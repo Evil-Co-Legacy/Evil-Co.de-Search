@@ -3,6 +3,7 @@
 	<category name="www.global">
 		<item name="www.global.changeStyle"><![CDATA[Stil wechseln]]></item>
 		<item name="www.global.copyright"><![CDATA[<a href="http://www.evil-co.de/">Suchmaschine: <strong>Evil-Co.de Search {PACKAGE_VERSION}</strong>, entwickelt von <strong>Evil-Co.de</strong></a>]]></item>
+		<item name="www.global.addOpenSearch"><![CDATA[Zum Browser hinzufügen]]></item>
 	</category>
 
 	<category name="www.header">
