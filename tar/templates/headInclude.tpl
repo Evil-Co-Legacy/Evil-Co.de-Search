@@ -8,7 +8,7 @@
 
 <script type="text/javascript" src="{@RELATIVE_WWW_DIR}js/jquery-1.4.1.js"></script>
 <script type="text/javascript" src="{@RELATIVE_WWW_DIR}js/jquery-ui-1.8.4.custom.min.js"></script>
-<!-- Thanck you Woltlab for this workaround -.- (Woltlab uses protoaculous but we use jquery ...) -->
+<!-- Thank you Woltlab for this workaround -.- (Woltlab uses protoaculous but we use jquery ...) -->
 <script type="text/javascript">
 window.$j = jQuery.noConflict();
 </script>
@@ -94,7 +94,7 @@ window.$j = jQuery.noConflict();
 		//]]>
 	</script>
 	{if $this->getStyle()->getVariable('user.MSIEFixes.IE7.use')}
-	<style type="text/css">	
+	<style type="text/css">
 		{@$this->getStyle()->getVariable('user.MSIEFixes.IE7.use')}
 	</style>
 	{/if}
