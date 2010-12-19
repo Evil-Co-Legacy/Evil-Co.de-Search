@@ -8,8 +8,15 @@
 				<ul>
 					{if $additionalFooterOptions|isset}{@$additionalFooterOptions}{/if}
 
-					<li class="addOpenSearch">
+					<li id="addOpenSearchLinkContainer" class="addOpenSearch" style="display: none;">
 						<a id="addOpenSearchLink" href="javascript:void(0)" onlick="addOpenSearch(); return false;"><img src="{icon}indexS.png{/icon}" alt="" /> <span>{lang}www.global.addOpenSearch{/lang}</span></a>
+						<script type="text/javascript">
+							//<![CDATA[
+							onloadEvents.push(function() {
+								$('addOpenSearchLinkContainer').style.display = "";
+							});
+							//]]>
+						</script>
 					</li>
 
 					{if $stylePickerOptions|count > 1}
