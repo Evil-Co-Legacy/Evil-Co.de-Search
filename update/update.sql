@@ -1,3 +1,8 @@
+-- Drop old tables
+DROP TABLE IF EXISTS `package`;
+DROP TABLE IF EXISTS `server`;
+
+-- Create new tables
 DROP TABLE IF EXISTS `www1_1_package`;
 CREATE TABLE `www1_1_package` (
 	`packageID` INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
