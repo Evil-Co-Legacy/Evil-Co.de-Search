@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com/XSD/language.xsd" languagecode="de-informal">
+	<category name="www.global">
+		<item name="www.global.changeStyle"><![CDATA[Stil wechseln]]></item>
+		<item name="www.global.copyright"><![CDATA[<a href="http://www.evil-co.de/">&copy; 2010 Evil-Co.de</a>]]></item>
+	</category>
+
+	<category name="www.header">
+		<item name="www.header.userNote.user"><![CDATA[Angemeldet als <a href="index.php?page=User&userID={$this->user->userID}">{$this->user->username}</a>.]]></item>
+		<item name="www.header.userMenu.logout"><![CDATA[Abmelden]]></item>
+		<item name="www.header.userMenu.profile"><![CDATA[Profil bearbeiten]]></item>
+		<item name="www.header.userMenu.acp"><![CDATA[Administration]]></item>
+		
+		<item name="www.header.userNote.guest"><![CDATA[Du bist nicht angemeldet.]]></item>
+		<item name="www.header.userMenu.login"><![CDATA[Anmelden]]></item>
+		<item name="www.header.userMenu.register"><![CDATA[Registrieren]]></item>
+		<item name="www.header.login.useCookies"><![CDATA[Angemeldet bleiben]]></item>
+		<item name="www.header.userMenu.changeLanguage"><![CDATA[Sprache ändern]]></item>
+	</category>
+	
+	<category name="www.search">
+		<item name="www.search.searchFieldValue"><![CDATA[Suchanfrage]]></item>
+		<item name="www.search.error"><![CDATA[Bitte überprüfe deine Eingaben nocheinmal.]]></item>
+		<item name="www.search.noJs"><![CDATA[Um die Suche komplett verwenden zu können wird JavaScript benötigt!]]></item>
+		<item name="www.search.instantResults"><![CDATA[Instant Suche]]></item>
+		
+		<item name="www.search.advancedSearch"><![CDATA[Erweiterte Sucheinstellungen]]></item>
+		<item name="www.search.advancedSearch.searchType"><![CDATA[Suchtyp]]></item>
+		<item name="www.search.advancedSearch.searchType.description"><![CDATA[Diese Einstellung definiert den Typ der Ergebnisse.]]></item>
+		<item name="www.search.advancedSearch.itemsPerPage"><![CDATA[Einträge pro Seite]]></item>
+		<item name="www.search.advancedSearch.itemsPerPage.description"><![CDATA[Definiert wie viele Einträge pro Seite angezeigt werden.]]></item>
+		
+		<item name="www.search.result.noResults"><![CDATA[Es wurden keine Ergebnisse zu deiner Suchanfrage gefunden.]]></item>
+		<item name="www.search.result.back"><![CDATA[Zurück zur Startseite]]></item>
+		
+		<item name="www.search.result.download"><![CDATA[Herunterladen]]></item>
+		<item name="www.search.result.mirror"><![CDATA[Paketspiegel]]></item>
+		
+		<!-- Package Search Type -->
+		<item name="www.search.advancedSearch.searchType.PackageType"><![CDATA[Woltlab&reg; Community Framework&trade; Paket]]></item>
+		<item name="www.search.advancedSearch.searchType.PackageType.name.label"><![CDATA[Paketbezeichner]]></item>
+		<item name="www.search.advancedSearch.searchType.PackageType.name.description"><![CDATA[Gebe hier den gesuchten Paketbezeichner an (<strong>Achtung:</strong> Der Paketbezeichner <strong>muss</strong> übereinstimmen!).]]></item>
+	</category>
+	
+	<category name="www.mirror">
+		<item name="www.mirror.notImplemented"><![CDATA[Diese Funktion ist (noch) nicht verfügbar.]]></item>
+	</category>
+	
+	<category name="www.download">
+		<item name="www.download.redirect"><![CDATA[Sie werden nun auf die Downloadseite des Paketservers weitergeleitet.</p><p id="errorMessage">
+		<script type="text/javascript">
+			if (document.referrer) {onloadEvents.push(function() { document.getElementById('errorMessage').innerHTML += "<br /><a href=\"" + document.referrer + "\">{lang}wcf.global.error.backward{/lang}</a>"; }); }
+		</script>]]></item>
+	</category>
+</language>

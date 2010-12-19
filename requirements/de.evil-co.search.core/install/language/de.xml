@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com/XSD/language.xsd" languagecode="de">
+	<category name="wcf.acp.searchTypeList">
+		<item name="wcf.acp.searchTypeList.title"><![CDATA[Suchtypen]]></item>
+		<item name="wcf.acp.searchTypeList.available"><![CDATA[Es existieren {#$searchTypes|count} Typen]]></item>
+		<item name="wcf.acp.searchTypeList.typeID"><![CDATA[Typ ID]]></item>
+		<item name="wcf.acp.searchTypeList.typeName"><![CDATA[Typname]]></item>
+		<item name="wcf.acp.searchTypeList.enable"><![CDATA[Aktivieren]]></item>
+		<item name="wcf.acp.searchTypeList.disable"><![CDATA[Deaktivieren]]></item>
+	</category>
+	
+	<category name="wcf.acp.menu">
+		<item name="wcf.acp.menu.link.search"><![CDATA[Suche]]></item>
+		<item name="wcf.acp.menu.link.search.typeList"><![CDATA[Suchtypen]]></item>
+	</category>
+</language>

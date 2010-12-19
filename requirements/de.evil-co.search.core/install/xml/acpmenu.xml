@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE data SYSTEM "http://www.woltlab.com/DTDs/acpMenu.dtd">
+<data>	
+	<import>
+		<acpmenuitem name="wcf.acp.menu.link.search">
+			<icon>icon/searchL.png</icon>
+		</acpmenuitem>
+		
+		<acpmenuitem name="wcf.acp.menu.link.search.typeList">
+			<link>index.php?page=SearchTypeList</link>
+			<parent>wcf.acp.menu.link.search</parent>
+			<!-- <permissions>admin.search.</permissions> -->
+			<showorder>2</showorder>
+		</acpmenuitem>
+	</import>
+</data>
