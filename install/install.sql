@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `package`;
-CREATE TABLE `package` (
+DROP TABLE IF EXISTS `www1_1_package`;
+CREATE TABLE `www1_1_package` (
   `packageID` varchar(255) NOT NULL,
   `name` text NOT NULL,
   `serverID` int(11) NOT NULL,
@@ -23,8 +23,8 @@ CREATE TABLE `package` (
   FULLTEXT KEY `licenceUrl` (`licenceUrl`)
 );
 
-DROP TABLE IF EXISTS `server`;
-CREATE TABLE `server` (
+DROP TABLE IF EXISTS `www1_1_server`;
+CREATE TABLE `www1_1_server` (
   `serverID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
   `serverHomepage` varchar(255) NOT NULL,
