@@ -12,7 +12,7 @@
 						<a id="addOpenSearchLink" href="javascript:void(0)" onlick="addOpenSearch(); return false;"><img src="{icon}indexS.png{/icon}" alt="" /> <span>{lang}www.global.addOpenSearch{/lang}</span></a>
 						<script type="text/javascript">
 							//<![CDATA[
-							onloadEvents.push(function() {
+							if ((typeof window.external == "object") && ((typeof window.external.AddSearchProvider == "unknown") || (typeof window.external.AddSearchProvider == "function"))) onloadEvents.push(function() {
 								$('addOpenSearchLinkContainer').style.display = "";
 							});
 							//]]>
