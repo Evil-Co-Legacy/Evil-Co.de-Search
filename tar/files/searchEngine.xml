@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+	<!-- Created on Sun, 19 Dec 2010 17:50:01 GMT -->
+	<ShortName>Evil-Co.de Package Search</ShortName>
+	<Description>A search engine for WCF and WBB plugins</Description>
+	<Image width="16" height="16">http://www.evil-co.de/search/icon/indexS.png</Image>
+	<Url type="text/html" method="GET" template="http://www.evil-co.de/search">
+		<Param name="form" value="Search"/>
+		<Param name="query" value="{searchTerms}"/>
+		<Param name="searchType" value="1"/>
+	</Url>
+	<Developer>Johannes Donath</Developer>
+	<InputEncoding>UTF-8</InputEncoding>
+	<moz:SearchForm>http://www.evil-co.de/search/index.php?form=Search</moz:SearchForm>
+	<Url type="application/opensearchdescription+xml" rel="self" template="http://www.evil-co.de/search/searchEngine.xml"/>
+	<moz:UpdateUrl>http://www.evil-co.de/search/searchEngine.xml</moz:UpdateUrl>
+</OpenSearchDescription>
