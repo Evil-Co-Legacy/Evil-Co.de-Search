@@ -16,6 +16,17 @@ window.$j = jQuery.noConflict();
 <script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/default.js"></script>
 <script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/PopupMenuList.class.js"></script>
 <script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/AjaxRequest.class.js"></script>
+<script type="text/javascript">
+	//<![CDATA[
+		function addOpenSearch() {
+			if ((typeof window.external == "object") && ((typeof window.external.AddSearchProvider == "unknown") || (typeof window.external.AddSearchProvider == "function"))) {
+				window.external.AddSearchProvider("{@RELATIVE_WWW_DIR}searchEngine.xml");
+			} else {
+				alert("You will need a browser which supports OpenSearch to install this plugin.");
+			}
+		}
+	//]]>
+</script>
 
 <!-- www styles
 	Senseless ... we haven't own css code :-P
