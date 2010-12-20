@@ -24,7 +24,8 @@ CREATE TABLE `www1_1_package_version` (
 	`plugin` VARCHAR (255) NOT NULL,
 	`packageUrl` TEXT NOT NULL,
 	`author` VARCHAR (255) NOT NULL,
-	`authorUrl` TEXT NULL
+	`authorUrl` TEXT NULL,
+	`serverID` INT NOT NULL
 );
 
 DROP TABLE IF EXISTS `www1_1_package_version_to_language`;
