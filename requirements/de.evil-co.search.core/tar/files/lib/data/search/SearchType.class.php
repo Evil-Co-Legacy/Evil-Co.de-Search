@@ -95,10 +95,13 @@ class SearchType extends DatabaseObject {
 
 		// execute sql statement
 		if (!empty($sqlCondition)) {
-			$sql = "SELECT 	".$this->sqlSelects."
-				FROM 	wcf".WCF_N."_search_type type
-					".$this->sqlJoins."
-				WHERE 	".$sqlCondition.
+			$sql = "SELECT
+						".$this->sqlSelects."
+					FROM
+						wcf".WCF_N."_search_type type
+						".$this->sqlJoins."
+					WHERE
+						".$sqlCondition.
 					$this->sqlGroupBy;
 			$row = WCF::getDB()->getFirstRow($sql);
 		}
@@ -113,8 +116,7 @@ class SearchType extends DatabaseObject {
 	protected function handleData($data) {
 		parent::handleData($data);
 
-		if (!$this->typeID)
-			$this->data['typeID'] = 0;
+		if (!$this->typeID) $this->data['typeID'] = 0;
 	}
 
 	/**
@@ -133,38 +135,8 @@ class SearchType extends DatabaseObject {
 			$sqlConditions .= "MATCH(`".$field."`) AGAINST('".escapeString($query)."' WITH QUERY EXPANSION)";
 		}
 
-		// execute search query
-		$sql = "SELECT
-					".$this->searchQuerySelects."
-				FROM
-					".$this->searchTable."
-					".$this->searchQueryJoins."
-				WHERE
-					".$sqlConditions;
-		$result = WCF::getDB()->sendQuery($sql, $itemsPerPage, (($page - 1) * $itemsPerPage));
-
-		// create needed array
-		$resultList = array();
-
-		// loop while fetching rows
-		while ($row = WCF::getDB()->fetchArray($result)) {
-			$resultList[] = $this->formatResult($row);
-		}
-
-		// get a count of all matching results
-		$sql = "SELECT
-					COUNT(*) AS count
-				FROM
-					`".$this->searchTable."`
-				WHERE
-					".$sqlConditions;
-		$count = WCF::getDB()->getFirstRow($sql);
-
-		// write result count
-		$this->lastSearchCount = intval($count['count']);
-
-		// return result list
-		return $resultList;
+		// execute query
+		return $this->executeSearchQuery($sqlConditions);
 	}
 
 	/**
@@ -199,6 +171,16 @@ class SearchType extends DatabaseObject {
 			$sqlConditions = "`".$fieldName."` = '".escapeString($value)."'";
 		}
 
+		// execute search query
+		return $this->executeSearchQuery($sqlConditions);
+	}
+
+	/**
+	 * Executes a search query
+	 * Note: This helps to unify search queries
+	 * @param	string	$sqlConditions
+	 */
+	protected function executeSearchQuery($sqlConditions) {
 		// get resultList
 		$sql = "SELECT
 					".$this->searchQuerySelects."
