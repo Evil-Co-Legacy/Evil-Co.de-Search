@@ -74,5 +74,24 @@ class CronUpdateType extends DatabaseObject {
 	public function execute() {
 		// nothing to do here
 	}
+
+	/**
+	 * Returnes all available types
+	 */
+	public static function getUpdateCronTypes() {
+		$types = array();
+
+		$sql = "SELECT
+					*
+				FROM
+					wcf".WCF_N."_cron_update_type";
+		$result = WCF::getDB()->sendQuery($sql);
+
+		while($row = WCF::getDB()->fetchArray($result)) {
+			$types[] = new CronUpdateType(null, $row);
+		}
+
+		return $types;
+	}
 }
 ?>
