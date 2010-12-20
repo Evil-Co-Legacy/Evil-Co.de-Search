@@ -38,6 +38,13 @@ class PackageType extends SearchType {
 					server.serverID AS serverID,
 					server.serverAlias AS serverAlias,
 					server.serverUrl AS serverUrl
+					version.version AS version,
+					version.isUnique AS isUnique,
+					version.standalone AS standalone,
+					version.plugin AS plugin,
+					version.packageUrl AS packageUrl,
+					version.author AS author,
+					version.authorUrl AS authorUrl
 					".(!empty($additionalSelects) ? ','.$additionalSelects : "")."
 				FROM
 					www".WWW_N."_package package
@@ -62,7 +69,7 @@ class PackageType extends SearchType {
 				AND
 					".$sqlConditions."
 				ORDER BY
-					INET_ATON(SUBSTRING_INDEX(CONCAT(version.version,'.0.0.0'),'.',4)) ASC,
+					INET_ATON(SUBSTRING_INDEX(CONCAT(version.version,'.0.0.0'),'.',4)) DESC,
 					searchScore ASC";
 		$result = WCF::getDB()->sendQuery($sql, $itemsPerPage, (($page - 1) * $itemsPerPage));
 
