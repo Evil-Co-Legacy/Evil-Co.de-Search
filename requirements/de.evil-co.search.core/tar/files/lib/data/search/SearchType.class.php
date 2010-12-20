@@ -46,6 +46,18 @@ class SearchType extends DatabaseObject {
 	protected $advancedSearchFields = array();
 
 	/**
+	 * Contains selects for search query
+	 * @var	string
+	 */
+	protected $searchQuerySelects = "*";
+
+	/**
+	 * Contains joins for search query
+	 * @var	string
+	 */
+	protected $searchQueryJoins = "";
+
+	/**
 	 * Contains the default count of results that should read from database
 	 * @var	integer
 	 */
@@ -115,9 +127,10 @@ class SearchType extends DatabaseObject {
 
 		// execute search query
 		$sql = "SELECT
-					*
+					".$this->searchQuerySelects."
 				FROM
-					`".$this->searchTable."`
+					".$this->searchTable."
+					".$this->searchQueryJoins."
 				WHERE
 					".$sqlConditions;
 		$result = WCF::getDB()->sendQuery($sql, $itemsPerPage, (($page - 1) * $itemsPerPage));
@@ -180,9 +193,10 @@ class SearchType extends DatabaseObject {
 
 		// get resultList
 		$sql = "SELECT
-					*
+					".$this->searchQuerySelects."
 				FROM
 					`".$this->searchTable."`
+					".$this->searchQueryJoins."
 				WHERE
 					".$sqlConditions;
 		$result = WCF::getDB()->sendQuery($sql, $itemsPerPage, (($page - 1) * $itemsPerPage));
