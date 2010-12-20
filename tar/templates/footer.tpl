@@ -14,9 +14,14 @@
 							//<![CDATA[
 							if ((typeof window.external == "object") && ((typeof window.external.AddSearchProvider == "unknown") || (typeof window.external.AddSearchProvider == "function"))) onloadEvents.push(function() {
 								$('addOpenSearchLinkContainer').style.display = "";
+								Effect.pulsate('addOpenSearchLinkContainer');
 							});
 							//]]>
 						</script>
+					</li>
+
+					<li id="switchInstantSearchContainer" class="switchInstantSearch">
+						<a id="switchInstantSearchContainer" href="index.php?action=ToggleInstantSearch"{* onclick="search.toggleInstantSearch(); return false;" *}><img src="{icon}{if $this->user->disableInstantSearch}disabled{else}enabled{/if}S.png{/icon}" alt="" /> <span>{lang}www.global.toggleInstantSearch{/lang}{/if}</span></a>
 					</li>
 
 					{if $stylePickerOptions|count > 1}
