@@ -33,7 +33,8 @@ CREATE TABLE `www1_1_package_version_to_language` (
 	`packageID` INT NOT NULL,
 	`languageID` INT NOT NULL,
 	`name` VARCHAR (255) NOT NULL,
-	`description` VARCHAR (255) NOT NULL
+	`description` VARCHAR (255) NOT NULL,
+	`isFallback` TINYINT (1) NOT NULL DEFAULT '0'
 );
 
 DROP TABLE IF EXISTS `www1_1_package_version_requirement`;
