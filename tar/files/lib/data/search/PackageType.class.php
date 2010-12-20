@@ -28,12 +28,16 @@ class PackageType extends SearchType {
 	/**
 	 * @see SearchType::executeSearchQuery()
 	 */
-	protected function executeSearchQuery($sqlConditions) {
+	protected function executeSearchQuery($sqlConditions, $additionalSelects = "") {
 		$sql = "SELECT
 					package.packageID AS packageID,
 					package.packageName AS packageName,
 					language.name AS name,
-					language.description AS description
+					language.description AS description,
+					server.serverID AS serverID,
+					server.serverAlias AS serverAlias,
+					server.serverUrl AS serverUrl
+					".(!empty($additionalSelects) ? ','.$additionalSelects : "")."
 				FROM
 					www".WWW_N."_package package
 				LEFT JOIN
@@ -41,9 +45,13 @@ class PackageType extends SearchType {
 				ON
 					package.lastVersionID = version.versionID
 				LEFT JOIN
-					".WWW_N."_package_version_to_language language
+					www".WWW_N."_package_version_to_language language
 				ON
 					version.versionID = language.versionID
+				LEFT JOIN
+					www".WWW_N."_package_server server
+				ON
+					version.serverID = server.serverID
 				WHERE
 					(
 							language.languageID = 1
@@ -51,7 +59,10 @@ class PackageType extends SearchType {
 							language.isFallback = 1
 					)
 				AND
-					".$sqlConditions;
+					".$sqlConditions."
+				ORDER BY
+					INET_ATON(SUBSTRING_INDEX(CONCAT(version.version,'.0.0.0'),'.',4) ASC,
+					";
 		$result = WCF::getDB()->sendQuery($sql, $itemsPerPage, (($page - 1) * $itemsPerPage));
 
 		// create needed array
