@@ -1,6 +1,7 @@
 <?php
 // wcf imports
 require_once(WCF_DIR.'lib/data/DatabaseObject.class.php');
+require_once(WCF_DIR.'lib/data/search/SearchResult.class.php');
 
 /**
  * Provides default methods for searchable types
@@ -56,6 +57,13 @@ class SearchType extends DatabaseObject {
 	 * @var	string
 	 */
 	protected $searchQueryJoins = "";
+
+	/**
+	 * Contains the name of result class
+	 * Note: The given class should extend the predefined SearchResult class
+	 * @var	SearchResult
+	 */
+	protected $searchResultClass = 'SearchResult';
 
 	/**
 	 * Contains the default count of results that should read from database
@@ -206,7 +214,7 @@ class SearchType extends DatabaseObject {
 
 		// loop while fetching rows
 		while ($row = WCF::getDB()->fetchArray($result)) {
-			$resultList[] = $this->formatResult($row);
+			$resultList[] = new $this->searchResultClass($row);
 		}
 
 		// get count of all matching results
@@ -237,14 +245,6 @@ class SearchType extends DatabaseObject {
 	 */
 	public function getResultCount() {
 		return $this->lastSearchCount;
-	}
-
-	/**
-	 * Formats the result for our output (so no errors should occour ;-))
-	 * @param	array	$row
-	 */
-	protected function formatResult($row) {
-		return array('ID' => '', 'title' => '', 'description' => '', 'additionalButtons' => '');
 	}
 }
 ?>
