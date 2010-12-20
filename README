@@ -5,8 +5,6 @@ Installation Steps:
 	- Create a cron in Server's cron tab for file $INSTALLDIR/scripts/Crawler.php (You'll need this to update the index automaticly).
 
 License
-	This package is licensed under the GNU Lesser Public License (LGPL). You can find a copy of the license text at the end of this file :-).
-	
 	                   GNU LESSER GENERAL PUBLIC LICENSE
 	                       Version 3, 29 June 2007
 	
