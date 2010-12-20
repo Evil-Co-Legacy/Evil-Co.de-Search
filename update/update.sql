@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS `server`;
 DROP TABLE IF EXISTS `www1_1_package`;
 CREATE TABLE `www1_1_package` (
 	`packageID` INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
-	`packageName` VARCHAR (255) NOT NULL,
+	`packageName` VARCHAR (255) NOT NULL
 );
 
 DROP TABLE IF EXISTS `www1_1_package_mirror`;
