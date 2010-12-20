@@ -153,6 +153,7 @@ class SearchType extends DatabaseObject {
 	public function advancedSearch($query, $fields, $page = self::DEFAULT_PAGE_NO, $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE) {
 		// create needed variables
 		$sqlConditions = "";
+		$additionalSqlSelects = "(";
 
 		// catch empty queries (Yes we'll allow a search for packageNames and other things)
 		if (!empty($query)) {
@@ -160,10 +161,12 @@ class SearchType extends DatabaseObject {
 			foreach($this->searchableFields as $field) {
 				if (!empty($sqlConditions)) $sqlConditions .= " OR ";
 				$sqlConditions .= "MATCH(`".$field."`) AGAINST('".escapeString($query)."' WITH QUERY EXPANSION)";
+				$additionalSqlSelects .= (strlen($additionalSqlSelects) > 1 ? ' + ' : '')."MATCH(`".$field."`) AGAINST('".escapeString($query)."' WITH QUERY EXPANSION)";
 			}
 
 			$sqlConditions = "( ".$sqlConditions." )";
 		}
+		$additionalSqlSelects .= ") AS searchScore";
 
 		// add additional fields to query
 		foreach($fields as $fieldName => $value) {
@@ -172,7 +175,7 @@ class SearchType extends DatabaseObject {
 		}
 
 		// execute search query
-		return $this->executeSearchQuery($sqlConditions);
+		return $this->executeSearchQuery($sqlConditions, $additionalSqlSelects);
 	}
 
 	/**
@@ -180,7 +183,7 @@ class SearchType extends DatabaseObject {
 	 * Note: This helps to unify search queries
 	 * @param	string	$sqlConditions
 	 */
-	protected function executeSearchQuery($sqlConditions) {
+	protected function executeSearchQuery($sqlConditions, $additionalSelects) {
 		// get resultList
 		$sql = "SELECT
 					".$this->searchQuerySelects."
