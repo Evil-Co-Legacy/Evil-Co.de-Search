@@ -28,7 +28,7 @@ class PackageType extends SearchType {
 	/**
 	 * @see SearchType::executeSearchQuery()
 	 */
-	protected function executeSearchQuery($sqlConditions, $additionalSelects = "") {
+	protected function executeSearchQuery($sqlConditions, $additionalSelects) {
 		$sql = "SELECT
 					package.packageID AS packageID,
 					package.packageName AS packageName,
@@ -62,7 +62,7 @@ class PackageType extends SearchType {
 					".$sqlConditions."
 				ORDER BY
 					INET_ATON(SUBSTRING_INDEX(CONCAT(version.version,'.0.0.0'),'.',4) ASC,
-					";
+					searchScore ASC";
 		$result = WCF::getDB()->sendQuery($sql, $itemsPerPage, (($page - 1) * $itemsPerPage));
 
 		// create needed array
