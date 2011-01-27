@@ -6,6 +6,9 @@
  * @copyright	2010 DEVel Fusion
  */
 
+// dau support
+if (substr(php_sapi_name(), 0, 3) != 'cli') die("You should really run this script from CLI!");
+
 // define paths
 define('RELATIVE_WWW_DIR', '../');
 
