@@ -7,7 +7,7 @@ require_once(WCF_DIR.'lib/data/DatabaseObject.class.php');
  * @author		Johannes Donath
  * @copyright	2010 DEVel Fusion
  */
-class SearchResult extends DatabaseObject {
+abstract class SearchResult extends DatabaseObject {
 
 	/**
 	 * Creates a new search result instance
