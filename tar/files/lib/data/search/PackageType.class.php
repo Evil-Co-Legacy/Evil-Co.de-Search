@@ -13,7 +13,7 @@ class PackageType extends SearchType {
 	/**
 	 * @see	SearchType::$searchableFields
 	 */
-	protected $searchableFields = array('language.packageName', 'language.description', 'version.plugin', 'version.licence', 'version.licenceUrl');
+	protected $searchableFields = array('language.name', 'language.description', 'version.plugin', 'version.licence', 'version.licenceUrl');
 
 	/**
 	 * @see	SearchType::$advancedSearchFields
