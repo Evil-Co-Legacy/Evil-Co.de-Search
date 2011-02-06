@@ -112,5 +112,98 @@ class PackageResult extends SearchResult {
 				package.packageID = ".$resultID;
 		return new PackageResult(WCF::getDB()->getFirstRow($sql));
 	}
+	
+	/**
+	 * Returnes an array with all requirements
+	 */
+	public function getRequirements() {
+		$data = array();
+		
+		$sql = "SELECT
+				targetPackageID AS packageID,
+				targetVersionID AS versionID,
+				packageLanguage.name AS name,
+				packageLanguage.description,
+				version.version
+			FROM
+				www".WWW_N."_package_version_requirement requirement
+			LEFT JOIN
+				www".WWW_N."_package_version version
+			ON
+				requirement.targetVersionID = version.versionID
+			LEFT JOIN
+				www".WWW_N."_package_version_to_language packageLanguage
+			ON
+				version.versionID = packageLanguage.versionID
+			WHERE
+				(
+						packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
+					OR
+						packageLanguage.isFallback = 1
+				)
+			AND
+				requirement.packageID = ".$this->packageID;
+		$result = WCF::getDB()->sendQuery($sql);
+		
+		while($row = WCF::getDB()->sendQuery($sql)) {
+			$data[] = new PackageResult($row);
+		}
+		
+		return $data;
+	}
+	
+	/**
+	 * Returnes an array with all 
+	 */
+	public function getOptionals() {
+		$data = array();
+		
+		$sql = "SELECT
+				targetPackageID AS packageID,
+				targetVersionID AS versionID,
+				packageLanguage.name AS name,
+				packageLanguage.description,
+				version.version
+			FROM
+				www".WWW_N."_package_version_optional optional
+			LEFT JOIN
+				www".WWW_N."_package_version version
+			ON
+				optional.targetVersionID = version.versionID
+			LEFT JOIN
+				www".WWW_N."_package_version_to_language packageLanguage
+			ON
+				version.versionID = packageLanguage.versionID
+			WHERE
+				(
+						packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
+					OR
+						packageLanguage.isFallback = 1
+				)
+			AND
+				requirement.packageID = ".$this->packageID;
+		$result = WCF::getDB()->sendQuery($sql);
+		
+		while($row = WCF::getDB()->sendQuery($sql)) {
+			$data[] = new PackageResult($row);
+		}
+		
+		return $data;
+	}
+	
+	/**
+	 * Returnes a pip list
+	 */
+	public function getInstructions() {
+		$sql = "SELECT
+				pipList
+			FROM
+				www".WWW_N."_package_version_instruction
+			WHERE
+				versionID = ".$this->versionID;
+		$row = WCF::getDB()->getFirstRow($sql);
+		
+		return explode(',', $row['pipList']);
+	}
 }
 ?>
