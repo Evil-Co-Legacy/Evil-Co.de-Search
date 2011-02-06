@@ -124,71 +124,60 @@
 
 	<div id="header">
 
-		{* --- quick search controls ---
-		 * $searchScript=search script; default=index.php?form=Search
-		 * $searchFieldName=name of the search input field; default=q
-		 * $searchFieldValue=default value of the search input field; default=content of $query
-		 * $searchFieldTitle=title of search input field; default=language variable www.header.search.query
-		 * $searchFieldOptions=special search options for popup menu; default=empty
-		 * $searchExtendedLink=link to extended search form; default=index.php?form=Search{@SID_ARG_2ND}
-		 * $searchHiddenFields=optional hidden fields; default=empty
-		 * $searchShowExtendedLink=set to false to disable extended search link; default=true
-		 *
-
-		{if !$searchScript|isset}{assign var='searchScript' value='index.php?form=Search'}{/if}
-		{if !$searchFieldName|isset}{assign var='searchFieldName' value='q'}{/if}
-		{if !$searchFieldValue|isset && $query|isset}{assign var='searchFieldValue' value=$query}{/if}
-		{if !$searchFieldTitle|isset}{assign var='searchFieldTitle' value='{lang}www.header.search.query{/lang}'}{/if}
-		{if !$searchFieldOptions|isset}
-			{capture assign=searchFieldOptions}
-				<li><a href="index.php?form=Search&amp;action=24h{@SID_ARG_2ND}">{lang}www.search.entriesOfTheLast24Hours{/lang}</a></li>
-			{/capture}
-		{/if}
-		{if !$searchExtendedLink|isset}{assign var='searchExtendedLink' value='index.php?form=Search'|concat:SID_ARG_2ND}{/if}
-		{if !$searchShowExtendedLink|isset}{assign var='searchShowExtendedLink' value=true}{/if}
-
-		<div id="search">
-			<form method="post" action="{@$searchScript}">
-
-				<div class="searchContainer">
-					<input type="text" tabindex="{counter name='tabindex'}" id="searchInput" class="inputText" name="{@$searchFieldName}" value="{if !$searchFieldValue|empty}{$searchFieldValue}{else}{@$searchFieldTitle}{/if}" />
-					<input type="image" tabindex="{counter name='tabindex'}" id="searchSubmit" class="searchSubmit inputImage" src="{icon}submitS.png{/icon}" alt="{lang}wcf.global.button.submit{/lang}" />
-					{@SID_INPUT_TAG}
-					{if $searchHiddenFields|isset}{@$searchHiddenFields}{else}<input type="hidden" name="types[]" value="wwwEntry" />{/if}
-
-					<script type="text/javascript">
-						//<![CDATA[
-						document.getElementById('searchInput').setAttribute('autocomplete', 'off');
-						document.getElementById('searchInput').onfocus = function() { if (this.value == '{@$searchFieldTitle}') this.value=''; };
-						document.getElementById('searchInput').onblur = function() { if (this.value == '') this.value = '{@$searchFieldTitle}'; };
-						document.getElementById('searchSubmit').ondblclick = function() { window.location = 'index.php?form=Search{@SID_ARG_2ND_NOT_ENCODED}'; };
+		{if $templateName|isset && $templateName != 'index'}
+			{if !$searchFieldTitle|isset}{assign var='searchFieldTitle' value='{lang}www.header.search.query{/lang}'}{/if}
+			{if !$searchFieldOptions|isset}
+				{capture assign=searchFieldOptions}
+					{* <li><a href="index.php?form=Search&amp;action=24h{@SID_ARG_2ND}">{lang}www.search.entriesOfTheLast24Hours{/lang}</a></li> *}
+				{/capture}
+			{/if}
+			{if !$searchExtendedLink|isset}{assign var='searchExtendedLink' value='index.php?page=Index'|concat:SID_ARG_2ND}{/if}
+			{if !$searchShowExtendedLink|isset}{assign var='searchShowExtendedLink' value=false}{/if}
+	
+			<div id="search">
+				<form method="post" action="index.php?form=Search">
+	
+					<div class="searchContainer">
+						<input type="text" tabindex="{counter name='tabindex'}" id="searchInput" class="inputText" name="query" value="{if $query|isset}{$query}{/if}" />
+						<input type="image" tabindex="{counter name='tabindex'}" id="searchSubmit" class="searchSubmit inputImage" src="{icon}submitS.png{/icon}" alt="{lang}wcf.global.button.submit{/lang}" />
+						{@SID_INPUT_TAG}
+						{* {if $searchHiddenFields|isset}{@$searchHiddenFields}{else}<input type="hidden" name="types[]" value="wwwEntry" />{/if} *}
+	
+						<script type="text/javascript">
+							//<![CDATA[
+							document.getElementById('searchInput').setAttribute('autocomplete', 'off');
+							document.getElementById('searchInput').onfocus = function() { if (this.value == '{lang}www.header.search.query{/lang}') this.value=''; };
+							document.getElementById('searchInput').onblur = function() { if (this.value == '') this.value = '{lang}www.header.search.query{/lang}'; };
+							document.getElementById('searchSubmit').ondblclick = function() { window.location = 'index.php?form=Search{@SID_ARG_2ND_NOT_ENCODED}'; };
+							{* {if $searchFieldOptions || $searchShowExtendedLink}
+								popupMenuList.register("searchInput");
+								document.getElementById('searchInput').className += " searchOptions";
+							{/if} *}
+							//]]>
+						</script>
 						{if $searchFieldOptions || $searchShowExtendedLink}
-							popupMenuList.register("searchInput");
-							document.getElementById('searchInput').className += " searchOptions";
-						{/if}
-						//]]>
-					</script>
-					{if $searchFieldOptions || $searchShowExtendedLink}
-						<div class="searchInputMenu">
-							<div class="hidden" id="searchInputMenu">
-								<div class="pageMenu smallFont">
-									<ul>
-										{@$searchFieldOptions}
-										{if $searchShowExtendedLink}<li><a href="{@$searchExtendedLink}{if !$searchFieldValue|empty}&amp;defaultQuery={$searchFieldValue|rawurlencode}{/if}">{lang}www.header.search.extended{/lang}</a></li>{/if}
-									</ul>
+							<div class="searchInputMenu">
+								<div class="hidden" id="searchInputMenu">
+									<div class="pageMenu smallFont">
+										<ul>
+											{* {@$searchFieldOptions} *}
+											{* {if $searchShowExtendedLink}<li><a href="{@$searchExtendedLink}{if !$searchFieldValue|empty}&amp;defaultQuery={$searchFieldValue|rawurlencode}{/if}">{lang}www.header.search.extended{/lang}</a></li>{/if} *}
+										</ul>
+									</div>
 								</div>
 							</div>
-						</div>
-					{/if}
-
-					{if $searchShowExtendedLink}
-						<noscript>
-							<p><a href="{@$searchExtendedLink}">{lang}www.header.search.extended{/lang}</a></p>
-						</noscript>
-					{/if}
-				</div>
-			</form>
-		</div> *}
+						{/if}
+	
+						{* {if $searchShowExtendedLink}
+							<noscript>
+								<p><a href="{@$searchExtendedLink}">{lang}www.header.search.extended{/lang}</a></p>
+							</noscript>
+						{/if} *}
+					</div>
+				</form>
+			</div>
+		{/if}
+		
 		<div id="logo">
 			<div class="logoInner">
 				<h1 class="pageTitle"><a href="index.php?page=Index{@SID_ARG_2ND}">{lang}{PAGE_TITLE}{/lang}</a></h1>
