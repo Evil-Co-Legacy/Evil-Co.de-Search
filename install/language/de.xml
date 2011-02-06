@@ -42,6 +42,9 @@
 		<item name="www.search.advancedSearch.searchType.PackageType"><![CDATA[Woltlab&reg; Community Framework&trade; Paket]]></item>
 		<item name="www.search.advancedSearch.searchType.PackageType.name.label"><![CDATA[Paketbezeichner]]></item>
 		<item name="www.search.advancedSearch.searchType.PackageType.name.description"><![CDATA[Geben Sie hier den gesuchten Paketbezeichner an (<strong>Achtung:</strong> Der Paketbezeichner <strong>muss</strong> übereinstimmen!).]]></item>
+		
+		<!-- Search Results -->
+		<item name="www.search.searchResult"><![CDATA[Suche nach &raquo;{$query}&laquo;]]></item>
 	</category>
 	
 	<category name="www.mirror">

@@ -42,6 +42,9 @@
 		<item name="www.search.advancedSearch.searchType.PackageType"><![CDATA[Woltlab&reg; Community Framework&trade; Package]]></item>
 		<item name="www.search.advancedSearch.searchType.PackageType.name.label"><![CDATA[Packagename]]></item>
 		<item name="www.search.advancedSearch.searchType.PackageType.name.description"><![CDATA[Put in the packagename here (<strong>Attention:</strong> The given Name must equal to the searched name!).]]></item>
+		
+		<!-- Search Results -->
+		<item name="www.search.searchResult"><![CDATA[Search results for &raquo;{$query}&laquo;]]></item>
 	</category>
 	
 	<category name="www.mirror">
