@@ -45,5 +45,11 @@ abstract class SearchResult extends DatabaseObject {
 	public function getDetailTemplate() {
 		return false;
 	}
+	
+	/**
+	 * Returnes the search result object for given ID
+	 * @param	integer	$resultID
+	 */
+	abstract public static function getByID($resultID);
 }
 ?>
