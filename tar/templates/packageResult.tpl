@@ -9,6 +9,28 @@
 {if !$result->isDownloadAvailable()}<p class="warning">{lang}www.packageDetail.downloadDisabled{/lang}</p>{/if}
 {if !$result->isMirrorAvailable()}<p class="info">{lang}www.packageDetail.mirrorDisabled{/lang}</p>{/if}
 
+<div class="contentHeader">
+	{if $result->isDownloadAvailable() || $result->isMirrorAvailable() || $additionalLargeButtons|isset}
+		<div class="largeButtons">
+			<ul>
+				{if $result->isDownloadAvailable()}
+					<li>
+						<a id="download{@$result->getResultID()}" href="index.php?page=DownloadPackage&amp;packageID={@$result->getResultID()}" title="{lang}www.search.result.download{/lang}"><img src="{icon}downloadM.png{/icon}" alt="" /> <span>{lang}www.search.result.download{/lang}</span></a>
+					</li>
+				{/if}
+				
+				{if $result->isMirrorAvailable()}
+					<li>
+						<a id="mirror{@$result->getResultID()}" href="index.php?page=PackageMirror&amp;packageID={@$result->getResultID()}" title="{lang}www.search.result.mirror{/lang}"><img src="{icon}mirrorM.png{/icon}" alt="" /> <span>{lang}www.search.result.mirror{/lang}</span></a>
+					</li>
+				{/if}
+				
+				{if $additionalLargeButtons|isset}{@$additionalLargeButtons}{/if}
+			</ul>
+		</div>
+	{/if}
+</div>
+
 <div id="packageInformation">
 	{* General Information *}
 	<div class="generalPackageInformation">
