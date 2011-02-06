@@ -14,7 +14,7 @@
 							//<![CDATA[
 							if ((typeof window.external == "object") && ((typeof window.external.AddSearchProvider == "unknown") || (typeof window.external.AddSearchProvider == "function"))) onloadEvents.push(function() {
 								$('addOpenSearchLinkContainer').style.display = "";
-								Effect.Pulsate('addOpenSearchLinkContainer');
+								{if $this->session->isNew}Effect.Pulsate('addOpenSearchLinkContainer');{/if}
 							});
 							//]]>
 						</script>
