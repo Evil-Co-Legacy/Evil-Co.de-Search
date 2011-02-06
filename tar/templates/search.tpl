@@ -1,6 +1,6 @@
 {include file='documentHeader'}
 	<head>
-		<title>{lang}{PAGE_TITLE}{/lang} - {lang}www.search.searchResult{/lang}</title>
+		<title>{lang}www.search.searchResult{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
 		{include file='headInclude' sandbox=false}
 		
 		<!-- Include search javascript literal -->
