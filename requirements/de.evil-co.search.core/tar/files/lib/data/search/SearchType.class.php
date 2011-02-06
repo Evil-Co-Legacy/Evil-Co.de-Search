@@ -125,7 +125,7 @@ class SearchType extends DatabaseObject {
 	 * @param	integer	$page
 	 * @param	integer	$itemsPerPage
 	 */
-	public function search($query, $page = self::DEFAULT_PAGE_NO, $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE) {
+	public function search($query, $page = self::DEFAULT_PAGE_NO, $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE, $additionalSelects = "") {
 		// create needed variables
 		$sqlConditions = "";
 
@@ -136,7 +136,7 @@ class SearchType extends DatabaseObject {
 		}
 
 		// execute query
-		return $this->executeSearchQuery($sqlConditions);
+		return $this->executeSearchQuery($sqlConditions, $additionalSelects);
 	}
 
 	/**
