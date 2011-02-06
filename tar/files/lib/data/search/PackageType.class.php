@@ -3,6 +3,9 @@
 require_once(WCF_DIR.'lib/data/search/SearchType.class.php');
 require_once(WCF_DIR.'lib/data/search/SearchResult.class.php');
 
+// www imports
+require_once(WWW_DIR.'lib/data/search/PackageResult.class.php');
+
 /**
  * Provides methods for searching the package database
  * @author		Johannes Donath
