@@ -235,7 +235,7 @@
 		{/if}
 
 	{elseif !$this->session->spiderID}
-		{if $this->session->isNew}<p class="info">{lang}www.user.register.welcome{/lang}</p>{/if}
+		{* {if $this->session->isNew}<p class="info">{lang}www.user.register.welcome{/lang}</p>{/if} *}
 
 	{/if}
 	{if OFFLINE == 1 && $this->user->getPermission('user.www.canViewWWWOffline')}
