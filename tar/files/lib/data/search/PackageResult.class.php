@@ -44,5 +44,21 @@ class PackageResult extends SearchResult {
 	public function getDetailTemplate() {
 		return 'packageResult';
 	}
+	
+	/**
+	 * Returnes true if the download feature is available for this package
+	 */
+	public function isDownloadAvailable() {
+		if (empty($this->licenseUrl)) return false;
+		return true;
+	}
+	
+	/**
+	 * Returnes true if the mirror feature is available for this package
+	 */
+	public function isMirrorAvailable() {
+		if (!$this->mirrorEnabled) return false;
+		return true;
+	}
 }
 ?>
