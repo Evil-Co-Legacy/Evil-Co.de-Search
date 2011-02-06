@@ -245,5 +245,12 @@ class SearchType extends DatabaseObject {
 	public function getResultCount() {
 		return $this->lastSearchCount;
 	}
+	
+	/**
+	 * Returnes the search result class
+	 */
+	public function getSearchResultClass() {
+		return $this->searchResultClass;
+	}
 }
 ?>
