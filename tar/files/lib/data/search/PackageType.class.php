@@ -72,7 +72,7 @@ class PackageType extends SearchType {
 				(package.packageID = package.packageID AND version.versionID = mirror.versionID)
 			WHERE
 				(
-						packageLanguage.languageID = 1
+						packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
 					OR
 						packageLanguage.isFallback = 1
 				)
