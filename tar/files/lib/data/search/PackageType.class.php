@@ -47,7 +47,9 @@ class PackageType extends SearchType {
 				version.plugin,
 				version.packageUrl,
 				version.author,
-				version.authorUrl
+				version.authorUrl,
+				version.licenseName,
+				version.licenseUrl,
 				".(!empty($additionalSelects) ? ','.$additionalSelects : "")."
 			FROM
 				www".WWW_N."_package package
