@@ -73,6 +73,17 @@
 		<item name="www.packageDetail.packageInstructions.name"><![CDATA[PiP]]></item>
 	</category>
 	
+	<category name="www.packageServerList">
+		<item name="www.packageServerList.title"><![CDATA[Paketserver]]></item>
+		<item name="www.packageServerList.description"><![CDATA[Hier werden sämtliche dem System bekannten Paketserver aufgelistet. Außerdem hast Du die Möglichkeit neue hinzuzufügen.]]></item>
+		<item name="wwww.packageServerList.submitServer"><![CDATA[Vorschlag einsenden]]></item>
+		<item name="www.packageServerList.url"><![CDATA[URL]]></item>
+		<item name="www.packageServerList.homepage"><![CDATA[Homepage]]></item>
+		<item name="www.packageServerList.description"><![CDATA[Beschreibung]]></item>
+		<item name="www.packageServerList.notes"><![CDATA[Notiz]]></item>
+		<item name="www.packageServerList.isDisabled"><![CDATA[Dieser Server wird zur Zeit nicht ausgelesen]]></item>
+	</category>
+	
 	<category name="www.mirror">
 		<item name="www.mirror.notImplemented"><![CDATA[Diese Funktion ist (noch) nicht verfügbar.]]></item>
 	</category>

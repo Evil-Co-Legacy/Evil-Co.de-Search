@@ -73,6 +73,17 @@
 		<item name="www.packageDetail.packageInstructions.name"><![CDATA[PiP]]></item>
 	</category>
 	
+	<category name="www.packageServerList">
+		<item name="www.packageServerList.title"><![CDATA[PackageServer]]></item>
+		<item name="www.packageServerList.description"><![CDATA[Here will all servers in our system appear. You can add new servers from here.]]></item>
+		<item name="wwww.packageServerList.submitServer"><![CDATA[Send Suggestion]]></item>
+		<item name="www.packageServerList.url"><![CDATA[URL]]></item>
+		<item name="www.packageServerList.homepage"><![CDATA[Homepage]]></item>
+		<item name="www.packageServerList.description"><![CDATA[Description]]></item>
+		<item name="www.packageServerList.notes"><![CDATA[Note]]></item>
+		<item name="www.packageServerList.isDisabled"><![CDATA[This server will not read at update]]></item>
+	</category>
+	
 	<category name="www.mirror">
 		<item name="www.mirror.notImplemented"><![CDATA[This function isn't ready yet.]]></item>
 	</category>
