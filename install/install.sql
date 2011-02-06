@@ -9,8 +9,6 @@ DROP TABLE IF EXISTS `www1_1_package_mirror`;
 CREATE TABLE `www1_1_package_mirror` (
 	`packageID` INT NOT NULL,
 	`versionID` INT NOT NULL,
-	`licenseName` VARCHAR (255) NOT NULL,
-	`licenseUrl` TEXT NOT NULL,
 	`isEnabled` TINYINT (1) NOT NULL
 );
 
@@ -25,7 +23,12 @@ CREATE TABLE `www1_1_package_version` (
 	`packageUrl` TEXT NOT NULL,
 	`author` VARCHAR (255) NOT NULL,
 	`authorUrl` TEXT NULL,
-	`serverID` INT NOT NULL
+	`serverID` INT NOT NULL,
+	`licenseName` VARCHAR (255) NOT NULL,
+	`licenseUrl` TEXT NOT NULL,
+	FULLTEXT (plugin),
+	FULLTEXT (licenseName),
+	FULLTEXT (licenseUrl)
 );
 
 DROP TABLE IF EXISTS `www1_1_package_version_to_language`;
@@ -35,7 +38,9 @@ CREATE TABLE `www1_1_package_version_to_language` (
 	`languageID` INT NOT NULL,
 	`name` VARCHAR (255) NOT NULL,
 	`description` VARCHAR (255) NOT NULL,
-	`isFallback` TINYINT (1) NOT NULL DEFAULT '0'
+	`isFallback` TINYINT (1) NOT NULL DEFAULT '0',
+	FULLTEXT (name),
+	FULLTEXT (description)
 );
 
 DROP TABLE IF EXISTS `www1_1_package_version_requirement`;
