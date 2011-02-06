@@ -9,6 +9,53 @@ require_once(WCF_DIR.'lib/data/search/SearchResult.class.php');
  * @license		GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  */
 class PackageResult extends SearchResult {
+	
+	/**
+	 * Contains and caches all requirements of this package
+	 * @var array
+	 */
+	protected $requirements = null;
+	
+	/**
+	 * Contains and caches all optionals of this package
+	 * @var array
+	 */
+	protected $optionals = null;
+	
+	/**
+	 * Contains and caches all instructions of this package
+	 * @var array
+	 */
+	protected $instructions = null;
+	
+	/**
+	 * Contains true if we should not generate trees
+	 * @var boolean
+	 */
+	protected $disableTrees = false;
+	
+	/**
+	 * Creates a new search result instance
+	 * @param	array	$row
+	 */
+	public function __construct($row, $disableTrees = false) {
+		$this->disableTrees = $disableTrees;
+		
+		parent::__construct($row);
+	}
+	
+	/**
+	 * @see DatabaseObject::handleData()
+	 */
+	protected function handleData($data) {
+		parent::handleData($data);
+		
+		if (!$this->disableTrees) {
+			$this->getRequirements();
+			$this->getOptionals();
+			$this->getInstructions();
+		}
+	}
 
 	/**
 	 * @see SearchResult::getResultID()
@@ -117,93 +164,105 @@ class PackageResult extends SearchResult {
 	 * Returnes an array with all requirements
 	 */
 	public function getRequirements() {
-		$data = array();
-		
-		$sql = "SELECT
-				targetPackageID AS packageID,
-				targetVersionID AS versionID,
-				packageLanguage.name AS name,
-				packageLanguage.description,
-				version.version
-			FROM
-				www".WWW_N."_package_version_requirement requirement
-			LEFT JOIN
-				www".WWW_N."_package_version version
-			ON
-				requirement.targetVersionID = version.versionID
-			LEFT JOIN
-				www".WWW_N."_package_version_to_language packageLanguage
-			ON
-				version.versionID = packageLanguage.versionID
-			WHERE
-				(
-						packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
-					OR
-						packageLanguage.isFallback = 1
-				)
-			AND
-				requirement.packageID = ".$this->packageID;
-		$result = WCF::getDB()->sendQuery($sql);
-		
-		while($row = WCF::getDB()->sendQuery($sql)) {
-			$data[] = new PackageResult($row);
+		if ($this->requirements === null) {
+			$data = array();
+			
+			$sql = "SELECT
+					targetPackageID AS packageID,
+					targetVersionID AS versionID,
+					packageLanguage.name AS name,
+					packageLanguage.description,
+					version.version
+				FROM
+					www".WWW_N."_package_version_requirement requirement
+				LEFT JOIN
+					www".WWW_N."_package_version version
+				ON
+					requirement.targetVersionID = version.versionID
+				LEFT JOIN
+					www".WWW_N."_package_version_to_language packageLanguage
+				ON
+					version.versionID = packageLanguage.versionID
+				WHERE
+					(
+							packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
+						OR
+							packageLanguage.isFallback = 1
+					)
+				AND
+					requirement.packageID = ".$this->packageID;
+			$result = WCF::getDB()->sendQuery($sql);
+			
+			while($row = WCF::getDB()->sendQuery($sql)) {
+				$data[] = new PackageResult($row, true);
+			}
+			
+			$this->requirements = $data;
 		}
-		
-		return $data;
+			
+		return $this->requirements;
 	}
 	
 	/**
 	 * Returnes an array with all 
 	 */
 	public function getOptionals() {
-		$data = array();
-		
-		$sql = "SELECT
-				targetPackageID AS packageID,
-				targetVersionID AS versionID,
-				packageLanguage.name AS name,
-				packageLanguage.description,
-				version.version
-			FROM
-				www".WWW_N."_package_version_optional optional
-			LEFT JOIN
-				www".WWW_N."_package_version version
-			ON
-				optional.targetVersionID = version.versionID
-			LEFT JOIN
-				www".WWW_N."_package_version_to_language packageLanguage
-			ON
-				version.versionID = packageLanguage.versionID
-			WHERE
-				(
-						packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
-					OR
-						packageLanguage.isFallback = 1
-				)
-			AND
-				requirement.packageID = ".$this->packageID;
-		$result = WCF::getDB()->sendQuery($sql);
-		
-		while($row = WCF::getDB()->sendQuery($sql)) {
-			$data[] = new PackageResult($row);
+		if ($this->optionals === null) {
+			$data = array();
+			
+			$sql = "SELECT
+					targetPackageID AS packageID,
+					targetVersionID AS versionID,
+					packageLanguage.name AS name,
+					packageLanguage.description,
+					version.version
+				FROM
+					www".WWW_N."_package_version_optional optional
+				LEFT JOIN
+					www".WWW_N."_package_version version
+				ON
+					optional.targetVersionID = version.versionID
+				LEFT JOIN
+					www".WWW_N."_package_version_to_language packageLanguage
+				ON
+					version.versionID = packageLanguage.versionID
+				WHERE
+					(
+							packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
+						OR
+							packageLanguage.isFallback = 1
+					)
+				AND
+					requirement.packageID = ".$this->packageID;
+			$result = WCF::getDB()->sendQuery($sql);
+			
+			while($row = WCF::getDB()->sendQuery($sql)) {
+				$data[] = new PackageResult($row, true);
+			}
+			
+			$this->optionals = $data;
 		}
 		
-		return $data;
+		return $this->optionals;
 	}
 	
 	/**
 	 * Returnes a pip list
 	 */
 	public function getInstructions() {
-		$sql = "SELECT
-				pipList
-			FROM
-				www".WWW_N."_package_version_instruction
-			WHERE
-				versionID = ".$this->versionID;
-		$row = WCF::getDB()->getFirstRow($sql);
+		if ($this->instructions === null) {
+			$sql = "SELECT
+					pipList
+				FROM
+					www".WWW_N."_package_version_instruction
+				WHERE
+					versionID = ".$this->versionID;
+			$row = WCF::getDB()->getFirstRow($sql);
+			
+			$this->instructions = explode(',', $row['pipList']);
+		}
 		
-		return explode(',', $row['pipList']);
+		return $this->instructions;
 	}
 }
 ?>
