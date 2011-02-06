@@ -62,7 +62,7 @@
 			
 			<div class="formElement">
 				<p class="formFieldLabel">{lang}www.packageDetail.server{/lang}</p>
-				<p class="formField"><a href="index.php?page=PackageServerDetail&amp;serverID={@$result->serverID}{@SID_ARG_2ND}">{lang}{$result->serverAlias}{/lang}</a></p>
+				<p class="formField"><a href="index.php?page=PackageServerList{@SID_ARG_2ND}#server{@$result->serverID}">{lang}{$result->serverAlias}{/lang}</a></p>
 			</div>
 			
 			<div class="formElement">
