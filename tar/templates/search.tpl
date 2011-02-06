@@ -1,6 +1,6 @@
 {include file='documentHeader'}
 	<head>
-		<title>{lang}{PAGE_TITLE}{/lang} - {$query}</title>
+		<title>{lang}{PAGE_TITLE}{/lang} - {lang}www.search.searchResult{/lang}</title>
 		{include file='headInclude' sandbox=false}
 		
 		<!-- Include search javascript literal -->
@@ -10,6 +10,13 @@
 		 {include file='header' sandbox=false}
 		 
 		 <div id="main">
+		 	<div class="mainHeadline">
+				<img src="{icon}indexL.png{/icon}" alt="" />
+				<div class="headlineContainer">
+					<h2>{lang}www.search.searchResult{/lang}</h2>
+				</div>
+			</div>
+		 
 		 	<div id="resultList">
 		 		{if !$items}
 		 			<p class="info">{lang}www.search.result.noResults{/lang}</p>
