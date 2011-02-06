@@ -45,6 +45,7 @@
 		
 		<!-- Search Results -->
 		<item name="www.search.searchResult"><![CDATA[Suche nach &raquo;{$query}&laquo;]]></item>
+		<item name="www.search.detail"><![CDATA[Details]]></item>
 	</category>
 	
 	<category name="www.mirror">
