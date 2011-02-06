@@ -8,8 +8,8 @@ require_once(WCF_DIR.'lib/acp/package/plugin/AbstractXMLPackageInstallationPlugi
  * @copyright	2010 DEVel Fusion
  */
 class UpdateCronTypePackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin {
-	public $tagName = 'cron_update_type';
-	public $tableName = 'updatecrontype';
+	public $tagName = 'updatecrontype';
+	public $tableName = 'cron_update_type';
 
     /**
      * @see PackageInstallationPlugin::install()
