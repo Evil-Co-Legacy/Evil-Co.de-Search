@@ -37,6 +37,7 @@
 				<img src="{icon}indexL.png{/icon}" alt="" />
 				<div class="headlineContainer">
 					<h2>{lang}{PAGE_TITLE}{/lang}</h2>
+					<p>{lang}{PAGE_DESCRIPTION}{/lang}</p>
 				</div>
 			</div>
 
