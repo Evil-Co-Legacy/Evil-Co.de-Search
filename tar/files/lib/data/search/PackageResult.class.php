@@ -60,5 +60,56 @@ class PackageResult extends SearchResult {
 		if (!$this->mirrorEnabled) return false;
 		return true;
 	}
+
+	/**
+	 * @see SearchResult::getByID()
+	 */
+	public static function getByID($resultID) {
+		$sql = "SELECT
+				package.packageID,
+				package.packageName,
+				packageLanguage.name AS name,
+				packageLanguage.description,
+				server.serverID,
+				server.serverAlias,
+				server.serverUrl,
+				version.version,
+				version.isUnique,
+				version.standalone,
+				version.plugin,
+				version.packageUrl,
+				version.author,
+				version.authorUrl,
+				version.licenseName,
+				version.licenseUrl,
+				mirror.isEnabled AS mirrorEnabled
+			FROM
+				www".WWW_N."_package package
+			LEFT JOIN
+				www".WWW_N."_package_version version
+			ON
+				package.lastVersionID = version.versionID
+			LEFT JOIN
+				www".WWW_N."_package_version_to_language packageLanguage
+			ON
+				version.versionID = packageLanguage.versionID
+			LEFT JOIN
+				www".WWW_N."_package_server server
+			ON
+				version.serverID = server.serverID
+			LEFT JOIN
+				www".WWW_N."_package_mirror AS mirror
+			ON
+				(package.packageID = package.packageID AND version.versionID = mirror.versionID)
+			WHERE
+				(
+						packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
+					OR
+						packageLanguage.isFallback = 1
+				)
+			AND
+				package.packageID = ".$resultID;
+		return new PackageResult(WCF::getDB()->getFirstRow($sql));
+	}
 }
 ?>
