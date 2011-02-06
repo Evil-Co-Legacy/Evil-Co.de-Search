@@ -9,5 +9,12 @@
 			<position>header</position>
 			<showorder>1</showorder>
 		</pagemenuitem>
+		<pagemenuitem name="www.header.menu.packageServerList">
+			<iconmedium>packageServerM.png</iconmedium>
+			<iconsmall>packageServerS.png</iconsmall>
+			<link>index.php?page=PackageServerList</link>
+			<position>header</position>
+			<showorder>2</showorder>
+		</pagemenuitem>
 	</import>
 </data>
