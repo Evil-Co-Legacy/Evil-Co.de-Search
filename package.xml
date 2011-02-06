@@ -84,21 +84,11 @@
 		<!-- <acpmenu>install/xml/acpmenu.xml</acpmenu> -->
 		<!-- <groupoptions>xml/groupoptions.xml</groupoptions> -->
 		<searchtype>install/xml/searchtype.xml</searchtype>
+		<pagemenu>install/xml/pagemenu.xml</pagemenu>
 
 		<!-- Other PiPs -->
 		<sql>install/install.sql</sql>
 
-		<!-- Languages -->
-		<languages languagecode="de">install/language/de.xml</languages>
-		<languages languagecode="de-informal">install/language/de-informal.xml</languages>
-		<languages languagecode="en">install/language/en.xml</languages>
-	</instructions>
-	
-	<instructions type="update" fromversion="1.0.2">
-		<!-- File-PiPs -->
-		<files>tar/files.tar</files>
-		<templates>tar/templates.tar</templates>
-		
 		<!-- Languages -->
 		<languages languagecode="de">install/language/de.xml</languages>
 		<languages languagecode="de-informal">install/language/de-informal.xml</languages>
