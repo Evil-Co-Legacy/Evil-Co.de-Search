@@ -213,7 +213,7 @@ class SearchType extends DatabaseObject {
 
 		// loop while fetching rows
 		while ($row = WCF::getDB()->fetchArray($result)) {
-			$resultList[] = new $this->searchResultClass($row);
+			$resultList[] = new $this->searchResultClass($row, true);
 		}
 
 		// get count of all matching results
