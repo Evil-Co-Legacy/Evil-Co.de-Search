@@ -48,6 +48,28 @@
 		<item name="www.search.detail"><![CDATA[Detail]]></item>
 	</category>
 	
+	<category name="www.packageDetail">
+		<item name="www.packageDetail.title"><![CDATA[Details of Package &raquo;{$result->getTitle}&laquo;]]></item>
+		<item name="www.packageDetail.downloadDisabled"><![CDATA[While we haven't enough license information we can't provide download links.]]></item>
+		<item name="www.packageDetail.mirrorDisabled"><![CDATA[While we haven't enough license information we can't provide our mirror service.]]></item>
+		<item name="www.packageDetail.generalInformation"><![CDATA[General Packageinformation]]></item>
+		<item name="www.packageDetail.packageName"><![CDATA[Packageidentifier]]></item>
+		<item name="www.packageDetail.author"><![CDATA[Author]]></item>
+		<item name="www.packageDetail.license"><![CDATA[License]]></item>
+		<item name="www.packageDetail.server"><![CDATA[Packageserver]]></item>
+		<item name="www.packageDetail.latestVersion"><![CDATA[Latest Version]]></item>
+		<item name="www.packageDetail.isUnique"><![CDATA[Is <a href="index.php?page=Help&amp;item=search.isUnique{@SID_ARG_2ND}">Unique</a>]]></item>
+		<item name="www.packageDetail.isUnique.value"><![CDATA[Yes]]></item>
+		<item name="www.packageDetail.plugin"><![CDATA[Parent Packages]]></item>
+		<item name="www.packageDetail.packageRequirements"><![CDATA[Dependencies]]></item>
+		<item name="www.packageDetail.packageOptionals"><![CDATA[Optional Packages]]></item>
+		<item name="www.packageDetail.packageInstructions"><![CDATA[Installation Instructions]]></item>
+		<item name="www.packageDetail.packageRequirements.name"><![CDATA[Paketname]]></item>
+		<item name="www.packageDetail.packageRequirements.version"><![CDATA[Required Version]]></item>
+		<item name="www.packageDetail.packageOptionals.name"><![CDATA[Packagename]]></item>
+		<item name="www.packageDetail.packageInstructions.name"><![CDATA[PiP]]></item>
+	</category>
+	
 	<category name="www.mirror">
 		<item name="www.mirror.notImplemented"><![CDATA[This function isn't ready yet.]]></item>
 	</category>

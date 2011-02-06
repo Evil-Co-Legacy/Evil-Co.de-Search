@@ -122,6 +122,7 @@ class PackageResult extends SearchResult {
 				server.serverAlias,
 				server.serverUrl,
 				version.version,
+				version.versionID,
 				version.isUnique,
 				version.standalone,
 				version.plugin,
@@ -193,7 +194,7 @@ class PackageResult extends SearchResult {
 					requirement.packageID = ".$this->packageID;
 			$result = WCF::getDB()->sendQuery($sql);
 			
-			while($row = WCF::getDB()->sendQuery($sql)) {
+			while($row = WCF::getDB()->fetchArray($result)) {
 				$data[] = new PackageResult($row, true);
 			}
 			
@@ -233,10 +234,10 @@ class PackageResult extends SearchResult {
 							packageLanguage.isFallback = 1
 					)
 				AND
-					requirement.packageID = ".$this->packageID;
+					optional.packageID = ".$this->packageID;
 			$result = WCF::getDB()->sendQuery($sql);
 			
-			while($row = WCF::getDB()->sendQuery($sql)) {
+			while($row = WCF::getDB()->fetchArray($result)) {
 				$data[] = new PackageResult($row, true);
 			}
 			
@@ -256,7 +257,9 @@ class PackageResult extends SearchResult {
 				FROM
 					www".WWW_N."_package_version_instruction
 				WHERE
-					versionID = ".$this->versionID;
+					versionID = ".$this->versionID."
+				AND
+					instructionType = 'install'"; // TODO: we should add support for all types
 			$row = WCF::getDB()->getFirstRow($sql);
 			
 			$this->instructions = explode(',', $row['pipList']);

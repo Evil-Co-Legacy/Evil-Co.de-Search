@@ -6,10 +6,10 @@
 	</div>
 </div>
 
-{if !$isDownloadAvailable()}<p class="warning">{lang}www.packageDetail.downloadDisabled{/if}</p>{/if}
-{if !$result->isMirrorAvailable()}<p class="info">{lang}www.packageDetail.mirrorDisabled{/if}</p>{/if}
+{if !$result->isDownloadAvailable()}<p class="warning">{lang}www.packageDetail.downloadDisabled{/lang}</p>{/if}
+{if !$result->isMirrorAvailable()}<p class="info">{lang}www.packageDetail.mirrorDisabled{/lang}</p>{/if}
 
-<div class="border container-1">
+<div id="packageInformation">
 	{* General Information *}
 	<div class="generalPackageInformation">
 		<fieldset>

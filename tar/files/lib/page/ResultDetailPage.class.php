@@ -1,6 +1,7 @@
 <?php
 // wcf imports
 require_once(WCF_DIR.'lib/page/AbstractPage.class.php');
+require_once(WCF_DIR.'lib/data/search/SearchType.class.php');
 
 /**
  * Displays a result detail page
@@ -67,6 +68,9 @@ class ResultDetailPage extends AbstractPage {
 		
 		// validate
 		if (!$this->searchType) throw new IllegalLinkException;
+		
+		$className = $this->searchType->typeName;
+		
 		if (!file_exists(WWW_DIR.'lib/data/search/'.$className.'.class.php'))
 				throw new SystemException('Classfile \''.$className.'.class.php\' not found.');
 			else
@@ -76,15 +80,17 @@ class ResultDetailPage extends AbstractPage {
 		$this->searchType = new $className($this->searchType->typeID);
 		
 		// get search result class
-		if (!file_exists(WWW_DIR.'lib/data/search/'.$searchType->getSearchResultClass().'.class.php'))
-			throw new SystemException('Classfile \''.$searchType->getSearchResultClass().'.class.php\' not found.');
+		if (!file_exists(WWW_DIR.'lib/data/search/'.$this->searchType->getSearchResultClass().'.class.php'))
+			throw new SystemException('Classfile \''.$this->searchType->getSearchResultClass().'.class.php\' not found.');
 		else
-			require_once(WWW_DIR.'lib/data/search/'.$searchType->getSearchResultClass().'.class.php');
+			require_once(WWW_DIR.'lib/data/search/'.$this->searchType->getSearchResultClass().'.class.php');
 			
-		$className = $searchType->getSearchResultClass();
+		$this->searchType = new $className($this->searchType->typeID);
+			
+		$className = $this->searchType->getSearchResultClass();
 		
 		// create new instance
-		$searchResult = new $className(array());
+		$searchResult = new $className(array(), true);
 		
 		// check for detail template
 		if (!$searchResult->getDetailTemplate())
@@ -105,7 +111,7 @@ class ResultDetailPage extends AbstractPage {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		WCF::getTPL()->assignVariables(array(
+		WCF::getTPL()->assign(array(
 			'searchType'		=>	$this->searchType,
 			'result'		=>	$this->result,
 			'detailTemplate'	=>	$this->detailTemplate

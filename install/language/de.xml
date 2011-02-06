@@ -48,6 +48,28 @@
 		<item name="www.search.detail"><![CDATA[Details]]></item>
 	</category>
 	
+	<category name="www.packageDetail">
+		<item name="www.packageDetail.title"><![CDATA[Details des Paketes &raquo;{$result->getTitle}&laquo;]]></item>
+		<item name="www.packageDetail.downloadDisabled"><![CDATA[Da die Lizenzinformationen dieses Paketes nicht existent, unvollständig oder eine Verlinkung verboten ist wurde der Download deaktiviert. Wir bitten um Verständnis.]]></item>
+		<item name="www.packageDetail.mirrorDisabled"><![CDATA[Da die Lizenzinformationen dieses Paketes nicht existent, unvollständig oder ein Spiegeln verbieten wurde die Spiegel-Funktion deaktiviert. Wir bitten um Verständnis.]]></item>
+		<item name="www.packageDetail.generalInformation"><![CDATA[Allgemeine Paketinformationen]]></item>
+		<item name="www.packageDetail.packageName"><![CDATA[Paketbezeichner]]></item>
+		<item name="www.packageDetail.author"><![CDATA[Autor]]></item>
+		<item name="www.packageDetail.license"><![CDATA[Lizenz]]></item>
+		<item name="www.packageDetail.server"><![CDATA[Paketserver]]></item>
+		<item name="www.packageDetail.latestVersion"><![CDATA[Aktuellste Version]]></item>
+		<item name="www.packageDetail.isUnique"><![CDATA[Ist <a href="index.php?page=Help&amp;item=search.isUnique{@SID_ARG_2ND}">Unique</a>]]></item>
+		<item name="www.packageDetail.isUnique.value"><![CDATA[Ja]]></item>
+		<item name="www.packageDetail.plugin"><![CDATA[Übergeordnetes Paket]]></item>
+		<item name="www.packageDetail.packageRequirements"><![CDATA[Abhängigkeiten]]></item>
+		<item name="www.packageDetail.packageOptionals"><![CDATA[Optionale Pakete]]></item>
+		<item name="www.packageDetail.packageInstructions"><![CDATA[Installations-Informationen]]></item>
+		<item name="www.packageDetail.packageRequirements.name"><![CDATA[Paketname]]></item>
+		<item name="www.packageDetail.packageRequirements.version"><![CDATA[Benötigte Version]]></item>
+		<item name="www.packageDetail.packageOptionals.name"><![CDATA[Paketname]]></item>
+		<item name="www.packageDetail.packageInstructions.name"><![CDATA[PiP]]></item>
+	</category>
+	
 	<category name="www.mirror">
 		<item name="www.mirror.notImplemented"><![CDATA[Diese Funktion ist (noch) nicht verfügbar.]]></item>
 	</category>
