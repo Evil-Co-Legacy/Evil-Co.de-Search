@@ -51,11 +51,11 @@
 	</category>
 	
 	<category name="www.packageDetail">
-		<item name="www.packageDetail.title"><![CDATA[Details of Package &raquo;{$result->getTitle}&laquo;]]></item>
+		<item name="www.packageDetail.title"><![CDATA[Details of Package &raquo;{$result->getTitle()}&laquo;]]></item>
 		<item name="www.packageDetail.downloadDisabled"><![CDATA[While we haven't enough license information we can't provide download links.]]></item>
 		<item name="www.packageDetail.mirrorDisabled"><![CDATA[While we haven't enough license information we can't provide our mirror service.]]></item>
 		<item name="www.packageDetail.generalInformation"><![CDATA[General Packageinformation]]></item>
-		<item name="www.packageDetail.packageName"><![CDATA[Packageidentifier]]></item>
+		<item name="www.packageDetail.packageName"><![CDATA[<a href="index.php?page=Help&amp;item=search.packageIdentifier{@SID_ARG_2ND}">Packageidentifier</a>]]></item>
 		<item name="www.packageDetail.author"><![CDATA[Author]]></item>
 		<item name="www.packageDetail.license"><![CDATA[License]]></item>
 		<item name="www.packageDetail.server"><![CDATA[Packageserver]]></item>
