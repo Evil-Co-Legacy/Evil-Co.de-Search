@@ -42,7 +42,7 @@ class IndexPage extends AbstractPage {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array('searchTypes' => $this->searchTypes, 'showAdvancedSearchOptions' => true, 'defaultSearchTypeID' => $this->defaultSearchTypeID));
-		WCF::getTPL()->append('additionalFooterOptions', '<li><a href="index.php?action=ChangeInstantSearchMode'.SID_ARG_2ND.'">'.WCF::getLanguage()->get('www.index.'.(!isset($_COOKIE['disableInstantSearch']) ? 'disable' : 'enable').'InstantSearch'));
+		// WCF::getTPL()->append('additionalFooterOptions', '<li><a href="index.php?action=ChangeInstantSearchMode'.SID_ARG_2ND.'">'.WCF::getLanguage()->get('www.index.'.(!isset($_COOKIE['disableInstantSearch']) ? 'disable' : 'enable').'InstantSearch'));
 	}
 }
 ?>
