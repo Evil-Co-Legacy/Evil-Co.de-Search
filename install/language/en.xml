@@ -18,6 +18,8 @@
 		<item name="www.header.userMenu.register"><![CDATA[Register]]></item>
 		<item name="www.header.login.useCookies"><![CDATA[Remember me]]></item>
 		<item name="www.header.userMenu.changeLanguage"><![CDATA[Change Language]]></item>
+		
+		<item name="www.header.menu.index"><![CDATA[Homepage]]></item>
 	</category>
 	
 	<category name="www.search">
