@@ -79,7 +79,6 @@ class PackageType extends SearchType {
 			AND
 				".$sqlConditions."
 			ORDER BY
-				INET_ATON(SUBSTRING_INDEX(CONCAT(version.version,'.0.0.0'),'.',4)) DESC,
 				searchScore ASC";
 		$result = WCF::getDB()->sendQuery($sql, $itemsPerPage, (($page - 1) * $itemsPerPage));
 
