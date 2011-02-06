@@ -50,7 +50,9 @@ class PackageType extends SearchType {
 				version.authorUrl,
 				version.licenseName,
 				version.licenseUrl,
-				mirror.isEnabled AS mirrorEnabled
+				mirror.isEnabled AS mirrorEnabled,
+				packageLanguage.isFallback,
+				packageLanguage.languageID
 				".(!empty($additionalSelects) ? ','.$additionalSelects : "")."
 			FROM
 				www".WWW_N."_package package
@@ -84,11 +86,30 @@ class PackageType extends SearchType {
 
 		// create needed array
 		$resultList = array();
-
+		$tempList = array();
+		$bestValues = array();
+		$fallbacks = array();
+		
 		// loop while fetching rows
 		while ($row = WCF::getDB()->fetchArray($result)) {
 			$resultList[] = new $this->searchResultClass($row, true);
 		}
+		
+		foreach($resultList as $key => $result) {
+			if ($result->isFallback)
+				$fallbacks[$result->getResultID()] = $key;
+			elseif ($result->languageID == WCF::getLanguage()->getLanguageID())
+				$bestValues[$result->getResultID()] = $key;
+		}
+		
+		foreach($fallbacks as $resultID => $key) {
+			if (isset($bestValues[$resultID]))
+				$tempList[] = $resultList[$bestValues[$resultID]];
+			else
+				$tempList[] = $resultList[$key];
+		}
+		
+		$resultList = $tempList;
 
 		// get count of all matching results
 		$sql = "SELECT
