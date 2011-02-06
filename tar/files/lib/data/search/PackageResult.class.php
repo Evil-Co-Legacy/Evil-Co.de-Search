@@ -267,5 +267,14 @@ class PackageResult extends SearchResult {
 		
 		return $this->instructions;
 	}
+	
+	/**
+	 * Adds the missing __isset method to wcf
+	 * @param	string	$variable
+	 */
+	public function __isset($variable) {
+		if (isset($this->data[$variable])) return true;
+		return false;
+	}
 }
 ?>
