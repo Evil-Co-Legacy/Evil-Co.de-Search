@@ -1,6 +1,6 @@
 {include file='documentHeader'}
 	<head>
-		<title>{lang}www.resultDetail.title{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
+		<title>{lang}www.packageDetail.title{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
 		{include file='headInclude' sandbox=false}
 	</head>
 	<body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
