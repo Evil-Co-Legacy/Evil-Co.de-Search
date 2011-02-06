@@ -49,6 +49,7 @@ class PackageResult extends SearchResult {
 	 * Returnes true if the download feature is available for this package
 	 */
 	public function isDownloadAvailable() {
+		if (empty($this->licenseName)) return false;
 		if (empty($this->licenseUrl)) return false;
 		return true;
 	}
