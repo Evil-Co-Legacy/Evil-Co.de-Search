@@ -25,21 +25,18 @@
 								<div class="messageInner container-{cycle name='results' values='1,2'}">
 									
 									<h3 class="subHeadline">
-										{$result.title}
+										{if $result->getDetailTemplate()}<a href="index.php?page=ResultDetail&amp;resultID={@$result->getResultID()}&amp;searchType={@$searchType->typeID}{@SID_ARG_2ND}">{$result->getTitle()}</a>{else}{$result->getTitle()}{/if}
 									</h3>
 						
 									<div class="messageBody">
-										<p>{$result.description}</p>
+										<p>{$result->getDescription()}</p>
 									</div>
 									
 									<div class="messageFooter">
 										<div class="smallButtons">
 											<ul>
 												<li class="extraButton"><a href="#top" title="{lang}wcf.global.scrollUp{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/upS.png" alt="{lang}wcf.global.scrollUp{/lang}" /></a></li>
-												
-												{if $result.additionalButtons|isset}
-													{include file=$result.additionalButtons}
-												{/if}
+												{if $result->getAdditionalButtons() != ''}{@$result->getAdditionalButtons()}{/if}
 											</ul>
 										</div>
 									</div>
