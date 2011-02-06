@@ -19,7 +19,7 @@ class APIPage extends AbstractPage {
 	 * If the given action does not match to one of this elements an IllegalLinkException will appear
 	 * @var	array<string>
 	 */
-	public $validActions = array('Download', 'Mirror', 'GetAdvancedSearchFields', 'Search');
+	public $validActions = array('GetAdvancedSearchFields', 'Search');
 
 	/**
 	 * Valid API types
@@ -74,70 +74,6 @@ class APIPage extends AbstractPage {
 
 		// display template
 		echo WCF::getTPL()->fetch($this->templateName);
-	}
-
-	/**
-	 * Handle jsonDownload request
-	 * Note: This will not return a json string!
-	 * @throws IllegalLinkException
-	 */
-	protected function jsonDownload() {
-		// read extended parameters
-		if (!isset($_REQUEST['packageID']) or !isset($_REQUEST['version'])) throw new IllegalLinkException;
-
-		// urldecode parameters
-		$packageID = urldecode($_REQUEST['packageID']);
-		$targetVersion = urldecode($_REQUEST['version']);
-
-		// read data
-		$sql = "SELECT
-					*
-				FROM
-					`package`
-				WHERE
-					packageID = '".escapeString($packageID)."'
-				AND
-					isDeleted = 0";
-		$package = WCF::getDB()->getFirstRow($sql);
-
-		// check for found rows
-		if (WCF::getDB()->countRows()) {
-			// unserialize version string
-			$versions = unserialize($package['versions']);
-
-			// loop throug versions
-			foreach($versions as $version) {
-				// check for target version
-				if ($version['version'] == $targetVersion) {
-					//if (!isset($version['notMirrored'])) { // this is for mirrors :-)
-
-					// send html header to override old json header
-					@header("Content-type: text/html");
-
-					// redirect to url
-					WCF::getTPL()->assign(array(
-						'url' => $version['file'],
-						'message' => WCF::getLanguage()->get('www.download.redirect'),
-						'wait' => 5
-					));
-					WCF::getTPL()->display('redirect');
-					exit;
-					//}
-				}
-			}
-		}
-
-		// on success we'll call exit(). So we'll throw an IllegalLinkException if the application is still alive
-		throw new IllegalLinkException;
-	}
-
-	/**
-	 * Handle Mirror requests
-	 * @TODO This isn't implemented yet. We haven't the permission to share software without giving the license or checking for disallowed licenses.
-	 * @throws NamedUserException
-	 */
-	protected function jsonMirror() {
-		throw new NamedUserException(WCF::getLanguage()->get('www.mirror.notImplemented'));
 	}
 
 	/**
