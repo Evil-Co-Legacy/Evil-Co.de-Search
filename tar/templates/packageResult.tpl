@@ -115,13 +115,13 @@
 					<table class="tableList">
 						<thead>
 							<tr class="tableHead">
-								<th>{lang}www.packageDetail.packageRequirements.name{/lang}</th>
-								<th>{lang}www.packageDetail.packageRequirements.version{/lang}</th>
+								<th class="empty"><span>{lang}www.packageDetail.packageRequirements.name{/lang}</span></th>
+								<th class="empty"><span>{lang}www.packageDetail.packageRequirements.version{/lang}</span></th>
 							</tr>
 						</thead>
 						<tbody>
 							{foreach from=$requirements item='requirement'}
-								<tr>
+								<tr class="{cycle values='container-1,container-2'}">
 									<td><a href="index.php?page=ResultDetail&amp;resultID={@$requirement->getResultID()}&amp;searchType={@$searchTypeID}{@SID_ARG_2ND}">{$requirement->getTitle()}</a></td>
 									<td>{$requirement->version}</td>
 								</tr>
@@ -160,12 +160,12 @@
 					<table class="tableList">
 						<thead>
 							<tr class="tableHead">
-								<th>{lang}www.packageDetail.packageOptionals.name{/lang}</th>
+								<th class="empty"><span>{lang}www.packageDetail.packageOptionals.name{/lang}</span></th>
 							</tr>
 						</thead>
 						<tbody>
 							{foreach from=$optionals item='optional'}
-								<tr>
+								<tr class="{cycle values='container-1,container-2'}">
 									<td><a href="index.php?page=ResultDetail&amp;resultID={@$optional->getResultID()}&amp;searchType={@$searchTypeID}{@SID_ARG_2ND}">{$optional->getTitle()}</a></td>
 								</tr>
 							{/foreach}
@@ -202,12 +202,12 @@
 					<table class="tableList">
 						<thead>
 							<tr class="tableHead">
-								<th>{lang}www.packageDetail.packageInstructions.name{/lang}</th>
+								<th class="empty"><span>{lang}www.packageDetail.packageInstructions.name{/lang}</span></th>
 							</tr>
 						</thead>
 						<tbody>
 							{foreach from=$instructions item='instruction'}
-								<tr>
+								<tr class="{cycle values='container-1,container-2'}">
 									<td>{$instruction}</td>
 								</tr>
 							{/foreach}
