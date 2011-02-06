@@ -17,16 +17,16 @@
 		<!-- And now ... for the thausends of people! LEEETS GET READY FOR CHEATS! -->
 		<script type="text/javascript" src="{@RELATIVE_WWW_DIR}js/konami.js"></script>
 		<script type="text/javascript">
-			konami = new Konami()
-			konami.code = function() {
-				if ($j('#advancedSearchFieldName') != null) {
-					//$j('#query').val('com.woltlab.wbb');
-					$j('#advancedSearchFieldName').val('com.woltlab.wbb');
-					document.getElementsByTagName('form')[0].submit();
-				}
-			}
+			//konami = new Konami()
+			// konami.code = function() {
+			//	if ($j('#advancedSearchFieldName') != null) {
+			//		//$j('#query').val('com.woltlab.wbb');
+			//		$j('#advancedSearchFieldName').val('com.woltlab.wbb');
+			//		document.getElementsByTagName('form')[0].submit();
+			//	}
+			//}
 
-			konami.load()
+			//konami.load()
 		</script>
 	</head>
 	<body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
