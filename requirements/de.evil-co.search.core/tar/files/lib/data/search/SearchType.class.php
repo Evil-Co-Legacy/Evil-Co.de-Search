@@ -136,7 +136,7 @@ class SearchType extends DatabaseObject {
 		}
 
 		// execute query
-		return $this->executeSearchQuery($sqlConditions, $additionalSelects);
+		return $this->executeSearchQuery($sqlConditions, $additionalSelects, $itemsPerPage, $page);
 	}
 
 	/**
@@ -183,7 +183,7 @@ class SearchType extends DatabaseObject {
 	 * Note: This helps to unify search queries
 	 * @param	string	$sqlConditions
 	 */
-	protected function executeSearchQuery($sqlConditions, $additionalSelects) {
+	protected function executeSearchQuery($sqlConditions, $additionalSelects, $itemsPerPage, $page) {
 		// get resultList
 		$sql = "SELECT
 					".$this->searchQuerySelects."

@@ -28,7 +28,7 @@ class PackageType extends SearchType {
 	/**
 	 * @see SearchType::executeSearchQuery()
 	 */
-	protected function executeSearchQuery($sqlConditions, $additionalSelects) {
+	protected function executeSearchQuery($sqlConditions, $additionalSelects, $itemsPerPage, $page) {
 		// wuhahahaha ... monster query from hell :-D
 		$sql = "SELECT
 				package.packageID AS packageID,
