@@ -43,6 +43,11 @@ window.$j = jQuery.noConflict();
 <!-- print styles -->
 <link rel="stylesheet" type="text/css" media="print" href="{@RELATIVE_WCF_DIR}style/extra/print{if PAGE_DIRECTION == 'rtl'}-rtl{/if}.css" />
 
+<!-- alternate stylesheets -->
+{foreach from=$stylePickerOptions item=style key=styleID}
+	{if $styleID != $this->style->styleID}<link rel="alternate stylesheet" title="{$style}" media="screen" href="{@RELATIVE_WCF_DIR}style/style-{@$styleID}{if PAGE_DIRECTION == 'rtl'}-rtl{/if}.css" />{/if}
+{/foreach}
+
 <!-- opera styles -->
 <script type="text/javascript">
 	//<![CDATA[
