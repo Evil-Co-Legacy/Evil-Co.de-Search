@@ -69,6 +69,10 @@
 									<div class="smallButtons">
 										<ul>
 											<li class="extraButton"><a href="#top" title="{lang}wcf.global.scrollUp{/lang}"><img src="{icon}upS.png{/icon}" alt="{lang}wcf.global.scrollUp{/lang}" /></a></li>
+											{if $this->user->getPermission('mod.search.canModerate')}
+												<li><a href="index.php?action=TogglePackageServer&amp;serverID={@$server.serverID}{@SID_ARG_2ND}"><img src="{icon}{if $server.isDisabled}dis{else}en{/if}abledS.png{/icon}" alt="" /> <span>{lang}www.packageServerList.toggleServer{/lang}</span></a></li>
+												<li><a href="index.php?action=DeletePackageServer&amp;serverID={@$server.serverID}{@SID_ARG_2ND}" onclick="return confirm('{lang}www.packageServerList.delete.sure{/lang}');"><img src="{icon}deleteS.png{/icon}" alt="" /> <span>{lang}www.packageServerList.delete{/lang}</span></a></li>
+											{/if}
 										</ul>
 									</div>
 								</div>
