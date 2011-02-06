@@ -20,7 +20,7 @@
 						<li id="userMenuLogout"><a href="index.php?action=UserLogout&amp;t={@SECURITY_TOKEN}{@SID_ARG_2ND}"><img src="{icon}logoutS.png{/icon}" alt="" /> <span>{lang}www.header.userMenu.logout{/lang}</span></a></li>
 						<li id="userMenuProfileEdit"><a href="index.php?form=UserProfileEdit{@SID_ARG_2ND}"><img src="{icon}editS.png{/icon}" alt="" /> <span>{lang}www.header.userMenu.profile{/lang}</span></a></li>
 						{if MODULE_PM == 1 && $this->user->getPermission('user.pm.canUsePm')}
-							<li {if $this->user->pmUnreadCount} class="new"{/if} id="userMenuPm"><a href="index.php?page=PMList{@SID_ARG_2ND}"><img src="{icon}pm{if $this->user->pmUnreadCount}Full{else}Empty{/if}S.png{/icon}" alt="" /> <span>{lang}wbb.header.userMenu.pm{/lang}{if $this->user->pmUnreadCount} ({#$this->user->pmUnreadCount}){/if}</span></a>{if $this->user->pmTotalCount >= $this->user->getPermission('user.pm.maxPm')} <span class="pmBoxFull">{lang}wcf.pm.userMenu.mailboxIsFull{/lang}</span>{/if}</li>
+							<li {if $this->user->pmUnreadCount} class="new"{/if} id="userMenuPm"><a href="index.php?page=PMList{@SID_ARG_2ND}"><img src="{icon}pm{if $this->user->pmUnreadCount}Full{else}Empty{/if}S.png{/icon}" alt="" /> <span>{lang}www.header.userMenu.pm{/lang}{if $this->user->pmUnreadCount} ({#$this->user->pmUnreadCount}){/if}</span></a>{if $this->user->pmTotalCount >= $this->user->getPermission('user.pm.maxPm')} <span class="pmBoxFull">{lang}wcf.pm.userMenu.mailboxIsFull{/lang}</span>{/if}</li>
 						{/if}
 						{if $additionalUserMenuItems|isset}{@$additionalUserMenuItems}{/if}
 	
