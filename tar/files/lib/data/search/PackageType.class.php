@@ -37,7 +37,7 @@ class PackageType extends SearchType {
 				language.description AS description,
 				server.serverID AS serverID,
 				server.serverAlias AS serverAlias,
-				server.serverUrl AS serverUrl
+				server.serverUrl AS serverUrl,
 				version.version AS version,
 				version.isUnique AS isUnique,
 				version.standalone AS standalone,
