@@ -20,7 +20,7 @@ window.$j = jQuery.noConflict();
 	//<![CDATA[
 		function addOpenSearch() {
 			if ((typeof window.external == "object") && ((typeof window.external.AddSearchProvider == "unknown") || (typeof window.external.AddSearchProvider == "function"))) {
-				window.external.AddSearchProvider("{@RELATIVE_WWW_DIR}searchEngine.xml");
+				window.external.AddSearchProvider("{PAGE_URL}/searchEngine.xml");
 			} else {
 				alert("You will need a browser which supports OpenSearch to install this plugin.");
 			}

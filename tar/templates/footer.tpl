@@ -9,7 +9,7 @@
 					{if $additionalFooterOptions|isset}{@$additionalFooterOptions}{/if}
 
 					<li id="addOpenSearchLinkContainer" class="addOpenSearch" style="display: none;">
-						<a id="addOpenSearchLink" href="javascript:void(0)" onlick="addOpenSearch(); return false;"><img src="{icon}indexS.png{/icon}" alt="" /> <span>{lang}www.global.addOpenSearch{/lang}</span></a>
+						<a id="addOpenSearchLink" href="javascript:void(0)" onclick="addOpenSearch(); return false;"><img src="{icon}indexS.png{/icon}" alt="" /> <span>{lang}www.global.addOpenSearch{/lang}</span></a>
 						<script type="text/javascript">
 							//<![CDATA[
 							if ((typeof window.external == "object") && ((typeof window.external.AddSearchProvider == "unknown") || (typeof window.external.AddSearchProvider == "function"))) onloadEvents.push(function() {
