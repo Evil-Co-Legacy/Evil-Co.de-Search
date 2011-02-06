@@ -20,10 +20,6 @@
 						</script>
 					</li>
 
-					<li id="switchInstantSearchContainer" class="switchInstantSearch">
-						<a id="switchInstantSearchContainer" href="index.php?action=ToggleInstantSearch"{* onclick="search.toggleInstantSearch(); return false;" *}><img src="{icon}{if $this->user->disableInstantSearch}disabled{else}enabled{/if}S.png{/icon}" alt="" /> <span>{lang}www.global.toggleInstantSearch{/lang}</span></a>
-					</li>
-
 					{if $stylePickerOptions|count > 1}
 						<li class="stylePicker{if !SHOW_CLOCK} last{/if}">
 							<a id="changeStyle" class="hidden"><img src="{icon}styleOptionsS.png{/icon}" alt="" /> <span>{lang}www.global.changeStyle{/lang}</span></a>
