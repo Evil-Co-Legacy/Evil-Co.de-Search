@@ -18,18 +18,60 @@
 		<requiredpackage minversion="1.1.0">com.woltlab.wcf</requiredpackage>
 		<requiredpackage minversion="1.0.1" file="requirements/de.evil-co.search.core.tar">de.evil-co.search.core</requiredpackage>
 
-		<!-- page system -->
+		<!-- system -->
+		<requiredpackage minversion="1.1.2">com.woltlab.wcf.data.cronjobs</requiredpackage>
+		<requiredpackage minversion="1.1.0">com.woltlab.wcf.system.style</requiredpackage>
+		<requiredpackage minversion="1.0.1">com.woltlab.wcf.tagging</requiredpackage>
+
+		<!-- page -->
 		<requiredpackage minversion="1.1.1">com.woltlab.wcf.data.page.headerMenu</requiredpackage>
 		<requiredpackage minversion="1.1.0">com.woltlab.wcf.data.page</requiredpackage>
 		<requiredpackage minversion="1.1.1">com.woltlab.wcf.data.help</requiredpackage>
+		<requiredpackage minversion="1.0.1">com.woltlab.wcf.imageViewer</requiredpackage>
+		<requiredpackage minversion="1.1.0">com.woltlab.wcf.page.user.membersList.team</requiredpackage>
 
 		<!-- message -->
 		<requiredpackage minversion="1.1.0">com.woltlab.wcf.data.message</requiredpackage>
 		<requiredpackage minversion="1.1.1">com.woltlab.wcf.data.message.bbcode</requiredpackage>
+		<requiredpackage minversion="1.1.2">com.woltlab.wcf.data.message.attachment</requiredpackage>
+		<requiredpackage minversion="1.1.0">com.woltlab.wcf.data.image</requiredpackage>
+		<requiredpackage minversion="1.1.0">com.woltlab.wcf.data.image.captcha</requiredpackage>
+		<requiredpackage minversion="1.1.0">com.woltlab.wcf.data.message.censorship</requiredpackage>
+		<requiredpackage minversion="1.1.1 pl 1">com.woltlab.wcf.data.user.messenger</requiredpackage>
+		<requiredpackage minversion="1.1.2">com.woltlab.wcf.form.message</requiredpackage>
+		<requiredpackage minversion="1.1.1">com.woltlab.wcf.data.message.search</requiredpackage>
+		<requiredpackage minversion="1.0.1">com.woltlab.wcf.message.sidebar</requiredpackage>
+		<requiredpackage minversion="1.0.0">com.woltlab.wcf.data.message.search.tagging</requiredpackage>
+		<requiredpackage minversion="1.0.1">com.woltlab.wcf.message.multiQuote</requiredpackage>
+		<requiredpackage minversion="1.0.3">com.woltlab.wcf.data.feed.reader</requiredpackage>
+		<requiredpackage minversion="1.1.1">com.woltlab.wcf.data.message.poll</requiredpackage>
+		<requiredpackage minversion="1.1.2">com.woltlab.wcf.data.message.pm</requiredpackage>
+		<requiredpackage minversion="1.1.1">com.woltlab.wcf.form.user.signature</requiredpackage>
+		<requiredpackage minversion="1.1.2">com.woltlab.wcf.form.message.wysiwyg</requiredpackage>
 
-		<!-- user profile -->
+		<!-- user -->
 		<requiredpackage minversion="1.1.2">com.woltlab.wcf.form.user</requiredpackage>
 		<requiredpackage minversion="1.1.2">com.woltlab.wcf.page.user.profile</requiredpackage>
+		<requiredpackage minversion="1.1.1">com.woltlab.wcf.form.user.group</requiredpackage>
+		<requiredpackage minversion="1.0.0">com.woltlab.wcf.user.security.login</requiredpackage>
+		<requiredpackage minversion="1.0.0">com.woltlab.wcf.user.attachment</requiredpackage>
+		<requiredpackage minversion="1.0.2">com.woltlab.wcf.user.infraction</requiredpackage>
+		<requiredpackage minversion="1.1.0">com.woltlab.wcf.page.user.usersOnline</requiredpackage>
+		
+		<!-- administration -->
+		<requiredpackage minversion="1.0.1">com.woltlab.wcf.acp.content.attachment</requiredpackage>
+		<requiredpackage minversion="1.1.0">com.woltlab.wcf.acp.user.avatar</requiredpackage>
+		<requiredpackage minversion="1.1.0">com.woltlab.wcf.acp.content.bbcode</requiredpackage>
+		<requiredpackage minversion="1.1.1">com.woltlab.wcf.acp.system.db</requiredpackage>
+		<requiredpackage minversion="1.0.0">com.woltlab.wcf.acp.content.help</requiredpackage>
+		<requiredpackage minversion="1.1.1">com.woltlab.wcf.data.help</requiredpackage>
+		<requiredpackage minversion="1.1.0">com.woltlab.wcf.acp.display.language</requiredpackage>
+		<requiredpackage minversion="1.0.0">com.woltlab.wcf.acp.display.pageMenu</requiredpackage>
+		<requiredpackage minversion="1.1.0">com.woltlab.wcf.acp.content.smiley</requiredpackage>
+		<requiredpackage minversion="1.1.0">com.woltlab.wcf.acp.display.style</requiredpackage>
+		<requiredpackage minversion="1.1.1">com.woltlab.wcf.acp.display.template</requiredpackage>
+		<requiredpackage minversion="1.1.1">com.woltlab.wcf.acp.user.option</requiredpackage>
+		<requiredpackage minversion="1.1.0">com.woltlab.wcf.acp.user.rank</requiredpackage>
 	</requiredpackages>
 
 	<instructions type="install">
