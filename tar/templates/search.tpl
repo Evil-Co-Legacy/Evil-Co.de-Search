@@ -42,7 +42,8 @@
 									<div class="messageFooter">
 										<div class="smallButtons">
 											<ul>
-												<li class="extraButton"><a href="#top" title="{lang}wcf.global.scrollUp{/lang}"><img src="{@RELATIVE_WCF_DIR}icon/upS.png" alt="{lang}wcf.global.scrollUp{/lang}" /></a></li>
+												<li class="extraButton"><a href="#top" title="{lang}wcf.global.scrollUp{/lang}"><img src="{icon}upS.png{/icon}" alt="{lang}wcf.global.scrollUp{/lang}" /></a></li>
+												<li class="detailsButton"><a href="index.php?page=ResultDetail&amp;resultID={@$result->getResultID()}&amp;searchType={@$searchType->typeID}{@SID_ARG_2ND}" title="{lang}www.search.detail{/lang}"><img src="{icon}detailS.png{/icon}" alt="" /> <span>{lang}www.search.detail{/lang}</span></a>
 												{if $result->getAdditionalButtons() != ''}{@$result->getAdditionalButtons()}{/if}
 											</ul>
 										</div>
