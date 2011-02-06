@@ -14,7 +14,7 @@
 							//<![CDATA[
 							if ((typeof window.external == "object") && ((typeof window.external.AddSearchProvider == "unknown") || (typeof window.external.AddSearchProvider == "function"))) onloadEvents.push(function() {
 								$('addOpenSearchLinkContainer').style.display = "";
-								Effect.pulsate('addOpenSearchLinkContainer');
+								Effect.Pulsate('addOpenSearchLinkContainer');
 							});
 							//]]>
 						</script>
