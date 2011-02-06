@@ -3,15 +3,15 @@
 	<!-- Created on Sun, 19 Dec 2010 17:50:01 GMT -->
 	<ShortName>Package Archive</ShortName>
 	<Description>A search engine for WCF and WBB plugins</Description>
-	<Image width="16" height="16">http://www.evil-co.de/search/icon/indexS.png</Image>
-	<Url type="text/html" method="GET" template="http://www.evil-co.de/search">
+	<Image width="16" height="16">http://www.packagearchive.org/icon/indexS.png</Image>
+	<Url type="text/html" method="GET" template="http://www.packagearchive.org/">
 		<Param name="form" value="Search"/>
 		<Param name="query" value="{searchTerms}"/>
 		<Param name="searchType" value="1"/>
 	</Url>
 	<Developer>Johannes Donath</Developer>
 	<InputEncoding>UTF-8</InputEncoding>
-	<moz:SearchForm>http://www.evil-co.de/search/index.php?form=Search</moz:SearchForm>
-	<Url type="application/opensearchdescription+xml" rel="self" template="http://www.evil-co.de/search/searchEngine.xml"/>
-	<moz:UpdateUrl>http://www.evil-co.de/search/searchEngine.xml</moz:UpdateUrl>
+	<moz:SearchForm>http://www.packagearchive.org/index.php?form=Search</moz:SearchForm>
+	<Url type="application/opensearchdescription+xml" rel="self" template="http://www.packagearchive.org/searchEngine.xml"/>
+	<moz:UpdateUrl>http://www.packagearchive.org/searchEngine.xml</moz:UpdateUrl>
 </OpenSearchDescription>
