@@ -125,15 +125,29 @@ class SearchType extends DatabaseObject {
 	 * @param	integer	$page
 	 * @param	integer	$itemsPerPage
 	 */
-	public function search($query, $page = self::DEFAULT_PAGE_NO, $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE, $additionalSelects = "") {
+	public function search($query, $page = self::DEFAULT_PAGE_NO, $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE) {
 		// create needed variables
 		$sqlConditions = "";
 
 		// loop trhoug searchableFields and add them to query
 		foreach($this->searchableFields as $field) {
 			if (!empty($sqlConditions)) $sqlConditions .= " OR ";
-			$sqlConditions .= "MATCH(`".$field."`) AGAINST('".escapeString($query)."' WITH QUERY EXPANSION)";
+			$sqlConditions .= "MATCH(`".str_replace('.', '`.`', $field)."`) AGAINST('".escapeString($query)."' WITH QUERY EXPANSION) OR `".str_replace('.', '`.`', $field)."` LIKE '%".escapeString($query)."%'";
 		}
+		
+		$additionalSelects = "";
+		$matchArray = explode(" OR ", $sqlConditions);
+		
+		foreach($matchArray as $match) {
+			if (!preg_match("~(.*) LIKE '%(.*)%'~", $match)) {
+				if (!empty($additionalSelects)) $additionalSelects .= " + ";
+				$additionalSelects .= $match;
+			}
+		}
+		
+		$additionalSelects = "(".$additionalSelects.") AS searchScore";
+		
+		$sqlConditions = "( ".$sqlConditions." )";
 
 		// execute query
 		return $this->executeSearchQuery($sqlConditions, $additionalSelects, $itemsPerPage, $page);

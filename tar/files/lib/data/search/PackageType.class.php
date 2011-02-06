@@ -13,7 +13,7 @@ class PackageType extends SearchType {
 	/**
 	 * @see	SearchType::$searchableFields
 	 */
-	protected $searchableFields = array('language.name', 'language.description', 'version.plugin', 'version.licence', 'version.licenceUrl');
+	protected $searchableFields = array('packageLanguage.name', 'packageLanguage.description', 'version.plugin', 'version.licenseName', 'version.licenseUrl');
 
 	/**
 	 * @see	SearchType::$advancedSearchFields
@@ -31,20 +31,20 @@ class PackageType extends SearchType {
 	protected function executeSearchQuery($sqlConditions, $additionalSelects, $itemsPerPage, $page) {
 		// wuhahahaha ... monster query from hell :-D
 		$sql = "SELECT
-				package.packageID AS packageID,
-				package.packageName AS packageName,
-				language.name AS name,
-				language.description AS description,
-				server.serverID AS serverID,
-				server.serverAlias AS serverAlias,
-				server.serverUrl AS serverUrl,
-				version.version AS version,
-				version.isUnique AS isUnique,
-				version.standalone AS standalone,
-				version.plugin AS plugin,
-				version.packageUrl AS packageUrl,
-				version.author AS author,
-				version.authorUrl AS authorUrl
+				package.packageID,
+				package.packageName,
+				packageLanguage.name AS name,
+				packageLanguage.description,
+				server.serverID,
+				server.serverAlias,
+				server.serverUrl,
+				version.version,
+				version.isUnique,
+				version.standalone,
+				version.plugin,
+				version.packageUrl,
+				version.author,
+				version.authorUrl
 				".(!empty($additionalSelects) ? ','.$additionalSelects : "")."
 			FROM
 				www".WWW_N."_package package
@@ -53,18 +53,18 @@ class PackageType extends SearchType {
 			ON
 				package.lastVersionID = version.versionID
 			LEFT JOIN
-				www".WWW_N."_package_version_to_language language
+				www".WWW_N."_package_version_to_language packageLanguage
 			ON
-				version.versionID = language.versionID
+				version.versionID = packageLanguage.versionID
 			LEFT JOIN
 				www".WWW_N."_package_server server
 			ON
 				version.serverID = server.serverID
 			WHERE
 				(
-						language.languageID = 1
+						packageLanguage.languageID = 1
 					OR
-						language.isFallback = 1
+						packageLanguage.isFallback = 1
 				)
 			AND
 				".$sqlConditions."
@@ -91,17 +91,22 @@ class PackageType extends SearchType {
 			ON
 				package.lastVersionID = version.versionID
 			LEFT JOIN
-				".WWW_N."_package_version_to_language language
+				www".WWW_N."_package_version_to_language packageLanguage
 			ON
-				version.versionID = language.versionID
+				version.versionID = packageLanguage.versionID
+			LEFT JOIN
+				www".WWW_N."_package_server server
+			ON
+				version.serverID = server.serverID
 			WHERE
 				(
-						language.languageID = 1
+						packageLanguage.languageID = 1
 					OR
-						language.isFallback = 1
+						packageLanguage.isFallback = 1
 				)
 			AND
 				".$sqlConditions;
+		echo $sql;
 		$count = WCF::getDB()->getFirstRow($sql);
 
 		// write count to class property
