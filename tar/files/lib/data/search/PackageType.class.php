@@ -50,6 +50,7 @@ class PackageType extends SearchType {
 				version.authorUrl,
 				version.licenseName,
 				version.licenseUrl,
+				mirror.isEnabled AS mirrorEnabled,
 				".(!empty($additionalSelects) ? ','.$additionalSelects : "")."
 			FROM
 				www".WWW_N."_package package
@@ -65,6 +66,10 @@ class PackageType extends SearchType {
 				www".WWW_N."_package_server server
 			ON
 				version.serverID = server.serverID
+			LEFT JOIN
+				www".WWW_N."_package_mirror AS mirror
+			ON
+				(package.packageID = package.packageID AND version.versionID = mirror.versionID)
 			WHERE
 				(
 						packageLanguage.languageID = 1
