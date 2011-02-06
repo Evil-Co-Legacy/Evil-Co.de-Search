@@ -2,10 +2,10 @@
 <!DOCTYPE package SYSTEM "http://www.woltlab.com/DTDs/package.dtd">
 <package name="de.evil-co.search.www">
 	<packageinformation>
-		<packagename><![CDATA[Evil-Co.de Search]]></packagename>
+		<packagename><![CDATA[Package Archive]]></packagename>
 		<packagedescription><![CDATA[]]></packagedescription>
 		<standalone>1</standalone>
-		<version>1.2.0</version>
+		<version>2.0.0</version>
 		<date>2010-09-09</date>
 	</packageinformation>
 
