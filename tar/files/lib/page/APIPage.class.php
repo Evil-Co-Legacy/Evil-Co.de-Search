@@ -154,58 +154,62 @@ class APIPage extends AbstractPage {
 		// create needed arrays
 		$searchResults = array();
 
-		// check for needed attributes
-		if (isset($_REQUEST['query']) and !empty($_REQUEST['query']) and isset($_REQUEST['searchType'])) {
-			// read attributes
-			$searchType = intval($_REQUEST['searchType']);
-			$query = StringUtil::trim($_REQUEST['query']);
-
-			if (isset($_REQUEST['page']))
-				$page = intval($_REQUEST['page']);
-			else
-				$page = 1;
-
-			if (isset($_REQUEST['itemsPerPage']) and intval($_REQUEST['itemsPerPage']) <= 100)
-				$itemsPerPage = intval($_REQUEST['itemsPerPage']);
-			else
-				$itemsPerPage = 20;
-
-			// validate
-			$searchType = new SearchType($searchType);
-			$className = $searchType->typeName;
-
-			// validate given type
-			if ($searchType->typeID != 0) {
-				// validate type
-				if (file_exists(WWW_DIR.'lib/data/search/'.$className.'.class.php')) {
-					// include type
-					require_once(WWW_DIR.'lib/data/search/'.$className.'.class.php');
-
-					// create new type instance
-					$searchType = new $className($searchType->typeID);
-
-					// execute query
-					$searchResults = $searchType->search($query, $page, $itemsPerPage);
-
-					// calculate result count
-					$pageData = $this->calculateNumberOfPages($searchType->getResultCount(), $page, $itemsPerPage);
-
-					// assign data
-					WCF::getTPL()->assign($pageData);
+		if (!isset($_REQUEST['evil'])) {
+			// check for needed attributes
+			if (isset($_REQUEST['query']) and !empty($_REQUEST['query']) and isset($_REQUEST['searchType'])) {
+				// read attributes
+				$searchType = intval($_REQUEST['searchType']);
+				$query = StringUtil::trim($_REQUEST['query']);
+	
+				if (isset($_REQUEST['page']))
+					$page = intval($_REQUEST['page']);
+				else
+					$page = 1;
+	
+				if (isset($_REQUEST['itemsPerPage']) and intval($_REQUEST['itemsPerPage']) <= 100)
+					$itemsPerPage = intval($_REQUEST['itemsPerPage']);
+				else
+					$itemsPerPage = 20;
+	
+				// validate
+				$searchType = new SearchType($searchType);
+				$className = $searchType->typeName;
+	
+				// validate given type
+				if ($searchType->typeID != 0) {
+					// validate type
+					if (file_exists(WWW_DIR.'lib/data/search/'.$className.'.class.php')) {
+						// include type
+						require_once(WWW_DIR.'lib/data/search/'.$className.'.class.php');
+	
+						// create new type instance
+						$searchType = new $className($searchType->typeID);
+	
+						// execute query
+						$searchResults = $searchType->search($query, $page, $itemsPerPage);
+	
+						// calculate result count
+						$pageData = $this->calculateNumberOfPages($searchType->getResultCount(), $page, $itemsPerPage);
+	
+						// assign data
+						WCF::getTPL()->assign($pageData);
+					} else {
+						// print debug message
+						// echo '<p class="error">Cannot load search type</p>';
+						$error = 'cannotLoadSearchType';
+					}
 				} else {
 					// print debug message
-					// echo '<p class="error">Cannot load search type</p>';
-					$error = 'cannotLoadSearchType';
+					// echo '<p class="error">Invalid SearchType!</p>';
+					$error = 'invalidSearchType';
 				}
 			} else {
 				// print debug message
-				// echo '<p class="error">Invalid SearchType!</p>';
-				$error = 'invalidSearchType';
+				// echo '<p class="error">Invalid query!<br />'; print_r($_REQUEST); echo '</p>';
+				$error = 'invalidQuery';
 			}
 		} else {
-			// print debug message
-			// echo '<p class="error">Invalid query!<br />'; print_r($_REQUEST); echo '</p>';
-			$error = 'invalidQuery';
+			$error = "Don't be evil!";
 		}
 
 		// assign results
