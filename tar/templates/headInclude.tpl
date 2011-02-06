@@ -38,7 +38,7 @@ window.$j = jQuery.noConflict();
 {/if}
 
 <!-- dynamic styles -->
-<link rel="stylesheet" type="text/css" media="screen" href="{@RELATIVE_WCF_DIR}style/style-{@$this->getStyle()->styleID}{if PAGE_DIRECTION == 'rtl'}-rtl{/if}.css" />
+<link rel="stylesheet" type="text/css" media="screen" title="{$this->getStyle()->styleName}" href="{@RELATIVE_WCF_DIR}style/style-{@$this->getStyle()->styleID}{if PAGE_DIRECTION == 'rtl'}-rtl{/if}.css" />
 
 <!-- print styles -->
 <link rel="stylesheet" type="text/css" media="print" href="{@RELATIVE_WCF_DIR}style/extra/print{if PAGE_DIRECTION == 'rtl'}-rtl{/if}.css" />
