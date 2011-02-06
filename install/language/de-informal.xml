@@ -20,6 +20,7 @@
 		<item name="www.header.userMenu.changeLanguage"><![CDATA[Sprache ändern]]></item>
 		
 		<item name="www.header.menu.index"><![CDATA[Hauptseite]]></item>
+		<item name="www.header.menu.packageServerList"><![CDATA[Paketserver]]></item>
 	</category>
 	
 	<category name="www.search">
