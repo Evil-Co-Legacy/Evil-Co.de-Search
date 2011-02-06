@@ -50,7 +50,7 @@ class PackageType extends SearchType {
 				version.authorUrl,
 				version.licenseName,
 				version.licenseUrl,
-				mirror.isEnabled AS mirrorEnabled,
+				mirror.isEnabled AS mirrorEnabled
 				".(!empty($additionalSelects) ? ','.$additionalSelects : "")."
 			FROM
 				www".WWW_N."_package package
