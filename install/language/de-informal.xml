@@ -10,6 +10,7 @@
 		<item name="www.header.userNote.user"><![CDATA[Angemeldet als <a href="index.php?page=User&userID={$this->user->userID}">{$this->user->username}</a>.]]></item>
 		<item name="www.header.userMenu.logout"><![CDATA[Abmelden]]></item>
 		<item name="www.header.userMenu.profile"><![CDATA[Profil bearbeiten]]></item>
+		<item name="www.header.userMenu.pm"><![CDATA[Private Nachrichten]]></item>
 		<item name="www.header.userMenu.acp"><![CDATA[Administration]]></item>
 		
 		<item name="www.header.userNote.guest"><![CDATA[Du bist nicht angemeldet.]]></item>
