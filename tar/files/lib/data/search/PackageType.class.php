@@ -109,7 +109,6 @@ class PackageType extends SearchType {
 				)
 			AND
 				".$sqlConditions;
-		echo $sql;
 		$count = WCF::getDB()->getFirstRow($sql);
 
 		// write count to class property
