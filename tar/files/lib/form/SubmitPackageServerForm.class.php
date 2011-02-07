@@ -134,6 +134,16 @@ class SubmitPackageServerForm extends CaptchaForm {
 	}
 	
 	/**
+	 * @see Page::show()
+	 */
+	public function show() {
+		require_once(WCF_DIR.'lib/page/util/menu/PageMenu.class.php');
+		PageMenu::setActiveMenuItem('www.header.menu.packageServerList');
+		
+		parent::show();
+	}
+	
+	/**
 	 * @see Page::assignVariables()
 	 */
 	public function assignVariables() {
