@@ -12,7 +12,7 @@
 			</ul>
 		 
 		 	<div class="mainHeadline">
-				<img src="{icon}indexL.png{/icon}" alt="" />
+				<img src="{icon}packageServerL.png{/icon}" alt="" />
 				<div class="headlineContainer">
 					<h2>{lang}www.packageServerList.title{/lang}</h2>
 					<p>{lang}www.packageServerList.description{/lang}</p>
@@ -23,7 +23,7 @@
 				<div class="largeButtons">
 					<ul>
 						<li>
-							<a href="index.php?form=SubmitPackageServer{@SID_ARG_2ND}"><img src="{icon}addPackageServerM.png{/icon}" alt="" /> <span>{lang}wwww.packageServerList.submitServer{/lang}</span></a>
+							<a href="index.php?form=SubmitPackageServer{@SID_ARG_2ND}"><img src="{icon}packageServerSubmitM.png{/icon}" alt="" /> <span>{lang}wwww.packageServerList.submitServer{/lang}</span></a>
 						</li>
 					</ul>
 				</div>
