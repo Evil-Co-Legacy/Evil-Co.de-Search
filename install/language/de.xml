@@ -84,8 +84,19 @@
 		<item name="www.packageServerList.isDisabled"><![CDATA[Dieser Server wird zur Zeit nicht ausgelesen]]></item>
 	</category>
 	
-	<category name="www.mirror">
-		<item name="www.mirror.notImplemented"><![CDATA[Diese Funktion ist (noch) nicht verfügbar.]]></item>
+	<category name="www.packageServerSubmit">
+		<item name="www.packageServerSubmit.title"><![CDATA[Paketserver einreichen]]></item>
+		<item name="www.packageServerSubmit.description"><![CDATA[Hier können Vorschläge für neue Server eingereicht werden.]]></item>
+		<item name="www.packageServerSubmit.general"><![CDATA[Allgemeine Informationen]]></item>
+		<item name="www.packageServerSubmit.serverAlias"><![CDATA[Anzeigename]]></item>
+		<item name="www.packageServerSubmit.serverAlias.description"><![CDATA[Geben Sie in diesem Feld einen Anzeigenamen (Alias) für den Server an.]]></item>
+		<item name="www.packageServerSubmit.serverUrl"><![CDATA[Server URL]]></item>
+		<item name="www.packageServerSubmit.serverUrl.description"><![CDATA[Geben Sie in diesem Feld die URL zum Paketserver an.]]></item>
+		<item name="www.packageServerSubmit.optional"><![CDATA[Optionale Angaben]]></item>
+		<item name="www.packageServerSubmit.homepage"><![CDATA[Anbieter URL]]></item>
+		<item name="www.packageServerSubmit.homepage.description"><![CDATA[Hier können Sie die URL des Anbieters (bzw. der Homepage) der den Paketserver betreibt angeben.]]></item>
+		<item name="www.packageServerSubmit.descriptionField"><![CDATA[Beschreibung]]></item>
+		<item name="www.packageServerSubmit.descriptionField.description"><![CDATA[Hier können Sie eine kurze Beschreibung des Paketservers angeben.]]></item>
 	</category>
 	
 	<category name="www.download">

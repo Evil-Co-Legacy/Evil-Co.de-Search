@@ -84,6 +84,21 @@
 		<item name="www.packageServerList.isDisabled"><![CDATA[This server will not read at update]]></item>
 	</category>
 	
+	<category name="www.packageServerSubmit">
+		<item name="www.packageServerSubmit.title"><![CDATA[Suggest Packageserver]]></item>
+		<item name="www.packageServerSubmit.description"><![CDATA[You can suggest new package servers here.]]></item>
+		<item name="www.packageServerSubmit.general"><![CDATA[General Information]]></item>
+		<item name="www.packageServerSubmit.serverAlias"><![CDATA[Displayname]]></item>
+		<item name="www.packageServerSubmit.serverAlias.description"><![CDATA[Put in an alias for this server here.]]></item>
+		<item name="www.packageServerSubmit.serverUrl"><![CDATA[Server URL]]></item>
+		<item name="www.packageServerSubmit.serverUrl.description"><![CDATA[Put in the URL to server here.]]></item>
+		<item name="www.packageServerSubmit.optional"><![CDATA[Optional Information]]></item>
+		<item name="www.packageServerSubmit.homepage"><![CDATA[Provider URL]]></item>
+		<item name="www.packageServerSubmit.homepage.description"><![CDATA[You can put in the URL to server's provider here.]]></item>
+		<item name="www.packageServerSubmit.descriptionField"><![CDATA[Description]]></item>
+		<item name="www.packageServerSubmit.descriptionField.description"><![CDATA[You can put in a little description here.]]></item>
+	</category>
+	
 	<category name="www.mirror">
 		<item name="www.mirror.notImplemented"><![CDATA[This function isn't ready yet.]]></item>
 	</category>
