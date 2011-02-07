@@ -137,7 +137,7 @@ class SubmitPackageServerForm extends AbstractForm {
 	 * @see Page::assignVariables()
 	 */
 	public function assignVariables() {
-		parent::assignVariabes();
+		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
 			'serverAlias'		=>	$this->serverAlias,
