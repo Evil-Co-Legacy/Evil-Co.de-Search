@@ -115,9 +115,9 @@ class SearchForm extends MultipleLinkPage {
 		// assign needed variables
 		WCF::getTPL()->assign(array(
 			'results'			=>	$this->searchResults,
-			'encodedQuery'		=>	urlencode($this->query),
+			'encodedQuery'			=>	urlencode($this->query),
 			'query'				=>	$this->query,
-			'searchType'		=>	$this->searchType
+			'searchType'			=>	$this->searchType
 		));
 
 		// assign additional footer options (Back to index page link)
