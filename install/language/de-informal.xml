@@ -11,6 +11,7 @@
 		<item name="www.header.userMenu.logout"><![CDATA[Abmelden]]></item>
 		<item name="www.header.userMenu.profile"><![CDATA[Profil bearbeiten]]></item>
 		<item name="www.header.userMenu.pm"><![CDATA[Private Nachrichten]]></item>
+		<item name="www.header.userMenu.moderationOverview"><![CDATA[Moderation]]></item>
 		<item name="www.header.userMenu.acp"><![CDATA[Administration]]></item>
 		
 		<item name="www.header.userNote.guest"><![CDATA[Du bist nicht angemeldet.]]></item>
