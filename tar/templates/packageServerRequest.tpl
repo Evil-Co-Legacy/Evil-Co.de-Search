@@ -26,7 +26,7 @@
 					<div class="largeButtons">
 						<ul>
 							<li>
-								<a href="index.php?page=ModerateServerRequest&amp;requestID={@$request.requestID}&amp;action=reject{@SID_ARG_2ND}"><img src="{icon}packageServerRequestRejectM.png{/icon}" alt="" /> <span>{lang}www.packageServerRequest.reject{/lang}</span></a>
+								<a href="javascript:void(0)" onclick="var reason = prompt('{lang}www.packageServerRequest.reject.prompt{/lang}'); location.href = 'index.php?page=ModerateServerRequest&amp;requestID={@$request.requestID}&amp;action=reject&amp;reason=' + escape(reason) + SID_ARG_2ND;"><img src="{icon}packageServerRequestRejectM.png{/icon}" alt="" /> <span>{lang}www.packageServerRequest.reject{/lang}</span></a>
 							</li>
 							
 							{if $request.state != 'pending'}
