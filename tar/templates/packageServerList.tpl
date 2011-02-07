@@ -19,6 +19,8 @@
 				</div>
 			</div>
 			
+			{if $userMessages|isset}{@$userMessages}{/if}
+			
 			<div class="contentHeader">
 				<div class="largeButtons">
 					<ul>

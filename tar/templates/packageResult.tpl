@@ -10,6 +10,8 @@
 	</div>
 </div>
 
+{if $userMessages|isset}{@$userMessages}{/if}
+
 {if !$result->isDownloadAvailable()}<p class="warning">{lang}www.packageDetail.downloadDisabled{/lang}</p>{/if}
 {if !$result->isMirrorAvailable()}<p class="info">{lang}www.packageDetail.mirrorDisabled{/lang}</p>{/if}
 

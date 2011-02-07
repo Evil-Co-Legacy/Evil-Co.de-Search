@@ -40,10 +40,8 @@
 					<p>{lang}{PAGE_DESCRIPTION}{/lang}</p>
 				</div>
 			</div>
-
-		 	<noscript>
-		 		<p class="info">{lang}www.search.noJs{/lang}</p>
-		 	</noscript>
+			
+			{if $userMessages|isset}{@$userMessages}{/if}
 
 		 	{if $tpl.get.error|isset}
 		 		<div class="contentHeader">
