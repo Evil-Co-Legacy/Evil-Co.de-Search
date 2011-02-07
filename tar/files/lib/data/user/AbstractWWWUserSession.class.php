@@ -15,6 +15,12 @@ class AbstractWWWUserSession extends UserSession {
 	protected $outstandingGroupApplications = null;
 	
 	/**
+	 * Contains the count of outstanding moderations
+	 * @var integer
+	 */
+	protected $outstandingModerations = null;
+	
+	/**
 	 * Contains a list of outstanding notifications
 	 * @var	array
 	 */
@@ -34,9 +40,23 @@ class AbstractWWWUserSession extends UserSession {
 	}
 	
 	/**
+	 * Retrunes true if the user has moderator permissions
+	 */
+	public function isModerator() {
+		return false;
+	}
+	
+	/**
 	 * Returnes the number of outstanding group applications
 	 */
 	public function getOutstandingGroupApplications() {
+		return 0;
+	}
+	
+	/**
+	 * Returnes the number of outstanding moderations
+	 */
+	public function getOutstandingModerations() {
 		return 0;
 	}
 	

@@ -53,7 +53,7 @@ class WWWUserSession extends AbstractWWWUserSession {
 		parent::init();
 
 		// reset properties
-		$this->outstandingGroupApplications = $this->invitations = null;
+		$this->outstandingGroupApplications = $this->outstandingModerations = $this->invitations = null;
 	}
 	
 	/**
@@ -61,6 +61,13 @@ class WWWUserSession extends AbstractWWWUserSession {
 	 */
 	public function isGroupLeader() {
 		return $this->getPermission('wcf.group.isGroupLeader');
+	}
+	
+	/**
+	 * @see AbstractWWWUserSession::isModerator()
+	 */
+	public function isModerator() {
+		return $this->getPermission('mod.search.canModerate');
 	}
 	
 	/**
@@ -109,6 +116,25 @@ class WWWUserSession extends AbstractWWWUserSession {
 		
 		// If the module isn't enabled we'll return zero
 		return 0;
+	}
+	
+	/**
+	 * @see AbstractWWWUserSession::getOutstandingModerations()
+	 */
+	public function getOutstandingModerations() {
+		if ($this->outstandingModerations === null) {
+			$sql = "SELECT
+					COUNT(*) AS count
+				FROM
+					www".WWW_N."_package_server_request
+				WHERE
+					state = 'waiting'";
+			$row = WCF::getDB()->getFirstRow($sql);
+			
+			$this->outstandingModerations = $row['count'];
+		}
+		
+		return $this->outstandingModerations;
 	}
 	
 	/**
