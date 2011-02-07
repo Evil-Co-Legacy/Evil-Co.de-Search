@@ -12,12 +12,16 @@
 			</ul>
 		 
 		 	<div class="mainHeadline">
-				<img src="{icon}packageServerAddL.png{/icon}" alt="" />
+				<img src="{icon}packageServerSubmitL.png{/icon}" alt="" />
 				<div class="headlineContainer">
 					<h2>{lang}www.packageServerSubmit.title{/lang}</h2>
 					<p>{lang}www.packageServerSubmit.description{/lang}</p>
 				</div>
 			</div>
+			
+			{if $userMessages|isset}{@$userMessages}{/if}
+			
+			{if $errorField}<p class="error">{lang}wcf.global.form.error{/lang}</p>{/if}
 			
 			<form action="index.php?form=SubmitPackageServer" method="post">
 				<fieldset>
@@ -29,9 +33,15 @@
 						</div>
 						<div class="formField">
 							<input type="text" class="inputText" value="{$serverAlias}" name="serverAlias" id="serverAlias" />
+							{if $errorField == 'serverAlias'}
+								<p class="innerError">
+									{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+									{if $errorType == 'notUnique'}{lang}www.packageServerSubmit.serverAlias.notUnique{/lang}{/if}
+								</p>
+							{/if}
 						</div>
 						<div class="formFieldDesc">
-							<p>{lang}www.packageServerSubmit.serverAlias{/lang}</p>
+							<p>{lang}www.packageServerSubmit.serverAlias.description{/lang}</p>
 						</div>
 					</div>
 					
@@ -41,9 +51,15 @@
 						</div>
 						<div class="formField">
 							<input type="text" class="inputText" value="{$serverUrl}" name="serverUrl" id="serverUrl" />
+							{if $errorField == 'serverUrl'}
+								<p class="innerError">
+									{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+									{if $errorType == 'notUnique'}{lang}www.packageServerSubmit.serverAlias.notUnique{/lang}{/if}
+								</p>
+							{/if}
 						</div>
 						<div class="formFieldDesc">
-							<p>{lang}www.packageServerSubmit.serverUrl{/lang}</p>
+							<p>{lang}www.packageServerSubmit.serverUrl.description{/lang}</p>
 						</div>
 					</div>
 					
@@ -53,9 +69,14 @@
 						</div>
 						<div class="formField">
 							<input type="text" class="inputText" value="{$homepage}" name="homepage" id="homepage" />
+							{if $errorField == 'homepage'}
+								<p class="innerError">
+									{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+								</p>
+							{/if}
 						</div>
 						<div class="formFieldDesc">
-							<p>{lang}www.packageServerSubmit.homepage{/lang}</p>
+							<p>{lang}www.packageServerSubmit.homepage.description{/lang}</p>
 						</div>
 					</div>
 					
@@ -65,18 +86,25 @@
 						</div>
 						<div class="formField">
 							<input type="text" class="inputText" value="{$description}" name="description" id="description" />
+							{if $errorField == 'description'}
+								<p class="innerError">
+									{if $errorType == 'empty'}{lang}wcf.global.error.empty{/lang}{/if}
+								</p>
+							{/if}
 						</div>
 						<div class="formFieldDesc">
-							<p>{lang}www.packageServerSubmit.description{/lang}</p>
+							<p>{lang}www.packageServerSubmit.description.description{/lang}</p>
 						</div>
 					</div>
 					
-					<div class="formSubmit">
-						<input type="submit" name="send" accesskey="s" value="{lang}wcf.global.button.submit{/lang}" />
-						<input type="reset" name="reset" accesskey="r" value="{lang}wcf.global.button.reset{/lang}" />
-						{@SID_INPUT_TAG}
-					</div>
+					{include file='captcha'}
 				</fieldset>
+				
+				<div class="formSubmit">
+					<input type="submit" name="send" accesskey="s" value="{lang}wcf.global.button.submit{/lang}" />
+					<input type="reset" name="reset" accesskey="r" value="{lang}wcf.global.button.reset{/lang}" />
+					{@SID_INPUT_TAG}
+				</div>
 			</form>
 		</div>
 		
