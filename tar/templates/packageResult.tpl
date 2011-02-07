@@ -1,5 +1,5 @@
 <ul class="breadCrumbs">
-	<li><a href="index.php?page=Index{@SID_ARG_2ND}"><img alt="" src="{icon}indexS.png{/icon}"> <span>{lang}{PAGE_TITLE}{/lang}</span></a> &raquo;</li>
+	<li><a href="index.php?page=Index{@SID_ARG_2ND}"><img alt="" src="{icon}indexS.png{/icon}" /> <span>{lang}{PAGE_TITLE}{/lang}</span></a> &raquo;</li>
 </ul>
 
 <div class="mainHeadline">
