@@ -62,7 +62,11 @@
 							<p>{lang}www.packageServerSubmit.serverUrl.description{/lang}</p>
 						</div>
 					</div>
-					
+				</fieldset>
+				
+				<fieldset>
+					<legend>{lang}www.packageServerSubmit.optional{/lang}</legend>
+				
 					<div class="formElement">
 						<div class="formFieldLabel">
 							<label for="serverAlias">{lang}www.packageServerSubmit.homepage{/lang}</label>
@@ -82,7 +86,7 @@
 					
 					<div class="formElement">
 						<div class="formFieldLabel">
-							<label for="serverAlias">{lang}www.packageServerSubmit.description{/lang}</label>
+							<label for="serverAlias">{lang}www.packageServerSubmit.descriptionField{/lang}</label>
 						</div>
 						<div class="formField">
 							<input type="text" class="inputText" value="{$description}" name="description" id="description" />
@@ -93,7 +97,7 @@
 							{/if}
 						</div>
 						<div class="formFieldDesc">
-							<p>{lang}www.packageServerSubmit.description.description{/lang}</p>
+							<p>{lang}www.packageServerSubmit.descriptionField.description{/lang}</p>
 						</div>
 					</div>
 					
