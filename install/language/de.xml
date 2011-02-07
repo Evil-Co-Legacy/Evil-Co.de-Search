@@ -97,6 +97,8 @@
 		<item name="www.packageServerSubmit.homepage.description"><![CDATA[Hier können Sie die URL des Anbieters (bzw. der Homepage) der den Paketserver betreibt angeben.]]></item>
 		<item name="www.packageServerSubmit.descriptionField"><![CDATA[Beschreibung]]></item>
 		<item name="www.packageServerSubmit.descriptionField.description"><![CDATA[Hier können Sie eine kurze Beschreibung des Paketservers angeben.]]></item>
+		<item name="www.submitPackageServer.redirect"><![CDATA[Der Eintrag wurde erfolgreich angelegt.{if $this->user->userID} Sie werden nun auf Ihre Anfrage weitergeleitet.{/if}]]></item>
+		<item name="www.packageServerSubmit.serverAlias.notUnique"><![CDATA[{if $errorField == 'serverAlias'}Ein Server mit diesem Alias existiert bereits oder befindet sich in der Freischaltung. Bitte wählen Sie einen anderen Alias.{else}Ein Server mit dieser URL existiert bereits oder befindet sich in der Freischaltung. Bitte tragen Sie eine andere URL ein.<span class="hidden">Oder lassen es ganz bleiben</span>]]></item>
 	</category>
 	
 	<category name="www.download">
