@@ -21,6 +21,30 @@
 			
 			{if $userMessages|isset}{@$userMessages}{/if}
 			
+			{if $this->user->getPermission('mod.search.canModerate') || $additionalLargeButtons|isset}
+				<div class="contentHeader">
+					<div class="largeButtons">
+						<ul>
+							<li>
+								<a href="index.php?page=ModerateServerRequest&amp;requestID={@$request.requestID}&amp;action=reject{@SID_ARG_2ND}"><img src="{icon}packageServerRequestRejectM.png{/icon}" alt="" /> <span>{lang}www.packageServerRequest.reject{/lang}</span></a>
+							</li>
+							
+							<li>
+								<a href="index.php?page=ModerateServerRequest&amp;requestID={@$request.requestID}&amp;action=pending{@SID_ARG_2ND}"><img src="{icon}packageServerRequestPendingM.png{/icon}" alt="" /> <span>{lang}www.packageServerRequest.pending{/lang}</span></a>
+							</li>
+							
+							<li>
+								<a href="index.php?page=ModerateServerRequest&amp;requestID={@$request.requestID}&amp;action=accept{@SID_ARG_2ND}"><img src="{icon}packageServerRequestAcceptM.png{/icon}" alt="" /> <span>{lang}www.packageServerRequest.accept{/lang}</span></a>
+							</li>
+							
+							<li>
+								<a href="index.php?page=ModerateServerRequest&amp;requestID={@$request.requestID}&amp;action=reset{@SID_ARG_2ND}"><img src="{icon}packageServerRequestResetM.png{/icon}" alt="" /> <span>{lang}www.packageServerRequest.reset{/lang}</span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			{/if}
+			
 			<div class="requestInformation">
 				<fieldset>
 					<legend>{lang}www.packageServerRequest.information{/lang}</legend>
