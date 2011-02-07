@@ -27,6 +27,10 @@
 						{if $this->user->isGroupLeader()}
 							<li id="userMenuGroupManagement"{if $this->user->getOutstandingGroupApplications()} class="new"{/if}><a href="index.php?page=UserGroupLeader{@SID_ARG_2ND}"><img src="{icon}groupLeaderS.png{/icon}" alt="" /> <span>{lang}wbb.header.userMenu.userGroupLeader{/lang}{if $this->user->getOutstandingGroupApplications()} ({#$this->user->getOutstandingGroupApplications()}){/if}</span></a></li>
 						{/if}
+						
+						{if $this->user->isModerator()}
+							<li id="userMenuModerator"{if $this->user->getOutstandingModerations()} class="new"{/if}><a href="index.php?page=ModerationOverview{@SID_ARG_2ND}"><img src="{icon}moderatorS.png{/icon}" alt="" /> <span>{lang}www.header.userMenu.moderationOverview{/lang}{if $this->user->getOutstandingModerations()} ({#$this->user->getOutstandingModerations()}){/if}</span></a></li>
+						{/if}
 
 						{if $this->user->getPermission('admin.general.canUseAcp')}
 							<li id="userMenuACP"><a href="acp/index.php?packageID={@PACKAGE_ID}"><img src="{icon}acpS.png{/icon}" alt="" /> <span>{lang}www.header.userMenu.acp{/lang}</span></a></li>
@@ -124,7 +128,7 @@
 
 	<div id="header">
 
-		{if $templateName|isset && $templateName != 'index'}
+		{if $templateName|isset && $templateName != 'index' && $searchType|isset}
 			{if !$searchFieldTitle|isset}{assign var='searchFieldTitle' value='{lang}www.header.search.query{/lang}'}{/if}
 			{if !$searchFieldOptions|isset}
 				{capture assign=searchFieldOptions}
@@ -140,6 +144,7 @@
 					<div class="searchContainer">
 						<input type="text" tabindex="{counter name='tabindex'}" id="searchInput" class="inputText" name="query" value="{if $query|isset}{$query}{/if}" />
 						<input type="image" tabindex="{counter name='tabindex'}" id="searchSubmit" class="searchSubmit inputImage" src="{icon}submitS.png{/icon}" alt="{lang}wcf.global.button.submit{/lang}" />
+						<input type="hidden" name="searchType" value="{$searchType}" />
 						{@SID_INPUT_TAG}
 						{* {if $searchHiddenFields|isset}{@$searchHiddenFields}{else}<input type="hidden" name="types[]" value="wwwEntry" />{/if} *}
 	
