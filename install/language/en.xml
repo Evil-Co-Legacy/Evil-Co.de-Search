@@ -78,7 +78,7 @@
 		<item name="www.packageServerList.description"><![CDATA[Here will all servers in our system appear. You can add new servers from here.]]></item>
 		<item name="wwww.packageServerList.submitServer"><![CDATA[Send Suggestion]]></item>
 		<item name="www.packageServerList.url"><![CDATA[URL]]></item>
-		<item name="www.packageServerList.homepage"><![CDATA[Homepage]]></item>
+		<item name="www.packageServerList.homepage"><![CDATA[Provider]]></item>
 		<item name="www.packageServerList.description"><![CDATA[Description]]></item>
 		<item name="www.packageServerList.notes"><![CDATA[Note]]></item>
 		<item name="www.packageServerList.isDisabled"><![CDATA[This server will not read at update]]></item>
@@ -101,8 +101,20 @@
 		<item name="www.packageServerSubmit.serverAlias.notUnique"><![CDATA[{if $errorField == 'serverAlias'}A server with this alias does already exist or was already requested. Please choose an other alias.{else}A server with this alias does already exist or was already requested. Please put in an other URL.<span class="hidden">Or just leave this page</span>]]></item>
 	</category>
 	
-	<category name="www.mirror">
-		<item name="www.mirror.notImplemented"><![CDATA[This function isn't ready yet.]]></item>
+	<category name="www.packageServerRequest">
+		<item name="www.packageServerRequest.title"><![CDATA[Packageserver suggestion &raquo;{$request.serverAlias}&laquo;]]></item>
+		<item name="www.packageServerRequest.information"><![CDATA[General Information]]></item>
+		<item name="www.packageServerRequest.serverAlias"><![CDATA[Alias]]></item>
+		<item name="www.packageServerRequest.serverUrl"><![CDATA[URL]]></item>
+		<item name="www.packageServerRequest.homepage"><![CDATA[Provider]]></item>
+		<item name="www.packageServerRequest.description"><![CDATA[Description]]></item>
+		<item name="www.packageServerRequest.author"><![CDATA[Author]]></item>
+		<item name="www.packageServerRequest.state"><![CDATA[State]]></item>
+		
+		<item name="www.packageServerRequest.state.waiting"><![CDATA[Waiting]]></item>
+		<item name="www.packageServerRequest.state.accepted"><![CDATA[Accepted]]></item>
+		<item name="www.packageServerRequest.state.pending"><![CDATA[Pending]]></item>
+		<item name="www.packageServerRequest.state.rejected"><![CDATA[Rejected]]></item>
 	</category>
 	
 	<category name="www.download">

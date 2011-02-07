@@ -78,7 +78,7 @@
 		<item name="www.packageServerList.description"><![CDATA[Hier werden sämtliche dem System bekannten Paketserver aufgelistet. Außerdem haben Sie die Möglichkeit neue hinzuzufügen.]]></item>
 		<item name="wwww.packageServerList.submitServer"><![CDATA[Vorschlag einsenden]]></item>
 		<item name="www.packageServerList.url"><![CDATA[URL]]></item>
-		<item name="www.packageServerList.homepage"><![CDATA[Homepage]]></item>
+		<item name="www.packageServerList.homepage"><![CDATA[Anbieter]]></item>
 		<item name="www.packageServerList.description"><![CDATA[Beschreibung]]></item>
 		<item name="www.packageServerList.notes"><![CDATA[Notiz]]></item>
 		<item name="www.packageServerList.isDisabled"><![CDATA[Dieser Server wird zur Zeit nicht ausgelesen]]></item>
@@ -99,6 +99,22 @@
 		<item name="www.packageServerSubmit.descriptionField.description"><![CDATA[Hier können Sie eine kurze Beschreibung des Paketservers angeben.]]></item>
 		<item name="www.submitPackageServer.redirect"><![CDATA[Der Eintrag wurde erfolgreich angelegt.{if $this->user->userID} Sie werden nun auf Ihre Anfrage weitergeleitet.{/if}]]></item>
 		<item name="www.packageServerSubmit.serverAlias.notUnique"><![CDATA[{if $errorField == 'serverAlias'}Ein Server mit diesem Alias existiert bereits oder befindet sich in der Freischaltung. Bitte wählen Sie einen anderen Alias.{else}Ein Server mit dieser URL existiert bereits oder befindet sich in der Freischaltung. Bitte tragen Sie eine andere URL ein.<span class="hidden">Oder lassen es ganz bleiben</span>]]></item>
+	</category>
+	
+	<category name="www.packageServerRequest">
+		<item name="www.packageServerRequest.title"><![CDATA[Paketserver Vorschlag &raquo;{$request.serverAlias}&laquo;]]></item>
+		<item name="www.packageServerRequest.information"><![CDATA[Allgemeine Informationen]]></item>
+		<item name="www.packageServerRequest.serverAlias"><![CDATA[Alias]]></item>
+		<item name="www.packageServerRequest.serverUrl"><![CDATA[URL]]></item>
+		<item name="www.packageServerRequest.homepage"><![CDATA[Anbieter]]></item>
+		<item name="www.packageServerRequest.description"><![CDATA[Beschreibung]]></item>
+		<item name="www.packageServerRequest.author"><![CDATA[Autor]]></item>
+		<item name="www.packageServerRequest.state"><![CDATA[Status]]></item>
+		
+		<item name="www.packageServerRequest.state.waiting"><![CDATA[In der Warteschlange]]></item>
+		<item name="www.packageServerRequest.state.accepted"><![CDATA[Angenommen]]></item>
+		<item name="www.packageServerRequest.state.pending"><![CDATA[In Bearbeitung]]></item>
+		<item name="www.packageServerRequest.state.rejected"><![CDATA[Abgelehnt]]></item>
 	</category>
 	
 	<category name="www.download">
