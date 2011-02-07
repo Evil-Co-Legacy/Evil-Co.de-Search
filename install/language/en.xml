@@ -98,7 +98,7 @@
 		<item name="www.packageServerSubmit.descriptionField"><![CDATA[Description]]></item>
 		<item name="www.packageServerSubmit.descriptionField.description"><![CDATA[You can put in a little description here.]]></item>
 		<item name="www.submitPackageServer.redirect"><![CDATA[The entry was successfully added.{if $this->user->userID} You will redirected to your request.{/if}]]></item>
-		<item name="www.packageServerSubmit.serverAlias.notUnique"><![CDATA[{if $errorField == 'serverAlias'}A server with this alias does already exist or was already requested. Please choose an other alias.{else}A server with this alias does already exist or was already requested. Please put in an other URL.<span class="hidden">Or just leave this page</span>]]></item>
+		<item name="www.packageServerSubmit.serverAlias.notUnique"><![CDATA[{if $errorField == 'serverAlias'}A server with this alias does already exist or was already requested. Please choose an other alias.{else}A server with this alias does already exist or was already requested. Please put in an other URL.<span class="hidden">Or just leave this page</span>{/if]]]></item>
 	</category>
 	
 	<category name="www.packageServerRequest">

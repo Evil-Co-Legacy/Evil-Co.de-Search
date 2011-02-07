@@ -98,7 +98,7 @@
 		<item name="www.packageServerSubmit.descriptionField"><![CDATA[Beschreibung]]></item>
 		<item name="www.packageServerSubmit.descriptionField.description"><![CDATA[Hier kannst Du eine kurze Beschreibung des Paketservers angeben.]]></item>
 		<item name="www.submitPackageServer.redirect"><![CDATA[Der Eintrag wurde erfolgreich angelegt.{if $this->user->userID} Du wirst nun auf Deine Anfrage weitergeleitet.{/if}]]></item>
-		<item name="www.packageServerSubmit.serverAlias.notUnique"><![CDATA[{if $errorField == 'serverAlias'}Ein Server mit diesem Alias existiert bereits oder befindet sich in der Freischaltung. Bitte wähle einen anderen Alias.{else}Ein Server mit dieser URL existiert bereits oder befindet sich in der Freischaltung. Bitte trage eine andere URL ein.<span class="hidden">Oder lass es ganz bleiben</span>]]></item>
+		<item name="www.packageServerSubmit.serverAlias.notUnique"><![CDATA[{if $errorField == 'serverAlias'}Ein Server mit diesem Alias existiert bereits oder befindet sich in der Freischaltung. Bitte wähle einen anderen Alias.{else}Ein Server mit dieser URL existiert bereits oder befindet sich in der Freischaltung. Bitte trage eine andere URL ein.<span class="hidden">Oder lass es ganz bleiben</span>{/if]]]></item>
 	</category>
 	
 	<category name="www.packageServerRequest">
