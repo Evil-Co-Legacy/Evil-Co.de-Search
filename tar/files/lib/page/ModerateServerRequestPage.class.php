@@ -82,7 +82,7 @@ class ModerateServerRequestPage extends AbstractPage {
 			// send pm
 			require_once(WCF_DIR.'lib/data/message/pm/PMEditor.class.php');
 			
-			PMEditor::create(false, array(array('userID' => $this->request['authorID'], 'username' => $this->request['authorName'])), array(), WCF::getLanguage()->get('www.moderateServerRequest.subject.reject', array('request' => $this->request)), WCF::getLanguage()->get('www.moderateServerRequest.text.reject', array('request' => $this->request, 'reason' => $reason)), WCF::getUser()->userID, WCF::getUser()->username);
+			PMEditor::create(false, array(array('userID' => $this->request['authorID'], 'username' => $this->request['authorName'])), array(), WCF::getLanguage()->get('www.moderateServerRequest.subject.reject', array('request' => $this->request)), WCF::getLanguage()->get('www.moderateServerRequest.text.reject', array('request' => $this->request, 'reason' => $reason)), WCF::getUser()->userID, WCF::getUser()->username, array('enableSmilies' => true, 'enableHtml' => true, 'enableBBCodes' => true));
 		}
 		
 		// redirect
@@ -108,7 +108,7 @@ class ModerateServerRequestPage extends AbstractPage {
 			// send pm
 			require_once(WCF_DIR.'lib/data/message/pm/PMEditor.class.php');
 			
-			PMEditor::create(false, array(array('userID' => $this->request['authorID'], 'username' => $this->request['authorName'])), array(), WCF::getLanguage()->get('www.moderateServerRequest.subject.pending', array('request' => $this->request)), WCF::getLanguage()->get('www.moderateServerRequest.text.pending', array('request' => $this->request)), WCF::getUser()->userID, WCF::getUser()->username);
+			PMEditor::create(false, array(array('userID' => $this->request['authorID'], 'username' => $this->request['authorName'])), array(), WCF::getLanguage()->get('www.moderateServerRequest.subject.pending', array('request' => $this->request)), WCF::getLanguage()->get('www.moderateServerRequest.text.pending', array('request' => $this->request)), WCF::getUser()->userID, WCF::getUser()->username, array('enableSmilies' => true, 'enableHtml' => true, 'enableBBCodes' => true));
 		}
 		
 		// redirect
@@ -145,7 +145,7 @@ class ModerateServerRequestPage extends AbstractPage {
 			// send pm
 			require_once(WCF_DIR.'lib/data/message/pm/PMEditor.class.php');
 			
-			PMEditor::create(false, array(array('userID' => $this->request['authorID'], 'username' => $this->request['authorName'])), array(), WCF::getLanguage()->get('www.moderateServerRequest.subject.accepted', array('request' => $this->request)), WCF::getLanguage()->get('www.moderateServerRequest.text.accepted', array('request' => $this->request)), WCF::getUser()->userID, WCF::getUser()->username);
+			PMEditor::create(false, array(array('userID' => $this->request['authorID'], 'username' => $this->request['authorName'])), array(), WCF::getLanguage()->get('www.moderateServerRequest.subject.accepted', array('request' => $this->request)), WCF::getLanguage()->get('www.moderateServerRequest.text.accepted', array('request' => $this->request)), WCF::getUser()->userID, WCF::getUser()->username, array('enableSmilies' => true, 'enableHtml' => true, 'enableBBCodes' => true));
 		}
 		
 		// redirect
