@@ -19,8 +19,10 @@
 				</div>
 			</div>
 			
-			<div class="border container-1">
-				<form action="index.php?form=SubmitPackageServer" method="post">
+			<form action="index.php?form=SubmitPackageServer" method="post">
+				<fieldset>
+					<legend>{lang}www.packageServerSubmit.general{/lang}</legend>
+				
 					<div class="formElement">
 						<div class="formFieldLabel">
 							<label for="serverAlias">{lang}www.packageServerSubmit.serverAlias{/lang}</label>
@@ -28,7 +30,7 @@
 						<div class="formField">
 							<input type="text" class="inputText" value="{$serverAlias}" name="serverAlias" id="serverAlias" />
 						</div>
-						<div class="formDesc">
+						<div class="formFieldDesc">
 							<p>{lang}www.packageServerSubmit.serverAlias{/lang}</p>
 						</div>
 					</div>
@@ -40,7 +42,7 @@
 						<div class="formField">
 							<input type="text" class="inputText" value="{$serverUrl}" name="serverUrl" id="serverUrl" />
 						</div>
-						<div class="formDesc">
+						<div class="formFieldDesc">
 							<p>{lang}www.packageServerSubmit.serverUrl{/lang}</p>
 						</div>
 					</div>
@@ -52,7 +54,7 @@
 						<div class="formField">
 							<input type="text" class="inputText" value="{$homepage}" name="homepage" id="homepage" />
 						</div>
-						<div class="formDesc">
+						<div class="formFieldDesc">
 							<p>{lang}www.packageServerSubmit.homepage{/lang}</p>
 						</div>
 					</div>
@@ -64,7 +66,7 @@
 						<div class="formField">
 							<input type="text" class="inputText" value="{$description}" name="description" id="description" />
 						</div>
-						<div class="formDesc">
+						<div class="formFieldDesc">
 							<p>{lang}www.packageServerSubmit.description{/lang}</p>
 						</div>
 					</div>
@@ -74,8 +76,8 @@
 						<input type="reset" name="reset" accesskey="r" value="{lang}wcf.global.button.reset{/lang}" />
 						{@SID_INPUT_TAG}
 					</div>
-				</form>
-			</div>
+				</fieldset>
+			</form>
 		</div>
 		
 		{include file='footer' sandbox=false}
