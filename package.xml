@@ -82,7 +82,7 @@
 
 		<!-- XML PiPs -->
 		<!-- <acpmenu>install/xml/acpmenu.xml</acpmenu> -->
-		<groupoptions>xml/groupoptions.xml</groupoptions>
+		<groupoptions>install/xml/groupoptions.xml</groupoptions>
 		<searchtype>install/xml/searchtype.xml</searchtype>
 		<pagemenu>install/xml/pagemenu.xml</pagemenu>
 
