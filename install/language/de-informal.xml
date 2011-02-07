@@ -111,6 +111,10 @@
 		<item name="www.packageServerRequest.author"><![CDATA[Autor]]></item>
 		<item name="www.packageServerRequest.state"><![CDATA[Status]]></item>
 		
+		<item name="www.packageServerRequest.accept"><![CDATA[Akzeptieren]]></item>
+		<item name="www.packageServerRequest.pending"><![CDATA[In Bearbeitung]]></item>
+		<item name="www.packageServerRequest.reject"><![CDATA[Ablehnen]]></item>
+		
 		<item name="www.packageServerRequest.state.waiting"><![CDATA[In der Warteschlange]]></item>
 		<item name="www.packageServerRequest.state.accepted"><![CDATA[Angenommen]]></item>
 		<item name="www.packageServerRequest.state.pending"><![CDATA[In Bearbeitung]]></item>
