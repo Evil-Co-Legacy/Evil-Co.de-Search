@@ -207,6 +207,29 @@
 
 		{if $this->user->activationCode && REGISTER_ACTIVATION_METHOD == 1}<p class="warning">{lang}wcf.user.register.needsActivation{/lang}</p>{/if}
 
+		{if MODULE_PM == 1 && $this->user->showPmPopup && $this->user->pmOutstandingNotifications && $this->user->getOutstandingNotifications()|count > 0}
+			<div class="info deletable" id="pmOutstandingNotifications">
+				<a href="index.php?page=PM&amp;action=disableNotifications&amp;t={@SECURITY_TOKEN}{@SID_ARG_2ND}" class="close deleteButton"><img src="{icon}closeS.png{/icon}" alt="" title="{lang}wcf.pm.notification.cancel{/lang}" longdesc="" /></a>
+				<p>{lang}wcf.pm.notification.report{/lang}</p>
+				<ul>
+					{foreach from=$this->user->getOutstandingNotifications() item=outstandingNotification}
+						<li title="{$outstandingNotification->getMessagePreview()}">
+							<a href="index.php?page=PMView&amp;pmID={@$outstandingNotification->pmID}{@SID_ARG_2ND}#pm{@$outstandingNotification->pmID}">{$outstandingNotification->subject}</a>
+							{lang}wcf.pm.messageFrom{/lang}
+
+							{if $outstandingNotification->userID}
+								<a href="index.php?page=User&amp;userID={@$outstandingNotification->userID}{@SID_ARG_2ND}">{$outstandingNotification->username}</a>
+							{elseif $outstandingNotification->username}
+								{$outstandingNotification->username}
+							{else}
+								{lang}wcf.pm.author.system{/lang}
+							{/if}
+						</li>
+					{/foreach}
+				</ul>
+			</div>
+		{/if}
+
 		{if $this->user->numberOfInvitations && $this->user->getInvitations()|count}
 			<div class="info deletable" id="invitationContainer">
 				<a href="index.php?action=WhiteListNotificationDisable&amp;ajax=1&amp;t={@SECURITY_TOKEN}{@SID_ARG_2ND}" class="close deleteButton"><img src="{icon}closeS.png{/icon}" alt="" title="{lang}wcf.user.whitelist.notification.cancel{/lang}" longdesc="" /></a>
