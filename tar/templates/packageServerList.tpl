@@ -32,7 +32,7 @@
 			<div id="serverList">
 				{foreach from=$packageServerList item='server'}
 					<div class="server" id="server{@$server.serverID}">
-						<div class="message content result">
+						<div class="message content result{if $server.isDisabled} disabled{/if}">
 							<div class="messageInner container-{cycle name='results' values='1,2'}">
 									
 								<h3 class="subHeadline">{lang}{$server.serverAlias}{/lang}</h3>
