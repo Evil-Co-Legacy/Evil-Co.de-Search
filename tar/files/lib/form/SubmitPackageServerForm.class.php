@@ -1,6 +1,6 @@
 <?php
 // wcf imports
-require_once(WCF_DIR.'lib/form/AbstractForm.class.php');
+require_once(WCF_DIR.'lib/form/CaptchaForm.class.php');
 
 /**
  * Displays a form that adds 
@@ -8,7 +8,7 @@ require_once(WCF_DIR.'lib/form/AbstractForm.class.php');
  * @copyright		2011 DEVel Fusion
  * @license		GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  */
-class SubmitPackageServerForm extends AbstractForm {
+class SubmitPackageServerForm extends CaptchaForm {
 	
 	/**
 	 * @see AbstractPage::$templateName
@@ -88,7 +88,7 @@ class SubmitPackageServerForm extends AbstractForm {
 		if (WCF::getDB()->countRows()) throw new UserInputException('serverAlias', 'notUnique');
 		
 		// server url
-		if (empty($this->serverUrl)) throw UserInputException('serverUrl', 'empty');
+		if (empty($this->serverUrl)) throw new UserInputException('serverUrl', 'empty');
 		
 		$sql = "SELECT
 				*
@@ -120,7 +120,7 @@ class SubmitPackageServerForm extends AbstractForm {
 		$sql = "INSERT INTO
 				www".WWW_N."_package_server_request (serverAlias, serverUrl, homepage, description, authorID, authorName, state)
 			VALUES
-				('".escapeString($this->serverAlias)."', '".escapeString($this->serverUrl)."', '".escapeString($this->homepage)."', '".escapeString($this->description)."', ".WCF::getUser()->userID.", '".escapeString(WCF::getUser()->username)."')";
+				('".escapeString($this->serverAlias)."', '".escapeString($this->serverUrl)."', '".escapeString($this->homepage)."', '".escapeString($this->description)."', ".WCF::getUser()->userID.", '".escapeString(WCF::getUser()->username)."', '".escapeString(self::DEFAULT_STATE)."')";
 		WCF::getDB()->sendQuery($sql);
 		
 		// redirect to url
