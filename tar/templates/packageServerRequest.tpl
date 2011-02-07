@@ -21,7 +21,7 @@
 			
 			{if $userMessages|isset}{@$userMessages}{/if}
 			
-			{if $this->user->getPermission('mod.search.canModerate') && $request.state == 'waiting' || $additionalLargeButtons|isset}
+			{if $this->user->getPermission('mod.search.canModerate') && ($request.state == 'waiting' || $request.state == 'pending') || $additionalLargeButtons|isset}
 				<div class="contentHeader">
 					<div class="largeButtons">
 						<ul>
@@ -29,9 +29,11 @@
 								<a href="index.php?page=ModerateServerRequest&amp;requestID={@$request.requestID}&amp;action=reject{@SID_ARG_2ND}"><img src="{icon}packageServerRequestRejectM.png{/icon}" alt="" /> <span>{lang}www.packageServerRequest.reject{/lang}</span></a>
 							</li>
 							
-							<li>
-								<a href="index.php?page=ModerateServerRequest&amp;requestID={@$request.requestID}&amp;action=pending{@SID_ARG_2ND}"><img src="{icon}packageServerRequestPendingM.png{/icon}" alt="" /> <span>{lang}www.packageServerRequest.pending{/lang}</span></a>
-							</li>
+							{if $request.state != 'pending'}
+								<li>
+									<a href="index.php?page=ModerateServerRequest&amp;requestID={@$request.requestID}&amp;action=pending{@SID_ARG_2ND}"><img src="{icon}packageServerRequestPendingM.png{/icon}" alt="" /> <span>{lang}www.packageServerRequest.pending{/lang}</span></a>
+								</li>
+							{/if}
 							
 							<li>
 								<a href="index.php?page=ModerateServerRequest&amp;requestID={@$request.requestID}&amp;action=accept{@SID_ARG_2ND}"><img src="{icon}packageServerRequestAcceptM.png{/icon}" alt="" /> <span>{lang}www.packageServerRequest.accept{/lang}</span></a>
