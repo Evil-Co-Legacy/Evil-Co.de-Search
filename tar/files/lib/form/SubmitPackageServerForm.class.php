@@ -82,7 +82,9 @@ class SubmitPackageServerForm extends CaptchaForm {
 			FROM
 				www".WWW_N."_package_server_request
 			WHERE
-				serverAlias = '".escapeString($this->serverAlias)."'";
+				serverAlias = '".escapeString($this->serverAlias)."'
+			AND
+				state NOT IN ('accepted', 'rejected')";
 		WCF::getDB()->sendQuery($sql);
 		
 		if (WCF::getDB()->countRows()) throw new UserInputException('serverAlias', 'notUnique');
@@ -105,7 +107,9 @@ class SubmitPackageServerForm extends CaptchaForm {
 			FROM
 				www".WWW_N."_package_server_request
 			WHERE
-				serverUrl = '".escapeString($this->serverUrl)."'";
+				serverUrl = '".escapeString($this->serverUrl)."'
+			AND
+				state NOT IN ('accepted', 'rejected')";
 		WCF::getDB()->sendQuery($sql);
 		
 		if (WCF::getDB()->countRows()) throw new UserInputException('serverUrl', 'notUnique');
