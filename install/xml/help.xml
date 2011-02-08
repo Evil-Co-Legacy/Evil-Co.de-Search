@@ -1,0 +1,17 @@
+<?xml version ="1.0"?>
+<!DOCTYPE data SYSTEM "http://www.woltlab.com/DTDs/help.dtd">
+<data>
+	<import>
+		<helpitem name="search">
+			<showorder>3</showorder>
+		</helpitem>
+		<helpitem name="search.packageIdentifier">
+			<parent>search</parent>
+			<showorder>1</showorder>
+		</helpitem>
+		<helpitem name="search.isUnique">
+			<parent>search</parent>
+			<showorder>2</showorder>
+		</helpitem>
+	</import>
+</data>
