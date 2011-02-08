@@ -50,7 +50,7 @@ class DownloadPackagePage extends AbstractPage {
 		if (!WCF::getDB()->countRows() or empty($this->version['licenseName']) or empty($this->version['licenseUrl'])) throw new IllegalLinkException;
 		
 		if (!isset($_REQUEST['licenseAccepted'])) {
-			WCF::getTPL()->assign(array('licenseName' => $this->version['licenseName'], 'licenseUrl' => $this->licenseUrl));
+			WCF::getTPL()->assign(array('licenseName' => $this->version['licenseName'], 'licenseUrl' => $this->version['licenseUrl'], 'versionID' => $this->versionID));
 			WCF::getTPL()->display('downloadPackage');
 			exit;
 		}
