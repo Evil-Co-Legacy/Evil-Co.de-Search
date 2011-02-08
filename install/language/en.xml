@@ -110,11 +110,13 @@
 		<item name="www.packageServerRequest.homepage"><![CDATA[Provider]]></item>
 		<item name="www.packageServerRequest.description"><![CDATA[Description]]></item>
 		<item name="www.packageServerRequest.author"><![CDATA[Author]]></item>
+		<item name="www.packageServerRequest.moderator"><![CDATA[Moderator]]></item>
 		<item name="www.packageServerRequest.state"><![CDATA[State]]></item>
 		
 		<item name="www.packageServerRequest.accept"><![CDATA[Accept]]></item>
 		<item name="www.packageServerRequest.pending"><![CDATA[Pending]]></item>
 		<item name="www.packageServerRequest.reject"><![CDATA[Reject]]></item>
+		<item name="www.packageServerRequest.reject.prompt"><![CDATA[Please put in a reason:]]></item>
 		
 		<item name="www.packageServerRequest.state.waiting"><![CDATA[Waiting]]></item>
 		<item name="www.packageServerRequest.state.accepted"><![CDATA[Accepted]]></item>
