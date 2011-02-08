@@ -83,6 +83,8 @@
 		<item name="www.packageServerList.descriptionField"><![CDATA[Description]]></item>
 		<item name="www.packageServerList.notes"><![CDATA[Note]]></item>
 		<item name="www.packageServerList.isDisabled"><![CDATA[This server will not read at update]]></item>
+		<item name="www.packageServerList.delete"><![CDATA[Delete]]></item>
+		<item name="www.packageServerList.toggleServer"><![CDATA[{if $server.isDisabled}Enable{else}Disable{/if}]]></item>
 	</category>
 	
 	<category name="www.packageServerSubmit">
