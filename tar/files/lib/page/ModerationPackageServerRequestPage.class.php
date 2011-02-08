@@ -16,6 +16,11 @@ class ModerationPackageServerRequestPage extends AbstractPage {
 	public $templateName = 'moderationPackageServerRequest';
 	
 	/**
+	 * @see AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = 'mod.search.canModerate';
+	
+	/**
 	 * Contains waiting requests
 	 * @var array
 	 */
