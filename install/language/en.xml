@@ -226,5 +226,17 @@
 		<item name="wcf.help.item.packageSearch.packageIdentifier.description"><![CDATA[The package identifier is unique. Mostly it consists of an url to the authors homepage and an additional package name (e.g. com.develfusion.test)]]></item>
 		<item name="wcf.help.item.packageSearch.isUnique"><![CDATA[Was means &raquo;Is Unique&laquo;?]]></item>
 		<item name="wcf.help.item.packageSearch.isUnique.description"><![CDATA[If the &raquo;Is Unique&laquo; field appears you'll only be able to install the package a single time in a system.]]></item>
+	
+		<item name="wcf.help.item.developer"><![CDATA[For Developers]]></item>
+		<item name="wcf.help.item.developer.description"><![CDATA[In this category you'll find information about the Package Archive Crawler that will help you to get better search results for your package server.]]></item>
+		<item name="wcf.help.item.developer.disableMirror"><![CDATA[Disable mirror]]></item>
+		<item name="wcf.help.item.developer.disableMirror.description"><![CDATA[You can disable the mirror feature with an additional tag in your license information. The tag is called <code>packagearchive:disablemirror</code>.]]></item>
+		<item name="wcf.help.item.developer.licenseInformation"><![CDATA[Licenseinformation]]></item>
+		<item name="wcf.help.item.developer.licenseInformation.description"><![CDATA[To enable all features of our service you must send license information about packages. This can be done with the following xml in the package tag (underneath your <code>packageinformation</code> tag):<br />
+<code>&lt;licenseinformation&gt;
+	&lt;license&gt;LICENSENAME&lt;/license&gt;
+	&lt;licenseurl&gt;LICENSEURL&lt;/licenseurl&gt;
+&lt;/licenseinformation&gt;</code><br />
+Please note that your new license information will only appear in new package versions.]]></item>
 	</category>
 </language>

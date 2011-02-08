@@ -228,5 +228,17 @@
 		<item name="wcf.help.item.packageSearch.packageIdentifier.description"><![CDATA[Der Paketbezeichner ist eine <strong>einzigartige</strong> Bezeichnung für ein Paket. Er setzt sich für gewöhnlich aus der Homepage des Entwicklers und einem Paketnamen zusammen (z.B. com.develfusion.test).]]></item>
 		<item name="wcf.help.item.packageSearch.isUnique"><![CDATA[Was bedeutet &raquo;Ist Unique&laquo;?]]></item>
 		<item name="wcf.help.item.packageSearch.isUnique.description"><![CDATA[Wird in den Paketdetails das Feld &raquo;Ist Unique&laquo; angezeigt bedeutet dies das man dieses Paket in einem WCF lediglich ein einziges mal installieren kann (Unique bedeutet &raquo;einzigartig&laquo;).]]></item>
+		
+		<item name="wcf.help.item.developer"><![CDATA[Für Entwickler]]></item>
+		<item name="wcf.help.item.developer.description"><![CDATA[In dieser Hilfskategorie finden Sie Informationen zum Package Archive Suchroboter die Ihnen helfen können die Suchergebnisse Ihres Paketservers zu verbessern.]]></item>
+		<item name="wcf.help.item.developer.disableMirror"><![CDATA[Spiegelfunktion deaktivieren]]></item>
+		<item name="wcf.help.item.developer.disableMirror.description"><![CDATA[Sie haben die Möglichkeit die Spiegelfunktion, die es ermöglicht Nutzern ein Paket auch nach seiner entfernung noch herunterzuladen, zu deaktivieren. Fügen Sie dazu einfach das Tag <code>packagearchive:disablemirror</code> mit einem beliebigen Wert zu Ihren Lizenzinformationen hinzu. Beachten Sie das die Spiegelfunktion automatisiert deaktiviert wird sobald nicht genügend Lizenzinformationen vorliegen. Das entfernen bzw. nicht senden der Lizenzinformationen hat jedoch auch zur Folge das die Downloadfunktion abgeschaltet wird.]]></item>
+		<item name="wcf.help.item.developer.licenseInformation"><![CDATA[Lizenzinformationen]]></item>
+		<item name="wcf.help.item.developer.licenseInformation.description"><![CDATA[Um sämtliche Funktionen für die Pakete auf Ihrem Server zu aktivieren müssen die Lizenzinformationen übergeben werden. Die Lizenzinformationen werden in folgendem Format übergeben:<br />
+<code>&lt;licenseinformation&gt;
+	&lt;license&gt;LIZENZNAME&lt;/license&gt;
+	&lt;licenseurl&gt;LIZENZURL&lt;/licenseurl&gt;
+&lt;/licenseinformation&gt;</code><br />
+Beachten Sie jedoch das alte Pakete nur neue Lizenzinformationen zugewiesen bekommen wenn eine neue Version herausgegeben wird.]]></item>
 	</category>
 </language>
