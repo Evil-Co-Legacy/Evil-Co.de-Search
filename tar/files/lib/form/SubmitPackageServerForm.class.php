@@ -130,7 +130,7 @@ class SubmitPackageServerForm extends CaptchaForm {
 		// redirect to url
 		WCF::getTPL()->assign(array(
 			'url' => (WCF::getUser()->userID ? 'index.php?page=PackageServerRequest&requestID='.WCF::getDB()->getInsertID().SID_ARG_2ND : 'index.php?page=PackageServerList'.SID_ARG_2ND),
-			'message' => WCF::getLanguage()->get('www.submitPackageServer.redirect'),
+			'message' => WCF::getLanguage()->getDynamicVariable('www.submitPackageServer.redirect'),
 			'wait' => 5
 		));
 		WCF::getTPL()->display('redirect');
