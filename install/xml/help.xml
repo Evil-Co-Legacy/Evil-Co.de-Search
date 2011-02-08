@@ -3,7 +3,7 @@
 <data>
 	<import>
 		<helpitem name="packageSearch">
-			<showorder>3</showorder>
+			<showorder>4</showorder>
 		</helpitem>
 		<helpitem name="packageSearch.packageIdentifier">
 			<parent>packageSearch</parent>
@@ -11,6 +11,18 @@
 		</helpitem>
 		<helpitem name="packageSearch.isUnique">
 			<parent>packageSearch</parent>
+			<showorder>2</showorder>
+		</helpitem>
+		
+		<helpitem name="developer">
+			<showorder>8</showorder>
+		</helpitem>
+		<helpitem name="developer.disableMirror">
+			<parent>developer</parent>
+			<showorder>1</showorder>
+		</helpitem>
+		<helpitem name="developer.licenseInformation">
+			<parent>developer</parent>
 			<showorder>2</showorder>
 		</helpitem>
 	</import>
