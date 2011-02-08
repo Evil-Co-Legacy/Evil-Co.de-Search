@@ -158,7 +158,7 @@
 	</category>
 	
 	<category name="www.download">
-		<item name="www.download.redirect"><![CDATA[Du wirst nun auf die Downloadseite des Paketservers weitergeleitet.</p><p id="errorMessage">
+		<item name="www.download.redirect"><![CDATA[Sie werden nun auf die Downloadseite des Paketservers weitergeleitet.</p><p id="errorMessage">
 		<script type="text/javascript">
 			if (document.referrer) {onloadEvents.push(function() { document.getElementById('errorMessage').innerHTML += "<br /><a href=\"" + document.referrer + "\">{lang}wcf.global.error.backward{/lang}</a>"; }); }
 		</script>]]></item>
