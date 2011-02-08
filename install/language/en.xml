@@ -122,6 +122,17 @@
 		<item name="www.packageServerRequest.state.rejected"><![CDATA[Rejected]]></item>
 	</category>
 	
+	<category name="www.moderateServerRequest">
+		<item name="www.moderateServerRequest.subject.pending"><![CDATA[The state of your suggestion was set to "Pending".]]></item>
+		<item name="www.moderateServerRequest.text.pending"><![CDATA[Hello,<br />the State of <a href="index.php?page=PackageServerRequest&amp;requestID={$request.requestID}{@SID_ARG_2ND}">your suggestion</a> was set to &raquo;pending&laquo;.<br /><br />Best regards<br />The {lang}{PAGE_TITLE}{/lang} Team]]></item>
+		
+		<item name="www.moderateServerRequest.subject.reject"><![CDATA[Your suggestion was rejected]]></item>
+		<item name="www.moderateServerRequest.text.reject"><![CDATA[Hello,<br /><a href="index.php?page=PackageServerRequest&amp;requestID={$request.requestID}{@SID_ARG_2ND}">Your suggestion</a> was rejected with the following reason: {$reason}<br /><br />Best regards<br />The {lang}{PAGE_TITLE}{/lang} Team]]></item>
+
+		<item name="www.moderateServerRequest.subject.accepted"><![CDATA[Your suggestion was accepted]]></item>
+		<item name="www.moderateServerRequest.text.accepted"><![CDATA[Hello,<br /><a href="index.php?page=PackageServerRequest&amp;requestID={$request.requestID}{@SID_ARG_2ND}">Your suggestion</a> was accepted. Your server will appear on the list of enabled package servers. The data of your server will appear in our database after the next refresh.<br /><br />Best regards<br />The {lang}{PAGE_TITLE}{/lang} Team]]></item>
+	</category>
+	
 	<category name="www.download">
 		<item name="www.download.redirect"><![CDATA[You will redirected to the download page of the package server.</p><p id="errorMessage">
 		<script type="text/javascript">

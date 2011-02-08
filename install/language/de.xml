@@ -122,6 +122,17 @@
 		<item name="www.packageServerRequest.state.rejected"><![CDATA[Abgelehnt]]></item>
 	</category>
 	
+	<category name="www.moderateServerRequest">
+		<item name="www.moderateServerRequest.subject.pending"><![CDATA[Der Status Ihres Vorschlages wurde auf "In Bearbeitung" gesetzt.]]></item>
+		<item name="www.moderateServerRequest.text.pending"><![CDATA[Hallo,<br />der Status <a href="index.php?page=PackageServerRequest&amp;requestID={$request.requestID}{@SID_ARG_2ND}">Ihres Vorschlages</a> wurde auf &raquo;In Bearbeitung&laquo; gesetzt.<br /><br />Mit freundlichen Grüßen<br />Das {lang}{PAGE_TITLE}{/lang} Team]]></item>
+		
+		<item name="www.moderateServerRequest.subject.reject"><![CDATA[Ihr Vorschlag wurde abgelehnt]]></item>
+		<item name="www.moderateServerRequest.text.reject"><![CDATA[Hallo,<br /><a href="index.php?page=PackageServerRequest&amp;requestID={$request.requestID}{@SID_ARG_2ND}">Ihr Vorschlag</a> wurde mit folgender Begründung abgelehnt: {$reason}<br /><br />Mit freundlichen Grüßen<br />Das {lang}{PAGE_TITLE}{/lang} Team]]></item>
+
+		<item name="www.moderateServerRequest.subject.accepted"><![CDATA[Ihr Vorschlag wurde akzeptiert]]></item>
+		<item name="www.moderateServerRequest.text.accepted"><![CDATA[Hallo,<br /><a href="index.php?page=PackageServerRequest&amp;requestID={$request.requestID}{@SID_ARG_2ND}">Ihr Vorschlag</a> wurde akzeptiert. Sie können den Paketserver nun in der Liste der aktiven Paketserver finden. Ab der nächsten Aktualisierung werden die Daten Ihres Servers ausgewertet.<br /><br />Mit freundlichen Grüßen<br />Das {lang}{PAGE_TITLE}{/lang} Team]]></item>
+	</category>
+	
 	<category name="www.download">
 		<item name="www.download.redirect"><![CDATA[Du wirst nun auf die Downloadseite des Paketservers weitergeleitet.</p><p id="errorMessage">
 		<script type="text/javascript">
