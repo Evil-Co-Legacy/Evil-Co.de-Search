@@ -144,93 +144,97 @@
 		</div>
 	{/if}
 	
-	{* Requirements *}
-	<div class="packageRequirements">
-		{* <fieldset>
-			<legend>{lang}www.packageDetail.packageRequirements{/lang}</legend> *}
-			
-			{assign var='requirements' value=$result->getRequirements()}
-			
-			<div class="border titleBarPanel">
-				<div class="containerHead">
-					<div class="containerIcon">
-						<a href="javascript:void(0);" onclick="openList('packageRequirementList')">
-							<img alt="" id="packageRequirementListImage" src="{icon}plusS.png{/icon}">
-						</a>
-					</div>
-					<div class="containerContent">
-						<h3>{lang}www.packageDetail.packageRequirements{/lang}</h3>
-					</div>
-				</div>
-				<div id="packageRequirementList">
-					<table class="tableList">
-						<thead>
-							<tr class="tableHead">
-								<th><div><span class="emptyHead">{lang}www.packageDetail.packageRequirements.name{/lang}</span></div></th>
-								<th><div><span class="emptyHead">{lang}www.packageDetail.packageRequirements.version{/lang}</span></div></th>
-							</tr>
-						</thead>
-						<tbody>
-							{foreach from=$requirements item='requirement'}
-								<tr class="{cycle values='container-1,container-2'}">
-									<td>{if $requirement->getResultID() > 0}<a href="index.php?page=ResultDetail&amp;resultID={@$requirement->getResultID()}&amp;searchType={@$searchTypeID}{@SID_ARG_2ND}">{$requirement->getTitle()}</a>{else}{$requirement->getTitle()}{/if}</td>
-									<td>{$requirement->version}</td>
-								</tr>
-							{/foreach}
-						</tbody>
-					</table>
-				</div>
-				<script type="text/javascript">
-					//<![CDATA[
-					initList('packageRequirementList', false);
-					//]]>
-				</script>
-			</div>
-		{* </fieldset> *}
-	</div>
+	{assign var='requirements' value=$result->getRequirements()}
 	
-	{* Optionals *}
-	<div class="packageOptionals">
-		{* <fieldset>
-			<legend>{lang}www.packageDetail.packageOptionals{/lang}</legend> *}
-			
-			{assign var='optionals' value=$result->getOptionals()}
-			
-			<div class="border titleBarPanel">
-				<div class="containerHead">
-					<div class="containerIcon">
-						<a href="javascript:void(0);" onclick="openList('packageOptionalsList')">
-							<img alt="" id="packageOptionalsListImage" src="{icon}plusS.png{/icon}">
-						</a>
+	{if $requirements|count > 0}
+		{* Requirements *}
+		<div class="packageRequirements">
+			{* <fieldset>
+				<legend>{lang}www.packageDetail.packageRequirements{/lang}</legend> *}
+				
+				<div class="border titleBarPanel">
+					<div class="containerHead">
+						<div class="containerIcon">
+							<a href="javascript:void(0);" onclick="openList('packageRequirementList')">
+								<img alt="" id="packageRequirementListImage" src="{icon}plusS.png{/icon}">
+							</a>
+						</div>
+						<div class="containerContent">
+							<h3>{lang}www.packageDetail.packageRequirements{/lang}</h3>
+						</div>
 					</div>
-					<div class="containerContent">
-						<h3>{lang}www.packageDetail.packageOptionals{/lang}</h3>
-					</div>
-				</div>
-				<div id="packageOptionalsList">
-					<table class="tableList">
-						<thead>
-							<tr class="tableHead">
-								<th><div><span class="emptyHead">{lang}www.packageDetail.packageOptionals.name{/lang}</span></div></th>
-							</tr>
-						</thead>
-						<tbody>
-							{foreach from=$optionals item='optional'}
-								<tr class="{cycle values='container-1,container-2'}">
-									<td><a href="index.php?page=ResultDetail&amp;resultID={@$optional->getResultID()}&amp;searchType={@$searchTypeID}{@SID_ARG_2ND}">{$optional->getTitle()}</a></td>
+					<div id="packageRequirementList">
+						<table class="tableList">
+							<thead>
+								<tr class="tableHead">
+									<th><div><span class="emptyHead">{lang}www.packageDetail.packageRequirements.name{/lang}</span></div></th>
+									<th><div><span class="emptyHead">{lang}www.packageDetail.packageRequirements.version{/lang}</span></div></th>
 								</tr>
-							{/foreach}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{foreach from=$requirements item='requirement'}
+									<tr class="{cycle values='container-1,container-2'}">
+										<td>{if $requirement->getResultID() > 0}<a href="index.php?page=ResultDetail&amp;resultID={@$requirement->getResultID()}&amp;searchType={@$searchTypeID}{@SID_ARG_2ND}">{$requirement->getTitle()}</a>{else}{$requirement->getTitle()}{/if}</td>
+										<td>{$requirement->version}</td>
+									</tr>
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
+					<script type="text/javascript">
+						//<![CDATA[
+						initList('packageRequirementList', false);
+						//]]>
+					</script>
 				</div>
-				<script type="text/javascript">
-					//<![CDATA[
-					initList('packageOptionalsList', false);
-					//]]>
-				</script>
-			</div>
-		{* </fieldset> *}
-	</div>
+			{* </fieldset> *}
+		</div>
+	{/if}
+	
+	{assign var='optionals' value=$result->getOptionals()}
+	
+	{if $optionals|count > 0}
+		{* Optionals *}
+		<div class="packageOptionals">
+			{* <fieldset>
+				<legend>{lang}www.packageDetail.packageOptionals{/lang}</legend> *}
+				
+				<div class="border titleBarPanel">
+					<div class="containerHead">
+						<div class="containerIcon">
+							<a href="javascript:void(0);" onclick="openList('packageOptionalsList')">
+								<img alt="" id="packageOptionalsListImage" src="{icon}plusS.png{/icon}">
+							</a>
+						</div>
+						<div class="containerContent">
+							<h3>{lang}www.packageDetail.packageOptionals{/lang}</h3>
+						</div>
+					</div>
+					<div id="packageOptionalsList">
+						<table class="tableList">
+							<thead>
+								<tr class="tableHead">
+									<th><div><span class="emptyHead">{lang}www.packageDetail.packageOptionals.name{/lang}</span></div></th>
+								</tr>
+							</thead>
+							<tbody>
+								{foreach from=$optionals item='optional'}
+									<tr class="{cycle values='container-1,container-2'}">
+										<td>{if $optional->getResultID()}<a href="index.php?page=ResultDetail&amp;resultID={@$optional->getResultID()}&amp;searchType={@$searchTypeID}{@SID_ARG_2ND}">{$optional->getTitle()}</a>{else}{$optional->getTitle()}{/if}</td>
+									</tr>
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
+					<script type="text/javascript">
+						//<![CDATA[
+						initList('packageOptionalsList', false);
+						//]]>
+					</script>
+				</div>
+			{* </fieldset> *}
+		</div>
+	{/if}
 	
 	<div class="packageInstructions">
 		{* <fieldset>
