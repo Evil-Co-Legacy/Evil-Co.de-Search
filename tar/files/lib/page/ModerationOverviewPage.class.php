@@ -53,5 +53,16 @@ class ModerationOverviewPage extends AbstractPage {
 			'outstandingServerRequests'		=>	$this->outstandingServerRequests
 		));
 	}
+	
+	/**
+	 * @see Page::show()
+	 */
+	public function show() {
+		// activate usercpmenu
+		require_once(WCF_DIR.'lib/page/util/menu/UserCPMenu.class.php');
+		UserCPMenu::getInstance()->setActiveMenuItem('www.user.usercp.menu.link.modcp.overview');
+		
+		parent::show();
+	}
 }
 ?>
