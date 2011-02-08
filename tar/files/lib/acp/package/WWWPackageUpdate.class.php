@@ -354,7 +354,7 @@ class WWWPackageUpdate extends PackageUpdate {
 						if (!empty($mirrorInserts)) $mirrorInserts .= ",";
 						$mirrorInserts .= "(".$packageUpdateID.",
 								    ".$packageUpdateVersionID.",
-								    ".((!empty($packData['licenseName']) and !empty($packageData['licenseUrl']) and !$packageData['disableMirror']) ? 1 : 0).")";
+								    ".((!empty($packData['licenseName']) and !empty($packageData['licenseUrl']) and $packageData['disableMirror'] !== true) ? 1 : 0).")";
 					}
 				}
 			}
