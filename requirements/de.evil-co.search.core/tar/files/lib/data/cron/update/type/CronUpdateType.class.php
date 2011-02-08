@@ -82,16 +82,36 @@ class CronUpdateType extends DatabaseObject {
 		$types = array();
 
 		$sql = "SELECT
-					*
-				FROM
-					wcf".WCF_N."_cron_update_type";
+				type.*,
+				package.packageDir
+			FROM
+				wcf".WCF_N."_cron_update_type type
+			LEFT JOIN
+				wcf".WCF_N."_package package
+			ON
+				type.packageID = package.packageID";
 		$result = WCF::getDB()->sendQuery($sql);
 
 		while($row = WCF::getDB()->fetchArray($result)) {
 			$types[] = new CronUpdateType(null, $row);
 		}
+		
+		foreach($types as $key => $type) {
+			if (!file_exists(WCF_DIR.$type->packageDir.$type->file)) throw new SystemException("Could not find class file ".WCF_DIR.$type->packageDir.$type->file);
+			require_once(WCF_DIR.$type->packageDir.$type->file);
+			
+			$className = basename($type->file, '.class.php');
+			$types[$key] = new $className(null, $type->getData());
+		}
 
 		return $types;
+	}
+	
+	/**
+	 * Returnes the complete dara array
+	 */
+	public function getData() {
+		return $this->data;
 	}
 }
 ?>
