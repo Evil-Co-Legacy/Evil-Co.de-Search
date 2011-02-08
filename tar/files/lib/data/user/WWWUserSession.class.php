@@ -6,6 +6,9 @@ require_once(WCF_DIR.'lib/data/user/avatar/Avatar.class.php');
 // www imports
 require_once(WWW_DIR.'lib/data/user/AbstractWWWUserSession.class.php');
 
+// little workaround to remove errors from pm system
+require_once(WCF_DIR.'lib/data/message/pm/ViewablePM.class.php');
+
 /**
  * Represents a user session
  * @author		Johannes Donath
@@ -142,9 +145,6 @@ class WWWUserSession extends AbstractWWWUserSession {
 	 */
 	public function getOutstandingNotifications() {
 		if ($this->outstandingNotifications === null) {
-			// little workaround to remove errors from pm system
-			require_once(WCF_DIR.'lib/data/message/pm/ViewablePM.class.php');
-			
 			require_once(WCF_DIR.'lib/data/message/pm/PM.class.php');
 			$this->outstandingNotifications = PM::getOutstandingNotifications(WCF::getUser()->userID);
 		}
