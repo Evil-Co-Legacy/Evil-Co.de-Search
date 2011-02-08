@@ -12,9 +12,13 @@ class ModerationOverview extends AbstractPage {
 	
 	/**
 	 * @see Page::$templateName
-	 * @var string
 	 */
 	public $templateName = 'moderationOverview';
+	
+	/**
+	 * @see AbstractPage::$neededPermissions
+	 */
+	public $neededPermissions = 'mod.search.canModerate';
 	
 	/**
 	 * Contains a count of outstanding server requests
