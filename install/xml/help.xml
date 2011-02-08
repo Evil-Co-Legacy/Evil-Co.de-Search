@@ -2,15 +2,15 @@
 <!DOCTYPE data SYSTEM "http://www.woltlab.com/DTDs/help.dtd">
 <data>
 	<import>
-		<helpitem name="search">
+		<helpitem name="packageSearch">
 			<showorder>3</showorder>
 		</helpitem>
-		<helpitem name="search.packageIdentifier">
-			<parent>search</parent>
+		<helpitem name="packageSearch.packageIdentifier">
+			<parent>packageSearch</parent>
 			<showorder>1</showorder>
 		</helpitem>
-		<helpitem name="search.isUnique">
-			<parent>search</parent>
+		<helpitem name="packageSearch.isUnique">
+			<parent>packageSearch</parent>
 			<showorder>2</showorder>
 		</helpitem>
 	</import>
