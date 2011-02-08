@@ -175,4 +175,56 @@
 		<item name="www.downloadPackage.pleaseReadLicense"><![CDATA[Please note that this package is licensed under the <a href="{@RELATIVE_WCF_DIR}dereferrer.php?url={$licenseUrl|rawurlencode}">{$licenseName}</a> license. You are only allowed to use this package under it's terms and conditions. Please contact the manufacturer if problems, errors or questions occour.]]></item>
 		<item name="www.downloadPackage.licenseAccept"><![CDATA[I've read the note, i've read the license and agree to the license.]]></item>
 	</category>
+	
+	<category name="wcf.help.item">
+		<item name="wcf.help.item.packageSearch"><![CDATA[Packagesearch]]></item>
+		<item name="wcf.help.item.packageSearch.description"><![CDATA[The package search accepts additional options:<br />
+<br />
+<div class="border">
+	<table class="tableList">
+		<thead>
+			<tr class="tableHead">
+				<th><div><span class="emptyHead">Term</span></div></th>
+				<th><div><span class="emptyHead">Description</span></div></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="container-1">
+				<td style="white-space: nowrap"><code>Text*</code></td>
+				<td>The Asterisk is a wildcard, which means e.g. "Textbla" will also be found. This operator may only be used at the end of a word.</td>
+			</tr>
+			<tr class="container-2">
+				<td style="white-space: nowrap"><code>+Text</code></td>
+				<td>Terms with a leading plus have to be found.</td>
+			</tr>
+			<tr class="container-1">
+				<td style="white-space: nowrap"><code>-Text</code></td>
+				<td>You can also exclude certain terms from your search by adding a minus sign.</td>
+			</tr>
+			<tr class="container-2">
+				<td style="white-space: nowrap"><code>Text Text2</code></td>
+				<td>If you just write the words, every possibilitiy will be listed, even if only one of those terms is found. Results containing both terms will be listed topmost.</td></tr>
+			<tr class="container-1">
+				<td style="white-space: nowrap"><code>&gt;Text &lt;Text2</code></td>
+				<td>With the arrow operator you can weight a certain term, which will then be more important within the search results.</td>
+			</tr>
+			<tr class="container-2">
+				<td style="white-space: nowrap"><code>+Text +(&gt;Text2 &lt;Text3)</code></td>
+				<td>You can also use brackets to make sub-searches. The example will list results including "Text" and "Text2" or "Text" and "Text3". The terms called first will have a greater importance.</td>
+			</tr>
+			<tr class="container-1">
+				<td style="white-space: nowrap"><code>+Text ~Text2</code></td>
+				<td>The tilde allows you to negate the priority. Results including "Text" and "Text2" will not have a lower priority if "Text2" is not included.</td></tr>
+			<tr class="container-2">
+				<td style="white-space: nowrap"><code>"Text Text2"</code></td>
+				<td>The double quotemark allows you to highlight certain word groups. The search-results will then only include results where the whole word-group appears. "Text, Text2" for example will not be found, because there is a comma in between, which was not entered as phrase.</td>
+			</tr>
+		</tbody>
+	</table>
+</div>]]></item>
+		<item name="wcf.help.item.packageSearch.packageIdentifier"><![CDATA[Packageidentifier]]></item>
+		<item name="wcf.help.item.packageSearch.packageIdentifier.description"><![CDATA[The package identifier is unique. Mostly it consists of an url to the authors homepage and an additional package name (e.g. com.develfusion.test)]]></item>
+		<item name="wcf.help.item.packageSearch.isUnique"><![CDATA[Was means &raquo;Is Unique&laquo;?]]></item>
+		<item name="wcf.help.item.packageSearch.isUnique.description"><![CDATA[If the &raquo;Is Unique&laquo; field appears you'll only be able to install the package a single time in a system.]]></item>
+	</category>
 </language>

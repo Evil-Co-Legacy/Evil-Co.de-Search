@@ -175,4 +175,58 @@
 			if (document.referrer) {onloadEvents.push(function() { document.getElementById('errorMessage').innerHTML += "<br /><a href=\"" + document.referrer + "\">{lang}wcf.global.error.backward{/lang}</a>"; }); }
 		</script>]]></item>
 	</category>
+	
+	<category name="wcf.help.item">
+		<item name="wcf.help.item.packageSearch"><![CDATA[Paketsuche]]></item>
+		<item name="wcf.help.item.packageSearch.description"><![CDATA[Die Paketsuche akzeptiert folgende zusätzlichen Schlüsselwörter zur Einschränkung der Ergebnisse:<br />
+<br />
+<div class="border">
+	<table class="tableList">
+		<thead>
+			<tr class="tableHead">
+				<th><div><span class="emptyHead">Suchbegriff</span></div></th>
+				<th><div><span class="emptyHead">Beschreibung</span></div></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="container-1">
+				<td style="white-space: nowrap"><code>Text*</code></td>
+				<td>Der Sternoperator wirkt als Platzhalter und kann nur an das Ende eines Worts angefügt werden. Suchergebnisse können Wörter wie »Text«, »Textzeile« oder auch »Texte« enthalten.</td>
+			</tr>
+			<tr class="container-2">
+				<td style="white-space: nowrap"><code>+Text</code></td>
+				<td>Wörter mit einem Pluszeichen vorangestellt, müssen im Suchergebnis enthalten sein.</td>
+			</tr>
+			<tr class="container-1">
+				<td style="white-space: nowrap"><code>-Text</code></td>
+				<td>Sie können Ergebnisse aus der Suche ausschließen, indem Sie ein Minus vor ein Wort stellen. Dann gibt es kein Suchergebnis mit dem Wort »Text«.</td>
+			</tr>
+			<tr class="container-2">
+				<td style="white-space: nowrap"><code>Text Text2</code></td>
+				<td>Verwenden Sie kein Zeichen, bedeutet das, dass die Wörter »Text« und »Text2« optional sind. Ergebnisse, die eines der Wörter oder beide enthalten, haben eine höhere Relevanz.</td>
+			</tr>
+			<tr class="container-1">
+				<td style="white-space: nowrap"><code>&gt;Text &lt;Text2</code></td>
+				<td>Mit dem Pfeiloperator können Sie die Bedeutung einzelner Wörter gewichten. Im Beispiel haben Ergebnisse, die das Wort »Text« enthalten, eine größere Relevanz, als Ergebnisse mit dem Wort »Text2«.</td>
+			</tr>
+			<tr class="container-2">
+				<td style="white-space: nowrap"><code>+Text +(&gt;Text2 &lt;Text3)</code></td>
+				<td>Durch die Verwendung von Klammern können Sie Unterausdrücke erstellen. Das Beispiel liefert Suchergebnisse zurück, die zum einen die Wörter »Text« und »Text2« enthalten und zum anderen »Text« und »Text3«. Die erstgenannten Wörter haben aber eine höhere Gewichtung.</td>
+			</tr>
+			<tr class="container-1">
+				<td style="white-space: nowrap"><code>+Text ~Text2</code></td>
+				<td>Mit Hilfe der Tilde kann man die Relevanz eines Wortes verringern. Suchergebnisse, die »Text« und »Text2« enthalten, haben eine geringere Bedeutung, als wenn das Wort »Text2« nicht enthalten wäre.</td>
+			</tr>
+			<tr class="container-2">
+				<td style="white-space: nowrap"><code>"Text Text2"</code></td>
+				<td>Mit dem doppelten Hochkomma (Anführungszeichen) können Sie Phrasen bzw. Wortgruppen markieren. In der Suche werden dann auch nur solche Ergebnisse zu finden sein, die genau diese Phrase enthält. »Text, Text2« würde beispielsweise nicht gefunden werden, da innerhalb der Phrase ein Zeichen existiert, das in der Suche nicht angegeben wurde.</td>
+			</tr>
+		</tbody>
+	</table>
+</div>]]></item>
+		<item name="wcf.help.item.packageSearch.packageIdentifier"><![CDATA[Paketbezeichner]]></item>
+		<item name="wcf.help.item.packageSearch.packageIdentifier.description"><![CDATA[Der Paketbezeichner ist eine <strong>einzigartige</strong> Bezeichnung für ein Paket. Er setzt sich für gewöhnlich aus der Homepage des Entwicklers und einem Paketnamen zusammen (z.B. com.develfusion.test).]]></item>
+		<item name="wcf.help.item.packageSearch.isUnique"><![CDATA[Was bedeutet &raquo;Ist Unique&laquo;?]]></item>
+		<item name="wcf.help.item.packageSearch.isUnique.description"><![CDATA[Wird in den Paketdetails das Feld &raquo;Ist Unique&laquo; angezeigt bedeutet dies das man dieses Paket in einem WCF lediglich ein einziges mal installieren kann (Unique bedeutet &raquo;einzigartig&laquo;).]]></item>
+	</category>
 </language>
