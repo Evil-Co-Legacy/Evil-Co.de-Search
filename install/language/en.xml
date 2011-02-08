@@ -80,7 +80,7 @@
 		<item name="wwww.packageServerList.submitServer"><![CDATA[Send Suggestion]]></item>
 		<item name="www.packageServerList.url"><![CDATA[URL]]></item>
 		<item name="www.packageServerList.homepage"><![CDATA[Provider]]></item>
-		<item name="www.packageServerList.description"><![CDATA[Description]]></item>
+		<item name="www.packageServerList.descriptionField"><![CDATA[Description]]></item>
 		<item name="www.packageServerList.notes"><![CDATA[Note]]></item>
 		<item name="www.packageServerList.isDisabled"><![CDATA[This server will not read at update]]></item>
 	</category>
