@@ -95,52 +95,54 @@
 		</fieldset>
 	</div>
 	
-	<div class="packageVersions">
-		{* <fieldset>
-			<legend>{lang}www.packageDetail.packageVersions{/lang}</legend> *}
-			
-			{assign var='versions' value=$result->getVersions()}
-			
-			<div class="border titleBarPanel">
-				<div class="containerHead">
-					<div class="containerIcon">
-						<a href="javascript:void(0);" onclick="openList('packageVersionList')">
-							<img alt="" id="packageVersionListImage" src="{icon}plusS.png{/icon}">
-						</a>
+	{assign var='versions' value=$result->getVersions()}
+	
+	{if  $versions|count > 0}
+		<div class="packageVersions">
+			{* <fieldset>
+				<legend>{lang}www.packageDetail.packageVersions{/lang}</legend> *}
+				
+				<div class="border titleBarPanel">
+					<div class="containerHead">
+						<div class="containerIcon">
+							<a href="javascript:void(0);" onclick="openList('packageVersionList')">
+								<img alt="" id="packageVersionListImage" src="{icon}minusS.png{/icon}">
+							</a>
+						</div>
+						<div class="containerContent">
+							<h3>{lang}www.packageDetail.packageVersions{/lang}</h3>
+						</div>
 					</div>
-					<div class="containerContent">
-						<h3>{lang}www.packageDetail.packageVersions{/lang}</h3>
-					</div>
-				</div>
-				<div id="packageVersionList">
-					<table class="tableList">
-						<thead>
-							<tr class="tableHead">
-								<th><div><span class="emptyHead">{lang}www.packageDetail.packageVersions.version{/lang}</span></div></th>
-								<th><div><span class="emptyHead">{lang}www.packageDetail.packageVersions.options{/lang}</span></div></th>
-							</tr>
-						</thead>
-						<tbody>
-							{foreach from=$versions item='version'}
-								<tr class="{cycle values='container-1,container-2'}">
-									<td>{$version.version}</td>
-									<td>
-										{if $version.licenseName != '' && $version.licenseUrl != ''}<a href="index.php?page=DownloadPackage&amp;versionID={$version.versionID}{@SID_ARG_2ND}" title="{lang}www.packageDetail.downloadVersion{/lang}"><img src="{icon}downloadS.png{/icon}" alt="" /></a>{/if}
-										{if $version.mirrorEnabled}<a href="index.php?page=PackageMirror&amp;versionID={$version.versionID}{@SID_ARG_2ND}" title="{lang}www.packageDetail.mirrorVersion{/lang}"><img src="{icon}mirrorS.png{/icon}" alt="" /></a>{/if}
-									</td>
+					<div id="packageVersionList">
+						<table class="tableList">
+							<thead>
+								<tr class="tableHead">
+									<th><div><span class="emptyHead">{lang}www.packageDetail.packageVersions.version{/lang}</span></div></th>
+									<th><div><span class="emptyHead">{lang}www.packageDetail.packageVersions.options{/lang}</span></div></th>
 								</tr>
-							{/foreach}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{foreach from=$versions item='version'}
+									<tr class="{cycle values='container-1,container-2'}">
+										<td>{$version.version}</td>
+										<td>
+											{if $version.licenseName != '' && $version.licenseUrl != ''}<a href="index.php?page=DownloadPackage&amp;versionID={$version.versionID}{@SID_ARG_2ND}" title="{lang}www.packageDetail.downloadVersion{/lang}"><img src="{icon}downloadS.png{/icon}" alt="" /></a>{/if}
+											{if $version.mirrorEnabled}<a href="index.php?page=PackageMirror&amp;versionID={$version.versionID}{@SID_ARG_2ND}" title="{lang}www.packageDetail.mirrorVersion{/lang}"><img src="{icon}mirrorS.png{/icon}" alt="" /></a>{/if}
+										</td>
+									</tr>
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
+					<script type="text/javascript">
+						//<![CDATA[
+						initList('packageRequirementList', false);
+						//]]>
+					</script>
 				</div>
-				<script type="text/javascript">
-					//<![CDATA[
-					initList('packageRequirementList', false);
-					//]]>
-				</script>
-			</div>
-		{* </fieldset> *}
-	</div>
+			{* </fieldset> *}
+		</div>
+	{/if}
 	
 	{* Requirements *}
 	<div class="packageRequirements">
@@ -171,7 +173,7 @@
 						<tbody>
 							{foreach from=$requirements item='requirement'}
 								<tr class="{cycle values='container-1,container-2'}">
-									<td><a href="index.php?page=ResultDetail&amp;resultID={@$requirement->getResultID()}&amp;searchType={@$searchTypeID}{@SID_ARG_2ND}">{$requirement->getTitle()}</a></td>
+									<td>{if $requirement->getResultID() > 0}<a href="index.php?page=ResultDetail&amp;resultID={@$requirement->getResultID()}&amp;searchType={@$searchTypeID}{@SID_ARG_2ND}">{$requirement->getTitle()}</a>{else}{$requirement->getTitle()}{/if}</td>
 									<td>{$requirement->version}</td>
 								</tr>
 							{/foreach}
