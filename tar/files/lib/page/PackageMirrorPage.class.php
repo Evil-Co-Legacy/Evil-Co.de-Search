@@ -69,7 +69,7 @@ class PackageMirrorPage extends AbstractPage {
 		if (!file_exists(WWW_DIR.'mirror/version'.$this->versionID.'.tar.gz') or !is_readable(WWW_DIR.'mirror/version'.$this->versionID.'.tar.gz')) throw new NamedUserException('An error occoured: The mirror file does not exist! Please retry later.');
 		
 		// send headers
-		header("Content-type: application/x-tar");
+		header("Content-type: application/x-gzip");
 		header("Content-Disposition: attachment; filename=\"".$this->version['packageName']."_".str_replace(' ', '_', $this->version['version'])."\"");
 		header("Content-length: ".filesize(WWW_DIR.'mirror/version'.$this->versionID.'.tar.gz'));
 		header("Cache-control: private");
