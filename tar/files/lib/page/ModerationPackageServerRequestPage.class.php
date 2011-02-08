@@ -39,7 +39,7 @@ class ModerationPackageServerRequestPage extends AbstractPage {
 			".(!isset($_REQUEST['showOthers']) ? "WHERE state = 'waiting'" : "");
 		$result = WCF::getDB()->sendQuery($sql);
 		
-		while($row = WCF::getDB()->sendQuery($sql)) {
+		while($row = WCF::getDB()->fetchArray($result)) {
 			$this->requests[] = $row;
 		}
 	}
