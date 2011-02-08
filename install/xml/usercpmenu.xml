@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.woltlab.com/XSD/usercp-menu.xsd">
+	<import>
+		<usercpmenuitem name="www.user.usercp.menu.link.modcp">
+			<link>index.php?page=ModerationOverview</link>
+			<icon>moderatorM.png</icon>
+			<showorder>4</showorder>
+			<permissions>mod.search.canModerate</permissions>
+		</usercpmenuitem>
+
+		<usercpmenuitem name="www.user.usercp.menu.link.modcp.overview">
+			<link>index.php?page=ModerationOverview</link>
+			<parent>www.user.usercp.menu.link.modcp</parent>
+			<permissions>mod.search.canModerate</permissions>
+		</usercpmenuitem>
+
+		<usercpmenuitem name="www.user.usercp.menu.link.modcp.packageServerRequests">
+			<link>index.php?page=ModerationPackageServerRequest</link>
+			<parent>www.user.usercp.menu.link.modcp</parent>
+			<permissions>mod.search.canModerate</permissions>
+		</usercpmenuitem>
+	</import>
+</data>
