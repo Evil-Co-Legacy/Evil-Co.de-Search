@@ -54,7 +54,7 @@
 									
 									{if $server.description != ''}
 										<div class="formElement">
-											<p class="formFieldLabel">{lang}www.packageServerList.description{/lang}</p>
+											<p class="formFieldLabel">{lang}www.packageServerList.descriptionField{/lang}</p>
 											<p class="formField">{lang}{$server.description}{/lang}</p>
 										</div>
 									{/if}
