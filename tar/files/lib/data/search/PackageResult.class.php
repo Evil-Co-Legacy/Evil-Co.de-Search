@@ -106,6 +106,8 @@ class PackageResult extends SearchResult {
 	 */
 	public function isMirrorAvailable() {
 		if (!$this->mirrorEnabled) return false;
+		if (empty($this->licenseName)) return false;
+		if (empty($this->licenseUrl)) return false;
 		return true;
 	}
 
