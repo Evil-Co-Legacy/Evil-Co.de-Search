@@ -4,7 +4,7 @@
 		
 		{capture append='specialStyles'}
 			<link rel="stylesheet" type="text/css" media="screen" href="{@RELATIVE_WWW_DIR}style/moderationOverview.css" />
-		{/capture>
+		{/capture}
 		{include file='headInclude' sandbox=false}
 	</head>
 	<body{if $templateName|isset} id="tpl{$templateName|ucfirst}"{/if}>
