@@ -7,8 +7,6 @@ require_once(WCF_DIR.'lib/system/language/LanguageEditor.class.php');
 // www imports
 require_once(WWW_DIR.'lib/acp/package/DetailedPackageArchive.class.php');
 
-define('CRON_DEBUG', true);
-
 /**
  * Overrides the woltlab PackageUpdate class and writes all data to our package database
  * @author		Johannes Donath
@@ -134,250 +132,262 @@ class WWWPackageUpdate extends PackageUpdate {
 		// TODO: Add ecludedPackages to index
 		$requirementInserts = $instructionInserts = $optionalInserts = $languageInserts = $mirrorInserts = /* $fromversionInserts = $excludedPackagesInserts = */ '';
 		foreach ($allNewPackages as $identifier => $packageData) {
-			if (!isset($existingPackages[$identifier])) {		
-				// create new database entry
-				$sql = "INSERT INTO
-						www".WWW_N."_package (packageName, serverID)
-					VALUES
-						('".escapeString($identifier)."', '".$packageUpdateServerID."')";
-				 
-				/*					(packageUpdateServerID, package, packageName, 
-									packageDescription, author, authorURL, standalone, plugin)  
-					VALUES				(".$packageUpdateServerID.", 
-									'".escapeString($identifier)."',
-									'".escapeString($packageData['packageName'])."',
-									'".escapeString($packageData['packageDescription'])."',
-									'".escapeString($packageData['author'])."',
-									'".escapeString($packageData['authorURL'])."',
-									".$packageData['standalone'].",
-									'".escapeString($packageData['plugin'])."')"; */
-				WCF::getDB()->sendQuery($sql);
-				$packageUpdateID = WCF::getDB()->getInsertID();
-			} else {
-				$packageUpdateID = $existingPackages[$identifier];
-			}
-			
-			// register version(s) of this update package.
-			if (isset($packageData['versions'])) {
-				foreach ($packageData['versions'] as $packageVersion => $versionData) {
-					if (isset($versionData['file']))
-						$packageFile = $versionData['file'];
-					else
-						$packageFile = FileUtil::addTrailingSlash($packageUpdateServerUrl).'?packageName='.urlencode($identifier).'&packageVersion='.urlencode($packageVersion);
-					
-					if (!isset($existingPackageVersions[$packageUpdateID]) or !isset($existingPackageVersions[$packageUpdateID][$packageVersion])) {
-						// download package
-						$packageArchive = new DetailedPackageArchive(FileUtil::downloadFileFromHttp($packageFile));
-						$packageArchive->openArchive();
+			try {
+				if (!isset($existingPackages[$identifier])) {		
+					// create new database entry
+					$sql = "INSERT INTO
+							www".WWW_N."_package (packageName, serverID)
+						VALUES
+							('".escapeString($identifier)."', '".$packageUpdateServerID."')";
+					 
+					/*					(packageUpdateServerID, package, packageName, 
+										packageDescription, author, authorURL, standalone, plugin)  
+						VALUES				(".$packageUpdateServerID.", 
+										'".escapeString($identifier)."',
+										'".escapeString($packageData['packageName'])."',
+										'".escapeString($packageData['packageDescription'])."',
+										'".escapeString($packageData['author'])."',
+										'".escapeString($packageData['authorURL'])."',
+										".$packageData['standalone'].",
+										'".escapeString($packageData['plugin'])."')"; */
+					WCF::getDB()->sendQuery($sql);
+					$packageUpdateID = WCF::getDB()->getInsertID();
+				} else {
+					$packageUpdateID = $existingPackages[$identifier];
+				}
+				
+				// register version(s) of this update package.
+				if (isset($packageData['versions'])) {
+					foreach ($packageData['versions'] as $packageVersion => $versionData) {
+						if (isset($versionData['file']))
+							$packageFile = $versionData['file'];
+						else
+							$packageFile = FileUtil::addTrailingSlash($packageUpdateServerUrl).'?packageName='.urlencode($identifier).'&packageVersion='.urlencode($packageVersion);
 						
-						// create new database entry
-						$sql = "INSERT INTO
-								www".WWW_N."_package_version (	 packageID,
-												 version,
-												 isUnique,
-												 standalone,
-												 plugin,
-												 packageUrl,
-												 author,
-												 authorUrl,
-												 serverID,
-												 licenseName,
-												 licenseUrl,
-												 downloadUrl)
-							VALUES
-								(".$packageUpdateID.",
-								 '".escapeString($packageVersion)."',
-								 ".($packageArchive->getPackageInfo('isUnique') ? 1 : 0).",
-								 ".($packageArchive->getPackageInfo('standalone') ? 1 : 0).",
-								 '".escapeString($packageArchive->getPackageInfo('plugin'))."',
-								 '".escapeString($packageArchive->getPackageInfo('packageURL'))."',
-								 '".escapeString($packageArchive->getAuthorInfo('author'))."',
-								 '".escapeString($packageArchive->getAuthorInfo('authorUrl'))."',
-								 ".$packageUpdateServerID.",
-								 '".escapeString($packageData['licenseName'])."',
-								 '".escapeString($packageData['licenseUrl'])."',
-								 '".escapeString($packageFile)."')";
-						WCF::getDB()->sendQuery($sql);
-						$packageUpdateVersionID = WCF::getDB()->getInsertID();
-					/* } else {
-						$packageUpdateVersionID = $existingPackageVersions[$packageUpdateID][$packageVersion];
-					} */
-					
-						// register requirement(s) of this update package version.
-						if (isset($versionData['requiredPackages'])) {
-							foreach ($versionData['requiredPackages'] as $requiredIdentifier => $required) {
-								// add ,
-								if (!empty($requirementInserts)) $requirementInserts .= ',';
-								
-								// add insert
-								$requirementInserts .= "(".$packageUpdateVersionID.",
-											 ".$packageUpdateID.",
-											 0,
-											 0,
-											 '".escapeString($requiredIdentifier)."',
-											'".(!empty($required['minversion']) ? escapeString($required['minversion']) : '')."')";
-							}
-						}
-						
-						// register excluded packages of this update package version.
-						// TODO: Implement excluded packages
-						/* if (isset($versionData['excludedPackages'])) {
-							foreach ($versionData['excludedPackages'] as $excludedIdentifier => $exclusion) {
-								if (!empty($excludedPackagesInserts)) $excludedPackagesInserts .= ',';
-								$excludedPackagesInserts .= "(".$packageUpdateVersionID.", '".escapeString($excludedIdentifier)."',
-											'".(!empty($exclusion['version']) ? escapeString($exclusion['version']) : '')."')";
-							}
+						if (!isset($existingPackageVersions[$packageUpdateID]) or !isset($existingPackageVersions[$packageUpdateID][$packageVersion])) {
+							// download package
+							$packageArchive = new DetailedPackageArchive(FileUtil::downloadFileFromHttp($packageFile));
+							$packageArchive->openArchive();
+							
+							// create new database entry
+							$sql = "INSERT INTO
+									www".WWW_N."_package_version (	 packageID,
+													 version,
+													 isUnique,
+													 standalone,
+													 plugin,
+													 packageUrl,
+													 author,
+													 authorUrl,
+													 serverID,
+													 licenseName,
+													 licenseUrl,
+													 downloadUrl)
+								VALUES
+									(".$packageUpdateID.",
+									 '".escapeString($packageVersion)."',
+									 ".($packageArchive->getPackageInfo('isUnique') ? 1 : 0).",
+									 ".($packageArchive->getPackageInfo('standalone') ? 1 : 0).",
+									 '".escapeString($packageArchive->getPackageInfo('plugin'))."',
+									 '".escapeString($packageArchive->getPackageInfo('packageURL'))."',
+									 '".escapeString($packageArchive->getAuthorInfo('author'))."',
+									 '".escapeString($packageArchive->getAuthorInfo('authorUrl'))."',
+									 ".$packageUpdateServerID.",
+									 '".escapeString($packageData['licenseName'])."',
+									 '".escapeString($packageData['licenseUrl'])."',
+									 '".escapeString($packageFile)."')";
+							WCF::getDB()->sendQuery($sql);
+							$packageUpdateVersionID = WCF::getDB()->getInsertID();
+						/* } else {
+							$packageUpdateVersionID = $existingPackageVersions[$packageUpdateID][$packageVersion];
 						} */
 						
-						// register fromversions of this update package version.
-						/* if (isset($versionData['fromversions'])) {
-							foreach ($versionData['fromversions'] as $fromversion) {
-								if (!empty($fromversionInserts)) $fromversionInserts .= ',';
-								$fromversionInserts .= "(".$packageUpdateVersionID.", '".escapeString($fromversion)."')";
-							}
-						} */
-						
-						$instructions = $packageArchive->getInstructions('install');
-						
-						// handle instructions
-						if (!empty($instructionInserts)) $instructionInserts .= ',';
-						$instructionInserts .= "(".$packageUpdateVersionID.",
-									 ".$packageUpdateID.",
-									 'install',
-									 NULL,
-									 '".implode(',', array_map('escapeString', array_keys($instructions)))."')";
-						
-						if (is_array($packageArchive->getInstructions('update'))) {
-							foreach($packageArchive->getInstructions('update') as $fromVersion => $update) {
-								$instructionInserts .= ",(".$packageUpdateVersionID.",
-											  ".$packageUpdateID.",
-											  'update',
-											  '".escapeString($fromVersion)."',
-											  '".implode(',', array_map('escapeString', array_keys($update)))."')";
-							}
-						}
-						
-						// handle optionals
-						if (is_array($packageArchive->getOptionals())) {
-							foreach($packageArchive->getOptionals() as $optional) {
-								if (!empty($optionalInserts)) $optionalInserts .= ",";
-								$optionalInserts .= "(	".$packageUpdateVersionID.",
-											".$packageUpdateID.",
-											0,
-											0,
-											'".escapeString($optional['name'])."',
-											'')";
-							}
-						}
-						
-						// handle languages
-						$packageNames = $packageArchive->getPackageInfo('packageName');
-						$packageDescriptions = $packageArchive->getPackageInfo('packageDescription');
-						
-						foreach($packageNames as $languageCode => $name) {
-							// get correct language
-							// TODO: We should not use en hardcoded here
-							$language = LanguageEditor::getLanguageByCode(($languageCode != 'default' ? $languageCode : 'en'));
-							
-							if ($language->getLanguageID()) {
-								// add ,
-								if (!empty($languageInserts)) $languageInserts .= ",";
-								
-								$languageInserts .= "(	".$packageUpdateVersionID.",
-											".$packageUpdateID.",
-											".$language->getLanguageID().",
-											'".escapeString($name)."',
-											'".(isset($packageDescriptions[$languageCode]) ? escapeString($packageDescriptions[$languageCode]) : '')."',
-											".($languageCode == 'default' ? 1 : 0).")";
-							}
-						}
-						
-						// handle mirror
-						
-						// create temp dir
-						$tempDir = FileUtil::addTrailingSlash(FileUtil::getTemporaryFilename());
-						FileUtil::makePath($tempDir);
-						
-						// create tar writer
-						$tarWriter = new TarWriter(WWW_DIR.'mirror/version'.$packageUpdateVersionID.'.tar.gz');
-						
-						// get tar
-						$tar = $packageArchive->getTar();
-						
-						// change dir
-						chdir($tempDir);
-						
-						// get content list
-						$contentList = $tar->getContentList();
-						$workaroundFolders = array();
-						
-						foreach ($contentList as $key => $val) {
-							// extract file
-							if ($val['type'] != 'folder') {
-								// workaround
-								if (!is_dir(dirname($tempDir.$val['filename']))) {
-									FileUtil::makePath(dirname($tempDir.$val['filename']));
-									$workaroundFolders[] = dirname($tempDir.$val['filename']);
+							// register requirement(s) of this update package version.
+							if (isset($versionData['requiredPackages'])) {
+								foreach ($versionData['requiredPackages'] as $requiredIdentifier => $required) {
+									// add ,
+									if (!empty($requirementInserts)) $requirementInserts .= ',';
+									
+									// add insert
+									$requirementInserts .= "(".$packageUpdateVersionID.",
+												 ".$packageUpdateID.",
+												 0,
+												 0,
+												 '".escapeString($requiredIdentifier)."',
+												'".(!empty($required['minversion']) ? escapeString($required['minversion']) : '')."')";
 								}
-								
-								// workaround #2
-								if (stripos($val['filename'], '.') === false) {
-									FileUtil::makePath($tempDir.$val['filename']);
-								}
-								
-								if (stripos($val['filename'], '.') !== false) $tar->extract($key, $tempDir.$val['filename']);
-							} else
-								mkdir($tempDir.$val['filename']);
+							}
 							
-							// add file to new tar.gz
-							$tarWriter->add($val['filename']);
+							// register excluded packages of this update package version.
+							// TODO: Implement excluded packages
+							/* if (isset($versionData['excludedPackages'])) {
+								foreach ($versionData['excludedPackages'] as $excludedIdentifier => $exclusion) {
+									if (!empty($excludedPackagesInserts)) $excludedPackagesInserts .= ',';
+									$excludedPackagesInserts .= "(".$packageUpdateVersionID.", '".escapeString($excludedIdentifier)."',
+												'".(!empty($exclusion['version']) ? escapeString($exclusion['version']) : '')."')";
+								}
+							} */
+							
+							// register fromversions of this update package version.
+							/* if (isset($versionData['fromversions'])) {
+								foreach ($versionData['fromversions'] as $fromversion) {
+									if (!empty($fromversionInserts)) $fromversionInserts .= ',';
+									$fromversionInserts .= "(".$packageUpdateVersionID.", '".escapeString($fromversion)."')";
+								}
+							} */
+							
+							$instructions = $packageArchive->getInstructions('install');
+							
+							// handle instructions
+							if (!empty($instructionInserts)) $instructionInserts .= ',';
+							$instructionInserts .= "(".$packageUpdateVersionID.",
+										 ".$packageUpdateID.",
+										 'install',
+										 NULL,
+										 '".implode(',', array_map('escapeString', array_keys($instructions)))."')";
+							
+							if (is_array($packageArchive->getInstructions('update'))) {
+								foreach($packageArchive->getInstructions('update') as $fromVersion => $update) {
+									$instructionInserts .= ",(".$packageUpdateVersionID.",
+												  ".$packageUpdateID.",
+												  'update',
+												  '".escapeString($fromVersion)."',
+												  '".implode(',', array_map('escapeString', array_keys($update)))."')";
+								}
+							}
+							
+							// handle optionals
+							if (is_array($packageArchive->getOptionals())) {
+								foreach($packageArchive->getOptionals() as $optional) {
+									if (!empty($optionalInserts)) $optionalInserts .= ",";
+									$optionalInserts .= "(	".$packageUpdateVersionID.",
+												".$packageUpdateID.",
+												0,
+												0,
+												'".escapeString($optional['name'])."',
+												'')";
+								}
+							}
+							
+							// handle languages
+							$packageNames = $packageArchive->getPackageInfo('packageName');
+							$packageDescriptions = $packageArchive->getPackageInfo('packageDescription');
+							
+							foreach($packageNames as $languageCode => $name) {
+								// get correct language
+								// TODO: We should not use en hardcoded here
+								$language = LanguageEditor::getLanguageByCode(($languageCode != 'default' ? $languageCode : 'en'));
+								
+								if ($language->getLanguageID()) {
+									// add ,
+									if (!empty($languageInserts)) $languageInserts .= ",";
+									
+									$languageInserts .= "(	".$packageUpdateVersionID.",
+												".$packageUpdateID.",
+												".$language->getLanguageID().",
+												'".escapeString($name)."',
+												'".(isset($packageDescriptions[$languageCode]) ? escapeString($packageDescriptions[$languageCode]) : '')."',
+												".($languageCode == 'default' ? 1 : 0).")";
+								}
+							}
+							
+							// handle mirror
+							
+							// create temp dir
+							$tempDir = FileUtil::addTrailingSlash(FileUtil::getTemporaryFilename());
+							FileUtil::makePath($tempDir);
+							
+							// create tar writer
+							$tarWriter = new TarWriter(WWW_DIR.'mirror/version'.$packageUpdateVersionID.'.tar.gz');
+							
+							// get tar
+							$tar = $packageArchive->getTar();
+							
+							// change dir
+							chdir($tempDir);
+							
+							// get content list
+							$contentList = $tar->getContentList();
+							$workaroundFolders = array();
+							
+							foreach ($contentList as $key => $val) {
+								// extract file
+								if ($val['type'] != 'folder') {
+									// workaround
+									if (!is_dir(dirname($tempDir.$val['filename']))) {
+										FileUtil::makePath(dirname($tempDir.$val['filename']));
+										$workaroundFolders[] = dirname($tempDir.$val['filename']);
+									}
+									
+									// workaround #2
+									if (stripos($val['filename'], '.') === false) {
+										FileUtil::makePath($tempDir.$val['filename']);
+									}
+									
+									if (stripos($val['filename'], '.') !== false) $tar->extract($key, $tempDir.$val['filename']);
+								} else
+									mkdir($tempDir.$val['filename']);
+								
+								// add file to new tar.gz
+								$tarWriter->add($val['filename']);
+							}
+							
+							// create new file
+							$tarWriter->create();
+							unset($tarWriter);
+							
+							// delete original file
+							$packageArchive->deleteArchive();
+							unset($packageArchive);
+							
+							// delete temp files
+							foreach(array_reverse($contentList) as $file) {
+								if (is_dir($tempDir.$file['filename']))
+									rmdir($tempDir.$file['filename']);
+								else
+									unlink($tempDir.$file['filename']);
+							}
+							foreach(array_reverse($workaroundFolders) as $dir) rmdir($dir);
+							rmdir($tempDir);
+							
+							if (!empty($mirrorInserts)) $mirrorInserts .= ",";
+							$mirrorInserts .= "(".$packageUpdateID.",
+									    ".$packageUpdateVersionID.",
+									    ".((!empty($packData['licenseName']) and !empty($packageData['licenseUrl']) and $packageData['disableMirror'] !== true) ? 1 : 0).")";
 						}
-						
-						// create new file
-						$tarWriter->create();
-						unset($tarWriter);
-						
-						// delete original file
-						$packageArchive->deleteArchive();
-						unset($packageArchive);
-						
-						// delete temp files
-						foreach(array_reverse($contentList) as $file) {
-							if (is_dir($tempDir.$file['filename']))
-								rmdir($tempDir.$file['filename']);
-							else
-								unlink($tempDir.$file['filename']);
-						}
-						foreach(array_reverse($workaroundFolders) as $dir) rmdir($dir);
-						rmdir($tempDir);
-						
-						if (!empty($mirrorInserts)) $mirrorInserts .= ",";
-						$mirrorInserts .= "(".$packageUpdateID.",
-								    ".$packageUpdateVersionID.",
-								    ".((!empty($packData['licenseName']) and !empty($packageData['licenseUrl']) and $packageData['disableMirror'] !== true) ? 1 : 0).")";
 					}
 				}
+				
+				// get last versionID
+				$sql = "SELECT
+						versionID
+					FROM
+						www".WWW_N."_package_version
+					WHERE
+						packageID = ".$packageUpdateID."
+					ORDER BY
+						version DESC";
+				$row = WCF::getDB()->getFirstRow($sql);
+				
+				// update lastVersionID field
+				$sql = "UPDATE
+						www".WWW_N."_package
+					SET
+						lastVersionID = ".$row['versionID']."
+					WHERE
+						packageID = ".$packageUpdateID;
+				WCF::getDB()->sendQuery($sql);
+			} catch(SystemException $e) {
+				$sql = "UPDATE
+						www".WWW_N."_package_server
+					SET
+						lastError = '".escapeString($e->getMessage())."'
+					WHERE
+						serverID = ".$packageUpdateServerID;
+				WCF::getDB()->sendQuery($sql);
+				
+				if (defined('CRON_DEBUG')) print($e);
 			}
-			
-			// get last versionID
-			$sql = "SELECT
-					versionID
-				FROM
-					www".WWW_N."_package_version
-				WHERE
-					packageID = ".$packageUpdateID."
-				ORDER BY
-					version DESC";
-			$row = WCF::getDB()->getFirstRow($sql);
-			
-			// update lastVersionID field
-			$sql = "UPDATE
-					www".WWW_N."_package
-				SET
-					lastVersionID = ".$row['versionID']."
-				WHERE
-					packageID = ".$packageUpdateID;
-			WCF::getDB()->sendQuery($sql);
 		}
 		
 		// save requirements, excluded packages and ...
