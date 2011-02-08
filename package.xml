@@ -85,6 +85,7 @@
 		<groupoptions>install/xml/groupoptions.xml</groupoptions>
 		<searchtype>install/xml/searchtype.xml</searchtype>
 		<pagemenu>install/xml/pagemenu.xml</pagemenu>
+		<usercpmenu>install/xml/usercpmenu.xml</usercpmenu>
 
 		<!-- Other PiPs -->
 		<sql>install/install.sql</sql>
