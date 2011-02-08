@@ -35,7 +35,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								{foreach from=$requests item='requests'}
+								{foreach from=$requests item='request'}
 									<tr>
 										<td>{$request.serverAlias} ({$request.serverUrl})</td>
 										<td>{if $request.authorID}<a href="index.php?page=User&amp;userID={$request.authorID}{@SID_ARG_2ND}">{$request.authorName}</a>{else}&nbsp;{/if}</td>
