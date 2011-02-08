@@ -23,22 +23,27 @@
 						</div>
 					</div>
 					
-					<table class="tableList">
-						<thead>
-							<tr>
-								<th><div><span class="emptyHead">{lang}www.moderation.packageServerRequest.alias{/lang}</span></div></th>
-								<th><div><span class="emptyHead">{lang}www.moderation.packageServerRequest.author{/lang}</span></div></th>
-							</tr>
-						</thead>
-						<tbody>
-							{foreach from=$requests item='requests'}
+					<div class="border titleBarPanel">
+						<div class="containerHead">
+							<h3>{lang}www.moderation.packageServeRequest.count{/lang}</h3>
+						</div>
+						<table class="tableList">
+							<thead>
 								<tr>
-									<td>{$request.serverAlias} ({$request.serverUrl})</td>
-									<td>{if $request.authorID}<a href="index.php?page=User&amp;userID={$request.authorID}{@SID_ARG_2ND}">{$request.authorName}</a>{else}&nbsp;{/if}</td>
+									<th><div><span class="emptyHead">{lang}www.moderation.packageServerRequest.alias{/lang}</span></div></th>
+									<th><div><span class="emptyHead">{lang}www.moderation.packageServerRequest.author{/lang}</span></div></th>
 								</tr>
-							{/foreach}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{foreach from=$requests item='requests'}
+									<tr>
+										<td>{$request.serverAlias} ({$request.serverUrl})</td>
+										<td>{if $request.authorID}<a href="index.php?page=User&amp;userID={$request.authorID}{@SID_ARG_2ND}">{$request.authorName}</a>{else}&nbsp;{/if}</td>
+									</tr>
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
