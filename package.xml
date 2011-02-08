@@ -86,6 +86,7 @@
 		<searchtype>install/xml/searchtype.xml</searchtype>
 		<pagemenu>install/xml/pagemenu.xml</pagemenu>
 		<usercpmenu>install/xml/usercpmenu.xml</usercpmenu>
+		<help>install/xml/help.xml</help>
 
 		<!-- Other PiPs -->
 		<sql>install/install.sql</sql>
