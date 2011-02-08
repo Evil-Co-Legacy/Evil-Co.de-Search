@@ -58,9 +58,10 @@ class DownloadPackagePage extends AbstractPage {
 		// redirect
 		WCF::getTPL()->assign(array(
 			'url' => $this->version['downloadUrl'],
-			'message' => WCF::getLanguage()->get('www.download.redirect'),
+			'message' => WCF::getLanguage()->getDynamicVariable('www.download.redirect'),
 			'wait' => 5
 		));
+		WCF::getTPL()->display('redirect');
 	}
 }
 ?>
