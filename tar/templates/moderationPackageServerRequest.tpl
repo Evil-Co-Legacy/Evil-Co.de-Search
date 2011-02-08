@@ -25,7 +25,7 @@
 					
 					<div class="border titleBarPanel">
 						<div class="containerHead">
-							<h3>{lang}www.moderation.packageServerRequest.count{/lang}</h3>
+							<h3>{lang}www.moderation.packageServerRequest.requestCount{/lang}</h3>
 						</div>
 						<table class="tableList">
 							<thead>
