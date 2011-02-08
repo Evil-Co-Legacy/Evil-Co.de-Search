@@ -29,6 +29,12 @@ class PackageResult extends SearchResult {
 	protected $instructions = null;
 	
 	/**
+	 * Contains and caches all versions of this package
+	 * @var array
+	 */
+	protected $versions = null;
+	
+	/**
 	 * Contains true if we should not generate trees
 	 * @var boolean
 	 */
@@ -49,12 +55,6 @@ class PackageResult extends SearchResult {
 	 */
 	protected function handleData($data) {
 		parent::handleData($data);
-		
-		if (!$this->disableTrees) {
-			$this->getRequirements();
-			$this->getOptionals();
-			$this->getInstructions();
-		}
 	}
 
 	/**
@@ -266,6 +266,34 @@ class PackageResult extends SearchResult {
 		}
 		
 		return $this->instructions;
+	}
+	
+	/**
+	 * Returnes all versions for this package
+	 */
+	public function getVersions() {
+		if ($this->versions === null) {
+			$sql = "SELECT
+					version.*,
+					mirror.isEnabled AS mirrorEnabled
+				FROM
+					www".WWW_N."_package_version version
+				LEFT JOIN
+					www".WWW_N."_package_mirror mirror
+				ON
+					version.versionID = mirror.versionID
+				WHERE
+					version.packageID = ".$this->packageID;
+			$result = WCF::getDB()->sendQuery($sql);
+			
+			$this->versions = array();
+			
+			while($row = WCF::getDB()->fetchArray($result)) {
+				$this->versions[] = $row;
+			}
+		}
+		
+		return $this->versions;
 	}
 	
 	/**
