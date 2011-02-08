@@ -117,8 +117,8 @@
 					<table class="tableList">
 						<thead>
 							<tr class="tableHead">
-								<th class="empty"><span>{lang}www.packageDetail.packageRequirements.name{/lang}</span></th>
-								<th class="empty"><span>{lang}www.packageDetail.packageRequirements.version{/lang}</span></th>
+								<th><div><span class="emptyHead">{lang}www.packageDetail.packageRequirements.name{/lang}</span></div></th>
+								<th><div><span class="emptyHead">{lang}www.packageDetail.packageRequirements.version{/lang}</span></div></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -162,7 +162,7 @@
 					<table class="tableList">
 						<thead>
 							<tr class="tableHead">
-								<th class="empty"><span>{lang}www.packageDetail.packageOptionals.name{/lang}</span></th>
+								<th><div><span class="emptyHead">{lang}www.packageDetail.packageOptionals.name{/lang}</span></div></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -204,7 +204,7 @@
 					<table class="tableList">
 						<thead>
 							<tr class="tableHead">
-								<th class="empty"><span>{lang}www.packageDetail.packageInstructions.name{/lang}</span></th>
+								<th><div><span class="emptyHead">{lang}www.packageDetail.packageInstructions.name{/lang}</span></div></th>
 							</tr>
 						</thead>
 						<tbody>
