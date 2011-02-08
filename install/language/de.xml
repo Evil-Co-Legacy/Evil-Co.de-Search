@@ -57,12 +57,12 @@
 		<item name="www.packageDetail.downloadDisabled"><![CDATA[Da die Lizenzinformationen dieses Paketes nicht existent, unvollständig oder eine Verlinkung verboten ist wurde der Download deaktiviert. Wir bitten um Verständnis.]]></item>
 		<item name="www.packageDetail.mirrorDisabled"><![CDATA[Da die Lizenzinformationen dieses Paketes nicht existent, unvollständig oder ein Spiegeln verbieten wurde die Spiegel-Funktion deaktiviert. Wir bitten um Verständnis.]]></item>
 		<item name="www.packageDetail.generalInformation"><![CDATA[Allgemeine Paketinformationen]]></item>
-		<item name="www.packageDetail.packageName"><![CDATA[<a href="index.php?page=Help&amp;item=search.packageIdentifier{@SID_ARG_2ND}">Paketbezeichner</a>]]></item>
+		<item name="www.packageDetail.packageName"><![CDATA[<a href="index.php?page=Help&amp;item=packageSearch.packageIdentifier{@SID_ARG_2ND}">Paketbezeichner</a>]]></item>
 		<item name="www.packageDetail.author"><![CDATA[Autor]]></item>
 		<item name="www.packageDetail.license"><![CDATA[Lizenz]]></item>
 		<item name="www.packageDetail.server"><![CDATA[Paketserver]]></item>
 		<item name="www.packageDetail.latestVersion"><![CDATA[Aktuellste Version]]></item>
-		<item name="www.packageDetail.isUnique"><![CDATA[Ist <a href="index.php?page=Help&amp;item=search.isUnique{@SID_ARG_2ND}">Unique</a>]]></item>
+		<item name="www.packageDetail.isUnique"><![CDATA[Ist <a href="index.php?page=Help&amp;item=packageSearch.isUnique{@SID_ARG_2ND}">Unique</a>]]></item>
 		<item name="www.packageDetail.isUnique.value"><![CDATA[Ja]]></item>
 		<item name="www.packageDetail.plugin"><![CDATA[Übergeordnetes Paket]]></item>
 		<item name="www.packageDetail.packageRequirements"><![CDATA[Abhängigkeiten]]></item>
