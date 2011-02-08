@@ -125,8 +125,8 @@
 								<tr class="{cycle values='container-1,container-2'}">
 									<td>{$version.version}</td>
 									<td>
-										{if $version.licenseName != '' && $version.licenseUrl != ''}<a href="index.php?page=DownloadPackage&amp;versionID={$version.versionID}{@SID_ARG_2ND}" title="{lang}www.packageDetail.downloadVersion{/lang}"><img src="{icon}downloadS.png{/icon}" alt="" /></a>
-										{if $version.mirrorEnabled}<a href="index.php?page=PackageMirror&amp;versionID={$version.versionID}{@SID_ARG_2ND}" title="{lang}www.packageDetail.mirrorVersion{/lang}"><img src="{icon}mirrorS.png{/icon}" alt="" /></a>
+										{if $version.licenseName != '' && $version.licenseUrl != ''}<a href="index.php?page=DownloadPackage&amp;versionID={$version.versionID}{@SID_ARG_2ND}" title="{lang}www.packageDetail.downloadVersion{/lang}"><img src="{icon}downloadS.png{/icon}" alt="" /></a>{/if}
+										{if $version.mirrorEnabled}<a href="index.php?page=PackageMirror&amp;versionID={$version.versionID}{@SID_ARG_2ND}" title="{lang}www.packageDetail.mirrorVersion{/lang}"><img src="{icon}mirrorS.png{/icon}" alt="" /></a>{/if}
 									</td>
 								</tr>
 							{/foreach}
