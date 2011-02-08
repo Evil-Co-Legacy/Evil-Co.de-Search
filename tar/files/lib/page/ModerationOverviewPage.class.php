@@ -8,7 +8,7 @@ require_once(WCF_DIR.'lib/page/AbstractPage.class.php');
  * @copyright		2011 DEVel Fusion
  * @license		GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  */
-class ModerationOverview extends AbstractPage {
+class ModerationOverviewPage extends AbstractPage {
 	
 	/**
 	 * @see Page::$templateName
