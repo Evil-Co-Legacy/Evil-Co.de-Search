@@ -13,7 +13,7 @@
 			
 			<div class="border tabMenuContent">
 				<div class="container-1">
-					<h3 class="subHeadline">{lang}www.moderation.packageServeRequest.title{/lang}</h3>
+					<h3 class="subHeadline">{lang}www.moderation.packageServerRequest.title{/lang}</h3>
 					
 					<div class="contentHeader">
 						<div class="largeButtons">
@@ -25,7 +25,7 @@
 					
 					<div class="border titleBarPanel">
 						<div class="containerHead">
-							<h3>{lang}www.moderation.packageServeRequest.count{/lang}</h3>
+							<h3>{lang}www.moderation.packageServerRequest.count{/lang}</h3>
 						</div>
 						<table class="tableList">
 							<thead>
