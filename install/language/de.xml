@@ -133,6 +133,12 @@
 		<item name="www.moderateServerRequest.text.accepted"><![CDATA[Hallo,<br /><a href="index.php?page=PackageServerRequest&amp;requestID={$request.requestID}{@SID_ARG_2ND}">Ihr Vorschlag</a> wurde akzeptiert. Sie können den Paketserver nun in der Liste der aktiven Paketserver finden. Ab der nächsten Aktualisierung werden die Daten Ihres Servers ausgewertet.<br /><br />Mit freundlichen Grüßen<br />Das {lang}{PAGE_TITLE}{/lang} Team]]></item>
 	</category>
 	
+	<category name="www.user.usercp">
+		<item name="www.user.usercp.menu.link.modcp"><![CDATA[Moderation]]></item>
+		<item name="www.user.usercp.menu.link.modcp.overview"><![CDATA[Übersicht]]></item>
+		<item name="www.user.usercp.menu.link.modcp.packageServerRequests"><![CDATA[Paketserver Vorschläge]]></item>
+	</category>
+	
 	<category name="www.moderation.overview">
 		<item name="www.moderation.overview.title"><![CDATA[Übersicht]]></item>
 	</category>
