@@ -133,6 +133,14 @@
 		<item name="www.moderateServerRequest.text.accepted"><![CDATA[Hallo,<br /><a href="index.php?page=PackageServerRequest&amp;requestID={$request.requestID}{@SID_ARG_2ND}">Dein Vorschlag</a> wurde akzeptiert. Du kannst den Paketserver nun in der Liste der aktiven Paketserver finden. Ab der nächsten Aktualisierung werden die Daten Deines Servers ausgewertet.<br /><br />Mit freundlichen Grüßen<br />Das {lang}{PAGE_TITLE}{/lang} Team]]></item>
 	</category>
 	
+	<category name="www.moderation.overview">
+		<item name="www.moderation.overview.title"><![CDATA[Übersicht]]></item>
+	</category>
+	
+	<category name="www.moderation.packageServerRequest">
+		<item name="www.moderation.packageServerRequest.count"><![CDATA[Paketserver Vorschläge{if $outstandingServerRequests} ({#$outstandingServerRequests}){/if}]]></item>
+	</category>
+	
 	<category name="www.download">
 		<item name="www.download.redirect"><![CDATA[Sie werden nun auf die Downloadseite des Paketservers weitergeleitet.</p><p id="errorMessage">
 		<script type="text/javascript">
