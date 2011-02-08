@@ -26,6 +26,7 @@ CREATE TABLE `www1_1_package_version` (
 	`serverID` INT NOT NULL,
 	`licenseName` VARCHAR (255) NOT NULL,
 	`licenseUrl` TEXT NOT NULL,
+	`downloadUrl` TEXT NOT NULL,
 	FULLTEXT (plugin),
 	FULLTEXT (licenseName),
 	FULLTEXT (licenseUrl)
