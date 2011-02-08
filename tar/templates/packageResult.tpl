@@ -95,6 +95,53 @@
 		</fieldset>
 	</div>
 	
+	<div class="packageVersions">
+		{* <fieldset>
+			<legend>{lang}www.packageDetail.packageVersions{/lang}</legend> *}
+			
+			{assign var='versions' value=$result->getVersions()}
+			
+			<div class="border titleBarPanel">
+				<div class="containerHead">
+					<div class="containerIcon">
+						<a href="javascript:void(0);" onclick="openList('packageVersionList')">
+							<img alt="" id="packageVersionListImage" src="{icon}plusS.png{/icon}">
+						</a>
+					</div>
+					<div class="containerContent">
+						<h3>{lang}www.packageDetail.packageVersions{/lang}</h3>
+					</div>
+				</div>
+				<div id="packageVersionList">
+					<table class="tableList">
+						<thead>
+							<tr class="tableHead">
+								<th><div><span class="emptyHead">{lang}www.packageDetail.packageVersions.version{/lang}</span></div></th>
+								<th><div><span class="emptyHead">{lang}www.packageDetail.packageVersions.options{/lang}</span></div></th>
+							</tr>
+						</thead>
+						<tbody>
+							{foreach from=$versions item='version'}
+								<tr class="{cycle values='container-1,container-2'}">
+									<td>{$version.version}</td>
+									<td>
+										{if $version.licenseName != '' && $version.licenseUrl != ''}<a href="index.php?page=DownloadPackage&amp;versionID={$version.versionID}{@SID_ARG_2ND}" title="{lang}www.packageDetail.downloadVersion{/lang}"><img src="{icon}downloadS.png{/icon}" alt="" /></a>
+										{if $version.mirrorEnabled}<a href="index.php?page=PackageMirror&amp;versionID={$version.versionID}{@SID_ARG_2ND}" title="{lang}www.packageDetail.mirrorVersion{/lang}"><img src="{icon}mirrorS.png{/icon}" alt="" /></a>
+									</td>
+								</tr>
+							{/foreach}
+						</tbody>
+					</table>
+				</div>
+				<script type="text/javascript">
+					//<![CDATA[
+					initList('packageRequirementList', false);
+					//]]>
+				</script>
+			</div>
+		{* </fieldset> *}
+	</div>
+	
 	{* Requirements *}
 	<div class="packageRequirements">
 		{* <fieldset>
