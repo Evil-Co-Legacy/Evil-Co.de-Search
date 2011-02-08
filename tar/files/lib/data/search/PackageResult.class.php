@@ -283,7 +283,9 @@ class PackageResult extends SearchResult {
 				ON
 					version.versionID = mirror.versionID
 				WHERE
-					version.packageID = ".$this->packageID;
+					version.packageID = ".$this->packageID."
+				ORDER BY
+					version.version DESC";
 			$result = WCF::getDB()->sendQuery($sql);
 			
 			$this->versions = array();
