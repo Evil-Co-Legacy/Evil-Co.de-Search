@@ -41,6 +41,7 @@ class PackageType extends SearchType {
 				server.serverID,
 				server.serverAlias,
 				server.serverUrl,
+				version.versionID,
 				version.version,
 				version.isUnique,
 				version.standalone,
