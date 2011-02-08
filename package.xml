@@ -87,6 +87,7 @@
 		<pagemenu>install/xml/pagemenu.xml</pagemenu>
 		<usercpmenu>install/xml/usercpmenu.xml</usercpmenu>
 		<help>install/xml/help.xml</help>
+		<updatecrontype>install/xml/updatecrontype.xml</updatecrontype>
 
 		<!-- Other PiPs -->
 		<sql>install/install.sql</sql>
