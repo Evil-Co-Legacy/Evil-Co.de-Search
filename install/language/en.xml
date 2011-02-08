@@ -71,7 +71,12 @@
 		<item name="www.packageDetail.packageRequirements.name"><![CDATA[Paketname]]></item>
 		<item name="www.packageDetail.packageRequirements.version"><![CDATA[Required Version]]></item>
 		<item name="www.packageDetail.packageOptionals.name"><![CDATA[Packagename]]></item>
-		<item name="www.packageDetail.packageInstructions.name"><![CDATA[PiP]]></item>
+		<item name="www.packageDetail.packageInstructions.name"><![CDATA[Instruction]]></item>
+		<item name="www.packageDetail.packageVersions"><![CDATA[Versionen]]></item>
+		<item name="www.packageDetail.packageVersions.version"><![CDATA[Version]]></item>
+		<item name="www.packageDetail.packageVersions.options"><![CDATA[Options]]></item>
+		<item name="www.packageDetail.downloadVersion"><![CDATA[Download version]]></item>
+		<item name="www.packageDetail.mirrorVersion"><![CDATA[Download version from mirror]]></item>
 	</category>
 	
 	<category name="www.packageServerList">
