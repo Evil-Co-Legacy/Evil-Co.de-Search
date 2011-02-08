@@ -147,6 +147,11 @@
 	
 	<category name="www.moderation.packageServerRequest">
 		<item name="www.moderation.packageServerRequest.count"><![CDATA[Packageserver Suggestions{if $outstandingServerRequests} ({#$outstandingServerRequests}){/if}]]></item>
+		<item name="www.moderation.packageServerRequest.title"><![CDATA[Packageserver Suggestions]]></item>
+		<item name="www.moderation.packageServerRequest.showOthers"><![CDATA[{if $tpl.get.showOthers|isset}Hide{else}Display{/if} closed suggestions]]></item>
+		<item name="www.moderation.packageServerRequest.requestCount"><![CDATA[There are {#$requests|count} suggestions in this list]]></item>
+		<item name="www.moderation.packageServerRequest.alias"><![CDATA[Alias]]></item>
+		<item name="www.moderation.packageServerRequest.author"><![CDATA[Author]]></item>
 	</category>
 	
 	<category name="www.download">
