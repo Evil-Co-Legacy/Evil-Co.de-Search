@@ -84,6 +84,7 @@
 		<item name="www.packageServerList.notes"><![CDATA[Notiz]]></item>
 		<item name="www.packageServerList.isDisabled"><![CDATA[Dieser Server wird zur Zeit nicht ausgelesen]]></item>
 		<item name="www.packageServerList.delete"><![CDATA[Löschen]]></item>
+		<item name="www.packageServerList.delete.sure"><![CDATA[Bist Du Dir sicher das Du diesen Server löschen willst?]]></item>
 		<item name="www.packageServerList.toggleServer"><![CDATA[{if $server.isDisabled}Aktivieren{else}Deaktivieren{/if}]]></item>
 	</category>
 	
