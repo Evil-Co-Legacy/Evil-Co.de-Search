@@ -157,6 +157,13 @@
 		<item name="www.moderation.packageServerRequest.author"><![CDATA[Autor]]></item>
 	</category>
 	
+	<category name="www.downloadPackage">
+		<item name="www.downloadPackage.title"><![CDATA[Paket herunterladen]]></item>
+		<item name="www.downloadPackage.license"><![CDATA[Lizenzinformationen]]></item>
+		<item name="www.downloadPackage.pleaseReadLicense"><![CDATA[Bitte beachten Sie das dieses Paket unter der <a href="{@RELATIVE_WCF_DIR}dereferrer.php?url={$licenseUrl|rawurlencode}">{$licenseName}</a> Lizenz steht. Es darf nur unter deren Bedingungen verwendet und weitergegeben werden. Wenden Sie sich bitte an den Hersteller falls Fehler, Probleme oder Fragen auftauchen.]]></item>
+		<item name="www.downloadPackage.licenseAccept"><![CDATA[Ich habe den Hinweis und die oben verlinkten Lizenzbestimmungen gelesen und bin mit ihnen einverstanden.]]></item>
+	</category>
+	
 	<category name="www.download">
 		<item name="www.download.redirect"><![CDATA[Sie werden nun auf die Downloadseite des Paketservers weitergeleitet.</p><p id="errorMessage">
 		<script type="text/javascript">

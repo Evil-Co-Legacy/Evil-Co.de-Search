@@ -163,4 +163,11 @@
 			if (document.referrer) {onloadEvents.push(function() { document.getElementById('errorMessage').innerHTML += "<br /><a href=\"" + document.referrer + "\">{lang}wcf.global.error.backward{/lang}</a>"; }); }
 		</script>]]></item>
 	</category>
+	
+	<category name="www.downloadPackage">
+		<item name="www.downloadPackage.title"><![CDATA[Paket herunterladen]]></item>
+		<item name="www.downloadPackage.license"><![CDATA[Lizenzinformationen]]></item>
+		<item name="www.downloadPackage.pleaseReadLicense"><![CDATA[Bitte beachte das dieses Paket unter der <a href="{@RELATIVE_WCF_DIR}dereferrer.php?url={$licenseUrl|rawurlencode}">{$licenseName}</a> Lizenz steht. Es darf nur unter deren Bedingungen verwendet und weitergegeben werden. Wende dich bitte an den Hersteller falls Fehler, Probleme oder Fragen auftauchen.]]></item>
+		<item name="www.downloadPackage.licenseAccept"><![CDATA[Ich habe den Hinweis und die oben verlinkten Lizenzbestimmungen gelesen und bin mit ihnen einverstanden.]]></item>
+	</category>
 </language>
