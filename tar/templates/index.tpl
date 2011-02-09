@@ -49,7 +49,7 @@
 		 		</div>
 		 	{/if}
 
-		 	<form action="index.php?form=Search" method="post">
+		 	<form action="index.php?form=Search" method="get">
 		 		<div class="searchField">
 		 			<input type="text" name="query" id="query" value="{lang}www.search.searchFieldValue{/lang}" onclick="search.clearField()"{if $this->user->enableInstantSearch} onkeyup="search.changedQueryField()"{/if} class="inputText emptySearchField" />
 		 		</div>
