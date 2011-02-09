@@ -191,8 +191,14 @@ class APIPage extends AbstractPage {
 						$searchType = new $className($searchType->typeID);
 	
 						// execute query
-						$searchResults = $searchType->search($query, $page, $itemsPerPage);
-	
+						$tempSearchResults = $searchType->search($query, $page, $itemsPerPage);
+						$searchResults = array();
+						
+						foreach($tempSearchResults as $result) {
+							$result->readTrees();
+							$searchResults[] = $result->getData();	
+						}
+						
 						// calculate result count
 						$pageData = $this->calculateNumberOfPages($searchType->getResultCount(), $page, $itemsPerPage);
 	
