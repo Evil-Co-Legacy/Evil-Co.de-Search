@@ -51,5 +51,12 @@ abstract class SearchResult extends DatabaseObject {
 	 * @param	integer	$resultID
 	 */
 	abstract public static function getByID($resultID);
+	
+	/**
+	 * Returnes the complete data array
+	 */
+	public final function getData() {
+		return $this->data;
+	}
 }
 ?>
