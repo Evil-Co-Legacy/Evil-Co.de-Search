@@ -41,7 +41,7 @@
 
 <versions>
 	{foreach from=$result->getVersions() item='version'}
-		<version isMirrorEnabled="{$version.mirrorEnabled}" isDownloadEnabled="{if $version.licenseName != '' && $version.licenseUrl}1{else}0{/if}">
+		<version isMirrorEnabled="{if $version.mirrorEnabled}1{else}0{/if}" isDownloadEnabled="{if $version.licenseName != '' && $version.licenseUrl}1{else}0{/if}">
 			<name><![CDATA[{$version.version}]]></name>
 			{if $version.licenseName != ''}<licenseName><![CDATA[{$version.licenseName}]]></licenseName>{/if}
 			{if $version.licenseUrl != ''}<licenseUrl><![CDATA[{$version.licenseUrl}]]></licenseUrl>{/if}
