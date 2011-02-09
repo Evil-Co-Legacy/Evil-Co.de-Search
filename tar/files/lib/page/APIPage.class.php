@@ -142,7 +142,7 @@ class APIPage extends AbstractPage {
 			// print debug message
 			// echo '<p class="error">Invalid query!<br />'; print_r($_REQUEST); echo '</p>';
 			// throw new NamedUserException(WCF::getLanguage()->get('www.search.error'));
-			WCF::getTPL()->assign('error');
+			WCF::getTPL()->assign('error', true);
 		}
 
 		// assign results
