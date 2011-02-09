@@ -83,7 +83,7 @@ class PackageType extends SearchType {
 			AND
 				".$sqlConditions."
 			ORDER BY
-				searchScore ASC";
+				searchScore DESC";
 		$result = WCF::getDB()->sendQuery($sql, $itemsPerPage, (($page - 1) * $itemsPerPage));
 
 		// create needed array
