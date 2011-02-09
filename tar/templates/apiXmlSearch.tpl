@@ -7,9 +7,13 @@
 			{foreach from=$results item='result'}
 				<result objectID="{@$result->getResultID()}">
 					<title><![CDATA[{$result->getTitle()}]]></title>
-					<description><![CDATA[{$result->description}]]></p>
-					{capture assign='apiTemplate'}apiXmlSearch{$result|get_class}{/capture}
-					{include file=$apiTemplate}
+					<description><![CDATA[{$result->description}]]></description>
+					{if $result->getDetailTemplate()}
+						{assign var='resultTemplate' value='apiXmlSearch'}
+						{append var='resultTemplate' value=$result->getDetailTemplate()|ucfirst}
+						
+						{include file=$resultTemplate}
+					{/if}
 				</result>
 			{/foreach}
 		</resultList>
