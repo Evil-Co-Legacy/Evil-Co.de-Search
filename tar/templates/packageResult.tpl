@@ -14,6 +14,7 @@
 
 {if !$result->isDownloadAvailable()}<p class="warning">{lang}www.packageDetail.downloadDisabled{/lang}</p>{/if}
 {if !$result->isMirrorAvailable()}<p class="info">{lang}www.packageDetail.mirrorDisabled{/lang}</p>{/if}
+{if $result->usedLanguageFallback}<p class="info">{lang}www.packageDetail.usedFallbackLanguage{/lang}</p>{/if}
 
 <div class="contentHeader">
 	{if $result->isDownloadAvailable() || $result->isMirrorAvailable() || $additionalLargeButtons|isset}
