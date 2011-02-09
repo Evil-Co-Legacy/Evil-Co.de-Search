@@ -166,7 +166,7 @@ class PackageType extends SearchType {
 				packageLanguage.name AS name,
 				packageLanguage.description,
 				version.version,
-				packageID AS parentPackageID
+				requirement.packageID AS parentPackageID
 			FROM
 				www".WWW_N."_package_version_requirement requirement
 			LEFT JOIN
