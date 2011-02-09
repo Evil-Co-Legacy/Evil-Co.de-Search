@@ -8,7 +8,7 @@
 {if $result->isDownloadAvailable()}
 	<downloadEnabled>1</downloadEnabled>
 	<downloadUrl><![CDATA[{$result->downloadUrl}]]></downloadUrl>
-{/if}
+{else}
 	<downloadEnabled>0</downloadEnabled>
 {/if}
 
@@ -32,7 +32,7 @@
 	{foreach from=$result->getOptionals() item='optional'}
 		<optional{if $optional->getResultID()} objectID="{$optional->getResultID()}"{/if}>
 			<package><![CDATA[{$optional->getTitle()}]]>
-			{if $optional->version != ''}<version><![CDATA[{$optional->version]]></version>
+			{if $optional->version != ''}<version><![CDATA[{$optional->version}]]></version>{/if}
 		</optional>
 	{/foreach}
 </optionals>
@@ -42,9 +42,9 @@
 <versions>
 	{foreach from=$result->getVersions() item='version'}
 		<version isMirrorEnabled="{$version.mirrorEnabled}" isDownloadEnabled="{if $version.licenseName != '' && $version.licenseUrl}1{else}0{/if}">
-			<name><![CDATA[{$version.version}]]>
-			{if $version.licenseName != ''}<licenseName><![CDATA[{$version.licenseName]]></licenseName>{/if}
-			{if $version.licenseUrl != ''}<licenseUrl><![CDATA[{$version.licenseUrl]]></licenseUrl>{/if}
+			<name><![CDATA[{$version.version}]]></name>
+			{if $version.licenseName != ''}<licenseName><![CDATA[{$version.licenseName}]]></licenseName>{/if}
+			{if $version.licenseUrl != ''}<licenseUrl><![CDATA[{$version.licenseUrl}]]></licenseUrl>{/if}
 		</version>
 	{/foreach}
 </versions>
