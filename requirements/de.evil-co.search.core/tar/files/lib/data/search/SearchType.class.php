@@ -150,7 +150,9 @@ class SearchType extends DatabaseObject {
 		$sqlConditions = "( ".$sqlConditions." )";
 
 		// execute query
-		return $this->executeSearchQuery($sqlConditions, $additionalSelects, $itemsPerPage, $page);
+		$resultList = $this->executeSearchQuery($sqlConditions, $additionalSelects, $itemsPerPage, $page);
+		$resultList = $this->readGlobalInformation($resultList);
+		return $resultList;
 	}
 
 	/**
@@ -188,8 +190,10 @@ class SearchType extends DatabaseObject {
 			$sqlConditions = "`".$fieldName."` = '".escapeString($value)."'";
 		}
 
-		// execute search query
-		return $this->executeSearchQuery($sqlConditions, $additionalSqlSelects);
+		// execute query
+		$resultList = $this->executeSearchQuery($sqlConditions, $additionalSelects, $itemsPerPage, $page);
+		$resultList = $this->readGlobalInformation($resultList);
+		return $resultList;
 	}
 
 	/**
@@ -251,6 +255,13 @@ class SearchType extends DatabaseObject {
 	 */
 	public function getSearchResultClass() {
 		return $this->searchResultClass;
+	}
+	
+	/**
+	 * Reads global information for results
+	 */
+	public function readGlobalInformation($resultList) {
+		return $resultList;
 	}
 	
 	/**
