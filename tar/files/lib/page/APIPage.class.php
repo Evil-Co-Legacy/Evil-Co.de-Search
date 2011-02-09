@@ -19,13 +19,13 @@ class APIPage extends AbstractPage {
 	 * If the given action does not match to one of this elements an IllegalLinkException will appear
 	 * @var	array<string>
 	 */
-	public $validActions = array('getadvancedsearchfields', 'search');
+	public $validActions = array(/* 'getadvancedsearchfields', */ 'search');
 
 	/**
 	 * Valid API types
 	 * @var array<string>
 	 */
-	public $validTypes = array('json', 'xml', 'html');
+	public $validTypes = array('json', 'xml');
 
 	/**
 	 * Contains the current type
