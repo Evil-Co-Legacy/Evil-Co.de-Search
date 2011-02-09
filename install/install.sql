@@ -39,7 +39,9 @@ CREATE TABLE `www1_1_package_version` (
 	`downloadUrl` TEXT NOT NULL,
 	FULLTEXT (plugin),
 	FULLTEXT (licenseName),
-	FULLTEXT (licenseUrl)
+	FULLTEXT (licenseUrl),
+	FULLTEXT (author),
+	FULLTEXT (authorUrl)
 );
 
 DROP TABLE IF EXISTS `www1_1_package_version_to_language`;
