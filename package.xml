@@ -5,7 +5,7 @@
 		<packagename><![CDATA[Package Archive]]></packagename>
 		<packagedescription><![CDATA[]]></packagedescription>
 		<standalone>1</standalone>
-		<version>2.0.0</version>
+		<version>2.1.0</version>
 		<date>2010-09-09</date>
 	</packageinformation>
 
@@ -92,6 +92,20 @@
 		<!-- Other PiPs -->
 		<sql>install/install.sql</sql>
 
+		<!-- Languages -->
+		<languages languagecode="de">install/language/de.xml</languages>
+		<languages languagecode="de-informal">install/language/de-informal.xml</languages>
+		<languages languagecode="en">install/language/en.xml</languages>
+	</instructions>
+	
+	<instructions type="update" fromversion="2.0.0">
+		<!-- File-PiPs -->
+		<files>tar/files.tar</files>
+		<templates>tar/templates.tar</templates>
+		
+		<!-- Other PiPs -->
+		<sql>update/update.sql</sql>
+		
 		<!-- Languages -->
 		<languages languagecode="de">install/language/de.xml</languages>
 		<languages languagecode="de-informal">install/language/de-informal.xml</languages>
