@@ -11,30 +11,6 @@ require_once(WCF_DIR.'lib/data/search/SearchResult.class.php');
 class PackageResult extends SearchResult {
 	
 	/**
-	 * Contains and caches all requirements of this package
-	 * @var array
-	 */
-	protected $requirements = null;
-	
-	/**
-	 * Contains and caches all optionals of this package
-	 * @var array
-	 */
-	protected $optionals = null;
-	
-	/**
-	 * Contains and caches all instructions of this package
-	 * @var array
-	 */
-	protected $instructions = null;
-	
-	/**
-	 * Contains and caches all versions of this package
-	 * @var array
-	 */
-	protected $versions = null;
-	
-	/**
 	 * Contains true if we should not generate trees
 	 * @var boolean
 	 */
@@ -48,6 +24,16 @@ class PackageResult extends SearchResult {
 		$this->disableTrees = $disableTrees;
 		
 		parent::__construct($row);
+	}
+	
+	/**
+	 * @see SearchResult::readTrees()
+	 */
+	public function readTrees() {
+		$this->getRequirements();
+		$this->getOptionals();
+		$this->getInstructions();
+		$this->getVersions();
 	}
 	
 	/**
