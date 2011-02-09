@@ -17,6 +17,11 @@ abstract class SearchResult extends DatabaseObject {
 		// handle result set
 		parent::__construct($row);
 	}
+	
+	/**
+	 * Reads additional data trees for json API
+	 */
+	public function readTrees() { }
 
 	/**
 	 * Returnes the ID of the current result
