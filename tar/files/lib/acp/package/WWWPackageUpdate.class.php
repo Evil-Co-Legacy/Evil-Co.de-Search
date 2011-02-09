@@ -278,7 +278,7 @@ class WWWPackageUpdate extends PackageUpdate {
 								// TODO: We should not use en hardcoded here
 								$language = LanguageEditor::getLanguageByCode(($languageCode != 'default' ? $languageCode : 'en'));
 								
-								if ($language->getLanguageID()) {
+								if ($language !== null) {
 									// add ,
 									if (!empty($languageInserts)) $languageInserts .= ",";
 									
