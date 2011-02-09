@@ -283,6 +283,8 @@ class PackageType extends SearchType {
 		foreach($instructions as $packageID => $versionList) {
 			$resultList[$resultIDs[$packageID]]->versions = $versionList;
 		}
+		
+		return $resultList;
 	}
 }
 ?>
