@@ -19,7 +19,7 @@ class APIPage extends AbstractPage {
 	 * If the given action does not match to one of this elements an IllegalLinkException will appear
 	 * @var	array<string>
 	 */
-	public $validActions = array('GetAdvancedSearchFields', 'Search');
+	public $validActions = array('getadvancedsearchfields', 'search');
 
 	/**
 	 * Valid API types
@@ -48,6 +48,10 @@ class APIPage extends AbstractPage {
 	 * @throws IllegalLinkException
 	 */
 	public function show() {
+		// set correct case
+		$this->action = strtolower($this->action);
+		$this->type = strtolower($this->type);
+		
 		// send correct content-type
 		header('Content-Type: '.($this->type == 'xml' ? 'application/xml' : ($this->type == 'json' ? 'application/json' : 'text/html')));
 
@@ -77,9 +81,9 @@ class APIPage extends AbstractPage {
 	}
 
 	/**
-	 * Handles search requests in HTML syntax (We'll use this for instant search)
+	 * Handles search requests in XML syntax (We'll use this for instant search)
 	 */
-	protected function htmlSearch() {
+	protected function xmlSearch() {
 		// include searchTypes
 		require_once(WCF_DIR.'lib/data/search/SearchType.class.php');
 
@@ -137,7 +141,8 @@ class APIPage extends AbstractPage {
 		} else {
 			// print debug message
 			// echo '<p class="error">Invalid query!<br />'; print_r($_REQUEST); echo '</p>';
-			throw new NamedUserException(WCF::getLanguage()->get('www.search.error'));
+			// throw new NamedUserException(WCF::getLanguage()->get('www.search.error'));
+			WCF::getTPL()->assign('error');
 		}
 
 		// assign results
