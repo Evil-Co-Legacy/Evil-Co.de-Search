@@ -62,10 +62,10 @@ class APIPage extends AbstractPage {
 		if (!in_array($this->action, $this->validActions) or !in_array($this->type, $this->validTypes)) throw new IllegalLinkException;
 
 		// create function name
-		$functionName = $this->type.$this->action;
+		$functionName = $this->type.ucfirst($this->action);
 
 		// create templateName
-		$this->templateName .= ucfirst($this->type).$this->action;
+		$this->templateName .= ucfirst($this->type).ucfirst($this->action);
 
 		// validate method (We'll catch undefined methods. If the method for the given action and type isn't defined we'll throw an IllegalLinkException)
 		if (!method_exists($this, $functionName)) throw new IllegalLinkException;
