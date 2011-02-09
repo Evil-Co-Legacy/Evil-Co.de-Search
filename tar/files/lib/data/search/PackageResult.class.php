@@ -133,7 +133,8 @@ class PackageResult extends SearchResult {
 				version.authorUrl,
 				version.licenseName,
 				version.licenseUrl,
-				mirror.isEnabled AS mirrorEnabled
+				mirror.isEnabled AS mirrorEnabled,
+				packageLanguage.isFallback AS usedLanguageFallback
 			FROM
 				www".WWW_N."_package package
 			LEFT JOIN
