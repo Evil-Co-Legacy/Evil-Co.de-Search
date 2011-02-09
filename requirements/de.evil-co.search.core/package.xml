@@ -6,7 +6,7 @@
 		<packagedescription><![CDATA[]]></packagedescription>
 		<!-- <standalone>1</standalone> -->
 		<!-- <plugin>com.woltlab.wcf</plugin> -->
-		<version>1.0.1</version>
+		<version>1.1.0</version>
 		<date>2010-08-15</date>
 	</packageinformation>
 
@@ -51,7 +51,7 @@
 		<languages languagecode="en">install/language/en.xml</languages>
 	</instructions>
 	
-	<instructions type="update" fromversion="1.0.0">
+	<instructions type="update" fromversion="1.0.1">
 		<!-- File-PiPs -->
 		<files>tar/files.tar</files>
 	</instructions>
