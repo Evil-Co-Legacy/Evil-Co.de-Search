@@ -36,11 +36,11 @@
 								<div class="messageInner container-{cycle name='results' values='1,2'}">
 									
 									<h3 class="subHeadline">
-										{if $result->getDetailTemplate()}<a href="index.php?page=ResultDetail&amp;resultID={@$result->getResultID()}&amp;searchType={@$searchType->typeID}{@SID_ARG_2ND}">{$result->getTitle()}</a>{else}{$result->getTitle()}{/if}
+										{if $result->getDetailTemplate()}<a href="index.php?page=ResultDetail&amp;resultID={@$result->getResultID()}&amp;searchType={@$searchType->typeID}{@SID_ARG_2ND}">{@$result->getTitle()}</a>{else}{@$result->getTitle()}{/if}
 									</h3>
 						
 									<div class="messageBody">
-										<p>{$result->getDescription()}</p>
+										<p>{@$result->getDescription()}</p>
 									</div>
 									
 									<div class="messageFooter">
