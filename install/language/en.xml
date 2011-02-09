@@ -77,6 +77,7 @@
 		<item name="www.packageDetail.packageVersions.options"><![CDATA[Options]]></item>
 		<item name="www.packageDetail.downloadVersion"><![CDATA[Download version]]></item>
 		<item name="www.packageDetail.mirrorVersion"><![CDATA[Download version from mirror]]></item>
+		<item name="www.packageDetail.usedFallbackLanguage"><![CDATA[The title and/or the description of this package isn't available in your language.]]></item>
 	</category>
 	
 	<category name="www.packageServerList">
