@@ -6,3 +6,6 @@ CREATE TABLE `www1_1_package_report` (
 	`authorName` VARCHAR (255) NOT NULL,
 	`reason` TEXT NOT NULL
 );
+
+ALTER TABLE `www1_1_package_version` ADD FULLTEXT (author);
+ALTER TABLE `www1_1_package_version` ADD FULLTEXT (authorUrl);
