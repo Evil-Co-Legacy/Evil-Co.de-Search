@@ -109,7 +109,7 @@
 			 						<label for="itemsPerPage">{lang}www.search.advancedSearch.itemsPerPage{/lang}</label>
 			 					</div>
 			 					<div class="formField">
-			 						<select name="itemsPerPage" id="itemsPerPage" onchange="search.submitSearch()">
+			 						<select name="itemsPerPage" id="itemsPerPage"{if $this->user->enableInstantSearch} onchange="search.submitSearch()"{/if}>
 			 							<option value="5">5</option>
 			 							<option value="10">10</option>
 			 							<option selected="selected" value="20">20</option>
