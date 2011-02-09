@@ -1,6 +1,8 @@
 <?php
 // wcf imports
 require_once(WCF_DIR.'lib/data/search/SearchResult.class.php');
+require_once(WCF_DIR.'lib/data/message/bbcode/SimpleMessageParser.class.php');
+require_once(WCF_DIR.'lib/data/message/util/KeywordHighlighter.class.php');
 
 /**
  * Represents a search result
@@ -41,6 +43,15 @@ class PackageResult extends SearchResult {
 	 */
 	protected function handleData($data) {
 		parent::handleData($data);
+		
+		// parse description and title
+		$parser = SimpleMessageParser::getInstance();
+		if ($this->name !== null) $this->name = $parser->parse($this->name, false, false);
+		if ($this->description !== null) $this->description = $parser->parse($this->description);
+		
+		// highlight description and title
+		if ($this->name !== null) KeywordHighlighter::doHighlight($this->name);
+		if ($this->description !== null) KeywordHighlighter::doHighlight($this->description);
 	}
 
 	/**
