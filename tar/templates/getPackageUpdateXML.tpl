@@ -13,7 +13,7 @@
 			{if $result->licenseName != '' || $result->licenseUrl != ''}
 				<licenseInformation>
 					{if $result->licenseName != ''}<license><![CDATA[{$result->licenseName}]]></license>{/if}
-					{if $result->licenseUrl != ''}<licenseUrl><![CDATA[{$result->licenseUrl}]]></license>{/if}
+					{if $result->licenseUrl != ''}<licenseUrl><![CDATA[{$result->licenseUrl}]]></licenseUrl>{/if}
 				</licenseInformation>
 			{/if}
 			
@@ -51,6 +51,7 @@
 						{* TODO: Add this
 						<timestamp><![CDATA[{$version->timestamp}]]></timestamp>
 						*}
+						<timestamp><![CDATA[{TIME_NOW}]]></timestamp>
 						
 						{* TODO: Add this
 						<versionType><![CDATA[{$version->type}]]></versionType>
