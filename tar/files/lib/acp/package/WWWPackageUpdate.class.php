@@ -458,10 +458,14 @@ class WWWPackageUpdate extends PackageUpdate {
 		$versions = array();
 		
 		while ($row = WCF::getDB()->fetchArray($result)) {
-			if (!isset($requirements[$row['packageName']])) $requirements[$row['packageName']] = array();
-			$requirements[$row['packageName']][] = $row['version'];
-			if (!in_array($row['version'], $versions)) $versions[] = $row['version'];
+			if (!empty($row['version'])) {
+				if (!isset($requirements[$row['packageName']])) $requirements[$row['packageName']] = array();
+				$requirements[$row['packageName']][] = $row['version'];
+				if (!in_array($row['version'], $versions)) $versions[] = $row['version'];
+			}
 		}
+		
+		var_dump($requirements);
 		
 		if (count($requirements)) {
 			// get packageIDs of known packages
