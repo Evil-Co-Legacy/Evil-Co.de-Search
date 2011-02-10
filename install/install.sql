@@ -37,6 +37,7 @@ CREATE TABLE `www1_1_package_version` (
 	`licenseName` VARCHAR (255) NOT NULL,
 	`licenseUrl` TEXT NOT NULL,
 	`downloadUrl` TEXT NOT NULL,
+	`timestamp` INT NOT NULL,
 	FULLTEXT (plugin),
 	FULLTEXT (licenseName),
 	FULLTEXT (licenseUrl),
