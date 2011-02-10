@@ -175,7 +175,7 @@
 							<tbody>
 								{foreach from=$requirements item='requirement'}
 									<tr class="{cycle values='container-1,container-2'}">
-										<td>{if $requirement->getResultID() > 0}<a href="index.php?page=ResultDetail&amp;resultID={@$requirement->getResultID()}&amp;searchType={@$searchTypeID}{@SID_ARG_2ND}">{$requirement->getTitle()}</a>{else}{$requirement->getTitle()}{/if}</td>
+										<td>{if $requirement->getResultID() > 0}<a href="index.php?page=ResultDetail&amp;resultID={@$requirement->getResultID()}&amp;searchType={@$searchType}{@SID_ARG_2ND}">{$requirement->getTitle()}</a>{else}{$requirement->getTitle()}{/if}</td>
 										<td>{$requirement->version}</td>
 									</tr>
 								{/foreach}
