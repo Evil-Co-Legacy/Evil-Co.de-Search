@@ -182,7 +182,8 @@ class WWWPackageUpdate extends PackageUpdate {
 													 serverID,
 													 licenseName,
 													 licenseUrl,
-													 downloadUrl)
+													 downloadUrl,
+													 timestamp)
 								VALUES
 									(".$packageUpdateID.",
 									 '".escapeString($packageVersion)."',
@@ -195,7 +196,8 @@ class WWWPackageUpdate extends PackageUpdate {
 									 ".$packageUpdateServerID.",
 									 '".escapeString($packageData['licenseName'])."',
 									 '".escapeString($packageData['licenseUrl'])."',
-									 '".escapeString($packageFile)."')";
+									 '".escapeString($packageFile)."',
+									 ".intval($versionData['timestamp']).")";
 							WCF::getDB()->sendQuery($sql);
 							$packageUpdateVersionID = WCF::getDB()->getInsertID();
 						/* } else {
