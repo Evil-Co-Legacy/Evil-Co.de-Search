@@ -259,10 +259,10 @@ class GetPackageUpdateXMLPage extends AbstractPage {
 		$this->assignVariables();
 		
 		// send header
-		header("Content-type: text/xml");
+		header('Content-Type: application/xml');
 		
 		// display template
-		WCF::getTPL()->display($this->templateName);
+		echo WCF::getTPL()->fetch($this->templateName);
 	}
 	
 	/**
