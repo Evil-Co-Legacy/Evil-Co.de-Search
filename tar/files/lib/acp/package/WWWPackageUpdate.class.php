@@ -535,7 +535,7 @@ class WWWPackageUpdate extends PackageUpdate {
 							case 'licenseurl':
 								$packageInfo['licenseUrl'] = $licenseInformation['cdata'];
 								break;
-							case 'apparchive:disablemirror':
+							case 'packagearchive:disablemirror':
 								$packageInfo['disableMirror'] = true;
 								break;
 						}
