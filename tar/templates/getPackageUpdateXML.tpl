@@ -48,10 +48,7 @@
 						{* I think this should not be hardcoded ... *}
 						<updateType><![CDATA[update]]></updateType>
 						
-						{* TODO: Add this
-						<timestamp><![CDATA[{$version->timestamp}]]></timestamp>
-						*}
-						<timestamp><![CDATA[{TIME_NOW}]]></timestamp>
+						<timestamp><![CDATA[{$version.timestamp}]]></timestamp>
 						
 						{* TODO: Add this
 						<versionType><![CDATA[{$version->type}]]></versionType>
