@@ -9,3 +9,4 @@ CREATE TABLE `www1_1_package_report` (
 
 ALTER TABLE `www1_1_package_version` ADD FULLTEXT (author);
 ALTER TABLE `www1_1_package_version` ADD FULLTEXT (authorUrl);
+ALTER TABLE `www1_1_package_version` ADD `timestamp` INT NOT NULL;
