@@ -162,7 +162,7 @@ class WWWPackageUpdate extends PackageUpdate {
 						if (isset($versionData['file']))
 							$packageFile = $versionData['file'];
 						else
-							$packageFile = FileUtil::addTrailingSlash($packageUpdateServerUrl).'?packageName='.urlencode($identifier).'&packageVersion='.urlencode($packageVersion);
+							$packageFile = FileUtil::addTrailingSlash($packageUpdateServerUrl).(stripos($packageUpdateServerUrl, '?') !== false ? '&' : '?' ).'packageName='.urlencode($identifier).'&packageVersion='.urlencode($packageVersion);
 						
 						if (!isset($existingPackageVersions[$packageUpdateID]) or !isset($existingPackageVersions[$packageUpdateID][$packageVersion])) {
 							// download package
