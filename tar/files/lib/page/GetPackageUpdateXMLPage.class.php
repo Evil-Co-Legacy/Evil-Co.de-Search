@@ -100,30 +100,11 @@ class GetPackageUpdateXMLPage extends AbstractPage {
 		
 		// get requirements
 		$sql = "SELECT
-				targetPackageID AS packageID,
-				targetVersionID AS versionID,
-				packageLanguage.name AS name,
-				packageLanguage.description,
-				requirement.version,
 				requirement.packageName AS packageName,
 				requirement.packageID AS parentPackageID
 			FROM
 				www".WWW_N."_package_version_requirement requirement
-			LEFT JOIN
-				www".WWW_N."_package_version version
-			ON
-				requirement.targetVersionID = version.versionID
-			LEFT JOIN
-				www".WWW_N."_package_version_to_language packageLanguage
-			ON
-				version.versionID = packageLanguage.versionID
 			WHERE
-				(
-						packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
-					OR
-						packageLanguage.isFallback = 1
-				)
-			AND
 				requirement.versionID IN (".implode(',', array_keys($versionIDs)).")";
 		$result = WCF::getDB()->sendQuery($sql);
 		
