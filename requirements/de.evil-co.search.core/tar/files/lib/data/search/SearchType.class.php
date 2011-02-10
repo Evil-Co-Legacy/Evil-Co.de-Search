@@ -132,7 +132,7 @@ class SearchType extends DatabaseObject {
 		// loop trhoug searchableFields and add them to query
 		foreach($this->searchableFields as $field) {
 			if (!empty($sqlConditions)) $sqlConditions .= " OR ";
-			$sqlConditions .= "MATCH(`".str_replace('.', '`.`', $field)."`) AGAINST('".escapeString($query)."' WITH QUERY EXPANSION)"; /* OR `".str_replace('.', '`.`', $field)."` LIKE '%".escapeString($query)."%'"; */
+			$sqlConditions .= "MATCH(`".str_replace('.', '`.`', $field)."`) AGAINST('".escapeString($query)."'  IN BOOLEAN MODE)"; /* OR `".str_replace('.', '`.`', $field)."` LIKE '%".escapeString($query)."%'"; */
 		}
 		
 		$additionalSelects = "";
