@@ -67,7 +67,7 @@ class ResultDetailPage extends AbstractPage {
 		$this->searchType = new SearchType($this->searchTypeID);
 		
 		// validate
-		if (!$this->searchType) throw new IllegalLinkException;
+		if (!$this->searchType->typeID) throw new IllegalLinkException;
 		
 		$className = $this->searchType->typeName;
 		
