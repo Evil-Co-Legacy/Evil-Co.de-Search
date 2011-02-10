@@ -526,7 +526,7 @@ class WWWPackageUpdate extends PackageUpdate {
 					
 					break;
 				case 'licenseinformation':
-					// loop through tags inside the <licenseInformatioN> tag.
+					// loop through tags inside the <licenseInformation> tag.
 					foreach($packageDefinition['children'] as $licenseInformation) {
 						switch (StringUtil::toLowerCase($licenseInformation['name'])) {
 							case 'license':
