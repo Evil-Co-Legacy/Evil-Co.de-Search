@@ -159,129 +159,133 @@ class PackageType extends SearchType {
 			$versionIDs[$result->versionID] = $key;
 		}
 		
-		// get requirements
-		$sql = "SELECT
-				targetPackageID AS packageID,
-				targetVersionID AS versionID,
-				packageLanguage.name AS name,
-				packageLanguage.description,
-				version.version,
-				requirement.packageID AS parentPackageID
-			FROM
-				www".WWW_N."_package_version_requirement requirement
-			LEFT JOIN
-				www".WWW_N."_package_version version
-			ON
-				requirement.targetVersionID = version.versionID
-			LEFT JOIN
-				www".WWW_N."_package_version_to_language packageLanguage
-			ON
-				version.versionID = packageLanguage.versionID
-			WHERE
-				(
-						packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
-					OR
-						packageLanguage.isFallback = 1
-				)
-			AND
-				requirement.versionID IN (".implode(',', array_keys($versionIDs)).")";
-		$result = WCF::getDB()->sendQuery($sql);
-		
-		$requirements = array();
-		while($row = WCF::getDB()->fetchArray($result)) {
-			if (!isset($requirements[$row['parentPackageID']])) $requirements[$row['parentPackageID']] = array();
-			$requirements[$row['parentPackageID']][] = new PackageResult($row, true);
+		if (count($versionIDs)) {
+			// get requirements
+			$sql = "SELECT
+					targetPackageID AS packageID,
+					targetVersionID AS versionID,
+					packageLanguage.name AS name,
+					packageLanguage.description,
+					version.version,
+					requirement.packageID AS parentPackageID
+				FROM
+					www".WWW_N."_package_version_requirement requirement
+				LEFT JOIN
+					www".WWW_N."_package_version version
+				ON
+					requirement.targetVersionID = version.versionID
+				LEFT JOIN
+					www".WWW_N."_package_version_to_language packageLanguage
+				ON
+					version.versionID = packageLanguage.versionID
+				WHERE
+					(
+							packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
+						OR
+							packageLanguage.isFallback = 1
+					)
+				AND
+					requirement.versionID IN (".implode(',', array_keys($versionIDs)).")";
+			$result = WCF::getDB()->sendQuery($sql);
+			
+			$requirements = array();
+			while($row = WCF::getDB()->fetchArray($result)) {
+				if (!isset($requirements[$row['parentPackageID']])) $requirements[$row['parentPackageID']] = array();
+				$requirements[$row['parentPackageID']][] = new PackageResult($row, true);
+			}
+			
+			// write arrays
+			foreach($requirements as $packageID => $requirementList) {
+				$resultList[$resultIDs[$packageID]]->requirements = $requirementList;
+			}
+			
+			// get optionals
+			$sql = "SELECT
+					targetPackageID AS packageID,
+					targetVersionID AS versionID,
+					packageLanguage.name AS name,
+					packageLanguage.description,
+					version.version,
+					optional.packageID AS parentPackageID
+				FROM
+					www".WWW_N."_package_version_optional optional
+				LEFT JOIN
+					www".WWW_N."_package_version version
+				ON
+					optional.targetVersionID = version.versionID
+				LEFT JOIN
+					www".WWW_N."_package_version_to_language packageLanguage
+				ON
+					version.versionID = packageLanguage.versionID
+				WHERE
+					(
+							packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
+						OR
+							packageLanguage.isFallback = 1
+					)
+				AND
+					optional.versionID IN (".implode(',', array_keys($versionIDs)).")";
+			$result = WCF::getDB()->sendQuery($sql);
+			
+			$optionals = array();
+			while($row = WCF::getDB()->fetchArray($result)) {
+				if (!isset($optionals[$row['parentPackageID']])) $optionals[$row['parentPackageID']] = array();
+				$optionals[$row['parentPackageID']][] = new PackageResult($row, true);
+			}
+			
+			// write arrays
+			foreach($optionals as $packageID => $optionalsList) {
+				$resultList[$resultIDs[$packageID]]->optionals = $optionalsList;
+			}
+			
+			// get instructions
+			$instructions = array();
+			$sql = "SELECT
+					pipList,
+					packageID AS parentPackageID
+				FROM
+					www".WWW_N."_package_version_instruction
+				WHERE
+					versionID IN (".implode(',', array_keys($versionIDs)).")
+				AND
+					instructionType = 'install'"; // TODO: we should add support for all types
+			$result = WCF::getDB()->sendQuery($sql);
+			
+			while($row = WCF::getDB()->fetchArray($result)) {
+				$instructions[$row['parentPackageID']] = explode(',', $row['pipList']);
+			}
+			
+			foreach($instructions as $packageID => $pipList) {
+				$resultList[$resultIDs[$packageID]]->instructions = $pipList;
+			}
 		}
 		
-		// write arrays
-		foreach($requirements as $packageID => $requirementList) {
-			$resultList[$resultIDs[$packageID]]->requirements = $requirementList;
-		}
-		
-		// get optionals
-		$sql = "SELECT
-				targetPackageID AS packageID,
-				targetVersionID AS versionID,
-				packageLanguage.name AS name,
-				packageLanguage.description,
-				version.version,
-				optional.packageID AS parentPackageID
-			FROM
-				www".WWW_N."_package_version_optional optional
-			LEFT JOIN
-				www".WWW_N."_package_version version
-			ON
-				optional.targetVersionID = version.versionID
-			LEFT JOIN
-				www".WWW_N."_package_version_to_language packageLanguage
-			ON
-				version.versionID = packageLanguage.versionID
-			WHERE
-				(
-						packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
-					OR
-						packageLanguage.isFallback = 1
-				)
-			AND
-				optional.versionID IN (".implode(',', array_keys($versionIDs)).")";
-		$result = WCF::getDB()->sendQuery($sql);
-		
-		$optionals = array();
-		while($row = WCF::getDB()->fetchArray($result)) {
-			if (!isset($optionals[$row['parentPackageID']])) $optionals[$row['parentPackageID']] = array();
-			$optionals[$row['parentPackageID']][] = new PackageResult($row, true);
-		}
-		
-		// write arrays
-		foreach($optionals as $packageID => $optionalsList) {
-			$resultList[$resultIDs[$packageID]]->optionals = $optionalsList;
-		}
-		
-		// get instructions
-		$instructions = array();
-		$sql = "SELECT
-				pipList,
-				packageID AS parentPackageID
-			FROM
-				www".WWW_N."_package_version_instruction
-			WHERE
-				versionID IN (".implode(',', array_keys($versionIDs)).")
-			AND
-				instructionType = 'install'"; // TODO: we should add support for all types
-		$result = WCF::getDB()->sendQuery($sql);
-		
-		while($row = WCF::getDB()->fetchArray($result)) {
-			$instructions[$row['parentPackageID']] = explode(',', $row['pipList']);
-		}
-		
-		foreach($instructions as $packageID => $pipList) {
-			$resultList[$resultIDs[$packageID]]->instructions = $pipList;
-		}
-		
-		// get versions
-		$versions = array();
-		$sql = "SELECT
-				version.*,
-				mirror.isEnabled AS mirrorEnabled
-			FROM
-				www".WWW_N."_package_version version
-			LEFT JOIN
-				www".WWW_N."_package_mirror mirror
-			ON
-				version.versionID = mirror.versionID
-			WHERE
-				version.packageID IN (".implode(',', array_keys($resultIDs)).")
-			ORDER BY
-				version.version DESC";
-		$result = WCF::getDB()->sendQuery($sql);
-		
-		while($row = WCF::getDB()->fetchArray($result)) {
-			if (!isset($versions[$row['packageID']])) $versions[$row['packageID']] = array();
-			$versions[$row['packageID']][] = $row;
-		}
-		
-		foreach($instructions as $packageID => $versionList) {
-			$resultList[$resultIDs[$packageID]]->versions = $versionList;
+		if (count($resultIDs)) {
+			// get versions
+			$versions = array();
+			$sql = "SELECT
+					version.*,
+					mirror.isEnabled AS mirrorEnabled
+				FROM
+					www".WWW_N."_package_version version
+				LEFT JOIN
+					www".WWW_N."_package_mirror mirror
+				ON
+					version.versionID = mirror.versionID
+				WHERE
+					version.packageID IN (".implode(',', array_keys($resultIDs)).")
+				ORDER BY
+					version.version DESC";
+			$result = WCF::getDB()->sendQuery($sql);
+			
+			while($row = WCF::getDB()->fetchArray($result)) {
+				if (!isset($versions[$row['packageID']])) $versions[$row['packageID']] = array();
+				$versions[$row['packageID']][] = $row;
+			}
+			
+			foreach($versions as $packageID => $versionList) {
+				$resultList[$resultIDs[$packageID]]->versions = $versionList;
+			}
 		}
 		
 		return $resultList;
