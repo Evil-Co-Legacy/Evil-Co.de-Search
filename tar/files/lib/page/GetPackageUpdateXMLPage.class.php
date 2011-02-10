@@ -2,6 +2,9 @@
 // wcf imports
 require_once(WCF_DIR.'lib/page/AbstractPage.class.php');
 
+// www imports
+require_once(WWW_DIR.'lib/data/search/PackageResult.class.php');
+
 /**
  * Displays a meta package server
  * @author		Johannes Donath
@@ -74,7 +77,9 @@ class GetPackageUpdateXMLPage extends AbstractPage {
 						packageLanguage.isFallback = 1
 				)
 			AND
-				".$sqlConditions."
+				version.licenseUrl NOT IN ('')
+			AND
+				version.licenseName NOT IN ('')
 			ORDER BY
 				package.packageName ASC";
 		$result = WCF::getDB()->sendQuery($sql);
@@ -249,6 +254,10 @@ class GetPackageUpdateXMLPage extends AbstractPage {
 	 * @see Page::show()
 	 */
 	public function show() {
+		$this->readParameters();
+		$this->readData();
+		$this->assignVariables();
+		
 		// send header
 		header("Content-type: text/xml");
 		
