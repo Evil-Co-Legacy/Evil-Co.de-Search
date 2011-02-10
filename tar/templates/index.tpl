@@ -62,7 +62,7 @@
 
 		 		<div id="advancedSearch">
 		 			<fieldset>
-		 				<legend><a onclick="return !openList('advancedSearchList')"><img alt="" src="{icon}minusS.png{/icon}" id="advancedSearchListImage" href="javascript:void(0)"></a> {lang}www.search.advancedSearch{/lang}</legend>
+		 				<legend><a href="javascript:openList('advancedSearchList')"><img alt="" src="{icon}minusS.png{/icon}" id="advancedSearchListImage"></a> {lang}www.search.advancedSearch{/lang}</legend>
 
 		 				<div id="advancedSearchList">
 			 				{if $searchTypes|count > 0}
