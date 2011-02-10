@@ -491,13 +491,13 @@ class WWWPackageUpdate extends PackageUpdate {
 						package.packageID,
 						package.packageName
 					FROM
-						www".WWW_N."_package_version
+						www".WWW_N."_package_version version
 					LEFT JOIN
-						www".WWW_N."_package
+						www".WWW_N."_package package
 					ON
 						version.packageID = package.packageID
 					WHERE
-						packageID IN (".implode(',', $packageData).")
+						package.packageID IN (".implode(',', $packageData).")
 					AND
 						version IN ('".implode("', '", array_map('escapeString', $versions))."')";
 				$result = WCF::getDB()->sendQuery($sql);
@@ -505,12 +505,12 @@ class WWWPackageUpdate extends PackageUpdate {
 				$packageVersions = array();
 				
 				while($row = WCF::getDB()->fetchArray($result)) {
-					if (!isset($packageVersions[$row['packageID'].'/'.$row['packageName']])) $packageVersions[$row['packageID']] = array();
+					if (!isset($packageVersions[$row['packageID'].'/'.$row['packageName']])) $packageVersions[$row['packageID'].'/'.$row['packageName']] = array();
 					$packageVersions[$row['packageID'].'/'.$row['packageName']][$row['version']] = $row['versionID'];
 				}
 				
 				foreach($packageVersions as $package => $versionArray) {
-					list($packageName, $packageID) = explode('/', $package);
+					list($packageID, $packageName) = explode('/', $package);
 					
 					foreach($versionArray as $version => $versionID) {
 						$sql = "UPDATE
@@ -524,6 +524,7 @@ class WWWPackageUpdate extends PackageUpdate {
 								packageName = '".escapeString($packageName)."'
 							AND
 								targetVersionID = 0";
+						echo $sql;
 						WCF::getDB()->sendQuery($sql);
 					}
 				}
