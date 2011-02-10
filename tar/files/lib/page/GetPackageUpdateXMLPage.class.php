@@ -217,7 +217,7 @@ class GetPackageUpdateXMLPage extends AbstractPage {
 			$updateInstructions[$row['parentPackageID']][$row['fromVersion']] = explode(',', $row['pipList']);
 		}
 		
-		foreach($instructions as $packageID => $pipList) {
+		foreach($updateInstructions as $packageID => $pipList) {
 			$resultList[$resultIDs[$packageID]]->updateInstructions = $pipList;
 		}
 		
@@ -243,7 +243,7 @@ class GetPackageUpdateXMLPage extends AbstractPage {
 			$versions[$row['packageID']][] = $row;
 		}
 		
-		foreach($instructions as $packageID => $versionList) {
+		foreach($versions as $packageID => $versionList) {
 			$resultList[$resultIDs[$packageID]]->versions = $versionList;
 		}
 		
