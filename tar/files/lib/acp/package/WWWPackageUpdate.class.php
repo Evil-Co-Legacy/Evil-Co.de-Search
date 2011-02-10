@@ -441,6 +441,90 @@ class WWWPackageUpdate extends PackageUpdate {
 					".$mirrorInserts;
 			WCF::getDB()->sendQuery($sql);
 		}
+		
+		// requirement cleanup
+		$sql = "SELECT
+				packageName,
+				version
+			FROM
+				www".WWW_N."_package_version_requirement
+			WHERE
+				targetPackageID = 0
+			OR
+				targetVersionID = 0";
+		$result = WCF::getDB()->sendQuery($sql);
+		
+		$requirements = array();
+		$versions = array();
+		
+		while ($row = WCF::getDB()->fetchArray($result)) {
+			if (!isset($requirements[$row['packageName']])) $requirements[$row['packageName']] = array();
+			$requirements[$row['packageName']][] = $row['version'];
+			if (!in_array($row['version'], $versions)) $versions[] = $row['version'];
+		}
+		
+		if (count($requirements)) {
+			// get packageIDs of known packages
+			$sql = "SELECT
+					packageID,
+					packageName
+				FROM
+					www".WWW_N."_package
+				WHERE
+					packageName IN ('".implode("', '", array_map('escapeString', array_keys($requirements)))."')";
+			$result = WCF::getDB()->sendQuery($sql);
+			
+			$packageData = array();
+			
+			while($row = WCF::getDB()->fetchArray($result)) {
+				$packageData[$row['packageName']] = $row['packageID'];
+			}
+			
+			if (count($packageData)) {
+				$sql = "SELECT
+						versionID,
+						version,
+						package.packageID,
+						package.packageName
+					FROM
+						www".WWW_N."_package_version
+					LEFT JOIN
+						www".WWW_N."_package
+					ON
+						version.packageID = package.packageID
+					WHERE
+						packageID IN (".implode(',', $packageData).")
+					AND
+						version IN ('".implode("', '", array_map('escapeString', $versions))."')";
+				$result = WCF::getDB()->sendQuery($sql);
+				
+				$packageVersions = array();
+				
+				while($row = WCF::getDB()->fetchArray($result)) {
+					if (!isset($packageVersions[$row['packageID'].'/'.$row['packageName']])) $packageVersions[$row['packageID']] = array();
+					$packageVersions[$row['packageID'].'/'.$row['packageName']][$row['version']] = $row['versionID'];
+				}
+				
+				foreach($packageVersions as $package => $versionArray) {
+					list($packageName, $packageID) = explode('/', $package);
+					
+					foreach($versionArray as $version => $versionID) {
+						$sql = "UPDATE
+								www".WWW_N."_package_version_requirement
+							SET
+								targetVersionID = ".$versionID.",
+								targetPackageID = ".intval($packageID)."
+							WHERE
+								version = '".escapeString($version)."'
+							AND
+								packageName = '".escapeString($packageName)."'
+							AND
+								targetVersionID = 0";
+						WCF::getDB()->sendQuery($sql);
+					}
+				}
+			}
+		}
 	}
 	
 	/**
