@@ -101,6 +101,7 @@ class GetPackageUpdateXMLPage extends AbstractPage {
 		// get requirements
 		$sql = "SELECT
 				requirement.packageName AS packageName,
+				requirement.version AS version,
 				requirement.packageID AS parentPackageID
 			FROM
 				www".WWW_N."_package_version_requirement requirement
