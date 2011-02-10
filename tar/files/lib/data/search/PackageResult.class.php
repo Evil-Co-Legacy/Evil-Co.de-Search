@@ -192,7 +192,7 @@ class PackageResult extends SearchResult {
 							packageLanguage.isFallback = 1
 					)
 				AND
-					requirement.packageID = ".$this->packageID;
+					requirement.versionID = ".$this->versionID;
 			$result = WCF::getDB()->sendQuery($sql);
 			
 			while($row = WCF::getDB()->fetchArray($result)) {
@@ -235,7 +235,7 @@ class PackageResult extends SearchResult {
 							packageLanguage.isFallback = 1
 					)
 				AND
-					optional.packageID = ".$this->packageID;
+					optional.versionID = ".$this->versionID;
 			$result = WCF::getDB()->sendQuery($sql);
 			
 			while($row = WCF::getDB()->fetchArray($result)) {
