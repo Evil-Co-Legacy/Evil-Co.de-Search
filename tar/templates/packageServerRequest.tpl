@@ -71,10 +71,12 @@
 						</div>
 					{/if}
 					
-					<div class="formElement">
-						<p class="formFieldLabel">{lang}www.packageServerRequest.author{/lang}</p>
-						<p class="formField"><a href="index.php?page=User&amp;userID={$request.authorID}{@SID_ARG_2ND}">{$request.authorName}</a></p>
-					</div>
+					{if $request.authorID > 0}
+						<div class="formElement">
+							<p class="formFieldLabel">{lang}www.packageServerRequest.author{/lang}</p>
+							<p class="formField"><a href="index.php?page=User&amp;userID={$request.authorID}{@SID_ARG_2ND}">{$request.authorName}</a></p>
+						</div>
+					{/if}
 					
 					{if $request.moderatorID}
 						<div class="formElement">
