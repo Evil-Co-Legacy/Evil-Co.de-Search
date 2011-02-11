@@ -78,6 +78,7 @@
 		<item name="www.packageDetail.downloadVersion"><![CDATA[Download version]]></item>
 		<item name="www.packageDetail.mirrorVersion"><![CDATA[Download version from mirror]]></item>
 		<item name="www.packageDetail.usedFallbackLanguage"><![CDATA[The title and/or the description of this package isn't available in your language.]]></item>
+		<item name="www.packageDetail.isDisabled"><![CDATA[This entry was disabled by <a href="index.php?page=User&amp;userID={$result->moderatorID}{@SID_ARG_2ND}">{$result->moderatorName}</a> {if $result->disableReason != ''}with the following reason:<br />{$result->disableReason}{else}.{/if}]]></item>
 	</category>
 	
 	<category name="www.packageServerList">

@@ -78,6 +78,7 @@
 		<item name="www.packageDetail.downloadVersion"><![CDATA[Version Herunterladen]]></item>
 		<item name="www.packageDetail.mirrorVersion"><![CDATA[Version von Spiegel herunterladen]]></item>
 		<item name="www.packageDetail.usedFallbackLanguage"><![CDATA[Der Titel und/oder die Beschreibung dieses Paketes ist in Deiner Sprache nicht verfügbar.]]></item>
+		<item name="www.packageDetail.isDisabled"><![CDATA[Dieser Eintrag wurde von <a href="index.php?page=User&amp;userID={$result->moderatorID}{@SID_ARG_2ND}">{$result->moderatorName}</a> {if $result->disableReason != ''}aus folgendem Grund{/if} deaktiviert{if $result->disableReason}:<br />{$result->disableReason}{else}.{/if}]]></item>
 	</category>
 	
 	<category name="www.packageServerList">
