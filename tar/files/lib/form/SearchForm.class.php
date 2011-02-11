@@ -37,6 +37,12 @@ class SearchForm extends MultipleLinkPage {
 	 * @var	array
 	 */
 	public $searchResults = array();
+	
+	/**
+	 * Contains a list of suggestions
+	 * @var array<string>
+	 */
+	public $suggestions = array();
 
 	/**
 	 * @see	Page::readData();
@@ -90,6 +96,9 @@ class SearchForm extends MultipleLinkPage {
 		} else {
 			$this->searchResults = $this->searchType->advancedSearch($this->query, $this->advancedSearchFields, $this->pageNo, $this->itemsPerPage);
 		}
+		
+		// get suggestions
+		if (!count($this->searchResults)) $this->suggestions = $this->searchType->getSuggestions($this->query);
 
 		// call parent method
 		parent::readData();
@@ -117,7 +126,8 @@ class SearchForm extends MultipleLinkPage {
 			'results'			=>	$this->searchResults,
 			'encodedQuery'			=>	urlencode($this->query),
 			'query'				=>	$this->query,
-			'searchType'			=>	$this->searchType
+			'searchType'			=>	$this->searchType,
+			'suggestions'			=>	$this->suggestions
 		));
 
 		// assign additional footer options (Back to index page link)
