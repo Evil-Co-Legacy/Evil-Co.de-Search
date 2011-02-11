@@ -23,7 +23,20 @@
 		 
 		 	<div id="resultList">
 		 		{if !$items}
-		 			<p class="info">{lang}www.search.result.noResults{/lang}</p>
+		 			<div class="info">
+		 				<p id="noResultsInfo">{lang}www.search.result.noResults{/lang}</p>
+		 				
+		 				{if $suggestions|count}
+		 					<div class="noResultSuggestions">
+		 						<p class="noResultSuggestionsHeading">{lang}www.search.result.noResults.suggestions{/lang}</p>
+		 						<ul>
+		 							{foreach from=$suggestions item='suggestion'}
+		 								<li><a href="index.php?form=Search&query={$suggestion.query|urlencode}&searchType=$searchTypeID{@SID_ARG_2ND}">{$suggestion.query}</a></li>
+		 							{/foreach}
+		 						</ul>
+		 					</div>
+		 				{/if}
+		 			</div>
 		 		{else}
 		 			<div class="contentHeader">
 		 				{assign var='searchTypeID' value=$searchType->typeID}
