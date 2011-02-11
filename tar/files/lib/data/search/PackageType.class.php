@@ -152,11 +152,26 @@ class PackageType extends SearchType {
 	 */
 	public function getSuggestions($query) {
 		$sql = "SELECT
-				packageLanguage.name AS query
+				packageLanguage.packageID,
+				packageLanguage.name AS query,
+				packageLanguage.isFallback,
+				packageLanguage.languageID
 			FROM
 				www".WWW_N."_package_version_to_language packageLanguage
+			LEFT JOIN
+				www".WWW_N."_package_version version
+			ON
+				packageLanguage.versionID = version.versionID
 			WHERE
-				packageLanguage.name LIKE '%".escapeString($query)."%'";
+				packageLanguage.name LIKE '%".escapeString($query)."%'
+			AND
+				(
+						packageLanguage.languageID = ".WCF::getLanguage()->getLanguageID()."
+					OR
+						packageLanguage.isFallback = 1
+				)
+			ORDER BY
+				version.version DESC";
 		$result = WCF::getDB()->sendQuery($sql);
 		
 		$suggestions = array();
@@ -165,7 +180,26 @@ class PackageType extends SearchType {
 			$suggestions[] = $row;
 		}
 		
-		return $suggestions;
+		// create needed array
+		$tempList = array();
+		$bestValues = array();
+		$fallbacks = array();
+		
+		foreach($suggestions as $key => $result) {
+			if ($result['isFallback'])
+				$fallbacks[$result['packageID']] = $key;
+			elseif ($result['languageID'] == WCF::getLanguage()->getLanguageID())
+				$bestValues[$result['packageID']] = $key;
+		}
+		
+		foreach($fallbacks as $resultID => $key) {
+			if (isset($bestValues[$resultID]))
+				$tempList[] = $suggestions[$bestValues[$resultID]];
+			else
+				$tempList[] = $suggestions[$key];
+		}
+		
+		return $tempList;
 	}
 	
 	/**
