@@ -1,3 +1,8 @@
+ALTER TABLE `www1_1_package` ADD `isDisabled` TINYINT (1) NOT NULL DEFAULT '0';
+ALTER TABLE `www1_1_package` ADD `disableReason` TEXT NULL;
+ALTER TABLE `www1_1_package` ADD `moderatorID` INT NULL;
+ALTER TABLE `www1_1_package` ADD `moderatorName` VARCHAR (255) NULL;
+
 DROP TABLE IF EXISTS `www1_1_package_report`;
 CREATE TABLE `www1_1_package_report` (
 	`reportID` INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,

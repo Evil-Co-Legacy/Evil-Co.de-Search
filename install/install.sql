@@ -3,7 +3,11 @@ CREATE TABLE `www1_1_package` (
 	`packageID` INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	`packageName` VARCHAR (255) NOT NULL,
 	`serverID` INT NOT NULL,
-	`lastVersionID` INT NULL
+	`lastVersionID` INT NULL,
+	`isDisabled` TINYINT (1) NOT NULL DEFAULT '0',
+	`disableReason` TEXT NULL,
+	`moderatorID` INT NULL,
+	`moderatorName` VARCHAR (255) NULL
 );
 
 DROP TABLE IF EXISTS `www1_1_package_report`;
