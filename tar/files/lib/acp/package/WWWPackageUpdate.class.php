@@ -528,6 +528,58 @@ class WWWPackageUpdate extends PackageUpdate {
 				}
 			}
 		}
+		
+		// optionals cleanup
+		$sql = "SELECT
+				packageName
+			FROM
+				www".WWW_N."_package_version_optional
+			WHERE
+				targetPackageID = 0
+			OR
+				targetVersionID = 0";
+		$result = WCF::getDB()->sendQuery($sql);
+		
+		$optionals = array();
+		
+		while ($row = WCF::getDB()->fetchArray($result)) {
+			if (!empty($row['packageName']))
+				$optionals[] = $row['packageName'];
+		}
+		
+		if (count($optionals)) {
+			// get packageIDs of known packages
+			$sql = "SELECT
+					packageID,
+					packageName,
+					lastVersionID
+				FROM
+					www".WWW_N."_package
+				WHERE
+					packageName IN ('".implode("', '", array_map('escapeString', $optionals))."')";
+			$result = WCF::getDB()->sendQuery($sql);
+			
+			$packageData = array();
+			
+			while($row = WCF::getDB()->fetchArray($result)) {
+				$packageData[$row['packageName']] = array('packageID' => $row['packageID'], 'lastVersionID' => $row['lastVersionID']);
+			}
+				
+		
+			// TODO: Add correct version to target
+			foreach($packageData as $package => $packageInfo) {
+				$sql = "UPDATE
+						www".WWW_N."_package_version_requirement
+					SET
+						targetVersionID = ".$packageInfo['lastVersionID'].",
+						targetPackageID = ".$packageInfo['packageID']."
+					AND
+						packageName = '".escapeString($packageName)."'
+					AND
+						targetPackageID = 0";
+				WCF::getDB()->sendQuery($sql);
+			}
+		}
 	}
 	
 	/**
