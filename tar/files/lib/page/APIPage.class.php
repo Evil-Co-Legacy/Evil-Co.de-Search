@@ -277,10 +277,7 @@ class APIPage extends AbstractPage {
 		$searchResult = new $className(array(), true);
 		
 		// check for detail template
-		if (!$searchResult->getDetailTemplate())
-			throw new IllegalLinkException;
-		else
-			$this->detailTemplate = $searchResult->getDetailTemplate();
+		if (!$searchResult->getDetailTemplate()) throw new IllegalLinkException;
 		
 		// create result
 		$result = call_user_func(array($className, 'getByID'), $resultID);
