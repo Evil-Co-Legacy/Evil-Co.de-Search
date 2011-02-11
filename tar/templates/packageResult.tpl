@@ -12,6 +12,7 @@
 
 {if $userMessages|isset}{@$userMessages}{/if}
 
+{if $result->isDisabled}<p class="info">{lang}www.packageDetail.isDisabled{/lang}</p>
 {if !$result->isDownloadAvailable()}<p class="warning">{lang}www.packageDetail.downloadDisabled{/lang}</p>{/if}
 {if !$result->isMirrorAvailable()}<p class="info">{lang}www.packageDetail.mirrorDisabled{/lang}</p>{/if}
 {if $result->usedLanguageFallback}<p class="info">{lang}www.packageDetail.usedFallbackLanguage{/lang}</p>{/if}
@@ -29,6 +30,12 @@
 				{if $result->isMirrorAvailable()}
 					<li>
 						<a id="mirror{@$result->getResultID()}" href="index.php?page=PackageMirror&amp;versionID={@$result->versionID}" title="{lang}www.search.result.mirror{/lang}"><img src="{icon}mirrorM.png{/icon}" alt="" /> <span>{lang}www.search.result.mirror{/lang}</span></a>
+					</li>
+				{/if}
+				
+				{if $this->user->getPermission('mod.search.canModerate')}
+					<li>
+						<a id="disablePackage{$result->getResultID()}" href="index.php?action=TogglePackage&amp;packageID={$result->getResultID()}" title="{lang}www.search.result.disable{/lang}" onclick="return confirm('{lang}www.search.result.disable.sure{/lang}');"><img src="{icon}{if $result->isDisabled}dis{else}en{/if}abledS.png{/icon}" alt="" /> <span>{lang}wwww.search.result.disable.sure{/lang}</span></a>
 					</li>
 				{/if}
 				
