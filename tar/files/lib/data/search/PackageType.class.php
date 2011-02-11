@@ -81,6 +81,7 @@ class PackageType extends SearchType {
 					OR
 						packageLanguage.isFallback = 1
 				)
+			".(!WCF::getUser()->getPermission('mod.search.canModerate') ? "AND isDisabled = 0 " : "")."
 			AND
 				".$sqlConditions."
 			ORDER BY
