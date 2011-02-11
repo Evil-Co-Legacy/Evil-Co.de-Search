@@ -127,6 +127,7 @@ class SearchForm extends MultipleLinkPage {
 			'encodedQuery'			=>	urlencode($this->query),
 			'query'				=>	$this->query,
 			'searchType'			=>	$this->searchType,
+			'searchTypeID'			=>	$this->searchType->typeID,
 			'suggestions'			=>	$this->suggestions
 		));
 
