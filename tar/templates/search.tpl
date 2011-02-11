@@ -1,6 +1,7 @@
 {include file='documentHeader'}
 	<head>
 		<title>{lang}www.search.searchResult{/lang} - {lang}{PAGE_TITLE}{/lang}</title>
+		{assign var='allowSpidersToIndexThisPage' value=true}
 		{include file='headInclude' sandbox=false}
 		
 		<!-- Include search javascript literal -->
