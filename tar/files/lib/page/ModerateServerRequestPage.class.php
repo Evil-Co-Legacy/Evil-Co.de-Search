@@ -86,7 +86,7 @@ class ModerateServerRequestPage extends AbstractPage {
 				requestID = ".$this->requestID;
 		WCF::getDB()->sendQuery($sql);
 		
-		if (MODULE_PM) {
+		if (MODULE_PM and $this->request['authorID'] > 0) {
 			// send pm
 			require_once(WCF_DIR.'lib/data/message/pm/PMEditor.class.php');
 			
@@ -118,7 +118,7 @@ class ModerateServerRequestPage extends AbstractPage {
 		// get language
 		$language = new LanguageEditor($user->languageID);
 		
-		if (MODULE_PM) {
+		if (MODULE_PM and $this->request['authorID'] > 0) {
 			// send pm
 			require_once(WCF_DIR.'lib/data/message/pm/PMEditor.class.php');
 			
@@ -161,7 +161,7 @@ class ModerateServerRequestPage extends AbstractPage {
 				 0)";
 		WCF::getDB()->sendQuery($sql);
 		
-		if (MODULE_PM) {
+		if (MODULE_PM and $this->request['authorID'] > 0) {
 			// send pm
 			require_once(WCF_DIR.'lib/data/message/pm/PMEditor.class.php');
 			
