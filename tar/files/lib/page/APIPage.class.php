@@ -19,7 +19,7 @@ class APIPage extends AbstractPage {
 	 * If the given action does not match to one of this elements an IllegalLinkException will appear
 	 * @var	array<string>
 	 */
-	public $validActions = array(/* 'getadvancedsearchfields', */ 'search');
+	public $validActions = array(/* 'getadvancedsearchfields', */ 'search', 'getResult');
 
 	/**
 	 * Valid API types
@@ -109,6 +109,8 @@ class APIPage extends AbstractPage {
 			// validate
 			$searchType = new SearchType($searchType);
 			$className = $searchType->typeName;
+			
+			if (!$searchType->typeID) throw new IllegalLinkException;
 
 			// validate given type
 			if ($searchType->typeID != 0) {
@@ -179,6 +181,8 @@ class APIPage extends AbstractPage {
 				// validate
 				$searchType = new SearchType($searchType);
 				$className = $searchType->typeName;
+				
+				if (!$searchType->typeID) throw new IllegalLinkException;
 	
 				// validate given type
 				if ($searchType->typeID != 0) {
@@ -230,6 +234,64 @@ class APIPage extends AbstractPage {
 		)));
 	}
 
+	/**
+	 * Reads information about a result from database and assignes it to template
+	 * @throws IllegalLinkException
+	 * @throws SystemException
+	 */
+	protected function xmlGetResult() {
+		// validate query
+		if (!isset($_REQUEST['searchType']) or !isset($_REQUEST['resultID'])) throw new IllegalLinkException;
+		
+		// extract vars
+		$searchTypeID = intval($_REQUEST['searchType']);
+		$resultID = intval($_REQUEST['resultID']);
+		
+		// search type
+		$searchType = new SearchType($searchTypeID);
+		
+		// validate
+		if (!$searchType->typeID) throw new IllegalLinkException;
+		
+		$className = $searchType->typeName;
+		
+		if (!file_exists(WWW_DIR.'lib/data/search/'.$className.'.class.php'))
+				throw new SystemException('Classfile \''.$className.'.class.php\' not found.');
+			else
+				require_once(WWW_DIR.'lib/data/search/'.$className.'.class.php');
+
+		// create new search type instance
+		$searchType = new $className($searchType->typeID);
+		
+		// get search result class
+		if (!file_exists(WWW_DIR.'lib/data/search/'.$searchType->getSearchResultClass().'.class.php'))
+			throw new SystemException('Classfile \''.$searchType->getSearchResultClass().'.class.php\' not found.');
+		else
+			require_once(WWW_DIR.'lib/data/search/'.$searchType->getSearchResultClass().'.class.php');
+			
+		$searchType = new $className($searchType->typeID);
+			
+		$className = $searchType->getSearchResultClass();
+		
+		// create new instance
+		$searchResult = new $className(array(), true);
+		
+		// check for detail template
+		if (!$searchResult->getDetailTemplate())
+			throw new IllegalLinkException;
+		else
+			$this->detailTemplate = $searchResult->getDetailTemplate();
+		
+		// create result
+		$result = call_user_func(array($className, 'getByID'), $resultID);
+		
+		// validate
+		if (!$result->getResultID()) throw new IllegalLinkException;
+		
+		// assign result
+		WCF::getTPL()->assign('result', $result);
+	}
+	
 	/**
 	 * Calculates the number of pages and
 	 * handles the given page number parameter.
