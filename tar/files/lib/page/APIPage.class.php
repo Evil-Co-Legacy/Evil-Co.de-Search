@@ -8,7 +8,19 @@ require_once(WCF_DIR.'lib/page/AbstractPage.class.php');
  * @copyright	2010 DEVel Fusion
  */
 class APIPage extends AbstractPage {
+	
+	/**
+	 * Contains a count of max bad logins
+	 * @var integer
+	 */
+	const MAX_BAD_LOGIN_COUNT = 5;
 
+	/**
+	 * Contains an amount of seconds wich the ip is still in database until the ban expires
+	 * @var integer
+	 */
+	const BAD_LOGIN_EXPIRE = 1800;
+	
 	/**
 	 * @see	AbstractPage::$templateName
 	 */
@@ -109,7 +121,56 @@ class APIPage extends AbstractPage {
 			$row = WCF::getDB()->getFirstRow($sql);
 			
 			// wrong key
-			if ($row['count'] <= 0) throw new PermissionDeniedException;
+			if ($row['count'] <= 0) {
+				// update blacklist
+				$sql = "SELECT
+						*
+					FROM
+						www".WWW_N."_api_key_blacklist
+					WHERE
+						ipAddress = '".escapeString(WCF::getSession()->ipAddress)."'
+					OR
+						hostname = '".escapeString(gethostbyaddr(WCF::getSession()->ipAddress))."'";
+				$row = WCF::getDB()->getFirstRow($sql);
+				
+				if (WCF::getDB()->countRows() > 0) {
+					// update counts
+					$sql = "UPDATE
+							www".WWW_N."_api_key_blacklist
+						SET
+							badLoginCount = ".($row['badLoginCount'] + 1).",
+							timestamp = ".TIME_NOW.",
+							expire = ".(TIME_NOW + self::BAD_LOGIN_EXPIRE)."
+							".($row['badLoginCount'] >= self::MAX_BAD_LOGIN_COUNT ? ", banEnabled = 1" : "")."
+						WHERE
+							banID = ".$row['banID'];
+					WCF::getDB()->sendQuery($sql);
+				} else {
+					// insert new ban
+					$sql = "INSERT INTO
+							www".WWW_N."_api_key_blacklist (ipAddress, host, badLoginCount, timestamp, expire, banEnabled)
+						VALUES
+							('".escapeString(WCF::getSession()->ipAddress)."',
+							 NULL,
+							 1,
+							 ".TIME_NOW.",
+							 ".(TIME_NOW + self::BAD_LOGIN_EXPIRE).",
+							 ".(self::MAX_BAD_LOGIN_COUNT == 1 ? 1 : 0).")";
+					
+					if (gethostbyaddr(WCF::getSession()->ipAddress) != WCF::getSession()->ipAddress) {
+						$sql .= ", (NULL,
+							    '".escapeString(gethostbyaddr(WCF::getSession()->ipAddress))."',
+							    1,
+							    ".TIME_NOW.",
+							    ".(TIME_NOW + self::BAD_LOGIN_EXPIRE).",
+							    ".(self::MAX_BAD_LOGIN_COUNT == 1 ? 1 : 0).")";
+					}
+					
+					WCF::getDB()->sendQuery($sql);
+				}
+				
+				throw new PermissionDeniedException;
+			}
 		}
 		// correct key ... let's go
 		
