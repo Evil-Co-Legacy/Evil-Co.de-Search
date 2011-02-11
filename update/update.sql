@@ -34,6 +34,7 @@ CREATE TABLE `www1_1_api_key_blacklist` (
 	`ipAddress` TEXT NULL,
 	`hostname` TEXT NULL,
 	`timestamp` INT NOT NULL,
+	`expire` INT NOT NULL,
 	`banEnabled` TINYINT (1) NOT NULL,
 	`badLoginCount` INT NOT NULL DEFAULT '1'
 );
