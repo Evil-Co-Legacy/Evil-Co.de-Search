@@ -300,6 +300,16 @@ class PackageResult extends SearchResult {
 	}
 	
 	/**
+	 * @see SearchResult::checkPermissions()
+	 */
+	public function checkPermissions() {
+		if ($this->isDisabled) {
+			// check moderator permissions
+			WCF::getUser()->checkPermission('mod.search.canModerate');
+		}
+	}
+	
+	/**
 	 * Adds the missing __isset method to wcf
 	 * @param	string	$variable
 	 */
