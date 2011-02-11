@@ -81,7 +81,7 @@ class PackageType extends SearchType {
 					OR
 						packageLanguage.isFallback = 1
 				)
-			".(!WCF::getUser()->getPermission('mod.search.canModerate') ? "AND isDisabled = 0 " : "")."
+			".(!WCF::getUser()->getPermission('mod.search.canModerate') ? "AND package.isDisabled = 0 " : "")."
 			AND
 				".$sqlConditions."
 			ORDER BY
@@ -138,6 +138,7 @@ class PackageType extends SearchType {
 					OR
 						packageLanguage.isFallback = 1
 				)
+			".(!WCF::getUser()->getPermission('mod.search.canModerate') ? "AND package.isDisabled = 0 " : "")."
 			AND
 				".$sqlConditions;
 		$count = WCF::getDB()->getFirstRow($sql);
@@ -164,6 +165,10 @@ class PackageType extends SearchType {
 				www".WWW_N."_package_version version
 			ON
 				packageLanguage.versionID = version.versionID
+			LEFT JOIN
+				www".WWW_N."_package package
+			ON
+				packageLanguage.packageID = package.packageID
 			WHERE
 				packageLanguage.name LIKE '%".escapeString($query)."%'
 			AND
@@ -172,6 +177,7 @@ class PackageType extends SearchType {
 					OR
 						packageLanguage.isFallback = 1
 				)
+			".(!WCF::getUser()->getPermission('mod.search.canModerate') ? "AND package.isDisabled = 0 " : "")."
 			ORDER BY
 				version.version DESC
 			LIMIT
