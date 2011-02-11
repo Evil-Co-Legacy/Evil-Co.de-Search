@@ -32,5 +32,8 @@ DROP TABLE IF EXISTS `www1_1_api_key_blacklist`;
 CREATE TABLE `www1_1_api_key_blacklist` (
 	`banID` INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	`ipAddress` TEXT NULL,
-	`hostname` TEXT NULL
+	`hostname` TEXT NULL,
+	`timestamp` INT NOT NULL,
+	`banEnabled` TINYINT (1) NOT NULL,
+	`badLoginCount` INT NOT NULL DEFAULT '1'
 );
