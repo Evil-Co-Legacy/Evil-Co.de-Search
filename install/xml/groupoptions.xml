@@ -2,6 +2,11 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com/XSD/group-options.xsd">
 	<import>
 		<categories>
+			<!-- user -->
+			<category name="user.developer">
+				<parent>user</parent>
+			</category>
+		
 			<!-- mod -->
 			<category name="mod.search">
 				<parent>mod</parent>
@@ -9,6 +14,19 @@
 			</category>
 		</categories>
 		<options>
+			<!-- user.developer -->
+			<option name="user.developer.canUse">
+				<categoryname>user.developer</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+			
+			<option name="user.developer.canUseApiKeys">
+				<categoryname>user.developer</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+		
 			<!-- mod.search -->
 			<option name="mod.search.canModerate">
 				<categoryname>mod.search</categoryname>
