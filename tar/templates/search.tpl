@@ -29,17 +29,16 @@
 		 				{if $suggestions|count}
 		 					<div class="noResultSuggestions">
 		 						<p class="noResultSuggestionsHeading">{lang}www.search.result.noResults.suggestions{/lang}</p>
-		 						<ul>
-		 							{foreach from=$suggestions item='suggestion'}
-		 								<li><a href="index.php?form=Search&amp;query=&quot;{$suggestion.query|urlencode}&quot;&amp;searchType={$searchTypeID}{@SID_ARG_2ND}">{$suggestion.query}</a></li>
-		 							{/foreach}
-		 						</ul>
+		 						<p class="noResultSuggestionsList">
+		 							{implode from=$suggestions item='suggestion'}
+		 								<a href="index.php?form=Search&amp;query=&quot;{$suggestion.query|urlencode}&quot;&amp;searchType={$searchTypeID}{@SID_ARG_2ND}">{$suggestion.query}</a>
+		 							{/implode}
+		 						</p>
 		 					</div>
 		 				{/if}
 		 			</div>
 		 		{else}
 		 			<div class="contentHeader">
-		 				{assign var='searchTypeID' value=$searchType->typeID}
 						{pages print=true assign=pagesLinks link="index.php?form=Search&pageNo=%d&query=$encodedQuery&searchType=$searchTypeID"|concat:SID_ARG_2ND_NOT_ENCODED}
 					</div>
 					
