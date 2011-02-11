@@ -148,6 +148,27 @@ class PackageType extends SearchType {
 	}
 	
 	/**
+	 * @see SearchType::getSuggestions()
+	 */
+	public function getSuggestions($query) {
+		$sql = "SELECT
+				packageLanguage.name AS query
+			FROM
+				www".WWW_N."_package_version_to_language packageLanguage
+			WHERE
+				packageLanguage.name LIKE '%".escapeString($query)."%'";
+		$result = WCF::getDB()->sendQuery($sql);
+		
+		$suggestions = array();
+		
+		while($row = WCF::getDB()->fetchArray($result)) {
+			$suggestions[] = $row;
+		}
+		
+		return $suggestions;
+	}
+	
+	/**
 	 * @see SearchType::readGlobalInformation()
 	 */
 	public function readGlobalInformation($resultList) {
