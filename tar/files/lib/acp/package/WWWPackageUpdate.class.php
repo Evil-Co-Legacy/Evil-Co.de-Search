@@ -522,7 +522,6 @@ class WWWPackageUpdate extends PackageUpdate {
 								packageName = '".escapeString($packageName)."'
 							AND
 								targetVersionID = 0";
-						echo $sql;
 						WCF::getDB()->sendQuery($sql);
 					}
 				}
@@ -535,9 +534,7 @@ class WWWPackageUpdate extends PackageUpdate {
 			FROM
 				www".WWW_N."_package_version_optional
 			WHERE
-				targetPackageID = 0
-			OR
-				targetVersionID = 0";
+				targetPackageID = 0";
 		$result = WCF::getDB()->sendQuery($sql);
 		
 		$optionals = array();
@@ -564,12 +561,11 @@ class WWWPackageUpdate extends PackageUpdate {
 			while($row = WCF::getDB()->fetchArray($result)) {
 				$packageData[$row['packageName']] = array('packageID' => $row['packageID'], 'lastVersionID' => $row['lastVersionID']);
 			}
-				
 		
 			// TODO: Add correct version to target
-			foreach($packageData as $package => $packageInfo) {
+			foreach($packageData as $packageName => $packageInfo) {
 				$sql = "UPDATE
-						www".WWW_N."_package_version_requirement
+						www".WWW_N."_package_version_optional
 					SET
 						targetVersionID = ".$packageInfo['lastVersionID'].",
 						targetPackageID = ".$packageInfo['packageID']."
