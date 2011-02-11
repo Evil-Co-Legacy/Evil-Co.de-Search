@@ -19,7 +19,7 @@ class APIPage extends AbstractPage {
 	 * If the given action does not match to one of this elements an IllegalLinkException will appear
 	 * @var	array<string>
 	 */
-	public $validActions = array(/* 'getadvancedsearchfields', */ 'search', 'getResult');
+	public $validActions = array(/* 'getadvancedsearchfields', */ 'search', 'getresult');
 
 	/**
 	 * Valid API types
@@ -239,9 +239,14 @@ class APIPage extends AbstractPage {
 	 * @throws IllegalLinkException
 	 * @throws SystemException
 	 */
-	protected function xmlGetResult() {
+	protected function xmlGetresult() {
+		$this->templateName = 'apiXmlGetResult';
+		
 		// validate query
 		if (!isset($_REQUEST['searchType']) or !isset($_REQUEST['resultID'])) throw new IllegalLinkException;
+		
+		// include searchTypes
+		require_once(WCF_DIR.'lib/data/search/SearchType.class.php');
 		
 		// extract vars
 		$searchTypeID = intval($_REQUEST['searchType']);
