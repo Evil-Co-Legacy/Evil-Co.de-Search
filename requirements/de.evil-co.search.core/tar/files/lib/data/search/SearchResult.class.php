@@ -58,6 +58,11 @@ abstract class SearchResult extends DatabaseObject {
 	abstract public static function getByID($resultID);
 	
 	/**
+	 * Checks for needed permissions to access the detail page
+	 */
+	public function checkPermissions() { }
+	
+	/**
 	 * Returnes the complete data array
 	 */
 	public final function getData() {
