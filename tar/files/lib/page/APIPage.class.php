@@ -85,7 +85,9 @@ class APIPage extends AbstractPage {
 						hostname = '".escapeString(gethostbyaddr(WCF::getSession()->ipAddress))."'
 				)
 			AND
-				banEnabled = 1";
+				banEnabled = 1
+			AND
+				expire >= ".TIME_NOW;
 		$row = WCF::getDB()->getFirstRow($sql);
 		
 		// send banned message
