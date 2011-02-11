@@ -60,7 +60,59 @@ class APIPage extends AbstractPage {
 
 		// validate action
 		if (!in_array($this->action, $this->validActions) or !in_array($this->type, $this->validTypes)) throw new IllegalLinkException;
-
+		
+		// check API-Key blacklist
+		$sql = "SELECT
+				COUNT(*) AS count
+			FROM
+				www".WWW_N."_api_key_blacklist
+			WHERE
+				(
+						ipAddress = '".escapeString(WCF::getSession()->ipAddress)."'
+					OR
+						hostname = '".escapeString(gethostbyaddr(WCF::getSession()->ipAddress))."'
+				)
+			AND
+				banEnabled = 1";
+		$row = WCF::getDB()->getFirstRow($sql);
+		
+		// send banned message
+		if ($row['count'] > 0) throw new NamedUserException("Access to API denied: Banned");
+		
+		// check for API-Key
+		if (!isset($_SERVER['PHP_AUTH_USER'])) {
+			// send auth headers
+			header('WWW-Authenticate: Basic realm="'.PAGE_TITLE.' API"');
+			header('HTTP/1.0 401 Unauthorized');
+			echo 'You must send a valid API-Key to use our API!';
+			exit;
+		} else {
+			// check login
+			$sql = "SELECT
+					COUNT(*) AS count
+				FROM
+					www".WWW_N."_api_key key
+				LEFT JOIN
+					www".WWW_N."_api_key_whitelist whitelist
+				ON
+					key.keyID = whitelist.keyID
+				WHERE
+					publicKey = '".escapeString($_SERVER['PHP_AUTH_USER'])."'
+				AND
+					secretKey = '".escapeString($_SERVER['PHP_AUTH_PW'])."'
+				AND
+					(
+							whitelist.ipAddress = '".escapeString(WCF::getSession()->ipAddress)."'
+						OR
+							whitelist.hostname = '".escapeString(gethostbyaddr(WCF::getSession())->ipAddress)."'
+					)";
+			$row = WCF::getDB()->getFirstRow($sql);
+			
+			// wrong key
+			if ($row['count'] <= 0) throw new PermissionDeniedException;
+		}
+		// correct key ... let's go
+		
 		// create function name
 		$functionName = $this->type.ucfirst($this->action);
 
