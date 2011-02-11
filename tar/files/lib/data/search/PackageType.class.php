@@ -171,7 +171,9 @@ class PackageType extends SearchType {
 						packageLanguage.isFallback = 1
 				)
 			ORDER BY
-				version.version DESC";
+				version.version DESC
+			LIMIT
+				10";
 		$result = WCF::getDB()->sendQuery($sql);
 		
 		$suggestions = array();
