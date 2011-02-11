@@ -1,0 +1,14 @@
+/**
+ * Package Archive Stylesheet
+ * @author		Johannes Donath
+ * @copyright		2010 DEVel Fusion
+ **/
+
+.noResultSuggestions ul {
+	list-style-type: none;	
+}
+
+.noResultSuggestions li {
+	float: left;
+	clear: both;	
+}
