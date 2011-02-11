@@ -114,3 +114,27 @@ CREATE TABLE `www1_1_package_server_request` (
 	`moderatorName` VARCHAR (255) NULL,
 	`state` ENUM ('accepted', 'pending', 'rejected', 'waiting')
 );
+
+DROP TABLE IF EXISTS `www1_1_api_key`;
+CREATE TABLE `www1_1_api_key` (
+	`keyID` INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	`publicKey` VARCHAR (255) NOT NULL,
+	`secretKey` VARCHAR (255) NOT NULL,
+	`ownerID` INT NOT NULL,
+	`ownerName` VARCHAR (255) NOT NULL
+);
+
+DROP TABLE IF EXISTS `www1_1_api_key_whitelist`;
+CREATE TABLE `www1_1_api_key_whitelist` (
+	`keyID` INT NOT NULL,
+	`ipAddress` TEXT NULL,
+	`hostname` TEXT NULL,
+	`isEnabled` TINYINT (1) NOT NULL DEFAULT '1'
+);
+
+DROP TABLE IF EXISTS `www1_1_api_key_blacklist`;
+CREATE TABLE `www1_1_api_key_blacklist` (
+	`banID` INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	`ipAddress` TEXT NULL,
+	`hostname` TEXT NULL
+);
