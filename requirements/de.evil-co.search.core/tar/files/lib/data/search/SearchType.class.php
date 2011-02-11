@@ -237,6 +237,14 @@ class SearchType extends DatabaseObject {
 	}
 
 	/**
+	 * Reads suggestions from database
+	 * @param	string	$query
+	 */
+	public function getSuggestions($query) {
+		return array();
+	}
+	
+	/**
 	 * Returnes all advanced
 	 */
 	public function getAdvancedSearchFields() {
