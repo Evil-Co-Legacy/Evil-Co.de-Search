@@ -31,7 +31,7 @@
 		 						<p class="noResultSuggestionsHeading">{lang}www.search.result.noResults.suggestions{/lang}</p>
 		 						<ul>
 		 							{foreach from=$suggestions item='suggestion'}
-		 								<li><a href="index.php?form=Search&query={$suggestion.query|urlencode}&searchType=$searchTypeID{@SID_ARG_2ND}">{$suggestion.query}</a></li>
+		 								<li><a href="index.php?form=Search&amp;query=&quot;{$suggestion.query|urlencode}&quot;&amp;searchType={$searchTypeID}{@SID_ARG_2ND}">{$suggestion.query}</a></li>
 		 							{/foreach}
 		 						</ul>
 		 					</div>
