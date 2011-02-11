@@ -41,6 +41,7 @@
 		
 		<item name="www.search.result.download"><![CDATA[Herunterladen]]></item>
 		<item name="www.search.result.mirror"><![CDATA[Paketspiegel]]></item>
+		<item name="wwww.search.result.disable"><![CDATA[{if !$result->isDisabled}Dea{else}A{/if}ktivieren]]></item>
 		
 		<!-- Package Search Type -->
 		<item name="www.search.advancedSearch.searchType.PackageType"><![CDATA[Woltlab&reg; Community Framework&trade; Paket]]></item>
