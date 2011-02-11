@@ -5,7 +5,7 @@
 		<usercpmenuitem name="www.user.usercp.menu.link.modcp">
 			<link>index.php?page=ModerationOverview</link>
 			<icon>moderatorM.png</icon>
-			<showorder>4</showorder>
+			<showorder>5</showorder>
 			<permissions>mod.search.canModerate</permissions>
 		</usercpmenuitem>
 
@@ -19,6 +19,27 @@
 			<link>index.php?page=ModerationPackageServerRequest</link>
 			<parent>www.user.usercp.menu.link.modcp</parent>
 			<permissions>mod.search.canModerate</permissions>
+		</usercpmenuitem>
+		
+		<usercpmenuitem name="www.user.usercp.menu.link.developer">
+			<link>index.php?page=DeveloperOverview</link>
+			<icon>developerM.png</icon>
+			<showorder>4</showorder>
+			<permissions>user.developer.canUse</permissions>
+		</usercpmenuitem>
+		
+		<usercpmenuitem name="www.user.usercp.menu.link.developer.overview">
+			<link>index.php?page=DeveloperOverview</link>
+			<parent>www.user.usercp.menu.link.developer</parent>
+			<showorder>1</showorder>
+			<permissions>user.developer.canUse</permissions>
+		</usercpmenuitem>
+		
+		<usercpmenuitem name="www.user.usercp.menu.link.developer.apiKeys">
+			<link>index.php?page=DeveloperAPIKeyList</link>
+			<parent>www.user.usercp.menu.link.developer</parent>
+			<showorder>2</showorder>
+			<permissions>user.developer.canUseApiKeys</permissions>
 		</usercpmenuitem>
 	</import>
 </data>
