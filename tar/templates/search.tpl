@@ -45,7 +45,7 @@
 					
 					{foreach from=$results item='result'}
 						<div class="result">
-							<div class="message content result">
+							<div class="message content result{if $result->isDisabled} disabled{/if}">
 								<div class="messageInner container-{cycle name='results' values='1,2'}">
 									
 									<h3 class="subHeadline">
