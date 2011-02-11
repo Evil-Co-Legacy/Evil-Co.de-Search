@@ -115,6 +115,7 @@ class PackageResult extends SearchResult {
 		$sql = "SELECT
 				package.packageID,
 				package.packageName,
+				package.isDisabled,
 				packageLanguage.name AS name,
 				packageLanguage.description,
 				server.serverID,
