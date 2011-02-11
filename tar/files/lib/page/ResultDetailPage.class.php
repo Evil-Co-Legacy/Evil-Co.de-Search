@@ -102,6 +102,7 @@ class ResultDetailPage extends AbstractPage {
 		$this->result = call_user_func(array($className, 'getByID'), $this->resultID);
 		
 		// validate
+		$this->result->checkPermissions();
 		if (!$this->result->getResultID()) throw new IllegalLinkException;
 	}
 	
