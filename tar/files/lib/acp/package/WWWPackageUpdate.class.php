@@ -465,8 +465,6 @@ class WWWPackageUpdate extends PackageUpdate {
 			}
 		}
 		
-		var_dump($requirements);
-		
 		if (count($requirements)) {
 			// get packageIDs of known packages
 			$sql = "SELECT
