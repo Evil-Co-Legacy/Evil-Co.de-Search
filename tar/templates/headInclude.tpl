@@ -28,8 +28,7 @@ window.$j = jQuery.noConflict();
 	//]]>
 </script>
 
-<!-- www styles
-	Senseless ... we haven't own css code :-P
+<!-- www styles -->
 <link rel="stylesheet" type="text/css" media="screen" href="{@RELATIVE_WWW_DIR}style/www.css" /> -->
 
 {if $specialStyles|isset}
