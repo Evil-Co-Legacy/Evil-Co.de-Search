@@ -29,7 +29,7 @@ window.$j = jQuery.noConflict();
 </script>
 
 <!-- www styles -->
-<link rel="stylesheet" type="text/css" media="screen" href="{@RELATIVE_WWW_DIR}style/www.css" /> -->
+<link rel="stylesheet" type="text/css" media="screen" href="{@RELATIVE_WWW_DIR}style/www.css" />
 
 {if $specialStyles|isset}
 	<!-- special styles -->
