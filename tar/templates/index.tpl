@@ -137,6 +137,36 @@
 
 		 		</div>
 		 	</div>
+		 	
+		 	{cycle values='container-1,container-2' print=false advance=false}
+			<div class="border infoBox">
+				{if $usersOnlineTotal|isset}
+					<div class="{cycle}">
+						<div class="containerIcon"><img src="{icon}membersM.png{/icon}" alt="" /></div>
+						<div class="containerContent">
+							<h3>{if $this->user->getPermission('user.usersOnline.canView')}<a href="index.php?page=UsersOnline{@SID_ARG_2ND}">{lang}www.usersOnlineList.page.title{/lang}</a>{else}{lang}pdb.usersOnlineList.page.title{/lang}{/if}</h3> 
+							<p class="smallFont">{lang}www.usersOnlineList.page.detail{/lang}</p>
+							{if $usersOnline|count}
+								<p class="smallFont">
+									{implode from=$usersOnline item=userOnline}<a href="index.php?page=User&amp;userID={@$userOnline.userID}{@SID_ARG_2ND}">{@$userOnline.username}</a>{/implode}
+								</p>
+								{if $usersOnlineMarkings|count}
+									<p class="smallFont">
+										{lang}wcf.usersOnline.marking.legend{/lang} {implode from=$usersOnlineMarkings item=usersOnlineMarking}{@$usersOnlineMarking}{/implode}
+									</p>
+								{/if}
+							{/if}
+						</div>
+					</div>
+				{/if}
+				<div class="{cycle}">
+					<div class="containerIcon"><img src="{icon}statsL.png{/icon}" alt="" style="width: 24px; height: 24px;" /></div>
+					<div class="containerContent">
+						<h3>{lang}www.index.statistics{/lang}</h3>
+						<p class="smallFont">{lang}www.index.statistics.detail{/lang}</p>
+					</div>
+				</div>
+			</div>
 		 </div>
 
 		 {include file='footer' sandbox=false}
