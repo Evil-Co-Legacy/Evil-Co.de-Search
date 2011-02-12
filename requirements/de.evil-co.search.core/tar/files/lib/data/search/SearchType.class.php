@@ -83,7 +83,7 @@ class SearchType extends DatabaseObject {
 	 * @param	array	$row
 	 * @param	integer	$isleID
 	 */
-	public function __construct($typeID, $row = null) {
+	public function __construct($typeID, $row = null, $typeName = null) {
 		$this->sqlSelects .= 'type.*';
 
 		// create sql conditions
@@ -91,6 +91,10 @@ class SearchType extends DatabaseObject {
 
 		if ($typeID !== null) {
 			$sqlCondition .=  "type.typeID = ".$typeID;
+		}
+		
+		if ($typeName !== null) {
+			$sqlCondition .= "type.typeName = '".escapeString($typeName)."'";
 		}
 
 		// execute sql statement
