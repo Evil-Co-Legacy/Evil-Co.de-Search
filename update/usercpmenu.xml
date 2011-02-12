@@ -22,5 +22,12 @@
 			<showorder>2</showorder>
 			<permissions>user.developer.canUseApiKeys</permissions>
 		</usercpmenuitem>
+		
+		<usercpmenuitem name="www.user.usercp.menu.link.developer.licenseBlacklist">
+			<link>index.php?page=PackageLicenseBlacklist</link>
+			<parent>www.user.usercp.menu.link.developer</parent>
+			<showorder>3</showorder>
+			<permissions>user.developer.canSeeLicenseBlacklist</permissions>
+		</usercpmenuitem>
 	</import>
 </data>
