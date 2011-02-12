@@ -54,7 +54,7 @@ class IndexPage extends AbstractPage {
 	 * Renders the statistic box
 	 */
 	public function renderStatistics() {
-		WCF::getCache()->addResource('searchStatistics-'.$this->defaultSearchTypeID, WWW_DIR.'cache/cache.searchStatistics-'.$this->defaultSearchTypeID.'.php', WWW_DIR.'lib/system/cache/CacheBuilderSearchStatistics.class.php');
+		WCF::getCache()->addResource('searchStatistics-'.$this->defaultSearchTypeID, WWW_DIR.'cache/cache.searchStatistics-'.$this->defaultSearchTypeID.'.php', WWW_DIR.'lib/system/cache/CacheBuilderSearchStatistics.class.php', 0, 3600);
 		WCF::getTPL()->assign('searchStatistics', WCF::getCache()->get('searchStatistics-'.$this->defaultSearchTypeID));
 	}
 	
