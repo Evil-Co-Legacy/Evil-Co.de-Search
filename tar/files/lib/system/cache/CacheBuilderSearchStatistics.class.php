@@ -20,7 +20,7 @@ class CacheBuilderSearchStatistics implements CacheBuilder {
 		$searchType = new SearchType($searchTypeID);
 		
 		// get class name
-		$className = $this->searchType->typeName;
+		$className = $searchType->typeName;
 		
 		// include class
 		if (!file_exists(WWW_DIR.'lib/data/search/'.$className.'.class.php'))
@@ -31,7 +31,7 @@ class CacheBuilderSearchStatistics implements CacheBuilder {
 		// create new search type instance
 		$searchType = new $className($searchType->typeID);
 		
-		return array_merge(array('searchTypeName' => $className), $searchType->getStatistics());
+		return array_merge(array('searchTypeName' => $className), $searchType->readStatistics());
 	}
 }
 ?>
