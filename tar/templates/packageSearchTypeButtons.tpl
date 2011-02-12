@@ -15,3 +15,7 @@
 		<a id="mirror{@$result->getResultID()}" href="index.php?page=PackageMirror&amp;versionID={@$result->versionID}" title="{lang}www.search.result.mirror{/lang}"><img src="{icon}mirrorS.png{/icon}" alt="" /> <span>{lang}www.search.result.mirror{/lang}</span></a>
 	</li>
 {/if}
+
+<li>
+	<a id="report{$result->getResultID()}" href="index.php?form=ReportPackage&amp;packageID={$result->getResultID()}{@SID_ARG_2ND}"><img src="{icon}reportS.png{/icon}" alt="" /> <span>{lang}www.search.result.report{/lang}</span></a>
+</li>

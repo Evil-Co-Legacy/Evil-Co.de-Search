@@ -33,6 +33,10 @@
 					</li>
 				{/if}
 				
+				<li>
+					<a id="report{$result->getResultID()}" href="index.php?form=ReportPackage&amp;packageID={$result->getResultID()}{@SID_ARG_2ND}"><img src="{icon}reportM.png{/icon}" alt="" /> <span>{lang}www.search.result.report{/lang}</span></a>
+				</li>
+				
 				{if $this->user->getPermission('mod.search.canModerate')}
 					<li>
 						<a id="disablePackage{$result->getResultID()}" href="index.php?action=TogglePackage&amp;packageID={$result->getResultID()}" title="{lang}www.search.result.disable{/lang}" onclick="return confirm('{lang}www.search.result.disable.sure{/lang}');"><img src="{icon}{if $result->isDisabled}dis{else}en{/if}abledM.png{/icon}" alt="" /> <span>{lang}wwww.search.result.disable{/lang}</span></a>
