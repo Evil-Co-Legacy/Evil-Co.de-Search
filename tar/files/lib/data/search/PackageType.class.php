@@ -355,5 +355,24 @@ class PackageType extends SearchType {
 		
 		return $resultList;
 	}
+	
+	/**
+	 * @see SearchType::readStatistics()
+	 */
+	public function readStatistics() {
+		$sql = "SELECT
+				COUNT(*) AS packageCount
+			FROM
+				www".WWW_N."_package";
+		$result = WCF::getDB()->getFirstRow($sql);
+		
+		$sql = "SELECT
+				COUNT(*) AS versionCount
+			FROM
+				www".WWW_N."_package_version";
+		$result = array_merge($result, WCF::getDB()->getFirstRow($sql));
+		
+		return array('packageCount' => $result['packageCount'], 'versionCount' => $result['versionCount']);
+	}
 }
 ?>
