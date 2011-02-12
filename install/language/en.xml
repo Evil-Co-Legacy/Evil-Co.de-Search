@@ -24,6 +24,12 @@
 		<item name="www.header.menu.packageServerList"><![CDATA[Packageserver]]></item>
 	</category>
 	
+	<category name="www.index">
+		<item name="www.index.statistics"><![CDATA[Statistics]]></item>
+		
+		<item name="www.index.statistics.detail.PackageType"><![CDATA[There are {#$searchStatistics.packageCount} Packages with {#$searchStatistics.versionCount} versions in our index.]]></item>
+	</category>
+	
 	<category name="www.search">
 		<item name="www.search.searchFieldValue"><![CDATA[Query]]></item>
 		<item name="www.search.error"><![CDATA[Please check all fields.]]></item>
