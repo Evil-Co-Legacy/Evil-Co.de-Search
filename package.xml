@@ -103,6 +103,10 @@
 		<files>tar/files.tar</files>
 		<templates>tar/templates.tar</templates>
 		
+		<!-- XML PiPs -->
+		<usercpmenu>update/xml/usercpmenu.xml</usercpmenu>
+		<groupoptions>update/xml/groupoptions.xml</groupoptions>
+		
 		<!-- Other PiPs -->
 		<sql>update/update.sql</sql>
 		
