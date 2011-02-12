@@ -27,7 +27,6 @@
 	<category name="www.search">
 		<item name="www.search.searchFieldValue"><![CDATA[Query]]></item>
 		<item name="www.search.error"><![CDATA[Please check all fields.]]></item>
-		<item name="www.search.noJs"><![CDATA[For the features of this search is javascript required!]]></item>
 		<item name="www.search.instantResults"><![CDATA[Instant search]]></item>
 		
 		<item name="www.search.advancedSearch"><![CDATA[Advanced Querysettings]]></item>
@@ -42,6 +41,7 @@
 		<item name="www.search.result.download"><![CDATA[Download]]></item>
 		<item name="www.search.result.mirror"><![CDATA[Packagemirror]]></item>
 		<item name="wwww.search.result.disable"><![CDATA[{if !$result->isDisabled}Dis{else}En{/if}able]]></item>
+		<item name="www.search.result.report"><![CDATA[Report]]></item>
 		
 		<!-- Package Search Type -->
 		<item name="www.search.advancedSearch.searchType.PackageType"><![CDATA[Woltlab&reg; Community Framework&trade; Package]]></item>
