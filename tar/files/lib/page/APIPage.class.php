@@ -103,27 +103,47 @@ class APIPage extends AbstractPage {
 		} else {
 			// check login
 			$sql = "SELECT
-					COUNT(*) AS count
+					*
 				FROM
 					www".WWW_N."_api_key key
-				LEFT JOIN
-					www".WWW_N."_api_key_whitelist whitelist
-				ON
-					key.keyID = whitelist.keyID
 				WHERE
 					publicKey = '".escapeString($_SERVER['PHP_AUTH_USER'])."'
 				AND
-					secretKey = '".escapeString($_SERVER['PHP_AUTH_PW'])."'
-				AND
-					(
-							whitelist.ipAddress = '".escapeString(WCF::getSession()->ipAddress)."'
-						OR
-							whitelist.hostname = '".escapeString(gethostbyaddr(WCF::getSession())->ipAddress)."'
-					)";
+					secretKey = '".escapeString($_SERVER['PHP_AUTH_PW'])."'";
 			$row = WCF::getDB()->getFirstRow($sql);
 			
+			$keyCount = WCF::getDB()->countRows();
+			
+			// check for enabled whitelist
+			$sql = "SELECT
+					COUNT(*) AS count
+				FROM
+					www".WWW_N."_api_key_whitelist
+				WHERE
+					keyID = ".$row['keyID'];
+			$whitelistRow = WCF::getDB()->getFirstRow($sql);
+			
+			if ($whitelistRow['count']) {
+				$sql = "SELECT
+						COUNT(*) AS count
+					FROM
+						www".WWW_N."_api_key_whitelist
+					WHERE
+						(
+								whitelist.ipAddress = '".escapeString(WCF::getSession()->ipAddress)."'
+							OR
+								whitelist.hostname = '".escapeString(gethostbyaddr(WCF::getSession())->ipAddress)."'
+						)
+					AND
+						keyID = ".$row['keyID'];
+				$whitelistRow = WCF::getDB()->getFirstRow($sql);
+				
+				// set keycount to zero
+				if (!$whitelistRow['count']) $keyCount = 0;
+			}
+			
 			// wrong key
-			if ($row['count'] <= 0) {
+			if ($keyCount <= 0) {
 				// update blacklist
 				$sql = "SELECT
 						*
