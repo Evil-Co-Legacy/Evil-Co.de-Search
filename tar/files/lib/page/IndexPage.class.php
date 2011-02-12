@@ -36,8 +36,31 @@ class IndexPage extends AbstractPage {
 			$this->searchTypes[] = new $className(null, $row);
 			if ($row['isDefault']) $this->defaultSearchTypeID = $row['typeID'];
 		}
+		
+		$this->renderOnlineList();
+		$this->renderStatistics();
 	}
 	
+	/**
+	 * Renders the users online list
+	 */
+	public function renderOnlineList() {
+		require_once(WCF_DIR.'lib/data/user/usersOnline/UsersOnlineList.class.php');
+		$usersOnlineList = new UsersOnlineList('', true);
+		$usersOnlineList->renderOnlineList();
+	}
+	
+	/**
+	 * Renders the statistic box
+	 */
+	public function renderStatistics() {
+		WCF::getCache()->addResource('searchStatistics-'.$this->defaultSearchTypeID, WWW_DIR.'cache/cache.searchStatistics-'.$this->defaultSearchTypeID.'.php', WWW_DIR.'lib/system/cache/CacheBuilderSearchStatistics.class.php');
+		WCF::getTPL()->assign('searchStatistics', WCF::getCache()->get('searchStatistics-'.$this->defaultSearchTypeID));
+	}
+	
+	/**
+	 * @see Page::assignVariables()
+	 */
 	public function assignVariables() {
 		parent::assignVariables();
 		
