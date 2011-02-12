@@ -277,6 +277,13 @@ class SearchType extends DatabaseObject {
 	}
 	
 	/**
+	 * Reads statistics for index page
+	 */
+	public function readStatistics() {
+		return array();
+	}
+	
+	/**
 	 * Allows to convert an instance of this class to type string
 	 */
 	public function __toString() {
