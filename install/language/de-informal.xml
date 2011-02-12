@@ -244,4 +244,9 @@
 &lt;/licenseinformation&gt;</code><br />
 Beachte jedoch das alte Pakete nur neue Lizenzinformationen zugewiesen bekommen wenn eine neue Version herausgegeben wird.]]></item>
 	</category>
+	
+	<category name="www.usersOnlineList.page">
+		<item name="www.usersOnlineList.page.title"><![CDATA[Zur Zeit {if $usersOnlineTotal == 1}ist{else}sind{/if} {#$usersOnlineTotal} Benutzer online:]]></item>
+		<item name="www.usersOnlineList.page.detail"><![CDATA[{if $usersOnlineMembers > 0}{#$usersOnlineMembers} Mitglied{if $usersOnlineMembers != 1}er{/if}{/if} {if $usersOnlineInvisible > 0}(davon {#$usersOnlineInvisible} unsichtbar){/if}{if $usersOnlineGuests > 0 && $usersOnlineMembers > 0} und {/if}{if $usersOnlineGuests > 0}{#$usersOnlineGuests} Besucher{/if}]]></item>
+	</category>
 </language>

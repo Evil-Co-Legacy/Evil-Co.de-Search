@@ -242,4 +242,9 @@
 &lt;/licenseinformation&gt;</code><br />
 Please note that your new license information will only appear in new package versions.]]></item>
 	</category>
+	
+	<category name="www.usersOnlineList.page">
+		<item name="www.usersOnlineList.page.title"><![CDATA[{$usersOnlineTotal} {if $usersOnlineTotal == 1}user is{else}users are{/if} browsing the forums]]></item>
+		<item name="www.usersOnlineList.page.detail"><![CDATA[{if $usersOnlineMembers > 0}{$usersOnlineMembers} member{if $usersOnlineMembers != 1}s{/if}{/if}{if $usersOnlineInvisible > 0}({$usersOnlineInvisible} thereof are invisible){/if}{if $usersOnlineGuests > 0 && $usersOnlineMembers > 0} and {/if}{if $usersOnlineGuests > 0}{$usersOnlineGuests} guests{/if}]]></item>
+	</category>
 </language>
