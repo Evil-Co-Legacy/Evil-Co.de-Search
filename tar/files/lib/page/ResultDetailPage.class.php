@@ -20,7 +20,13 @@ class ResultDetailPage extends AbstractPage {
 	 * Contains the ID of the search type that should used
 	 * @var integer
 	 */
-	public $searchTypeID = 0;
+	public $searchTypeID = null;
+	
+	/**
+	 * Contains the name of the search type that should used
+	 * @var string
+	 */
+	public $searchTypeName = null;
 	
 	/**
 	 * Contains the ID of the result that should displayed
@@ -54,6 +60,7 @@ class ResultDetailPage extends AbstractPage {
 		
 		// read parameters
 		if (isset($_REQUEST['searchType'])) $this->searchTypeID = intval($_REQUEST['searchType']);
+		if (isset($_REQUEST['searchTypeName'])) $this->searchTypeName = StringUtil::trim($_REQUEST['searchTypeName']);
 		if (isset($_REQUEST['resultID'])) $this->resultID = intval($_REQUEST['resultID']);
 	}
 	
@@ -64,7 +71,7 @@ class ResultDetailPage extends AbstractPage {
 		parent::readData();
 		
 		// search type
-		$this->searchType = new SearchType($this->searchTypeID);
+		$this->searchType = new SearchType($this->searchTypeID, null, $this->searchTypeName);
 		
 		// validate
 		if (!$this->searchType->typeID) throw new IllegalLinkException;
