@@ -159,13 +159,15 @@
 						</div>
 					</div>
 				{/if}
-				<div class="{cycle}">
-					<div class="containerIcon"><img src="{icon}statsL.png{/icon}" alt="" style="width: 24px; height: 24px;" /></div>
-					<div class="containerContent">
-						<h3>{lang}www.index.statistics{/lang}</h3>
-						<p class="smallFont">{lang}www.index.statistics.detail{/lang}</p>
+				{if $searchStatistics|count > 1}
+					<div class="{cycle}">
+						<div class="containerIcon"><img src="{icon}statsL.png{/icon}" alt="" style="width: 24px; height: 24px;" /></div>
+						<div class="containerContent">
+							<h3>{lang}www.index.statistics{/lang}</h3>
+							<p class="smallFont">{lang}www.index.statistics.detail.{$searchStatistics.searchTypeName}{/lang}</p>
+						</div>
 					</div>
-				</div>
+				{/if}
 			</div>
 		 </div>
 
