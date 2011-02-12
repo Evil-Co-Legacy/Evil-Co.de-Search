@@ -119,6 +119,26 @@ CREATE TABLE `www1_1_package_server_request` (
 	`state` ENUM ('accepted', 'pending', 'rejected', 'waiting')
 );
 
+DROP TABLE IF EXISTS `www1_1_package_license_blacklist`;
+CREATE TABLE `www1_1_package_license_blacklist` (
+	`licenseID` INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	`licenseRegex` TEXT NOT NULL,
+	`banReason` VARCHAR (255) NOT NULL,
+	`isEnabled` TINYINT (1) NOT NULL
+);
+
+DROP TABLE IF EXISTS `www1_1_package_license_blacklist_request`;
+CREATE TABLE `www1_1_package_license_blacklist_request` (
+	`requestID` INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	`licenseRegex` TEXT NOT NULL,
+	`banReason` VARCHAR (255) NOT NULL,
+	`state` ENUM ('accepted', 'waiting', 'rejected'),
+	`authorID` INT NOT NULL,
+	`authorName` VARCHAR (255) NOT NULL,
+	`moderatorID` INT NULL,
+	`moderatorName` VARCHAR (255) NULL
+);
+
 DROP TABLE IF EXISTS `www1_1_api_key`;
 CREATE TABLE `www1_1_api_key` (
 	`keyID` INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
