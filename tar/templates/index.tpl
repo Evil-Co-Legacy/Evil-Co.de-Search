@@ -89,7 +89,7 @@
 				 					{foreach from=$type->getAdvancedSearchFields() item='searchField'}
 				 						<div class="formElement">
 				 							<div class="formFieldLabel">
-				 								<label for="advancedSearch[{$searchField}]">{lang}www.search.advancedSearch.searchType.{$defaultSearchType->typeName}.{$searchField}.label{/lang}</label>
+				 								<label for="advancedSearchField{$searchField|ucfirst}">{lang}www.search.advancedSearch.searchType.{$defaultSearchType->typeName}.{$searchField}.label{/lang}</label>
 				 							</div>
 				 							<div class="formField">
 				 								<input type="text" class="inputText" name="advancedSearch[{$searchField}]" id="advancedSearchField{$searchField|ucfirst}"/>
