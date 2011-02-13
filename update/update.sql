@@ -9,7 +9,8 @@ CREATE TABLE `www1_1_package_report` (
 	`packageID` INT NOT NULL,
 	`authorID` INT NOT NULL,
 	`authorName` VARCHAR (255) NOT NULL,
-	`reason` TEXT NOT NULL
+	`reason` TEXT NOT NULL,
+	`state` ENUM ('read', 'new') DEFAULT 'new'
 );
 
 ALTER TABLE `www1_1_package_version` ADD FULLTEXT (author);

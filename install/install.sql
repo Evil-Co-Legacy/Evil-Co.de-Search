@@ -16,7 +16,8 @@ CREATE TABLE `www1_1_package_report` (
 	`packageID` INT NOT NULL,
 	`authorID` INT NOT NULL,
 	`authorName` VARCHAR (255) NOT NULL,
-	`reason` TEXT NOT NULL
+	`reason` TEXT NOT NULL,
+	`state` ENUM ('read', 'new') DEFAULT 'new'
 );
 
 DROP TABLE IF EXISTS `www1_1_package_mirror`;
