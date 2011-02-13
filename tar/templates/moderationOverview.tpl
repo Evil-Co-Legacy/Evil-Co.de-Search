@@ -33,6 +33,12 @@
 								<li><a href="index.php?page=PackageReports{@SID_ARG_2ND}">{lang}www.moderation.packageReports.count{/lang}</a>
 							</ul>
 						</li>
+						<li>
+							<img src="{icon}apiL.png{/icon}" alt="" />
+							<ul>
+								<li><a href="index.php?page=APIBlacklist{@SID_ARG_2ND}">{lang}www.moderation.apiBlacklist.count{/lang}</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</div>
