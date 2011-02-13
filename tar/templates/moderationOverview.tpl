@@ -26,6 +26,13 @@
 								<li><a href="index.php?page=ModerationPackageServerRequest{@SID_ARG_2ND}">{lang}www.moderation.packageServerRequest.count{/lang}</a></li>
 							</ul>
 						</li>
+						<li>
+							<img src="{icon}detailL.png{/icon}" alt="" />
+							<ul>
+								<li><a href="index.php?page=DisabledPackages{@SID_ARG_2ND}">{lang}www.moderation.disabledPackages.count{/lang}</a></li>
+								<li><a href="index.php?page=PackageReports{@SID_ARG_2ND}">{lang}www.moderation.packageReports.count{/lang}</a>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</div>
