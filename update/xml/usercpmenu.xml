@@ -2,6 +2,24 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.woltlab.com/XSD/usercp-menu.xsd">
 	<import>
+		<usercpmenuitem name="www.user.usercp.menu.link.modcp.disabledPackages">
+			<link>index.php?page=DisabledPackages</link>
+			<parent>www.user.usercp.menu.link.modcp</parent>
+			<permissions>mod.search.canModerate</permissions>
+		</usercpmenuitem>
+		
+		<usercpmenuitem name="www.user.usercp.menu.link.modcp.packageReports">
+			<link>index.php?page=PackageReports</link>
+			<parent>www.user.usercp.menu.link.modcp</parent>
+			<permissions>mod.search.canModerate</permissions>
+		</usercpmenuitem>
+		
+		<usercpmenuitem name="www.user.usercp.menu.link.modcp.apiBlacklist">
+			<link>index.php?page=APIBlacklist</link>
+			<parent>www.user.usercp.menu.link.modcp</parent>
+			<permissions>mod.search.canModerate</permissions>
+		</usercpmenuitem>
+	
 		<usercpmenuitem name="www.user.usercp.menu.link.developer">
 			<link>index.php?page=DeveloperOverview</link>
 			<icon>developerM.png</icon>
