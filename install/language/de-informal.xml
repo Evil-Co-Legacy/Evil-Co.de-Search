@@ -185,6 +185,14 @@
 		<item name="www.downloadPackage.licenseAccept"><![CDATA[Ich habe den Hinweis und die oben verlinkten Lizenzbestimmungen gelesen und bin mit ihnen einverstanden.]]></item>
 	</category>
 	
+	<category name="www.reportPackage">
+		<item name="www.reportPackage.title"><![CDATA[Paket melden]]></item>
+		<item name="www.reportPackage.generalInformation"><![CDATA[Allgemeine Informationen]]></item>
+		<item name="www.reportPackage.generalInformation.resultName"><![CDATA[Paketname]]></item>
+		<item name="www.reportPackage.success"><![CDATA[Danke für Deine Meldung. Wir werden Deine Meldung schnellst möglich bearbeiten.]]></item>
+		<item name="www.reportPackage.alreadyReported"><![CDATA[Für dieses Paket existiert bereits eine Meldung. Wir werden diese möglichst schnell bearbeiten. Falls Du trotzdem eine Meldung abgeben willst kannst Du dich jederzeit an die Administration wenden.]]></item>
+	</category>
+	
 	<category name="wcf.help.item">
 		<item name="wcf.help.item.packageSearch"><![CDATA[Paketsuche]]></item>
 		<item name="wcf.help.item.packageSearch.description"><![CDATA[Die Paketsuche akzeptiert folgende zusätzlichen Schlüsselwörter zur Einschränkung der Ergebnisse:<br />

@@ -185,6 +185,14 @@
 		<item name="www.downloadPackage.licenseAccept"><![CDATA[I've read the note, i've read the license and agree to the license.]]></item>
 	</category>
 	
+	<category name="www.reportPackage">
+		<item name="www.reportPackage.title"><![CDATA[Report Packages]]></item>
+		<item name="www.reportPackage.generalInformation"><![CDATA[General Information]]></item>
+		<item name="www.reportPackage.generalInformation.resultName"><![CDATA[Packagename]]></item>
+		<item name="www.reportPackage.success"><![CDATA[Thank you for your report. We'll process your report as fast as we can.]]></item>
+		<item name="www.reportPackage.alreadyReported"><![CDATA[Sorry, we have already a report for this package. We'll process this request as fast as we can. If you want to give additional information to moderators notify one of our administrators.]]></item>
+	</category>
+	
 	<category name="wcf.help.item">
 		<item name="wcf.help.item.packageSearch"><![CDATA[Packagesearch]]></item>
 		<item name="wcf.help.item.packageSearch.description"><![CDATA[The package search accepts additional options:<br />
