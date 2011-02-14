@@ -118,7 +118,11 @@ window.$j = jQuery.noConflict();
 	<link rel="stylesheet" type="text/css" media="screen" href="{@RELATIVE_WCF_DIR}style/extra/ie8-fix{if PAGE_DIRECTION == 'rtl'}-rtl{/if}.css" />
 <![endif]-->
 
-{if $this->getStyle()->getVariable('global.favicon')}<link rel="shortcut icon" href="{@RELATIVE_WCF_DIR}icon/favicon/favicon{$this->getStyle()->getVariable('global.favicon')|ucfirst}.ico" type="image/x-icon" />{/if}
+{if $this->getStyle()->getVariable('global.favicon')}
+	<link rel="shortcut icon" href="{@RELATIVE_WCF_DIR}icon/favicon/favicon{$this->getStyle()->getVariable('global.favicon')|ucfirst}.ico" type="image/x-icon" />
+{else}
+	<link rel="shortcut icon" href="{@RELATIVE_WWW_DIR}favicon.ico" type="image/x-icon" />
+{/if}
 
 {if $executeCronjobs}
 	<script type="text/javascript">
