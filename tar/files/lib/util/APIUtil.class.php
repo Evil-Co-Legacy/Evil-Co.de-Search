@@ -36,7 +36,7 @@ class APIUtil {
 	 * Contains allowed types
 	 * @var array<string>
 	 */
-	protected static $allowedTypes = array('xml', 'json', 'var_dump', 'print_r');
+	protected static $allowedTypes = array('xml', 'json', 'serialized', 'var_dump', 'print_r');
 	
 	/**
 	 * Contains content-types for all valid types
@@ -46,7 +46,17 @@ class APIUtil {
 		'xml'		=>	'application/xml',
 		'json'		=>	'application/json',
 		'var_dump'	=>	'text/plain',
-		'print_r'	=>	'text/plain'
+		'print_r'	=>	'text/plain',
+		'serialized'	=>	'text/plain',
+		'yaml'		=>	'text/yaml'
+	);
+	
+	/**
+	 * Contains required methods for all valid types
+	 * @var array<string>
+	 */
+	protected static $requiredTypeMethod = array(
+		'yaml'		=>	'yaml_emit'
 	);
 	
 	/**
@@ -193,11 +203,43 @@ class APIUtil {
 	}
 	
 	/**
+	 * Generates the serialized output
+	 * @param	array	$data
+	 * @param	boolean	$outputBuffer
+	 * @param	boolean	$writeXmlHeader
+	 * @return mixed
+	 * @throws SystemException
+	 */
+	protected static function generateSerialized($data, $outputBuffer = false, $writeXmlHeader = true) {
+		if (!$outputBuffer)
+			echo serialize($data);
+		else 
+			return serialize($data);
+	}
+	
+	/**
+	 * Generates dynamic YAML output
+	 *@param	array	$data
+	 * @param	boolean	$outputBuffer
+	 * @param	boolean	$writeXmlHeader
+	 * @return mixed
+	 * @throws SystemException
+	 */
+	protected static function generateYaml($data, $outputBuffer = false, $writeXmlHeader = true) {
+		if (!$outputBuffer)
+			echo yaml_emit($data);
+		else
+			return yaml_emit($data);
+	}
+	
+	
+	/**
 	 * Returnes true if the given type is valid
 	 * @param	string	$type
 	 * @throws SystemException
 	 */
 	public static function isValidType($type) {
+		if (isset(self::$requiredTypeMethod[$type]) and !function_exists(self::$requiredTypeMethod[$type])) return false;
 		return (in_array($type, self::$allowedTypes));
 	}
 	
