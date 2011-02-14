@@ -344,14 +344,14 @@ class PackageResult extends SearchResult {
 		$publicArray['optionals'] = array();
 		
 		foreach($this->getOptionals() as $optional) {
-			$publicArray['optionals'][$optional->name] = $optional->getPublicArray();
+			$publicArray['optionals'][$optional->packageName] = $optional->getPublicArray();
 		}
 		
 		// add requirements
 		$publicArray['requirements'] = array();
 		
 		foreach($this->getRequirements() as $requirement) {
-			$publicArray['requirements'][$requirement->name] = $requirement->getPublicArray();
+			$publicArray['requirements'][$requirement->packageName] = $requirement->getPublicArray();
 		}
 		
 		return $publicArray;
