@@ -35,8 +35,9 @@ class APIUtil {
 	 * Generates a dynamic output
 	 * @param	string	$type
 	 * @param	array	$data
-	 * @param	pointer	$outputBuffer
+	 * @param	boolean	$outputBuffer
 	 * @param	boolean	$writeXmlHeader
+	 * @return mixed
 	 * @throws SystemException
 	 */
 	public static function generate($type, $data, $outputBuffer = false, $writeXmlHeader = true) {
@@ -58,6 +59,7 @@ class APIUtil {
 	 * @param	array	$data
 	 * @param	pointer	$outputBuffer
 	 * @param	boolean	$writeXmlHeader
+	 * @return mixed
 	 */
 	public static function generateXml($data, $outputBuffer = false, $writeXmlHeader = true) {
 		if (!$outputBuffer) {
@@ -117,9 +119,10 @@ class APIUtil {
 	
 	/**
 	 * Generates dynamic json strings
-	 * @param unknow$data
-	 * @param unknown_type $outputBuffer
-	 * @param unknown_type $writeXmlHeader
+	 * @param	array	$data
+	 * @param	boolean	$outputBuffer
+	 * @param	boolean	$writeXmlHeader
+	 * @return mixed
 	 */
 	protected static function generateJson ($data, $outputBuffer = false, $writeXmlHeader = true) {
 		if ($outputBuffer === null)
@@ -131,8 +134,9 @@ class APIUtil {
 	/**
 	 * Generates dynamic var_dump strings
 	 * @param	array	$data
-	 * @param	pointer	$outputBuffer
+	 * @param	boolean	$outputBuffer
 	 * @param	boolean	$writeXmlHeader
+	 * @return mixed
 	 * @throws SystemException
 	 */
 	protected static function generateVar_dump($data, $outputBuffer = false, $writeXmlHeader = true) {
@@ -150,8 +154,9 @@ class APIUtil {
 	/**
 	 * Generates dynamic print_r 
 	 * @param	array	$data
-	 * @param	pointer	$outputBuffer
+	 * @param	boolean	$outputBuffer
 	 * @param	boolean	$writeXmlHeader
+	 * @return mixed
 	 * @throws SystemException
 	 */
 	protected static function generatePrint_r($data, $outputBuffer = false, $writeXmlHeader = true) {
@@ -214,6 +219,77 @@ class APIUtil {
 		if ($row['count'] > 0) return true;
 		
 		return false;
+	}
+	
+	/**
+	 * Returnes false if the given keys are not valid and an integer if the given key is valid
+	 * @param	string	$publicKey
+	 * @param	string	$secretKey
+	 * @return mixed
+	 * @throws SystemException
+	 */
+	public static function checkLogin($publicKey, $secretKey) {
+		$sql = "SELECT
+				*
+			FROM
+				www".WWW_N."_api_key
+			WHERE
+				publicKey = '".escapeString($publicKey)."'
+			AND
+				secretKey = '".escapeString($secretKey)."'";
+		$row = WCF::getDB()->getFirstRow($sql);
+		
+		// no valid key
+		if (!WCF::getDB()->countRows()) return false;
+		
+		// return keyID
+		return $row['keyID'];
+	}
+	
+	/**
+	 * Returnes true if the whitelist is enabled
+	 * @param	integer	$keyID
+	 * @return	boolean
+	 * @throws SystemException
+	 */
+	public static function isWhiteListEnabled($keyID) {
+		// check for enabled whitelist
+		$sql = "SELECT
+				COUNT(*) AS count
+			FROM
+				www".WWW_N."_api_key_whitelist
+			WHERE
+				keyID = ".$keyID;
+		$row = WCF::getDB()->getFirstRow($sql);
+		
+		return ($row['count'] > 0);
+	}
+	
+	/**
+	 * Returnes true if the given address is on whitelist (This additionaly executes the isWhiteListEnabled method. Please do not use isWhiteListEnabled in combination with this method)
+	 * @param	integer	$keyID
+	 * @param	string	$ipAddress
+	 * @return boolean
+	 * @throws SystemException
+	 */
+	public static function checkWhiteList($keyID, $ipAddress) {
+		if (!self::isWhiteListEnabled($keyID)) return true;
+		
+		$sql = "SELECT
+				COUNT(*) AS count
+			FROM
+				www".WWW_N."_api_key_whitelist
+			WHERE
+				(
+						whitelist.ipAddress = '".escapeString($ipAddress)."'
+					OR
+						whitelist.hostname = '".escapeString(gethostbyaddr($ipAddress))."'
+				)
+			AND
+				keyID = ".$keyID;
+		$row = WCF::getDB()->getFirstRow($sql);
+		
+		return ($row['count'] > 0);
 	}
 }
 ?>
