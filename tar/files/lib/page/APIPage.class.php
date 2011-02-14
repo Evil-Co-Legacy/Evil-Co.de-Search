@@ -71,6 +71,7 @@ class APIPage extends AbstractPage {
 				
 				// show exception
 				$ex->show();
+				exit;
 			}
 		}
 		// correct key ... let's go
