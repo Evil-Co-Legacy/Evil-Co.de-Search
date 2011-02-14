@@ -27,6 +27,12 @@ class APIUtil {
 	const API_XML_TAG = 'api';
 	
 	/**
+	 * Contains a regex that is used to validate key names
+	 * @var string
+	 */
+	const INVALID_XML_TAG_REGEX = '~(\.|^[0-9])~i';
+	
+	/**
 	 * Contains allowed types
 	 * @var array<string>
 	 */
@@ -90,28 +96,23 @@ class APIUtil {
 		
 		foreach($data as $key => $data) {
 			if (is_array($data)) {
-				echo "\t<".$key.">\n";
-				
 				// generate child xml
 				$buffer = self::generateXml($data, true, false);
+				$data = "";
 				
 				// split buffer
 				$bufferArray = explode("\n", $buffer);
 				
 				// prefix every line with \t
-				foreach($bufferArray as $buffer) echo "\t".$buffer."\n";
+				foreach($bufferArray as $buffer) $data .= "\t".$buffer."\n";
 				
-				// send newline
-				echo "\n\t</".$key.">\n";
+				echo "\t".self::generateXmlKey($key, $data,"\n\t", "\n")."\n";
 			} else {
 				// cast to string
 				$data = (string) $data;
 				
-				if (empty($data))
-					echo "\t<".$key." />\n";
-				else
-					// send output
-					echo "\t<".$key."><![CDATA[".$data."]]></".$key.">\n";
+				// send correct output
+				echo "\t".self::generateXmlKey($key, "<![CDATA[".$data."]]>")."\n";
 			}
 		}
 		
@@ -125,6 +126,16 @@ class APIUtil {
 			echo $outputBuffer;
 		else
 			return $outputBuffer;
+	}
+	
+	/**
+	 * Generates the complete xml object
+	 * @param	string	$key
+	 * @param	string	$value
+	 */
+	protected static function generateXmlKey($key, $value, $closePrefix = "", $openSuffix = "") {
+		if (preg_match(self::INVALID_XML_TAG_REGEX, $key)) return '<object name="'.$key.'"'.(empty($value) ? '/' : '').'>'.(!empty($value) ? $openSuffix.$value.$closePrefix.'</object>' : '');
+		return '<'.$key.(empty($value) ? '/' : '').'>'.(!empty($value) ? $openSuffix.$value.$closePrefix.'</'.$key.'>' : '');
 	}
 	
 	/**
