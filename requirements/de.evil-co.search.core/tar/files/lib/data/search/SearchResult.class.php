@@ -70,5 +70,16 @@ abstract class SearchResult extends DatabaseObject {
 	public final function getData() {
 		throw new SystemException("Method getData() has been deprecated");
 	}
+	
+	/**
+	 * Returnes an array with public data for api
+	 */
+	public function getPublicArray() {
+		return array(
+			'objectID'	=>	$this->getResultID(),
+			'title'		=>	$this->getTitle(),
+			'description'	=>	$this->getDescription()
+		);
+	}
 }
 ?>
