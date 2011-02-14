@@ -311,6 +311,49 @@ class PackageResult extends SearchResult {
 	}
 	
 	/**
+	 * @see SearchResult::getPublicArray()
+	 */
+	public function getPublicArray() {
+		$publicArray = parent::getPublicArray();
+		
+		// add versions
+		$publicArray['versions'] = array();
+		
+		foreach($this->getVersions() as $version) {
+			$publicArray['versions'][] = array(
+				'version'	=>	$version['version'],
+				'isUnique'	=>	$version['isUnique'],
+				'standalone'	=>	$version['standalone'],
+				'plugin'	=>	$version['plugin'],
+				'packageUrl'	=>	$version['packageUrl'],
+				'author'	=>	$version['author'],
+				'authorUrl'	=>	$version['authorUrl'],
+				'licenseName'	=>	$version['licenseName'],
+				'licenseUrl'	=>	$version['licenseUrl'],
+				'downloadUrl'	=>	(!empty($version['licenseName']) and !empty($version['licenseUrl']) ? $version['downloadUrl'] : false),
+				'timestamp'	=>	$version['timestamp']
+			);
+		}
+		
+		// add instructions
+		$publicArray['instructions'] = $this->getInstructions();
+		
+		// add optionals
+		$publicArray['optionals'] = array();
+		
+		foreach($this->getOptionals() as $optional) {
+			$publicArray['optionals'][] = $optional->getPublicArray();
+		}
+		
+		// add requirements
+		$publicArray['requirements'] = array();
+		
+		foreach($this->getRequirements() as $requirement) {
+			$publicArray['requirements'][] = $requirement->getPublicArray();
+		}
+	}
+	
+	/**
 	 * Adds the missing __isset method to wcf
 	 * @param	string	$variable
 	 */
