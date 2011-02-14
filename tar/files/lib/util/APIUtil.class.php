@@ -39,9 +39,9 @@ class APIUtil {
 	 * @param	boolean	$writeXmlHeader
 	 * @throws SystemException
 	 */
-	public static function generate($type, $data, &$outputBuffer = null, $writeXmlHeader = true) {
+	public static function generate($type, $data, $outputBuffer = false, $writeXmlHeader = true) {
 		// convert type case
-		$type = StringUtil::toLower($type);
+		$type = strtolower($type);
 		
 		// type validation
 		if (!in_array($type, self::$allowedTypes)) throw new SystemException("Use of undefined type '".$type."'");
@@ -50,7 +50,7 @@ class APIUtil {
 		$methodName = 'generate'.ucfirst($type);
 		
 		// call generator method
-		call_user_func(array('static', $methodName), $data, $outputBuffer, $writeXmlHeader);
+		return call_user_func(array('static', $methodName), $data, $outputBuffer, $writeXmlHeader);
 	}
 	
 	/**
@@ -59,12 +59,13 @@ class APIUtil {
 	 * @param	pointer	$outputBuffer
 	 * @param	boolean	$writeXmlHeader
 	 */
-	public static function generateXml($data, &$outputBuffer = null, $writeXmlHeader = true) {
-		if ($outputBuffer === null) {
+	public static function generateXml($data, $outputBuffer = false, $writeXmlHeader = true) {
+		if (!$outputBuffer) {
 			unset($outputBuffer);
 			$outputBuffer = "";
 			$sendOutput = true;
-		}
+		} else
+			$sendOutput = false;
 		
 		// start output catching
 		ob_start();
@@ -80,17 +81,14 @@ class APIUtil {
 				// send newline
 				echo "\n";
 				
-				// create buffer
-				$buffer = "";
-				
-				// generate xml string
-				self::generateXml($data, $buffer, false);
+				// generate child xml
+				$buffer = self::generateXml($data, true, false);
 				
 				// split buffer
 				$bufferArray = explode("\n", $buffer);
 				
 				// prefix every line with \t
-				foreach($bufferArray as $buffer) echo "\t".$buffer;
+				foreach($bufferArray as $buffer) echo "\t".$buffer."\n";
 				
 				// send newline
 				echo "\n\t";
@@ -99,21 +97,22 @@ class APIUtil {
 				$data = (string) $data;
 				
 				// send output
-				echo $data;
+				echo "<![CDATA[".$data."]]>";
 			}
 			
-			echo "</".$key.">";
+			echo "</".$key.">\n";
 		}
 		
 		if ($writeXmlHeader) {
 			echo "</".self::API_XML_TAG.">";
 		}
 		$outputBuffer = ob_get_clean();
-		ob_end();
+		// // ob_end_clean();
 		
-		if ($sendOutput) {
+		if ($sendOutput)
 			echo $outputBuffer;
-		}
+		else
+			return $outputBuffer;
 	}
 	
 	/**
@@ -122,11 +121,11 @@ class APIUtil {
 	 * @param unknown_type $outputBuffer
 	 * @param unknown_type $writeXmlHeader
 	 */
-	protected static function generateJson ($data, &$outputBuffer = null, $writeXmlHeader = true) {
+	protected static function generateJson ($data, $outputBuffer = false, $writeXmlHeader = true) {
 		if ($outputBuffer === null)
 			echo json_encode($data);
 		else
-			$outputBuffer = json_encode($data);
+			return json_encode($data);
 	}
 	
 	/**
@@ -136,14 +135,15 @@ class APIUtil {
 	 * @param	boolean	$writeXmlHeader
 	 * @throws SystemException
 	 */
-	protected static function generateVar_dump($data, &$outputBuffer = null, $writeXmlHeader = true) {
-		if ($outputBuffer === null)
+	protected static function generateVar_dump($data, $outputBuffer = false, $writeXmlHeader = true) {
+		if (!$outputBuffer)
 			var_dump($data);
 		else {
 			ob_start();
 			echo var_dump($data);
 			$outputBuffer = ob_get_clean();
-			ob_end();
+			// ob_end_clean();;
+			return $outputBuffer;
 		}
 	}
 	
@@ -154,14 +154,15 @@ class APIUtil {
 	 * @param	boolean	$writeXmlHeader
 	 * @throws SystemException
 	 */
-	protected static function generatePrint_r($data, &$outputBuffer = null, $writeXmlHeader = true) {
-		if ($outputBuffer === null)
+	protected static function generatePrint_r($data, $outputBuffer = false, $writeXmlHeader = true) {
+		if (!$outputBuffer)
 			print_r($data);
 		else {
 			ob_start();
 			echo print_r($data);
 			$outputBuffer = ob_get_clean();
-			ob_end();
+			// ob_end_clean();;
+			return $outputBuffer;
 		}
 	}
 	
