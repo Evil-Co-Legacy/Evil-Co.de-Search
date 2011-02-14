@@ -65,24 +65,10 @@ class APIException extends Exception implements PrintableException {
 	 * Displays the error
 	 */
 	public function show() {
-		@header("Content-type: ".($this->type == 'xml' ? 'application/xml' : ($this->type == 'json' ? 'application/json' : 'text/plain')));
+		@header("Content-Type: ".APIUtil::getContentType($this->type));
 		if (!empty($this->header)) @header($this->header);
 		
-		switch($this->type) {
-			case 'xml':
-				echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-				echo "<api>";
-				echo "\t<errorMessage><![CDATA[".$this->getMessage()."]]></errorMessage>\n";
-				echo "\t<errorCode><![CDATA[".$this->getCode()."]]></errorCode>\n";
-				echo "</api>";
-				break;
-			case 'json':
-				echo json_encode(array('errorMessage' => $this->getMessage(), 'errorCode' => $this->getCode()));
-				break;
-			default:
-				echo str_replace(':', '\:', $this->getMessage()).':'.$this->getCode();
-				break;
-		}
+		APIUtil::generate($this->type, array('errorMessage' => $this->getMessage(), 'errorCode' => $this->getCode()));
 	}
 }
 ?>
