@@ -187,5 +187,33 @@ class APIUtil {
 		// get content type
 		return self::$typeHeaders[$type];
 	}
+	
+	/**
+	 * Returnes true if the given ip address is banned
+	 * @param	string	$ipAddress
+	 */
+	public static function isBanned($ipAddress) {
+		// check API-Key blacklist
+		$sql = "SELECT
+				COUNT(*) AS count
+			FROM
+				www".WWW_N."_api_key_blacklist
+			WHERE
+				(
+						ipAddress = '".escapeString($ipAddress)."'
+					OR
+						hostname = '".escapeString(gethostbyaddr($ipAddress))."'
+				)
+			AND
+				banEnabled = 1
+			AND
+				expire >= ".TIME_NOW;
+		$row = WCF::getDB()->getFirstRow($sql);
+		
+		// banned ip?
+		if ($row['count'] > 0) return true;
+		
+		return false;
+	}
 }
 ?>
