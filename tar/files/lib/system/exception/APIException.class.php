@@ -46,6 +46,9 @@ class APIException extends Exception implements PrintableException {
 			$code += hexdec(substr(sha1($message{$i}), 0, 4));
 		}
 		
+		// workaround: cast to int
+		$code = (int) $code;
+		
 		// replace message
 		$message = call_user_func_array('sprintf', $arguments);
 		
