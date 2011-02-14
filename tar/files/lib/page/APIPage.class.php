@@ -144,7 +144,7 @@ class APIPage extends AbstractPage {
 	 * @throws APIException
 	 * @throws SystemException
 	 */
-	protected function Getresult() {
+	protected function getresult() {
 		// validate query
 		if (!isset($_REQUEST['searchType']) or !isset($_REQUEST['resultID'])) throw new APIException($this->type, "Request error: %s", 'Missing arguments');
 		
