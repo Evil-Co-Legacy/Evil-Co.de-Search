@@ -21,6 +21,17 @@ class APIUtil {
 	protected static $allowedTypes = array('xml', 'json', 'var_dump', 'print_r');
 	
 	/**
+	 * Contains content-types for all valid types
+	 * @var array<string>
+	 */
+	protected static $typeHeaders = array(
+		'xml'		=>	'application/xml',
+		'json'		=>	'application/json',
+		'var_dump'	=>	'text/plain',
+		'print_r'	=>	'text/plain'
+	);
+	
+	/**
 	 * Generates a dynamic output
 	 * @param	string	$type
 	 * @param	array	$data
@@ -152,6 +163,28 @@ class APIUtil {
 			$outputBuffer = ob_get_clean();
 			ob_end();
 		}
+	}
+	
+	/**
+	 * Returnes true if the given type is valid
+	 * @param	string	$type
+	 * @throws SystemException
+	 */
+	public static function isValidType($type) {
+		return (in_array($type, self::$allowedTypes));
+	}
+	
+	/**
+	 * Returnes the content type for given output type
+	 * @param	string	$type
+	 * @throws SystemException
+	 */
+	public static function getContentType($type) {
+		// validate
+		if (!self::isValidType($type)) throw new SystemException("Invalid type '".$type."'");
+		
+		// get content type
+		return self::$typeHeaders[$type];
 	}
 }
 ?>
