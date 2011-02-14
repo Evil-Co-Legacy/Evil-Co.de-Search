@@ -15,23 +15,10 @@ class APIPage extends AbstractPage {
 	public $templateName = 'api';
 
 	/**
-	 * Contains a list of valid actions
-	 * If the given action does not match to one of this elements an IllegalLinkException will appear
-	 * @var	array<string>
-	 */
-	public $validActions = array(/* 'getadvancedsearchfields', */ 'search', 'getresult');
-
-	/**
-	 * Valid API types
-	 * @var array<string>
-	 */
-	public $validTypes = array('json', 'xml');
-
-	/**
 	 * Contains the current type
 	 * @var	string
 	 */
-	public $type = 'json';
+	public $type = 'xml';
 
 	/**
 	 * @see	Page::readParameters()
@@ -53,7 +40,7 @@ class APIPage extends AbstractPage {
 		$this->type = strtolower($this->type);
 		
 		// validate type
-		if (!APIUtil::isValidType($this->type)) throw new APIException('print_r', "Invalid type '%s'", $this->type);
+		if (!APIUtil::isValidType($this->type)) throw new APIException('xml', "Invalid type '%s'", $this->type);
 		
 		// send correct content-type
 		header('Content-Type: '.APIUtil::getContentType($this->type));
