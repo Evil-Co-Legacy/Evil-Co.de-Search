@@ -98,7 +98,16 @@ class APIPage extends AbstractPage {
 			// send auth headers
 			header('WWW-Authenticate: Basic realm="'.PAGE_TITLE.' API"');
 			header('HTTP/1.0 401 Unauthorized');
-			echo 'You must send a valid API-Key to use our API!';
+			
+			switch($this->type) {
+				case 'xml':
+					echo "<api>\n\t<errorMessage><![CDATA[You need a valid API-Key to use our API]]></errorMessage>\n</api>";
+					break;
+				case 'json':
+					echo json_encode(array('errorMessage' => 'You need a valid API-Key to use our API'));
+					break;
+			}
+			
 			exit;
 		} else {
 			// check login
