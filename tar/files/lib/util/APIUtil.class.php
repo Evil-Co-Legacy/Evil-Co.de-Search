@@ -156,7 +156,7 @@ class APIUtil {
 	 * @return mixed
 	 */
 	protected static function generateJson ($data, $outputBuffer = false, $writeXmlHeader = true) {
-		if ($outputBuffer === null)
+		if (!$outputBuffer)
 			echo json_encode($data);
 		else
 			return json_encode($data);
