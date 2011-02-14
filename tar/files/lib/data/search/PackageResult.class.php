@@ -322,7 +322,7 @@ class PackageResult extends SearchResult {
 		$publicArray['versions'] = array();
 		
 		foreach($this->getVersions() as $version) {
-			$publicArray['versions'][] = array(
+			$publicArray['versions'][$version['version']] = array(
 				'version'	=>	$version['version'],
 				'isUnique'	=>	$version['isUnique'],
 				'standalone'	=>	$version['standalone'],
