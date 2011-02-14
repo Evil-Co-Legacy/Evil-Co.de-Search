@@ -50,7 +50,7 @@ class APIUtil {
 		$methodName = 'generate'.ucfirst($type);
 		
 		// call generator method
-		$this->{$methodName}($data, $outputBuffer, $writeXmlHeader);
+		call_user_func(array('static', $methodName), $data, $outputBuffer, $writeXmlHeader);
 	}
 	
 	/**
