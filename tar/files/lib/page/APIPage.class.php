@@ -67,7 +67,7 @@ class APIPage extends AbstractPage {
 				if (!APIUtil::checkWhiteList($apiKeyID, WCF::getSession()->ipAddress)) throw new APIException($this->type, "Your IP-Address/hostname isn't on keys whitelist");
 			} Catch (APIException $ex) {
 				// update blacklist (+1)
-				APIUtil::updateBlackList($ipAddress, true);
+				APIUtil::updateBlackList(WCF::getSession()->ipAddress, true);
 				
 				// show exception
 				$ex->show();
