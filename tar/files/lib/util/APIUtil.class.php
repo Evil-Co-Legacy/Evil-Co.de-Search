@@ -9,6 +9,18 @@
 class APIUtil {
 	
 	/**
+	 * Contains a count of max bad logins
+	 * @var integer
+	 */
+	const MAX_BAD_LOGIN_COUNT = 5;
+
+	/**
+	 * Contains an amount of seconds wich the ip is still in database until the ban expires
+	 * @var integer
+	 */
+	const BAD_LOGIN_EXPIRE = 1800;
+	
+	/**
 	 * Contains the name of api xml start tag
 	 * @var string
 	 */
