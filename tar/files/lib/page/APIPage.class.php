@@ -99,16 +99,7 @@ class APIPage extends AbstractPage {
 			header('WWW-Authenticate: Basic realm="'.PAGE_TITLE.' API"');
 			header('HTTP/1.0 401 Unauthorized');
 			
-			switch($this->type) {
-				case 'xml':
-					echo "<api>\n\t<errorMessage><![CDATA[You need a valid API-Key to use our API]]></errorMessage>\n</api>";
-					break;
-				case 'json':
-					echo json_encode(array('errorMessage' => 'You need a valid API-Key to use our API'));
-					break;
-			}
-			
-			exit;
+			throw new APIException($this->type, "You need an API-Key to access this API");
 		} else {
 			// check login
 			$sql = "SELECT
@@ -147,8 +138,8 @@ class APIPage extends AbstractPage {
 						keyID = ".$row['keyID'];
 				$whitelistRow = WCF::getDB()->getFirstRow($sql);
 				
-				// set keycount to zero
-				if (!$whitelistRow['count']) $keyCount = 0;
+				// throw error
+				if (!$whitelistRow['count']) throw new APIException("Your IP-Adress/hostname isn't listed in whitelist");
 			}
 			
 			// wrong key
@@ -200,7 +191,7 @@ class APIPage extends AbstractPage {
 					WCF::getDB()->sendQuery($sql);
 				}
 				
-				throw new PermissionDeniedException;
+				throw new APIException($this->type, "Bad login".($row['badLoginCount'] >= self::MAX_BAD_LOGIN_COUNT ? " (Banned for ".self::BAD_LOGIN_EXPIRE." seconds)" : ""));
 			}
 		}
 		// correct key ... let's go
