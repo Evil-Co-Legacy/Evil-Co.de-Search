@@ -133,7 +133,7 @@ class APIPage extends AbstractPage {
 		$searchResultOutput = array();
 	
 		foreach($searchResults as $result) {
-			$searchResultOutput[] = $result->getPublicArray();
+			$searchResultOutput[$result->packageName] = $result->getPublicArray();
 		}
 		
 		// generate output
