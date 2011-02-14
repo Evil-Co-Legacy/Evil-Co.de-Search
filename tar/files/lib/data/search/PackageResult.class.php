@@ -332,7 +332,7 @@ class PackageResult extends SearchResult {
 				'authorUrl'	=>	$version['authorUrl'],
 				'licenseName'	=>	$version['licenseName'],
 				'licenseUrl'	=>	$version['licenseUrl'],
-				'downloadUrl'	=>	(!empty($version['licenseName']) and !empty($version['licenseUrl']) ? $version['downloadUrl'] : false),
+				'downloadUrl'	=>	((!empty($version['licenseName']) and !empty($version['licenseUrl'])) ? $version['downloadUrl'] : null),
 				'timestamp'	=>	$version['timestamp']
 			);
 		}
