@@ -291,5 +291,59 @@ class APIUtil {
 		
 		return ($row['count'] > 0);
 	}
+	
+	/**
+	 * Updates the blacklist
+	 * @param	string	$ipAddress
+	 * @param	boolean	$mode
+	 * @return void
+	 */
+	public static function updateBlackList($ipAddress, $mode = true) {
+		$sql = "SELECT
+				*
+			FROM
+				www".WWW_N."_api_key_blacklist
+			WHERE
+				ipAddress = '".escapeString($ipAddress)."'
+			OR
+				hostname = '".escapeString(gethostbyaddr($ipAddress))."'";
+		$row = WCF::getDB()->getFirstRow($sql);
+		
+		if (WCF::getDB()->countRows() > 0) {
+			// update counts
+			$sql = "UPDATE
+					www".WWW_N."_api_key_blacklist
+				SET
+					badLoginCount = ".($mode ? ($row['badLoginCount'] + 1) : ($row['badLoginCount'] - 1)).",
+					timestamp = ".TIME_NOW.",
+					expire = ".(TIME_NOW + self::BAD_LOGIN_EXPIRE)."
+					".($row['badLoginCount'] >= self::MAX_BAD_LOGIN_COUNT ? ", banEnabled = 1" : "")."
+				WHERE
+					banID = ".$row['banID'];
+			WCF::getDB()->sendQuery($sql);
+		} elseif ($mode) {
+			// insert new ban
+			$sql = "INSERT INTO
+					www".WWW_N."_api_key_blacklist (ipAddress, hostname, badLoginCount, timestamp, expire, banEnabled)
+				VALUES
+					('".escapeString($ipAddress)."',
+					 NULL,
+					 1,
+					 ".TIME_NOW.",
+					 ".(TIME_NOW + self::BAD_LOGIN_EXPIRE).",
+					 ".(self::MAX_BAD_LOGIN_COUNT == 1 ? 1 : 0).")";
+			
+			if (gethostbyaddr($ipAddress) != $ipAddress) {
+				$sql .= ", (NULL,
+					    '".escapeString(gethostbyaddr($ipAddress))."',
+					    1,
+					    ".TIME_NOW.",
+					    ".(TIME_NOW + self::BAD_LOGIN_EXPIRE).",
+					    ".(self::MAX_BAD_LOGIN_COUNT == 1 ? 1 : 0).")";
+			}
+			
+			WCF::getDB()->sendQuery($sql);
+		}
+	}
 }
 ?>
