@@ -63,10 +63,12 @@ abstract class SearchResult extends DatabaseObject {
 	public function checkPermissions() { }
 	
 	/**
-	 * Returnes the complete data array
+	 * Returnes the whole data array of this object
+	 * @return array
+	 * @deprecated
 	 */
 	public final function getData() {
-		return $this->data;
+		throw new SystemException("Method getData() has been deprecated");
 	}
 }
 ?>
