@@ -10,18 +10,6 @@ require_once(WCF_DIR.'lib/page/AbstractPage.class.php');
 class APIPage extends AbstractPage {
 	
 	/**
-	 * Contains a count of max bad logins
-	 * @var integer
-	 */
-	const MAX_BAD_LOGIN_COUNT = 5;
-
-	/**
-	 * Contains an amount of seconds wich the ip is still in database until the ban expires
-	 * @var integer
-	 */
-	const BAD_LOGIN_EXPIRE = 1800;
-	
-	/**
 	 * @see	AbstractPage::$templateName
 	 */
 	public $templateName = 'api';
@@ -57,41 +45,24 @@ class APIPage extends AbstractPage {
 
 	/**
 	 * @see	Page::show()
-	 * @throws IllegalLinkException
+	 * @throws APIException
 	 */
 	public function show() {
 		// set correct case
 		$this->action = strtolower($this->action);
 		$this->type = strtolower($this->type);
 		
+		// validate type
+		if (!APIUtil::isValidType($this->type)) throw new APIException('print_r', "Invalid type '%s'", $this->type);
+		
 		// send correct content-type
-		header('Content-Type: '.($this->type == 'xml' ? 'application/xml' : ($this->type == 'json' ? 'application/json' : 'text/html')));
-
-		// call readParameters method to get needed variables
-		$this->readParameters();
+		header('Content-Type: '.APIUtil::getContentType($this->type));
 
 		// validate action
-		if (!in_array($this->action, $this->validActions) or !in_array($this->type, $this->validTypes)) throw new IllegalLinkException;
+		if (!method_exists($this, $this->action)) throw new APIException($this->type, "Invalid API method '%s'", $this->action);
 		
-		// check API-Key blacklist
-		$sql = "SELECT
-				COUNT(*) AS count
-			FROM
-				www".WWW_N."_api_key_blacklist
-			WHERE
-				(
-						ipAddress = '".escapeString(WCF::getSession()->ipAddress)."'
-					OR
-						hostname = '".escapeString(gethostbyaddr(WCF::getSession()->ipAddress))."'
-				)
-			AND
-				banEnabled = 1
-			AND
-				expire >= ".TIME_NOW;
-		$row = WCF::getDB()->getFirstRow($sql);
-		
-		// send banned message
-		if ($row['count'] > 0) throw new NamedUserException("Access to API denied: Banned");
+		// check blacklist
+		if (APIUtil::isBanned(WCF::getSession()->ipAddress)) throw new APIException($this->type, "Access to API denied: %s", 'Banned');
 		
 		// check for API-Key
 		if (!isset($_SERVER['PHP_AUTH_USER'])) {
@@ -101,284 +72,94 @@ class APIPage extends AbstractPage {
 			
 			throw new APIException($this->type, "You need an API-Key to access this API");
 		} else {
-			// check login
-			$sql = "SELECT
-					*
-				FROM
-					www".WWW_N."_api_key key
-				WHERE
-					publicKey = '".escapeString($_SERVER['PHP_AUTH_USER'])."'
-				AND
-					secretKey = '".escapeString($_SERVER['PHP_AUTH_PW'])."'";
-			$row = WCF::getDB()->getFirstRow($sql);
-			
-			$keyCount = WCF::getDB()->countRows();
-			
-			// check for enabled whitelist
-			$sql = "SELECT
-					COUNT(*) AS count
-				FROM
-					www".WWW_N."_api_key_whitelist
-				WHERE
-					keyID = ".$row['keyID'];
-			$whitelistRow = WCF::getDB()->getFirstRow($sql);
-			
-			if ($whitelistRow['count']) {
-				$sql = "SELECT
-						COUNT(*) AS count
-					FROM
-						www".WWW_N."_api_key_whitelist
-					WHERE
-						(
-								whitelist.ipAddress = '".escapeString(WCF::getSession()->ipAddress)."'
-							OR
-								whitelist.hostname = '".escapeString(gethostbyaddr(WCF::getSession())->ipAddress)."'
-						)
-					AND
-						keyID = ".$row['keyID'];
-				$whitelistRow = WCF::getDB()->getFirstRow($sql);
+			try {
+				// check login
+				if (($apiKeyID = APIUtil::checkLogin($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) === false) throw new APIException($this->type, "Invalid API-Key");
 				
-				// throw error
-				if (!$whitelistRow['count']) throw new APIException("Your IP-Adress/hostname isn't listed in whitelist");
-			}
-			
-			// wrong key
-			if ($keyCount <= 0) {
-				// update blacklist
-				$sql = "SELECT
-						*
-					FROM
-						www".WWW_N."_api_key_blacklist
-					WHERE
-						ipAddress = '".escapeString(WCF::getSession()->ipAddress)."'
-					OR
-						hostname = '".escapeString(gethostbyaddr(WCF::getSession()->ipAddress))."'";
-				$row = WCF::getDB()->getFirstRow($sql);
+				// check whitelist
+				if (!APIUtil::checkWhiteList($apiKeyID, WCF::getSession()->ipAddress)) throw new APIException($this->type, "Your IP-Address/hostname isn't on keys whitelist");
+			} Catch (APIException $ex) {
+				// update blacklist (+1)
+				APIUtil::updateBlackList($ipAddress, true);
 				
-				if (WCF::getDB()->countRows() > 0) {
-					// update counts
-					$sql = "UPDATE
-							www".WWW_N."_api_key_blacklist
-						SET
-							badLoginCount = ".($row['badLoginCount'] + 1).",
-							timestamp = ".TIME_NOW.",
-							expire = ".(TIME_NOW + self::BAD_LOGIN_EXPIRE)."
-							".($row['badLoginCount'] >= self::MAX_BAD_LOGIN_COUNT ? ", banEnabled = 1" : "")."
-						WHERE
-							banID = ".$row['banID'];
-					WCF::getDB()->sendQuery($sql);
-				} else {
-					// insert new ban
-					$sql = "INSERT INTO
-							www".WWW_N."_api_key_blacklist (ipAddress, host, badLoginCount, timestamp, expire, banEnabled)
-						VALUES
-							('".escapeString(WCF::getSession()->ipAddress)."',
-							 NULL,
-							 1,
-							 ".TIME_NOW.",
-							 ".(TIME_NOW + self::BAD_LOGIN_EXPIRE).",
-							 ".(self::MAX_BAD_LOGIN_COUNT == 1 ? 1 : 0).")";
-					
-					if (gethostbyaddr(WCF::getSession()->ipAddress) != WCF::getSession()->ipAddress) {
-						$sql .= ", (NULL,
-							    '".escapeString(gethostbyaddr(WCF::getSession()->ipAddress))."',
-							    1,
-							    ".TIME_NOW.",
-							    ".(TIME_NOW + self::BAD_LOGIN_EXPIRE).",
-							    ".(self::MAX_BAD_LOGIN_COUNT == 1 ? 1 : 0).")";
-					}
-					
-					WCF::getDB()->sendQuery($sql);
-				}
-				
-				throw new APIException($this->type, "Bad login".($row['badLoginCount'] >= self::MAX_BAD_LOGIN_COUNT ? " (Banned for ".self::BAD_LOGIN_EXPIRE." seconds)" : ""));
+				// show exception
+				$ex->show();
 			}
 		}
 		// correct key ... let's go
-		
-		// create function name
-		$functionName = $this->type.ucfirst($this->action);
-
-		// create templateName
-		$this->templateName .= ucfirst($this->type).ucfirst($this->action);
-
-		// validate method (We'll catch undefined methods. If the method for the given action and type isn't defined we'll throw an IllegalLinkException)
-		if (!method_exists($this, $functionName)) throw new IllegalLinkException;
 
 		// call readData method for given type and action
-		$this->{$functionName}();
-
-		// call assignVariables method
-		$this->assignVariables();
-
-		// display template
-		echo WCF::getTPL()->fetch($this->templateName);
+		$this->{$this->action}();
 	}
 
 	/**
 	 * Handles search requests in XML syntax (We'll use this for instant search)
+	 * @throws APIException
 	 */
-	protected function xmlSearch() {
+	protected function search() {
 		// include searchTypes
 		require_once(WCF_DIR.'lib/data/search/SearchType.class.php');
 
 		// create needed arrays
 		$searchResults = array();
 
-		// check for needed attributes
-		if (isset($_REQUEST['query']) and !empty($_REQUEST['query']) and isset($_REQUEST['searchType'])) {
-			// read attributes
-			$searchType = intval($_REQUEST['searchType']);
-			$query = StringUtil::trim($_REQUEST['query']);
+		// validate
+		if (!isset($_REQUEST['query']) or empty($_REQUEST['query']) or !isset($_REQUEST['searchType'])) throw new APIException($this->type, "Request Error: %s", 'Missing arguments');
+		
+		// read attributes
+		$searchType = intval($_REQUEST['searchType']);
+		$query = StringUtil::trim($_REQUEST['query']);
 
-			if (isset($_REQUEST['page']))
-				$page = intval($_REQUEST['page']);
-			else
-				$page = 1;
+		if (isset($_REQUEST['page']))
+			$page = intval($_REQUEST['page']);
+		else
+			$page = 1;
 
-			if (isset($_REQUEST['itemsPerPage']) and intval($_REQUEST['itemsPerPage']) <= 100)
-				$itemsPerPage = intval($_REQUEST['itemsPerPage']);
-			else
-				$itemsPerPage = 20;
+		if (isset($_REQUEST['itemsPerPage']) and intval($_REQUEST['itemsPerPage']) <= 100)
+			$itemsPerPage = intval($_REQUEST['itemsPerPage']);
+		else
+			$itemsPerPage = 20;
 
-			// validate
-			$searchType = new SearchType($searchType);
-			$className = $searchType->typeName;
+		// validate
+		$searchType = new SearchType($searchType);
+		$className = $searchType->typeName;
 			
-			if (!$searchType->typeID) throw new IllegalLinkException;
-
-			// validate given type
-			if ($searchType->typeID != 0) {
-				// validate type
-				if (file_exists(WWW_DIR.'lib/data/search/'.$className.'.class.php')) {
-					// include type
-					require_once(WWW_DIR.'lib/data/search/'.$className.'.class.php');
-
-					// create new type instance
-					$searchType = new $className($searchType->typeID);
-
-					// execute query
-					$searchResults = $searchType->search($query, $page, $itemsPerPage);
-
-					// calculate result count
-					$pageData = $this->calculateNumberOfPages($searchType->getResultCount(), $page, $itemsPerPage);
-
-					// assign data
-					WCF::getTPL()->assign($pageData);
-				} else {
-					// print debug message
-					// echo '<p class="error">Cannot load search type</p>';
-					throw new IllegalLinkException;
-				}
-			} else {
-				// print debug message
-				// echo '<p class="error">Invalid SearchType!</p>';
-				throw new IllegalLinkException;
-			}
-		} else {
-			// print debug message
-			// echo '<p class="error">Invalid query!<br />'; print_r($_REQUEST); echo '</p>';
-			// throw new NamedUserException(WCF::getLanguage()->get('www.search.error'));
-			WCF::getTPL()->assign('error', true);
-		}
-
-		// assign results
-		WCF::getTPL()->assign('results', $searchResults);
-	}
-
-	/**
-	 * Handles json search requests
-	 */
-	protected function jsonSearch() {
-		// include searchTypes
-		require_once(WCF_DIR.'lib/data/search/SearchType.class.php');
-
-		// create needed arrays
-		$searchResults = array();
-
-		if (!isset($_REQUEST['evil'])) {
-			// check for needed attributes
-			if (isset($_REQUEST['query']) and !empty($_REQUEST['query']) and isset($_REQUEST['searchType'])) {
-				// read attributes
-				$searchType = intval($_REQUEST['searchType']);
-				$query = StringUtil::trim($_REQUEST['query']);
-	
-				if (isset($_REQUEST['page']))
-					$page = intval($_REQUEST['page']);
-				else
-					$page = 1;
-	
-				if (isset($_REQUEST['itemsPerPage']) and intval($_REQUEST['itemsPerPage']) <= 100)
-					$itemsPerPage = intval($_REQUEST['itemsPerPage']);
-				else
-					$itemsPerPage = 20;
-	
-				// validate
-				$searchType = new SearchType($searchType);
-				$className = $searchType->typeName;
+		if (!$searchType->typeID) throw new APIException($this->type, "Request Error: %s", 'Invalid search type');
 				
-				if (!$searchType->typeID) throw new IllegalLinkException;
-	
-				// validate given type
-				if ($searchType->typeID != 0) {
-					// validate type
-					if (file_exists(WWW_DIR.'lib/data/search/'.$className.'.class.php')) {
-						// include type
-						require_once(WWW_DIR.'lib/data/search/'.$className.'.class.php');
-	
-						// create new type instance
-						$searchType = new $className($searchType->typeID);
-	
-						// execute query
-						$tempSearchResults = $searchType->search($query, $page, $itemsPerPage);
-						$searchResults = array();
-						
-						foreach($tempSearchResults as $result) {
-							$result->readTrees();
-							$searchResults[] = $result->getData();	
-						}
-						
-						// calculate result count
-						$pageData = $this->calculateNumberOfPages($searchType->getResultCount(), $page, $itemsPerPage);
-	
-						// assign data
-						WCF::getTPL()->assign($pageData);
-					} else {
-						// print debug message
-						// echo '<p class="error">Cannot load search type</p>';
-						$error = 'cannotLoadSearchType';
-					}
-				} else {
-					// print debug message
-					// echo '<p class="error">Invalid SearchType!</p>';
-					$error = 'invalidSearchType';
-				}
-			} else {
-				// print debug message
-				// echo '<p class="error">Invalid query!<br />'; print_r($_REQUEST); echo '</p>';
-				$error = 'invalidQuery';
-			}
-		} else {
-			$error = "Don't be evil!";
-		}
+		// validate type
+		if (!file_exists(WWW_DIR.'lib/data/search/'.$className.'.class.php')) throw new APIException($this->type, "API Error: %s", "Can't locate search type");
+			
+		// include type
+		require_once(WWW_DIR.'lib/data/search/'.$className.'.class.php');
 
-		// assign results
-		WCF::getTPL()->assign('json', json_encode(array(
-			'error' => (isset($error) ? $error : false),
-			'resultList' => $searchResults
-		)));
+		// create new type instance
+		$searchType = new $className($searchType->typeID);
+
+		// execute query
+		$searchResults = $searchType->search($query, $page, $itemsPerPage);
+
+		// calculate result count
+		$pageData = $this->calculateNumberOfPages($searchType->getResultCount(), $page, $itemsPerPage);
+		
+		// create needed variables
+		$searchResultOutput = array();
+	
+		foreach($searchResults as $result) {
+			$searchResultOutput[] = $result->getPublicArray();
+		}
+		
+		// generate output
+		APIUtil::generate($this->type, array('pageData' => $pageData, 'results' => $searchResultOutput));
 	}
 
 	/**
 	 * Reads information about a result from database and assignes it to template
-	 * @throws IllegalLinkException
+	 * @throws APIException
 	 * @throws SystemException
 	 */
-	protected function xmlGetresult() {
-		$this->templateName = 'apiXmlGetResult';
-		
+	protected function Getresult() {
 		// validate query
-		if (!isset($_REQUEST['searchType']) or !isset($_REQUEST['resultID'])) throw new IllegalLinkException;
+		if (!isset($_REQUEST['searchType']) or !isset($_REQUEST['resultID'])) throw new APIException($this->type, "Request error: %s", 'Missing arguments');
 		
 		// include searchTypes
 		require_once(WCF_DIR.'lib/data/search/SearchType.class.php');
@@ -391,14 +172,14 @@ class APIPage extends AbstractPage {
 		$searchType = new SearchType($searchTypeID);
 		
 		// validate
-		if (!$searchType->typeID) throw new IllegalLinkException;
+		if (!$searchType->typeID) throw new APIException($this->type, "Request error: %s", 'Invalid search type');
 		
 		$className = $searchType->typeName;
 		
 		if (!file_exists(WWW_DIR.'lib/data/search/'.$className.'.class.php'))
-				throw new SystemException('Classfile \''.$className.'.class.php\' not found.');
-			else
-				require_once(WWW_DIR.'lib/data/search/'.$className.'.class.php');
+			throw new SystemException('Classfile \''.$className.'.class.php\' not found.');
+		else
+			require_once(WWW_DIR.'lib/data/search/'.$className.'.class.php');
 
 		// create new search type instance
 		$searchType = new $className($searchType->typeID);
@@ -409,24 +190,20 @@ class APIPage extends AbstractPage {
 		else
 			require_once(WWW_DIR.'lib/data/search/'.$searchType->getSearchResultClass().'.class.php');
 			
+		// create searchType
 		$searchType = new $className($searchType->typeID);
 			
+		// get className
 		$className = $searchType->getSearchResultClass();
-		
-		// create new instance
-		$searchResult = new $className(array(), true);
-		
-		// check for detail template
-		if (!$searchResult->getDetailTemplate()) throw new IllegalLinkException;
 		
 		// create result
 		$result = call_user_func(array($className, 'getByID'), $resultID);
 		
 		// validate
-		if (!$result->getResultID()) throw new IllegalLinkException;
+		if (!$result->getResultID()) throw new APIException($this->type, "No object with given ID found");
 		
-		// assign result
-		WCF::getTPL()->assign('result', $result);
+		// generate result output
+		APIUtil::generate($this->type, $result->getPublicArray());
 	}
 	
 	/**
