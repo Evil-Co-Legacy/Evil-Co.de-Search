@@ -31,7 +31,7 @@ class APIException extends Exception implements PrintableException {
 	 */
 	public function __construct($type, $message) {
 		// save type
-		$this->type = StringUtil::toLower($type);
+		$this->type = $type;
 		
 		// get arguments
 		$arguments = func_get_args();
@@ -43,7 +43,7 @@ class APIException extends Exception implements PrintableException {
 		// get code
 		$code = 0;
 		for($i = 0; $i < strlen($message); $i++) {
-			$code += hexdec(sha1($message{$i}));
+			$code += hexdec(substr(sha1($message{$i}), 0, 4));
 		}
 		
 		// replace message
