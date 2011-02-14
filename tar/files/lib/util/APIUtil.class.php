@@ -89,11 +89,8 @@ class APIUtil {
 		}
 		
 		foreach($data as $key => $data) {
-			echo "\t<".$key.">";
-			
 			if (is_array($data)) {
-				// send newline
-				echo "\n";
+				echo "\t<".$key.">\n";
 				
 				// generate child xml
 				$buffer = self::generateXml($data, true, false);
@@ -105,16 +102,17 @@ class APIUtil {
 				foreach($bufferArray as $buffer) echo "\t".$buffer."\n";
 				
 				// send newline
-				echo "\n\t";
+				echo "\n\t</".$key.">\n";
 			} else {
 				// cast to string
 				$data = (string) $data;
 				
-				// send output
-				echo "<![CDATA[".$data."]]>";
+				if (empty($data))
+					echo "\t<".$key." />\n";
+				else
+					// send output
+					echo "\t<".$key."><![CDATA[".$data."]]></".$key.">\n";
 			}
-			
-			echo "</".$key.">\n";
 		}
 		
 		if ($writeXmlHeader) {
