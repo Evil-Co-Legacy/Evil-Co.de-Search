@@ -316,9 +316,13 @@ class APIUtil {
 			FROM
 				www".WWW_N."_api_key_blacklist
 			WHERE
-				ipAddress = '".escapeString($ipAddress)."'
-			OR
-				hostname = '".escapeString(gethostbyaddr($ipAddress))."'";
+				(
+						ipAddress = '".escapeString($ipAddress)."'
+					OR
+						hostname = '".escapeString(gethostbyaddr($ipAddress))."'
+				)
+			AND
+				expire >= ".TIME_NOW;
 		$row = WCF::getDB()->getFirstRow($sql);
 		
 		if (WCF::getDB()->countRows() > 0) {
