@@ -229,6 +229,7 @@ class PackageType extends SearchType {
 			$sql = "SELECT
 					targetPackageID AS packageID,
 					targetVersionID AS versionID,
+					requirement.packageName AS packageName,
 					packageLanguage.name AS name,
 					packageLanguage.description,
 					version.version,
@@ -268,6 +269,7 @@ class PackageType extends SearchType {
 			$sql = "SELECT
 					targetPackageID AS packageID,
 					targetVersionID AS versionID,
+					optional.packageName AS packageName,
 					packageLanguage.name AS name,
 					packageLanguage.description,
 					version.version,

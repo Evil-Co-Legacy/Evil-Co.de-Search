@@ -173,6 +173,7 @@ class PackageResult extends SearchResult {
 			$sql = "SELECT
 					targetPackageID AS packageID,
 					targetVersionID AS versionID,
+					requirement.packageName AS packageName,
 					packageLanguage.name AS name,
 					packageLanguage.description,
 					version.version
@@ -216,6 +217,7 @@ class PackageResult extends SearchResult {
 			$sql = "SELECT
 					targetPackageID AS packageID,
 					targetVersionID AS versionID,
+					optional.packageName AS packageName,
 					packageLanguage.name AS name,
 					packageLanguage.description,
 					version.version
@@ -342,15 +344,17 @@ class PackageResult extends SearchResult {
 		$publicArray['optionals'] = array();
 		
 		foreach($this->getOptionals() as $optional) {
-			$publicArray['optionals'][] = $optional->getPublicArray();
+			$publicArray['optionals'][$optional->name] = $optional->getPublicArray();
 		}
 		
 		// add requirements
 		$publicArray['requirements'] = array();
 		
 		foreach($this->getRequirements() as $requirement) {
-			$publicArray['requirements'][] = $requirement->getPublicArray();
+			$publicArray['requirements'][$requirement->name] = $requirement->getPublicArray();
 		}
+		
+		return $publicArray;
 	}
 	
 	/**
