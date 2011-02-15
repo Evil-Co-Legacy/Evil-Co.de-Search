@@ -45,7 +45,7 @@ class TogglePackageAction extends AbstractAction {
 		WCF::getDB()->sendQuery($sql);
 		
 		$sql = "UPDATE
-				".WWW_N."_package_report
+				www".WWW_N."_package_report
 			SET
 				state = 'read'
 			WHERE
