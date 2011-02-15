@@ -33,6 +33,12 @@ class AbstractWWWUserSession extends UserSession {
 	protected $invitations = null;
 	
 	/**
+	 * Contains true if the current user is marked as developer
+	 * @var boolean
+	 */
+	protected $isDeveloper = null;
+	
+	/**
 	 * Returnes true if the user is a group leader
 	 */
 	public function isGroupLeader() {
@@ -79,6 +85,13 @@ class AbstractWWWUserSession extends UserSession {
 	 */
 	public function getAvatar() {
 		return null;
+	}
+	
+	/**
+	 * Returnes true if the current user is marked as developer
+	 */
+	public function isDeveloper() {
+		return $this->isDeveloper;
 	}
 }
 ?>

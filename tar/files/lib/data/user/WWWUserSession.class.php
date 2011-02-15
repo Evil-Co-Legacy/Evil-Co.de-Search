@@ -207,5 +207,24 @@ class WWWUserSession extends AbstractWWWUserSession {
 	public function getAvatar() {
 		return $this->avatar;
 	}
+	
+	/**
+	 * @see AbstractWWWUserSession::isDeveloper()
+	 */
+	public function isDeveloper() {
+		if ($this->isDeveloper === null) {
+			$sql = "SELECT
+					COUNT(*) AS count
+				FROM
+					www".WWW_N."_api_key
+				WHERE
+					ownerID = ".WCF::getUser()->userID;
+			$row = WCF::getDB()->getFirstRow($sql);
+			
+			$this->isDeveloper = ($row['count'] > 0);
+		}
+		
+		return parent::isDeveloper();
+	}
 }
 ?>
