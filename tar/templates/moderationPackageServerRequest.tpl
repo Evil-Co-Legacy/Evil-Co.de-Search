@@ -18,7 +18,7 @@
 					<div class="contentHeader">
 						<div class="largeButtons">
 							<ul>
-								<li><a href="index.php?page=ModerationPackageServerRequest{if !$tpl.get.showOthers|isset}&amp;showOthers=1{/if}{@SID_ARG_2ND}"><img src="packageServerM.png" alt="" /> <span>{lang}www.moderation.packageServerRequest.showOthers{/lang}</span></a></li>
+								<li><a href="index.php?page=ModerationPackageServerRequest{if !$tpl.get.showOthers|isset}&amp;showOthers=1{/if}{@SID_ARG_2ND}"><img src="{icon}packageServerM.png{/icon}" alt="" /> <span>{lang}www.moderation.packageServerRequest.showOthers{/lang}</span></a></li>
 							</ul>
 						</div>
 					</div>
