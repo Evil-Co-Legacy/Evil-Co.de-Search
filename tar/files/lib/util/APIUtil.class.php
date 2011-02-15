@@ -36,7 +36,7 @@ class APIUtil {
 	 * Contains allowed types
 	 * @var array<string>
 	 */
-	protected static $allowedTypes = array('xml', 'json', 'serialized', 'var_dump', 'print_r');
+	protected static $allowedTypes = array('xml', 'json', 'serialized', 'yaml', 'var_dump', 'print_r');
 	
 	/**
 	 * Contains content-types for all valid types
