@@ -37,13 +37,15 @@ class TogglePackageAction extends AbstractAction {
 		$sql = "UPDATE
 				www".WWW_N."_package
 			SET
-				isDisabled = IF(isDisabled = 1, 0, 1)
+				isDisabled = IF(isDisabled = 1, 0, 1),
+				moderatorID = ".WCF::getUser()->userID.",
+				moderatorName = '".escapeString(WCF::getUser()->username)."'
 			WHERE
 				packageID = ".$this->packageID;
 		WCF::getDB()->sendQuery($sql);
 		
 		// send redirect header
-		HeaderUtil::redirect('index.php?page=SearchResult&resultID='.$this->packageID.'&searchTypeName=PackageType'.SID_ARG_2ND_NOT_ENCODED);
+		HeaderUtil::redirect('index.php?page=ResultDetail&resultID='.$this->packageID.'&searchTypeName=PackageType'.SID_ARG_2ND_NOT_ENCODED);
 		
 		// fire event
 		$this->executed();
