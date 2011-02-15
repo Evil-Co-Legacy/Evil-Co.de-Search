@@ -143,7 +143,7 @@ class WWWUserSession extends AbstractWWWUserSession {
 				FROM
 					www".WWW_N."_package_report report
 				WHERE
-					state = 'new'";
+					report.state = 'new'";
 			$row = WCF::getDB()->getFirstRow($sql);
 			
 			$this->outstandingModerations += $row['count'];
