@@ -29,7 +29,7 @@
 							<tbody>
 								{foreach from=$disabledPackages item='result'}
 									<tr>
-										<td><a href="index.php?page=ResultDetail&amp;resultID={$result->getResultID()}{@SID_ARG_2ND}">{$result->getTitle()}</a></td>
+										<td><a href="index.php?page=ResultDetail&amp;resultID={$result->getResultID()}&amp;searchTypeName=PackageType{@SID_ARG_2ND}">{$result->getTitle()}</a></td>
 										<td>{if $result->author != ''}{$result->author}{else}&nbsp;{/if}</td>
 									</tr>
 								{/foreach}
