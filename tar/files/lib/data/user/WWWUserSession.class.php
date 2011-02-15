@@ -126,6 +126,7 @@ class WWWUserSession extends AbstractWWWUserSession {
 	 */
 	public function getOutstandingModerations() {
 		if ($this->outstandingModerations === null) {
+			// get server requests
 			$sql = "SELECT
 					COUNT(*) AS count
 				FROM
@@ -135,6 +136,17 @@ class WWWUserSession extends AbstractWWWUserSession {
 			$row = WCF::getDB()->getFirstRow($sql);
 			
 			$this->outstandingModerations = $row['count'];
+			
+			// get reports
+			$sql = "SELECT
+					COUNT(*) AS count
+				FROM
+					www".WWW_N."_package_report report
+				WHERE
+					state = 'new'";
+			$row = WCF::getDB()->getFirstRow($sql);
+			
+			$this->outstandingModerations += $row['count'];
 		}
 		
 		return $this->outstandingModerations;
