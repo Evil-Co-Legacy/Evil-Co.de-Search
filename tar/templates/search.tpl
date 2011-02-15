@@ -76,6 +76,17 @@
 					</div>
 		 		{/if}
 		 	</div>
+		 	
+		 	{cycle values='container-1,container-2' print=false advance=false}
+			<div class="border infoBox">
+				<div class="{cycle}">
+					<div class="containerIcon"><img src="{icon}linkM.png{/icon}" alt="" /></div>
+					<div class="containerContent">
+						<h3>{lang}www.search.link{/lang}</h3>
+						<p class="smallFont"><a href="index.php?form=Search&amp;searchTypeName={$searchType->typeName}&amp;query={$encodedQuery}">{PAGE_URL}/index.php?form=Search&amp;searchTypeName={$searchType->typeName}&amp;query={$encodedQuery}</a></p>
+					</div>
+				</div>
+			</div>
 		 </div>
 		 
 		 {include file='footer' sandbox=false}
