@@ -22,7 +22,7 @@ class TogglePackageAction extends AbstractAction {
 		parent::readParameters();
 		
 		// permission check
-		WCF::getUser()->checkPermissions('mod.search.canModerate');
+		WCF::getUser()->checkPermission('mod.search.canModerate');
 		
 		// get value of packageID query argument
 		if (isset($_REQUEST['packageID'])) $this->packageID = intval($_REQUEST['packageID']);
