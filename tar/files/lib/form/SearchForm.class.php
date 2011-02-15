@@ -25,7 +25,13 @@ class SearchForm extends MultipleLinkPage {
 	 * Contains the search type ID
 	 * @var	integer
 	 */
-	public $searchType = 0;
+	public $searchType = null;
+	
+	/**
+	 * Contains the search type name
+	 * @var string
+	 */
+	public $searchTypeName = null;
 
 	/**
 	 * Contains the search query
@@ -52,12 +58,12 @@ class SearchForm extends MultipleLinkPage {
 		// read parameters
 		if (isset($_REQUEST['query'])) $this->query = StringUtil::trim($_REQUEST['query']);
 		if (isset($_REQUEST['searchType'])) $this->searchType = intval($_REQUEST['searchType']);
+		if (isset($_REQUEST['searchTypeName'])) $this->searchTypeName = StringUtil::trim($_REQUEST['searchTypeName']);
 		if (isset($_REQUEST['advancedSearch'])) $this->advancedSearchFields = array_map(array('StringUtil', 'trim'), $_REQUEST['advancedSearch']);
-
 		if (isset($_REQUEST['itemsPerPage']) and intval($_REQUEST['itemsPerPage']) <= 100) $this->itemsPerPage = intval($_REQUEST['itemsPerPage']);
 
 		// validate
-		$this->searchType = new SearchType($this->searchType);
+		$this->searchType = new SearchType($this->searchType, null, $this->searchTypeName);
 		$className = $this->searchType->typeName;
 
 		// validate
