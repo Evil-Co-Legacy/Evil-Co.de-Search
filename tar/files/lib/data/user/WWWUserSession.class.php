@@ -213,6 +213,13 @@ class WWWUserSession extends AbstractWWWUserSession {
 	 */
 	public function isDeveloper() {
 		if ($this->isDeveloper === null) {
+			// check permission
+			if (!WCF::getUser()->getPermission('user.developer.canUse')) {
+				$this->isDeveloper = false;
+				return false;
+			}
+			
+			// check for api keys
 			$sql = "SELECT
 					COUNT(*) AS count
 				FROM
