@@ -27,6 +27,18 @@ class ModerationOverviewPage extends AbstractPage {
 	public $outstandingServerRequests = 0;
 	
 	/**
+	 * Contains a count of disabled packages
+	 * @var integer
+	 */
+	public $disabledPackages = 0;
+	
+	/**
+	 * Contains a count of outstanding package reports
+	 * @var integer
+	 */
+	public $outstandingPackageReports = 0;
+	
+	/**
 	 * @see Page::readData()
 	 */
 	public function readData() {
@@ -41,6 +53,28 @@ class ModerationOverviewPage extends AbstractPage {
 		$row = WCF::getDB()->getFirstRow($sql);
 			
 		$this->outstandingServerRequests = $row['count'];
+		
+		// get reports
+		$sql = "SELECT
+				COUNT(*) AS count
+			FROM
+				www".WWW_N."_package_report report
+			WHERE
+				report.state = 'new'";
+		$row = WCF::getDB()->getFirstRow($sql);
+			
+		$this->outstandingPackageReports = $row['count'];
+		
+		// get disabled packages
+		$sql = "SELECT
+				COUNT(*) AS count
+			FROM
+				www".WWW_N."_package
+			WHERE
+				isDisabled = 1";
+		$row = WCF::getDB()->getFirstRow($sql);
+		
+		$this->disabledPackages = $row['count'];
 	}
 	
 	/**
@@ -50,7 +84,9 @@ class ModerationOverviewPage extends AbstractPage {
 		parent::assignVariables();
 		
 		WCF::getTPL()->assign(array(
-			'outstandingServerRequests'		=>	$this->outstandingServerRequests
+			'outstandingServerRequests'		=>	$this->outstandingServerRequests,
+			'outstandingPackageReports'		=>	$this->outstandingPackageReports,
+			'disabledPackages'			=>	$this->disabledPackages
 		));
 	}
 	
