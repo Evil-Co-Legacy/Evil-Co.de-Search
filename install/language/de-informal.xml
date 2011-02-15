@@ -57,6 +57,9 @@
 		<!-- Search Results -->
 		<item name="www.search.searchResult"><![CDATA[Suche nach &raquo;{$query}&laquo;]]></item>
 		<item name="www.search.detail"><![CDATA[Details]]></item>
+		
+		<!-- Search boxes -->
+		<item name="www.search.link"><![CDATA[Verlinken]]></item>
 	</category>
 	
 	<category name="www.packageDetail">
