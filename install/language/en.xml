@@ -182,6 +182,13 @@
 		<item name="www.moderation.disabledPackages.author"><![CDATA[Author]]></item>
 	</category>
 	
+	<category name="www.moderation.packageReports">
+		<item name="www.moderation.packageReports.title"><![CDATA[Reported Packages]]></item>
+		<item name="www.moderation.packageReports.count"><![CDATA[Reported Packages{if $outstandingPackageReports > 0} ({#$outstandingPackageReports}){/if}]]></item>
+		<item name="www.packageReport.delete"><![CDATA[Delete]]></item>
+		<item name="www.packageReport.pm"><![CDATA[Send private message]]></item>
+	</category>
+	
 	<category name="www.download">
 		<item name="www.download.redirect"><![CDATA[You will redirected to the download page of the package server.</p><p id="errorMessage">
 		<script type="text/javascript">

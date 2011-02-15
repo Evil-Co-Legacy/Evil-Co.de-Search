@@ -182,6 +182,13 @@
 		<item name="www.moderation.disabledPackages.author"><![CDATA[Autor]]></item>
 	</category>
 	
+	<category name="www.moderation.packageReports">
+		<item name="www.moderation.packageReports.title"><![CDATA[Gemeldete Pakete]]></item>
+		<item name="www.moderation.packageReports.count"><![CDATA[Gemeldete Pakete{if $outstandingPackageReports > 0} ({#$outstandingPackageReports}){/if}]]></item>
+		<item name="www.packageReport.delete"><![CDATA[Löschen]]></item>
+		<item name="www.packageReport.pm"><![CDATA[Private Nachricht senden]]></item>
+	</category>
+	
 	<category name="www.downloadPackage">
 		<item name="www.downloadPackage.title"><![CDATA[Paket herunterladen]]></item>
 		<item name="www.downloadPackage.license"><![CDATA[Lizenzinformationen]]></item>
