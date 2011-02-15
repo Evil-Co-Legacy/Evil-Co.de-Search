@@ -40,6 +40,8 @@
 							<textarea id="reason" name="reason" cols="40" rows="10" style="width: 98%;">{$reason}</textarea>
 						</div>
 					</div>
+					
+					{include file='captcha'}
 				</fieldset>
 				
 				<div class="formSubmit">
