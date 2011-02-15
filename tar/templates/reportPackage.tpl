@@ -13,7 +13,7 @@
 		 <div id="main">
 		 	<ul class="breadCrumbs">
 				<li><a href="index.php?page=Index{@SID_ARG_2ND}"><img alt="" src="{icon}indexS.png{/icon}" /> <span>{lang}{PAGE_TITLE}{/lang}</span></a> &raquo;</li>
-				<li><a href="index.php?page=ResultDetail&amp;searchTypeName=PackageType&amp;resultID={$package->getResultID()}"><img alt="" src="{icon}detailM.png{/icon}" /> <span>{$result->getTitle()}</span></a> &raquo;</li>
+				<li><a href="index.php?page=ResultDetail&amp;searchTypeName=PackageType&amp;resultID={$package->getResultID()}"><img alt="" src="{icon}detailM.png{/icon}" /> <span>{$package->getTitle()}</span></a> &raquo;</li>
 			</ul>
 		 
 		 	<div class="mainHeadline">
