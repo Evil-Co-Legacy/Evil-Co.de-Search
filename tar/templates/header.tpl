@@ -28,12 +28,12 @@
 							<li id="userMenuGroupManagement"{if $this->user->getOutstandingGroupApplications()} class="new"{/if}><a href="index.php?page=UserGroupLeader{@SID_ARG_2ND}"><img src="{icon}groupLeaderS.png{/icon}" alt="" /> <span>{lang}wbb.header.userMenu.userGroupLeader{/lang}{if $this->user->getOutstandingGroupApplications()} ({#$this->user->getOutstandingGroupApplications()}){/if}</span></a></li>
 						{/if}
 						
-						{if $this->user->isModerator()}
-							<li id="userMenuModerator"{if $this->user->getOutstandingModerations()} class="new"{/if}><a href="index.php?page=ModerationOverview{@SID_ARG_2ND}"><img src="{icon}moderatorS.png{/icon}" alt="" /> <span>{lang}www.header.userMenu.moderationOverview{/lang}{if $this->user->getOutstandingModerations()} ({#$this->user->getOutstandingModerations()}){/if}</span></a></li>
-						{/if}
-						
 						{if $this->user->isDeveloper()}
 							<li id="userMenuDeveloper"><a href="index.php?page=DeveloperOverview{@SID_ARG_2ND}"><img src="{icon}apiS.png{/icon}" alt="" /> <span>{lang}www.header.userMenu.developer{/lang}</span></a></li>
+						{/if}
+						
+						{if $this->user->isModerator()}
+							<li id="userMenuModerator"{if $this->user->getOutstandingModerations()} class="new"{/if}><a href="index.php?page=ModerationOverview{@SID_ARG_2ND}"><img src="{icon}moderatorS.png{/icon}" alt="" /> <span>{lang}www.header.userMenu.moderationOverview{/lang}{if $this->user->getOutstandingModerations()} ({#$this->user->getOutstandingModerations()}){/if}</span></a></li>
 						{/if}
 
 						{if $this->user->getPermission('admin.general.canUseAcp')}
