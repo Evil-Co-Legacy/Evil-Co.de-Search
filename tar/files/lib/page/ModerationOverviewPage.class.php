@@ -39,6 +39,12 @@ class ModerationOverviewPage extends AbstractPage {
 	public $outstandingPackageReports = 0;
 	
 	/**
+	 * Contains a count 
+	 * @var unknown_type
+	 */
+	public $apiBlacklistCount = 0;
+	
+	/**
 	 * @see Page::readData()
 	 */
 	public function readData() {
@@ -75,6 +81,17 @@ class ModerationOverviewPage extends AbstractPage {
 		$row = WCF::getDB()->getFirstRow($sql);
 		
 		$this->disabledPackages = $row['count'];
+		
+		// get blacklisted ips/hosts
+		$sql = "SELECT
+				COUNT(*) AS count
+			FROM
+				www".WWW_N."_api_key_blacklist
+			WHERE
+				expire >= ".TIME_NOW;
+		$row = WCF::getDB()->getFirstRow($sql);
+		
+		$this->apiBlacklistCount = $row['count'];
 	}
 	
 	/**
@@ -86,7 +103,8 @@ class ModerationOverviewPage extends AbstractPage {
 		WCF::getTPL()->assign(array(
 			'outstandingServerRequests'		=>	$this->outstandingServerRequests,
 			'outstandingPackageReports'		=>	$this->outstandingPackageReports,
-			'disabledPackages'			=>	$this->disabledPackages
+			'disabledPackages'			=>	$this->disabledPackages,
+			'apiBlacklistCount'			=>	$this->apiBlacklistCount
 		));
 	}
 	
