@@ -2,6 +2,12 @@
 // wcf imports
 require_once(WCF_DIR.'lib/action/AbstractAction.class.php');
 
+/**
+ * Deletes specified reports
+ * @author		Johannes Donath
+ * @copyright		2011 DEVel Fusion
+ * @license		GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ */
 class PackageReportDeleteAction extends AbstractAction {
 	
 	/**
