@@ -17,7 +17,7 @@ class PackageMirrorUtil {
 		$sql = "SELECT
 				*
 			FROM
-				www".WWW_N."_license_blacklist
+				www".WWW_N."_package_license_blacklist
 			WHERE
 				isEnabled = 1";
 		$result = WCF::getDB()->sendQuery($sql);
