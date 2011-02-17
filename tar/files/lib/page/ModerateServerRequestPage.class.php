@@ -69,12 +69,6 @@ class ModerateServerRequestPage extends AbstractPage {
 		// decode reason
 		$reason = StringUtil::trim(urldecode($_REQUEST['reason']));
 		
-		// get user profile
-		$user = new UserProfile($this->request['authorID']);
-		
-		// get language
-		$language = new LanguageEditor($user->languageID);
-		
 		// set state
 		$sql = "UPDATE
 				www".WWW_N."_package_server_request
@@ -86,13 +80,21 @@ class ModerateServerRequestPage extends AbstractPage {
 				requestID = ".$this->requestID;
 		WCF::getDB()->sendQuery($sql);
 		
-		if (MODULE_PM and $this->request['authorID'] > 0) {
-			// send pm
-			require_once(WCF_DIR.'lib/data/message/pm/PMEditor.class.php');
+		if ($this->request['authorID'] > 0) {
+			// get user profile
+			$user = new UserProfile($this->request['authorID']);
 			
-			PMEditor::create(false, array(array('userID' => $this->request['authorID'], 'username' => $this->request['authorName'])), array(), $language->getDynamicVariable('www.moderateServerRequest.subject.reject', array('request' => $this->request)), $language->getDynamicVariable('www.moderateServerRequest.text.reject', array('request' => $this->request, 'reason' => $reason)), WCF::getUser()->userID, WCF::getUser()->username, array('enableSmilies' => true, 'enableHtml' => true, 'enableBBCodes' => true));
+			// get language
+			$language = new LanguageEditor($user->languageID);
+			
+			if (MODULE_PM) {
+				// send pm
+				require_once(WCF_DIR.'lib/data/message/pm/PMEditor.class.php');
+				
+				PMEditor::create(false, array(array('userID' => $this->request['authorID'], 'username' => $this->request['authorName'])), array(), $language->getDynamicVariable('www.moderateServerRequest.subject.reject', array('request' => $this->request)), $language->getDynamicVariable('www.moderateServerRequest.text.reject', array('request' => $this->request, 'reason' => $reason)), WCF::getUser()->userID, WCF::getUser()->username, array('enableSmilies' => true, 'enableHtml' => true, 'enableBBCodes' => true));
+			}
 		}
-		
+			
 		// redirect
 		HeaderUtil::redirect('index.php?page=PackageServerRequest&requestID='.$this->request['requestID'].SID_ARG_2ND_NOT_ENCODED);
 	}
@@ -112,17 +114,19 @@ class ModerateServerRequestPage extends AbstractPage {
 				requestID = ".$this->requestID;
 		WCF::getDB()->sendQuery($sql);
 		
-		// get user profile
-		$user = new UserProfile($this->request['authorID']);
-		
-		// get language
-		$language = new LanguageEditor($user->languageID);
-		
-		if (MODULE_PM and $this->request['authorID'] > 0) {
-			// send pm
-			require_once(WCF_DIR.'lib/data/message/pm/PMEditor.class.php');
+		if ($this->request['authorID'] > 0) {
+			// get user profile
+			$user = new UserProfile($this->request['authorID']);
 			
-			PMEditor::create(false, array(array('userID' => $this->request['authorID'], 'username' => $this->request['authorName'])), array(), $language->getDynamicVariable('www.moderateServerRequest.subject.pending', array('request' => $this->request)), $language->getDynamicVariable('www.moderateServerRequest.text.pending', array('request' => $this->request)), WCF::getUser()->userID, WCF::getUser()->username, array('enableSmilies' => true, 'enableHtml' => true, 'enableBBCodes' => true));
+			// get language
+			$language = new LanguageEditor($user->languageID);
+			
+			if (MODULE_PM) {
+				// send pm
+				require_once(WCF_DIR.'lib/data/message/pm/PMEditor.class.php');
+				
+				PMEditor::create(false, array(array('userID' => $this->request['authorID'], 'username' => $this->request['authorName'])), array(), $language->getDynamicVariable('www.moderateServerRequest.subject.pending', array('request' => $this->request)), $language->getDynamicVariable('www.moderateServerRequest.text.pending', array('request' => $this->request)), WCF::getUser()->userID, WCF::getUser()->username, array('enableSmilies' => true, 'enableHtml' => true, 'enableBBCodes' => true));
+			}
 		}
 		
 		// redirect
@@ -144,12 +148,6 @@ class ModerateServerRequestPage extends AbstractPage {
 				requestID = ".$this->requestID;
 		WCF::getDB()->sendQuery($sql);
 		
-		// get user profile
-		$user = new UserProfile($this->request['authorID']);
-		
-		// get language
-		$language = new LanguageEditor($user->languageID);
-		
 		// write data to new table
 		$sql = "INSERT INTO
 				www".WWW_N."_package_server (serverAlias, serverUrl, homepage, description, isDisabled)
@@ -161,11 +159,19 @@ class ModerateServerRequestPage extends AbstractPage {
 				 0)";
 		WCF::getDB()->sendQuery($sql);
 		
-		if (MODULE_PM and $this->request['authorID'] > 0) {
-			// send pm
-			require_once(WCF_DIR.'lib/data/message/pm/PMEditor.class.php');
+		if ($this->request['authorID'] > 0) {
+			// get user profile
+			$user = new UserProfile($this->request['authorID']);
 			
-			PMEditor::create(false, array(array('userID' => $this->request['authorID'], 'username' => $this->request['authorName'])), array(), $language->getDynamicVariable('www.moderateServerRequest.subject.accepted', array('request' => $this->request)), $language->getDynamicVariable('www.moderateServerRequest.text.accepted', array('request' => $this->request)), WCF::getUser()->userID, WCF::getUser()->username, array('enableSmilies' => true, 'enableHtml' => true, 'enableBBCodes' => true));
+			// get language
+			$language = new LanguageEditor($user->languageID);
+			
+			if (MODULE_PM) {
+				// send pm
+				require_once(WCF_DIR.'lib/data/message/pm/PMEditor.class.php');
+				
+				PMEditor::create(false, array(array('userID' => $this->request['authorID'], 'username' => $this->request['authorName'])), array(), $language->getDynamicVariable('www.moderateServerRequest.subject.accepted', array('request' => $this->request)), $language->getDynamicVariable('www.moderateServerRequest.text.accepted', array('request' => $this->request)), WCF::getUser()->userID, WCF::getUser()->username, array('enableSmilies' => true, 'enableHtml' => true, 'enableBBCodes' => true));
+			}
 		}
 		
 		// redirect
