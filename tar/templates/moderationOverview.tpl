@@ -37,6 +37,7 @@
 							<img src="{icon}apiL.png{/icon}" alt="" />
 							<ul>
 								<li><a href="index.php?page=APIBlacklist{@SID_ARG_2ND}">{lang}www.moderation.apiBlacklist.count{/lang}</a></li>
+								<li><a href="index.php?page=LicenseBlacklistRequests{@SID_ARG_2ND}">{lang}www.moderation.licenseBlacklistRequests.count{/lang}</a></li>
 							</ul>
 						</li>
 					</ul>
