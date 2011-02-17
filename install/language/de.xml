@@ -189,6 +189,14 @@
 		<item name="www.packageReport.pm"><![CDATA[Private Nachricht senden]]></item>
 	</category>
 	
+	<category name="www.moderation.apiBlacklist">
+		<item name="www.moderation.apiBlacklist.title"><![CDATA[API Blacklist]]></item>
+		<item name="www.moderation.apiBlacklist.count"><![CDATA[API Blacklist{if $apiBlacklistCount > 0} ({#$apiBlacklistCount}){/if}]]></item>
+		<item name="www.moderation.apiBlacklist.targetCount"><![CDATA[Derzeit befinden sich {#$blacklistedHosts|count} Einträge auf der Blacklist]]></item>
+		<item name="www.moderation.apiBlacklist.target"><![CDATA[IP-Adresse/Hostname]]></item>
+		<item name="www.moderation.apiBlacklist.expire"><![CDATA[Verbleibende Banzeit]]></item>
+	</category>
+	
 	<category name="www.downloadPackage">
 		<item name="www.downloadPackage.title"><![CDATA[Paket herunterladen]]></item>
 		<item name="www.downloadPackage.license"><![CDATA[Lizenzinformationen]]></item>

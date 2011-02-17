@@ -189,6 +189,14 @@
 		<item name="www.packageReport.pm"><![CDATA[Send private message]]></item>
 	</category>
 	
+	<category name="www.moderation.apiBlacklist">
+		<item name="www.moderation.apiBlacklist.title"><![CDATA[API Blacklist]]></item>
+		<item name="www.moderation.apiBlacklist.count"><![CDATA[API Blacklist{if $apiBlacklistCount > 0} ({#$apiBlacklistCount}){/if}]]></item>
+		<item name="www.moderation.apiBlacklist.targetCount"><![CDATA[We've currently {#$blacklistedHosts|count} blacklisted IPs/Hostnames]]></item>
+		<item name="www.moderation.apiBlacklist.target"><![CDATA[IP-Address/Hostname]]></item>
+		<item name="www.moderation.apiBlacklist.expire"><![CDATA[Remaining bantime]]></item>
+	</category>
+	
 	<category name="www.download">
 		<item name="www.download.redirect"><![CDATA[You will redirected to the download page of the package server.</p><p id="errorMessage">
 		<script type="text/javascript">

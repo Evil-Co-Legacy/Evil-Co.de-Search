@@ -188,6 +188,14 @@
 		<item name="www.packageReport.delete"><![CDATA[Löschen]]></item>
 		<item name="www.packageReport.pm"><![CDATA[Private Nachricht senden]]></item>
 	</category>
+	
+	<category name="www.moderation.apiBlacklist">
+		<item name="www.moderation.apiBlacklist.title"><![CDATA[API Blacklist]]></item>
+		<item name="www.moderation.apiBlacklist.count"><![CDATA[API Blacklist{if $apiBlacklistCount > 0} ({#$apiBlacklistCount}){/if}]]></item>
+		<item name="www.moderation.apiBlacklist.targetCount"><![CDATA[Derzeit befinden sich {#$blacklistedHosts|count} Einträge auf der Blacklist]]></item>
+		<item name="www.moderation.apiBlacklist.target"><![CDATA[IP-Adresse/Hostname]]></item>
+		<item name="www.moderation.apiBlacklist.expire"><![CDATA[Verbleibende Banzeit]]></item>
+	</category>
 		
 	<category name="www.download">
 		<item name="www.download.redirect"><![CDATA[Du wirst nun auf die Downloadseite des Paketservers weitergeleitet.</p><p id="errorMessage">
