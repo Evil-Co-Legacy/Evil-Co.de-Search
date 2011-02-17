@@ -39,6 +39,12 @@
 			<permissions>mod.search.canModerate</permissions>
 		</usercpmenuitem>
 		
+		<usercpmenuitem name="www.user.usercp.menu.link.modcp.licenseBlacklistRequests">
+			<link>index.php?page=LicenseBlacklistRequests</link>
+			<parent>www.user.usercp.menu.link.modcp</parent>
+			<permissions>mod.search.canModerate</permissions>
+		</usercpmenuitem>
+		
 		<usercpmenuitem name="www.user.usercp.menu.link.developer">
 			<link>index.php?page=DeveloperOverview</link>
 			<icon>developerM.png</icon>
