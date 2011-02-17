@@ -191,6 +191,8 @@
 		<item name="www.moderation.disabledPackages.packageCount"><![CDATA[{#$disabledPackages|count} disabled packages]]></item>
 		<item name="www.moderation.disabledPackages.name"><![CDATA[Packagename]]></item>
 		<item name="www.moderation.disabledPackages.author"><![CDATA[Author]]></item>
+		<item name="www.moderation.licenseBlacklistRequest.accept"><![CDATA[Accept]]></item>
+		<item name="www.moderation.licenseBlacklistRequest.delete"><![CDATA[Reject]]></item>
 	</category>
 	
 	<category name="www.moderation.packageReports">

@@ -215,6 +215,8 @@
 		<item name="www.moderation.licenseBlacklistRequest.requestCount"><![CDATA[Zur Zeit werden {#$licenses|count} Einträge aufgelistet]]></item>
 		<item name="www.moderation.licenseBlacklistRequest.licenseRegex"><![CDATA[Regex]]></item>
 		<item name="www.moderation.licenseBlacklistRequest.banReason"><![CDATA[Begründung]]></item>
+		<item name="www.moderation.licenseBlacklistRequest.accept"><![CDATA[Akzeptieren]]></item>
+		<item name="www.moderation.licenseBlacklistRequest.delete"><![CDATA[Ablehnen]]></item>
 	</category>
 		
 	<category name="www.download">
