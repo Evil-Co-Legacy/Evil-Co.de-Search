@@ -205,7 +205,7 @@
 	</category>
 	
 	<category name="www.moderation.licenseBlacklistRequests">
-		<item name="www.moderation.licenseBlacklistRequest.title"><![CDATA[Lizenz Blacklist]]></item>
+		<item name="www.moderation.licenseBlacklistRequest.title"><![CDATA[Lizenz Blacklist Vorschläge]]></item>
 		<item name="www.moderation.licenseBlacklistRequests.count"><![CDATA[Lizenz Blacklist Vorschläge{if $blacklistedLicenses > 0} ({#$blacklistedLicenses}){/if}]]></item>
 		<item name="www.moderation.licenseBlacklistRequest.showAll"><![CDATA[Bearbeitete Vorschläge {if $tpl.get.showAll|isset}anzeigen{else}ausblenden{/if}]]></item>
 		<item name="www.moderation.licenseBlacklistRequest.requestCount"><![CDATA[Zur Zeit werden {#$licenses|count} Einträge aufgelistet]]></item>

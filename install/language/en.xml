@@ -211,7 +211,7 @@
 	</category>
 	
 	<category name="www.moderation.licenseBlacklistRequests">
-		<item name="www.moderation.licenseBlacklistRequest.title"><![CDATA[License blacklist]]></item>
+		<item name="www.moderation.licenseBlacklistRequest.title"><![CDATA[License blacklist suggestions]]></item>
 		<item name="www.moderation.licenseBlacklistRequests.count"><![CDATA[License blacklist suggestions{if $blacklistedLicenses > 0} ({#$blacklistedLicenses}){/if}]]></item>
 		<item name="www.moderation.licenseBlacklistRequest.showAll"><![CDATA[{if $tpl.get.showAll|isset}display{else}hide{/if} processed suggestions]]></item>
 		<item name="www.moderation.licenseBlacklistRequest.requestCount"><![CDATA[There are {#$licenses|count} items in this list]]></item>
