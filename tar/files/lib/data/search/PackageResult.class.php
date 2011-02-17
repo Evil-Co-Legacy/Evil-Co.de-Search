@@ -116,6 +116,8 @@ class PackageResult extends SearchResult {
 				package.packageID,
 				package.packageName,
 				package.isDisabled,
+				package.moderatorID,
+				package.moderatorName,
 				packageLanguage.name AS name,
 				packageLanguage.description,
 				server.serverID,
