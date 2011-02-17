@@ -42,11 +42,13 @@
 		<item name="www.search.advancedSearch.itemsPerPage.description"><![CDATA[Definiert wie viele Einträge pro Seite angezeigt werden.]]></item>
 		
 		<item name="www.search.result.noResults"><![CDATA[Es wurden keine Ergebnisse zu deiner Suchanfrage gefunden.]]></item>
+		<item name="www.search.result.noResults.suggestions"><![CDATA[Meintest Du vielleicht eines der folgenden Pakete?]]></item>
 		<item name="www.search.result.back"><![CDATA[Zurück zur Startseite]]></item>
 		
 		<item name="www.search.result.download"><![CDATA[Herunterladen]]></item>
 		<item name="www.search.result.mirror"><![CDATA[Paketspiegel]]></item>
 		<item name="wwww.search.result.disable"><![CDATA[{if !$result->isDisabled}Dea{else}A{/if}ktivieren]]></item>
+		<item name="www.search.result.disable.sure"><![CDATA[Are you sure?]]></item>
 		<item name="www.search.result.report"><![CDATA[Melden]]></item>
 		
 		<!-- Package Search Type -->
@@ -159,6 +161,15 @@
 		<item name="www.user.usercp.menu.link.modcp"><![CDATA[Moderation]]></item>
 		<item name="www.user.usercp.menu.link.modcp.overview"><![CDATA[Übersicht]]></item>
 		<item name="www.user.usercp.menu.link.modcp.packageServerRequests"><![CDATA[Paketserver Vorschläge]]></item>
+		
+		<item name="www.user.usercp.menu.link.modcp"><![CDATA[Moderation]]></item>
+		<item name="www.user.usercp.menu.link.modcp.overview"><![CDATA[Übersicht]]></item>
+		<item name="www.user.usercp.menu.link.modcp.packageServerRequests"><![CDATA[Paketserver Vorschläge]]></item>
+		<item name="www.user.usercp.menu.link.modcp.disabledPackages"><![CDATA[Deaktivierte Pakete]]></item>
+		<item name="www.user.usercp.menu.link.modcp.packageReports"><![CDATA[Gemeldete Pakete]]></item>
+		<item name="www.user.usercp.menu.link.modcp.apiBlacklist"><![CDATA[API-Blacklist]]></item>
+		
+		<item name="www.user.usercp.menu.link.developer"><![CDATA[Entwickler]]></item>
 	</category>
 	
 	<category name="www.moderation.overview">
@@ -196,6 +207,15 @@
 		<item name="www.moderation.apiBlacklist.target"><![CDATA[IP-Adresse/Hostname]]></item>
 		<item name="www.moderation.apiBlacklist.expire"><![CDATA[Verbleibende Banzeit]]></item>
 	</category>
+	
+	<category name="www.moderation.licenseBlacklistRequests">
+		<item name="www.moderation.licenseBlacklistRequest.title"><![CDATA[Lizenz Blacklist]]></item>
+		<item name="www.moderation.licenseBlacklistRequests.count"><![CDATA[Lizenz Blacklist Vorschläge{if $blacklistedLicenses > 0} ({#$blacklistedLicenses}){/if}]]></item>
+		<item name="www.moderation.licenseBlacklistRequest.showAll"><![CDATA[Bearbeitete Vorschläge {if $tpl.get.showAll|isset}anzeigen{else}ausblenden{/if}]]></item>
+		<item name="www.moderation.licenseBlacklistRequest.requestCount"><![CDATA[Zur Zeit werden {#$licenses|count} Einträge aufgelistet]]></item>
+		<item name="www.moderation.licenseBlacklistRequest.licenseRegex"><![CDATA[Regex]]></item>
+		<item name="www.moderation.licenseBlacklistRequest.banReason"><![CDATA[Begründung]]></item>
+	</category>
 		
 	<category name="www.download">
 		<item name="www.download.redirect"><![CDATA[Du wirst nun auf die Downloadseite des Paketservers weitergeleitet.</p><p id="errorMessage">
@@ -215,6 +235,7 @@
 		<item name="www.reportPackage.title"><![CDATA[Paket melden]]></item>
 		<item name="www.reportPackage.generalInformation"><![CDATA[Allgemeine Informationen]]></item>
 		<item name="www.reportPackage.generalInformation.resultName"><![CDATA[Paketname]]></item>
+		<item name="www.reportPackage.generalInformation.reason"><![CDATA[Begründung]]></item>
 		<item name="www.reportPackage.success"><![CDATA[Danke für Deine Meldung. Wir werden Deine Meldung schnellst möglich bearbeiten.]]></item>
 		<item name="www.reportPackage.alreadyReported"><![CDATA[Für dieses Paket existiert bereits eine Meldung. Wir werden diese möglichst schnell bearbeiten. Falls Du trotzdem eine Meldung abgeben willst kannst Du dich jederzeit an die Administration wenden.]]></item>
 	</category>
