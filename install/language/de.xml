@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com/XSD/language.xsd" languagecode="de">
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/language.xsd" languagecode="de">
 	<category name="www.global">
 		<item name="www.global.changeStyle"><![CDATA[Stil wechseln]]></item>
 		<item name="www.global.copyright"><![CDATA[<a href="http://www.evil-co.de/">Suchmaschine: <strong>Evil-Co.de Search {PACKAGE_VERSION}</strong>, entwickelt von <strong>Evil-Co.de</strong></a>]]></item>
