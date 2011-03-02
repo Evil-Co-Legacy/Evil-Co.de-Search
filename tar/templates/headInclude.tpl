@@ -10,6 +10,8 @@
 <script type="text/javascript" src="{@RELATIVE_WWW_DIR}js/jquery-ui-1.8.4.custom.min.js"></script>
 <script type="text/javascript">
 window.$j = jQuery.noConflict();
+
+// Evil-Co.de Search Frontend {PACKAGE_VERSION}
 </script>
 <script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/3rdParty/protoaculous.1.8.2.min.js"></script>
 <script type="text/javascript" src="{@RELATIVE_WCF_DIR}js/default.js"></script>
