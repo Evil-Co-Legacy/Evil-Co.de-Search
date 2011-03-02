@@ -30,6 +30,9 @@ class WWWCore extends WCF implements PageMenuContainer, UserCPMenuContainer, Use
 		require_once(WCF_DIR.'lib/system/template/StructuredTemplate.class.php');
 		self::$tplObj = new StructuredTemplate(self::getStyle()->templatePackID, self::getLanguage()->getLanguageID(), ArrayUtil::appendSuffix($packageDirs, 'templates/'));
 		$this->assignDefaultTemplateVariables();
+		
+		// add generator tag
+		self::$tplObj->append('specialStyles', '<meta name="generator" content="Evil-Co.de Search Frontend '.PACKAGE_VERSION.'" />');
 
 		// init cronjobs
 		$this->initCronjobs();
