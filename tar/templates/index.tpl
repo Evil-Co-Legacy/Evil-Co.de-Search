@@ -51,14 +51,11 @@
 
 		 	<form action="index.php?form=Search" method="post">
 		 		<div class="searchField">
-		 			<input type="text" name="query" id="query" value="{lang}www.search.searchFieldValue{/lang}" onclick="search.clearField()"{if $this->user->enableInstantSearch} onkeyup="search.changedQueryField()"{/if} class="inputText emptySearchField" />
+		 			<input type="text" name="query" id="query" value="{lang}www.search.searchFieldValue{/lang}" onclick="search.clearField()"{if $this->user->enableInstantSearch} onkeyup="search.changedQueryField()"{/if} class="emptySearchField indexSearchField" />
+		 			<input type="submit" accesskey="s" value="{lang}www.search.submit{/lang}" {if $this->user->enableInstantSearch}onclick="search.pageNo = 1; search.submitSearch(); return false;"{/if} class="indexSearchSubmit" />
 		 		</div>
-
-		 		<div class="formSubmit">
-		 			<input type="submit" accesskey="s" value="{lang}wcf.global.button.submit{/lang}" {if $this->user->enableInstantSearch}onclick="search.pageNo = 1; search.submitSearch(); return false;"{/if} />
-
-			 		{@SID_INPUT_TAG}
-		 		</div>
+		 			
+			 	{@SID_INPUT_TAG}
 
 		 		<div id="advancedSearch">
 		 			<fieldset>

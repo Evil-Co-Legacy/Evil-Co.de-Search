@@ -11,10 +11,10 @@ class UpdateCronTypePackageInstallationPlugin extends AbstractXMLPackageInstalla
 	public $tagName = 'updatecrontype';
 	public $tableName = 'cron_update_type';
 
-    /**
-     * @see PackageInstallationPlugin::install()
-     */
-    public function install() {
+	/**
+	 * @see PackageInstallationPlugin::install()
+	 */
+	public function install() {
 		parent::install();
 
 		if (!$xml = $this->getXML()) {
@@ -26,7 +26,7 @@ class UpdateCronTypePackageInstallationPlugin extends AbstractXMLPackageInstalla
 
 		// Loop through the array and install or uninstall items.
 		foreach ($validateServerXML['children'] as $key => $block) {
-		    if (count($block['children'])) {
+			if (count($block['children'])) {
 				// Handle the import instructions
 				if ($block['name'] == 'import') {
 				    // Loop through items and create or update them.
@@ -48,18 +48,17 @@ class UpdateCronTypePackageInstallationPlugin extends AbstractXMLPackageInstalla
 						    throw new SystemException("Required 'file' attribute is missing", 13023);
 						}
 
-						$sql = "INSERT INTO
-									wcf".WCF_N."_cron_update_type (packageID, file)
-								VALUES (".$this->installation->getPackageID().", '".escapeString($file)."')";
+						$sql = "INSERT INTO 	wcf".WCF_N."_cron_update_type (packageID, file)
+							VALUES 		(".$this->installation->getPackageID().", '".escapeString($file)."')";
 						WCF::getDB()->sendQuery($sql);
 					}
 				}
 
 				// Handle the delete instructions.
 				else if ($block['name'] == 'delete' && $this->installation->getAction() == 'update') {
-				    // Loop through items and delete them.
-				    $nameArray = array();
-				    foreach ($block['children'] as $type) {
+					// Loop through items and delete them.
+					$nameArray = array();
+					foreach ($block['children'] as $type) {
 						// Extract item properties.
 						foreach ($type['children'] as $child) {
 						    if (!isset($child['cdata'])) continue;
@@ -71,20 +70,19 @@ class UpdateCronTypePackageInstallationPlugin extends AbstractXMLPackageInstalla
 						}
 
 						$nameArray[] = $type['file'];
-				    }
+					}
 
-				    if (count($nameArray)) {
+					if (count($nameArray)) {
 						$sql = "DELETE FROM
 							    	wcf".WCF_N."_cron_update_type
-								WHERE
-							    	packageID = ".$this->installation->getPackageID()."
-								AND
-							    	file IN ('".implode("','", array_map('escapeString', $nameArray))."')";
+							WHERE
+									packageID = ".$this->installation->getPackageID()."
+								AND	file IN ('".implode("','", array_map('escapeString', $nameArray))."')";
 						WCF::getDB()->sendQuery($sql);
-				    }
+					}
 				}
 			}
-    	}
-    }
+		}
+	}
 }
 ?>

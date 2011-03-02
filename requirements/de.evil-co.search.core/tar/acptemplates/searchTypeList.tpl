@@ -31,7 +31,7 @@
 			</thead>
 			<tbody>
 				{foreach from=$searchTypes item=type}
-					<tr class="{cycle values="container-1,container-2"}">
+					<tr class="{cycle values='container-1,container-2'}">
 						<td class="columnIcon">
 							{if !$type->isDisabled && !$type->isDefault}
 								<a href="index.php?action=SearchTypeChangeStatus&amp;field=isDisabled&amp;typeID={@$type->typeID}&amp;packageID={@PACKAGE_ID}{@SID_ARG_2ND}"><img src="{@RELATIVE_WCF_DIR}icon/enabledS.png" alt="" title="{lang}wcf.acp.searchTypeList.disable{/lang}" /></a>
